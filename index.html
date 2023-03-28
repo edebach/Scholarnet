@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
  <!--   <link rel="stylesheet" type="text/css" href="style.css"> -->
 
-    <title>Schermata iniziale</title>
+    <title>Scholarnet</title>
 
 </head>
 <body>
@@ -34,9 +34,11 @@
 					</li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <!-- da inserire ancora i riferimenti -->
 					<li class="nav-item">
 						<a class="btn btn-outline-primary" href="#">Sign Up</a>
 					</li>
+                    <!-- da inserire ancora i riferimenti -->
 					<li class="nav-item">
 						<a class="btn btn-outline-secondary" href="#">Sign In</a>
 					</li>
@@ -51,10 +53,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-auto">
+                    <!-- Titolo da modificare -->
 					<h1>Benvenuti sul nostro sito</h1>
+                    <!-- immagine di prova-->
                     <img src="./img/SfondoScuola.jpg" class="img-fluid" alt="...">
+                    <!-- Testo da modificare -->
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget lorem sem. Ut porttitor justo vitae est vestibulum, at lacinia ex bibendum.
                          Donec et lorem auctor, venenatis quam vitae, tincidunt tellus.</p>
+                         <!-- bottone poco necessario, forse da rimuovere o cambiare funzionalità -->
 					<a href="#description-section" class="btn btn-primary">Scopri di più</a>
 				</div>
 			</div>
@@ -68,6 +74,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
             <h2>Descrizione</h2>
+            <!-- Da riempire -->
             <p>Qui potrai trovare informazioni dettagliate sul nostro sito e sui servizi offerti. Scopri come possiamo aiutarti!</p>
             </div>
         </div>
@@ -85,7 +92,7 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h3 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="btn btn-link dropdown" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         Qual è il vostro prodotto più venduto?
                                     </button>
                                 </h3>
@@ -139,14 +146,18 @@
                 <div class="card">
                     <div class="card-header">
                         Iscriviti alla nostra Mailing List
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                          </svg>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <form method="POST" action="your-mailing-list-script.php">
-                            <div class="form-group">
+                            <div class="form-group text-left">
                                 <label for="name">Nome completo</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group text-left">
                                 <label for="email">Indirizzo email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
