@@ -4,11 +4,163 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <!--   <link rel="stylesheet" type="text/css" href="style.css"> -->
+
+    <title>Schermata iniziale</title>
+
 </head>
 <body>
-    Hello World!
-    come stai--ciaociao
-    ff
+    	<!-- Sezione Header -->
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<a class="navbar-brand" href="#">Scholarnet</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ml-md-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#home-section">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#descrizione-section">Descrizione</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#qa-section">Q&amp;A</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#mailing-list-section">Mailing list</a>
+					</li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="btn btn-outline-primary" href="#">Sign Up</a>
+					</li>
+					<li class="nav-item">
+						<a class="btn btn-outline-secondary" href="#">Sign In</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+    <br>
+
+    	<!-- Sezione Home -->
+	<section id="home-section" class="bg-image mt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-auto">
+					<h1>Benvenuti sul nostro sito</h1>
+                    <img src="./img/SfondoScuola.jpg" class="img-fluid" alt="...">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget lorem sem. Ut porttitor justo vitae est vestibulum, at lacinia ex bibendum.
+                         Donec et lorem auctor, venenatis quam vitae, tincidunt tellus.</p>
+					<a href="#description-section" class="btn btn-primary">Scopri di più</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+    <!-- Sezione Descrizione -->
+    <section id="descrizione-section">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <h2>Descrizione</h2>
+            <p>Qui potrai trovare informazioni dettagliate sul nostro sito e sui servizi offerti. Scopri come possiamo aiutarti!</p>
+            </div>
+        </div>
+        </div>
+  </section>
+  
+    <!-- Sezione Q&A -->
+    <section id="qa-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Domande frequenti</h2>
+                    <p>Qui troverai le risposte alle domande più frequenti sulla nostra azienda e i nostri prodotti.</p>
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h3 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Qual è il vostro prodotto più venduto?
+                                    </button>
+                                </h3>
+                            </div>
+    
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Il nostro prodotto più venduto è il nostro prodotto di punta, il quale è stato sviluppato con grande cura e attenzione ai dettagli per garantire una qualità eccellente.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h3 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Come posso effettuare un ordine?
+                                    </button>
+                                </h3>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Puoi effettuare un ordine sul nostro sito web, oppure contattarci telefonicamente o via e-mail per effettuare l'ordine.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h3 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        Quanto tempo impiegate per la consegna?
+                                    </button>
+                                </h3>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Il tempo di consegna dipende dalla zona di consegna e dal tipo di prodotto. Solitamente la consegna avviene entro 3-5 giorni lavorativi.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sezione Mailing List -->
+<section id="mailing-list-section" class="mt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        Iscriviti alla nostra Mailing List
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="your-mailing-list-script.php">
+                            <div class="form-group">
+                                <label for="name">Nome completo</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Indirizzo email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Iscriviti</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    
+</footer>
+
 </body>
 </html>
