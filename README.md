@@ -2,7 +2,7 @@
 Progetto LTW
 
 COMANDI UTILI GENERALE
-git push: pusha il codice su github
+git push: pusha il codice su github \n
 git pull: prende il codice più recente da github
 git reset --hard HEAD^: resetta l'head al penultimo commit
 
