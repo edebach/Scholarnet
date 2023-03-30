@@ -1,18 +1,23 @@
 # ScholarNet
 Progetto LTW
 
-COMANDI UTILI GENERALE
+COMANDI UTILI GENERALE:
+
 git push: pusha il codice su github
+
 git pull: prende il codice più recente da github
+
 git reset --hard HEAD^: resetta l'head al penultimo commit
 
 
-COMANDI UTILI FABIO
+COMANDI UTILI FABIO:
+
 git add -A index.html
 
 
 
-TESTO VERSIONE SMALL
+TESTO VERSIONE SMALL:
+
 <small id="emailSmall" class="form-text text-muted">Inserisci la tua email</small>
 
 COSE DA AGGIUNGERE:
