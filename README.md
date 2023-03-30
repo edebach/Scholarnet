@@ -28,5 +28,3 @@ INDEX:
 
 LOGIN:
 1) Aggiungere "Omino_stilizzato.png" a sinistra di email
-
-a
