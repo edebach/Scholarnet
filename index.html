@@ -14,6 +14,11 @@
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!--Carosello immagine-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
 
     <title>Scholarnet</title>
 
@@ -54,7 +59,7 @@
 	</header>
     <br>
 
-    	<!-- Sezione Home -->
+    <!-- Sezione Home -->
 	<section id="home-section" class="bg-image mt-5">
 		<div class="container">
 			<div class="row">
@@ -62,20 +67,24 @@
                     <!-- Titolo da modificare -->
 					<h1>Scholarnet</h1>
 
-                    <!-- immagine di prova: carosello ma non funziona-->
+                    <!-- immagine di prova (carosello)-->
                     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                          <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="./img/SfondoScuola.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-item carousel-image bg-img-1 active">
+                            <img src="https://www.istitutoimpariamo.it/images/servizi/scuola-e-recupero.jpg" class="d-block w-55" alt="...">
                           </div>
-                          <div class="carousel-item" data-bs-interval="2000">
-                            <img src="./img/sfScuola1.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-item carousel-image bg-img-2">
+                            <img src="https://www.turismoroma.it/sites/default/files/universit%C3%A0%20COP.jpg" class="d-block" alt="...">
                           </div>
-                          <div class="carousel-item">
-                            <img src="./img/sfScuola2.jpg" class="d-block w-100" alt="...">
+                          <div class="carousel-item carousel-image bg-img-3">
+                            <img src="http://i2.wp.com/www.senzatregua.it/wp-content/uploads/2018/12/sapienza-ingegneria-colosseo-bc7e99b3a90e859099ec6a85a9c9be00.jpg?fit=1920%2C1080" class="d-block" alt="...">
                           </div>
                         </div>
-                    </div>
+                      </div>
+                      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+                        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+                        crossorigin="anonymous"></script>
+
                 </div>
             </div>
         </div>
@@ -175,7 +184,7 @@
                 <div class="col-sm-12">
                     <h2>Ultime recensioni</h2>
                     
-                    <!--La mia idea che voglio implementare è quella di inserire per ogni categoria seleziona le recensioni-->
+                    <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
                     <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">
                         5 stelle
                       </button>
