@@ -32,8 +32,8 @@ SIGNUP:
 
 INDEX:
 1) Cambiare grandezza pulsanti "Sign-in" e "Sign-up" quando la Navbar collassa (quando rimpicciolisci lo schermo)
-2) Modifica dimensione delle foto caruselle
-3)Modifica la sezione delle recensioni con icone stelle
+2) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
+3) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
 
 LOGIN:
 1) Aggiungere "Omino_stilizzato.png" a sinistra di email
