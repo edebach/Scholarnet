@@ -14,7 +14,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height:100vh;
+      }
+      #BottoneProsegui{
+        padding-left: 0.3cm;
+        padding-right: 0.3cm;
       }
 
       /* Aggiunge la forma quadrata al contenitore (forma diversa salla pagina di login)*/
@@ -44,7 +48,7 @@
   </head>
   <body>
     <div class="square">
-      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3">
+      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.html'">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
       <form>
@@ -91,11 +95,14 @@
           <input type="password" class="form-control" id="repasswordInput" placeholder="password">
           <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
         </div><!--Fine quinta riga-->
-        <button type="submit" class="btn btn-primary">Registrati</button>
+
+        <div class="row" id="BottoneProsegui">
+        <button type="submit" class="btn btn-primary">Prosegui</button>
+        </div>
         <div class="mt-2">
           <!-- Da inserire il link al sign in -->
           <div style="text-align: center">
-            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="#">Sei già iscritto? Effettua l'accesso!</a>
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/login.html">Sei già iscritto? Effettua l'accesso!</a>
           </div>
           
       </div>

@@ -27,16 +27,39 @@ COSE DA AGGIUNGERE:
 SIGNUP:
 1) Scelta se professore o studente
 2) Sesso della persona
-3) Cambiare pulsante "registrati" in "prosegui"
+3) Aggiungere Lo step successivo dopo prosegui
 4) Aggiungere "Omino_stilizzato.png" a sinistra di Nome e Cognome + aggiungere le altre png
 
 INDEX:
-1) Cambiare grandezza pulsanti "Sign-in" e "Sign-up" quando la Navbar collassa (quando rimpicciolisci lo schermo)
-2) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
-3) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
+1) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
+2) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
+3) Parte php
+4)avviso recensione (disponibile solo se loggato)
 
 LOGIN:
 1) Aggiungere "Omino_stilizzato.png" a sinistra di email
 
+INDEXLOGGED:
+1)Aggiungere profilo, crea/unisicti classe, loggout
+
+LISTACLASSIDOCENTI:
+1) Finestre dei corsi gestiti dal docente
+2) Pulsante crea corso
+2) profilo+logout
+
+LISTACLASSISTUDENTI:
+1) Finestre dei corsi in cui si è iscritti
+2) Pulsante unisciti a un corso
+2) profilo+logout
+
+PROFILO:
+1) informazioni essenziali (Usando principalente php)
+
 CLASSI:
 1) Iniziare a costruire le classi
+
+SEZIONE SOCIAL:
+Da fare tutta
+
+DATABASE:
+da fare da 0
