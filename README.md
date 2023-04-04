@@ -40,7 +40,7 @@ LOGIN:
 1) Aggiungere "Omino_stilizzato.png" a sinistra di email
 
 INDEXLOGGED:
-1)Aggiungere profilo, crea/unisicti classe, loggout
+1)Aggiungere profilo (leggi riga 87)
 
 LISTACLASSIDOCENTI:
 1) Finestre dei corsi gestiti dal docente
