@@ -17,11 +17,6 @@
 
     
     <!--Carosello immagine: SEZIONE CRITICA CHE FA APPARIRE L'IMMAGINE BIANCA-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-            crossorigin="anonymous"></script> 
     <!--Icona stella-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
@@ -36,13 +31,6 @@
           padding: 3px;
           background-color: rgb(45, 42, 42);
           color: rgb(237, 237, 237);
-        }
-        /* Viene usato per staccare la scritta "Scholarnet" della Navbar */
-        .topleft {
-          position: absolute;
-          top: 8px;
-          left: 16px;
-          font-size: 18px;
         }
      </style>
 
@@ -219,33 +207,32 @@
                     <h2>Inserisci la tua recensione</h2>
                     <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
                     <!-- Modifica delle valutazioni usando icone di stelle -->
-                    <div class="class=mb-5">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-                        </fieldset>
-                    </div>
+                    <fieldset class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                        <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
                 <!-- Da completare -->
-                <textarea name="Recensione" id="TextareaRecensione" cols="10" rows="8" placeholder="Feedback..." ></textarea>
-                <input type="submit" value="Invia" class="btn btn-outline-primary">
+                <textarea class="flex-fill" name="Recensione" id="TextareaRecensione" cols="10" rows="8" placeholder="Feedback..." ></textarea>
+            </div>
+            <div class="row my-2">
+                <input type="submit" value="Invia" class="btn btn-outline-primary"> 
             </div>
         </form>
         </div>
     </section>
     <!-- Da completare -->
-    <br>
-    <br>
+    <div style="height: 20px; width: auto;"></div>
     <div id="includedContent"></div>
 
     <!-- <footer> -->
