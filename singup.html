@@ -54,7 +54,7 @@
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
       <form>
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
-        <!-- Prima riga: form per nome e cognome. Da inserire: piccola immagine accanto-->
+        <!-- Prima riga: form per nome e cognome.-->
         <div class="row">
           <div class="col">
             <!-- IMMAGINE DELL'OMINO: guardare video del seguente link: https://www.youtube.com/watch?v=q93hR316nk4-->
@@ -69,38 +69,62 @@
             </div>
           </div>
           <div class="col">
-            <div class="form-floating">
-              <input type="text" class="form-control" id="cognomeInput" placeholder="Cognome">
-              <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
+            <div class="mb-3 input-group">
+              <div class="input-group-text">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="form-floating">
+                <input type="text" class="form-control" id="cognomeInput" placeholder="Cognome">
+                <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Seconda riga: form solo per email. Da inserire: piccola immagine accanto-->
-        <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
-          <label for="emailInput" class="text-black text-opacity-50">Email</label>
+        </div><!--Fine prima riga-->
+        <!-- Seconda riga: form solo per email.-->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="emailInput" class="text-black text-opacity-50">Email</label>
+          </div>
         </div><!--Fine seconda riga-->
-        <!--Terza riga: Form per scelta scuola. Da inserire: piccola immagine accanto-->
-        <div class="form-floating mb-3">
-          <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-            <option selected></option>
-            <option value="1">scuola 1</option>
-            <option value="2">scuola 2</option>
-            <option value="3">scuola 3</option>
-          </select>
-          <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
+        <!--Terza riga: Form per scelta scuola.-->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div> 
+          <div class="form-floating">
+            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+              <option selected></option>
+              <option value="1">scuola 1</option>
+              <option value="2">scuola 2</option>
+              <option value="3">scuola 3</option>
+            </select>
+            <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
+          </div>
         </div><!--Fine terza riga-->
         <!--Quarta riga: form per la password -->
-        <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="passwordInput" placeholder="password">
-          <label for="passwordInput" class="text-black text-opacity-50">Password</label>
-        </div><!--Fine quarta riga-->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-lock"></i>
+          </div> 
+          <div class="form-floating">
+            <input type="password" class="form-control" id="passwordInput" placeholder="password">
+            <label for="passwordInput" class="text-black text-opacity-50">Password</label>
+          </div>
+        </div> <!--Fine quarta riga-->
         <!--Quinta riga: form per reinserire password. DA FARE: CONTROLLARE CHE LA PASSWORD REINSERITA SIA UGUALE A QUELLA INSERITA IN PRECEDENZA -->
-        <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="repasswordInput" placeholder="password">
-          <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
-        </div><!--Fine quinta riga-->
-
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-key"></i>
+          </div> 
+          <div class="form-floating">
+            <input type="password" class="form-control" id="repasswordInput" placeholder="password">
+            <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
+          </div><!--Fine quinta riga-->
+        </div> 
         <div class="row" id="BottoneProsegui">
         <button type="submit" class="btn btn-primary">Prosegui</button>
         </div>

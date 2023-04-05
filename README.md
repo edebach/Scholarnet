@@ -28,7 +28,6 @@ SIGNUP:
 1) Scelta se professore o studente
 2) Sesso della persona
 3) Aggiungere Lo step successivo dopo prosegui
-4) Aggiungere "Omino_stilizzato.png" a sinistra di Nome e Cognome + aggiungere le altre png
 
 INDEX:
 1) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
@@ -37,7 +36,7 @@ INDEX:
 4)avviso recensione (disponibile solo se loggato)
 
 LOGIN:
-1) Aggiungere "Omino_stilizzato.png" a sinistra di email
+1) Rendere tutti i pulsanti funzionanti
 
 INDEXLOGGED:
 1) Aggiungere profilo (leggi riga 87)
