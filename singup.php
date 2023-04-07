@@ -52,7 +52,7 @@
       <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.html'">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
-      <form>
+      <form name="myForm" action="http://localhost:3000/Logged/registrati.php" method="POST">
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
         <!-- Prima riga: form per nome e cognome.-->
         <div class="row">
@@ -63,7 +63,7 @@
                 <i class="fa-solid fa-user"></i>
               </div>
               <div class="form-floating">
-                <input type="text" class="form-control" id="nomeInput" placeholder="Nome">
+                <input type="text" class="form-control" name="nomeInput" placeholder="Nome" required>
                 <label for="nomeInput" class="text-black text-opacity-50">Nome</label>
               </div>
             </div>
@@ -74,7 +74,7 @@
                 <i class="fa-solid fa-user"></i>
               </div>
               <div class="form-floating">
-                <input type="text" class="form-control" id="cognomeInput" placeholder="Cognome">
+                <input type="text" class="form-control" name="cognomeInput" placeholder="Cognome" required>
                 <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
               </div>
             </div>
@@ -86,7 +86,7 @@
             <i class="fa-solid fa-envelope"></i>
           </div>
           <div class="form-floating">
-            <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" name="emailInput" aria-describedby="emailHelp" placeholder="Enter email" required>
             <label for="emailInput" class="text-black text-opacity-50">Email</label>
           </div>
         </div><!--Fine seconda riga-->
@@ -96,7 +96,7 @@
             <i class="fa-solid fa-graduation-cap"></i>
           </div> 
           <div class="form-floating">
-            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+            <select class="form-select" name="floatingSelect" aria-label="Floating label select example" required>
               <option selected></option>
               <option value="1">scuola 1</option>
               <option value="2">scuola 2</option>
@@ -111,7 +111,7 @@
             <i class="fa-solid fa-lock"></i>
           </div> 
           <div class="form-floating">
-            <input type="password" class="form-control" id="passwordInput" placeholder="password">
+            <input type="password" class="form-control" name="passwordInput" placeholder="password" required>
             <label for="passwordInput" class="text-black text-opacity-50">Password</label>
           </div>
         </div> <!--Fine quarta riga-->
@@ -121,7 +121,7 @@
             <i class="fa-solid fa-key"></i>
           </div> 
           <div class="form-floating">
-            <input type="password" class="form-control" id="repasswordInput" placeholder="password">
+            <input type="password" class="form-control" id="repasswordInput" placeholder="password" required>
             <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
           </div><!--Fine quinta riga-->
         </div> 
@@ -131,7 +131,7 @@
         <div class="mt-2">
           <!-- Da inserire il link al sign in -->
           <div style="text-align: center">
-            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="/login.html">Sei già iscritto? Effettua l'accesso!</a>
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="http://localhost:3000/login.php">Sei già iscritto? Effettua l'accesso!</a>
           </div>
           
       </div>

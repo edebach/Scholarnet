@@ -41,17 +41,19 @@
   </head>
   <body>
     <div class="square">
-      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.html'">
+      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3">
       <h2 class="text-center mb-3">Login</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare le credenziali e fornire accesso al sito -->
-      <form>
+      
+      <form name="myForm" action="http://localhost:3000/Logged/accesso.php" method="POST">
+      
       <!--Prima riga: form per la password -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-envelope"></i>
           </div>
           <div class="form-floating">
-            <input type="email" class="form-control" id="emailInputLogin" aria-describedby="emailHelp" placeholder="Enter email">
+            <input type="email" class="form-control" name="emailInputLogin" aria-describedby="emailHelp" placeholder="Enter email" required>
             <label for="emailInputLogin" class="text-black text-opacity-50">Email</label>
           </div>
         </div><!--Fine prima riga-->
@@ -61,7 +63,7 @@
             <i class="fa-solid fa-lock"></i>
           </div> 
           <div class="form-floating">
-            <input type="password" class="form-control" id="passwordInput" placeholder="password">
+            <input type="password" class="form-control" name="passwordInput" placeholder="password" required>
             <label for="passwordInput" class="text-black text-opacity-50">Password</label>
           </div>
         </div> <!--Fine seconda riga-->
@@ -77,7 +79,7 @@
         <button type="submit" class="btn btn-primary">Accedi</button>
         <div class="mt-1">
             <!-- Da inserire il link al sign up -->
-            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="singup.html">Primo accesso? Iscriviti ora!</a>
+            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="http://localhost:3000/singup.php">Primo accesso? Iscriviti ora!</a>
         </div>
       </form>
     </div>

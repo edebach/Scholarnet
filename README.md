@@ -10,6 +10,22 @@ git pull: prende il codice più recente da github
 git reset --hard HEAD^: resetta l'head al penultimo commit
 
 
+COMANDI UTILI DB:
+
+- Creazione tabella:
+create table 'nome_tabella' (
+    attr_1 'tipo(dim)',
+    ...
+    attr_n 'tipo(dim)'
+);
+
+
+- Modifica tabella (aggiunta colonna):
+alter table 'nome_tabella' add 'new_column_name' 'data_type'(dim);
+
+- Inserimento dati:
+insert into 'nome_tabella' values('attr_1',...,'attr_n');
+
 
 
 COMANDI UTILI FABIO:

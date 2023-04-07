@@ -97,7 +97,9 @@
 
         <!-- Titolo da modificare -->
         <div class="container">
-            <h1>Benvenuto nome_utente!</h1>
+            <?php
+                echo "<h2>Benvenuto nome_utente!</h2>";
+            ?>
         </div>
         <br>
 		<div class="container">
@@ -290,13 +292,6 @@
     <div style="height: 20px; width: auto;"></div>
     <div id="includedContent"></div>
 
-    <!-- <footer> -->
-        <!-- Contatti per informazioni, logo ... -->
-<!--         <div class="col-md-12">
-            <h2>Contatti</h2>
-            Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco<br>
-            <a href="mailto:hege@example.com">hege@example.com</a>
-        </div> -->
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
             <div class="container p-4 pb-0">
