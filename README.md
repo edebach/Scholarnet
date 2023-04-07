@@ -15,7 +15,7 @@ COMANDI UTILI DB:
 - Creazione tabella:
 create table 'nome_tabella' (
     attr_1 'tipo(dim)',
-    ...
+    ...,
     attr_n 'tipo(dim)'
 );
 
