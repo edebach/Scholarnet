@@ -39,6 +39,8 @@ TESTO VERSIONE SMALL:
 <small id="emailSmall" class="form-text text-muted">Inserisci la tua email</small>
 
 COSE DA AGGIUNGERE:
+DA RICORDARE:
+1) Quando modificate i nomi dei file php ricordate che i riferimenti dei bottoni vanno modificati altrimenti il link resta ad un file html
 
 SIGNUP:
 1) Scelta se professore o studente

@@ -49,7 +49,7 @@
   </head>
   <body>
     <div class="square">
-      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.html'">
+      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.php'">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
       <form name="myForm" action="http://localhost:3000/Logged/registrati.php" method="POST">

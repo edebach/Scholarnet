@@ -41,7 +41,7 @@
   </head>
   <body>
     <div class="square">
-      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3">
+      <img src="./img/logo.jpg" alt="Logo del sito" class="logo mb-3" onclick="location.href='./index.php'">
       <h2 class="text-center mb-3">Login</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare le credenziali e fornire accesso al sito -->
       
