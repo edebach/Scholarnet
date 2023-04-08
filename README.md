@@ -1,93 +1,94 @@
 # ScholarNet
-Progetto LTW
+`Progetto LTW`
 
-COMANDI UTILI GENERALE:
-
-git push: pusha il codice su github
-
-git pull: prende il codice più recente da github
-
-git reset --hard HEAD^: resetta l'head al penultimo commit
+**COMANDI UTILI GENERALE**:
+- `git push` pusha il codice su github
+- `git pull` prende il codice più recente da github
+- `git reset --hard HEAD^` resetta l'head al penultimo commit
 
 
-COMANDI UTILI DB:
-
+**COMANDI UTILI MySQL (DBMS)**:
 - Creazione tabella:
+```bash
 create table 'nome_tabella' (
-    attr_1 'tipo(dim)',
+    attr_1 'data_type(dim)',
     ...,
-    attr_n 'tipo(dim)'
+    attr_n 'data_type(dim)'
 );
+```
 
 - Modifica tabella (aggiunta colonna):
-alter table 'nome_tabella' add 'new_column_name' 'data_type'(dim);
+```bash
+alter table 'nome_tabella' add 'new_column_name' 'data_type(dim)';
+```
 
 - Inserimento dati:
-insert into 'nome_tabella' values('attr_1',...,'attr_n');
+```bash
+insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
+```
 
 - Esportare il db su pgAdmin4:
 1. Tasto destro sul db da esportare;
-2. Backup;
+2. `Backup`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
 - Importare il db su pgAdmin4:
 1. Tasto destro sul db da importare;
-2. Restore;
+2. `Restore`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
 
 
-COMANDI UTILI FABIO:
-
-git add -A index.html
-
+**COMANDI UTILI FABIO**:
+- `git add -A index.html`
 
 
-TESTO VERSIONE SMALL:
-
+**TESTO VERSIONE SMALL**:
+```bash
 <small id="emailSmall" class="form-text text-muted">Inserisci la tua email</small>
+```
 
-COSE DA AGGIUNGERE:
-DA RICORDARE:
-1) Quando modificate i nomi dei file php ricordate che i riferimenti dei bottoni vanno modificati altrimenti il link resta ad un file html
+# COSE DA AGGIUNGERE:
+**DA RICORDARE**:
+- Quando modificate i nomi dei file php ricordate che i riferimenti dei bottoni vanno modificati altrimenti il link resta ad un file html
 
-SIGNUP:
+**SIGNUP**:
 1) Scelta se professore o studente
 2) Sesso della persona
 3) Aggiungere Lo step successivo dopo prosegui
 
-INDEX:
+**INDEX**:
 1) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
 2) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
 3) Parte php
 4)avviso recensione (disponibile solo se loggato)
 
-LOGIN:
+**LOGIN**:
 1) Rendere tutti i pulsanti funzionanti
 
-INDEXLOGGED:
+**INDEXLOGGED**:
 1) Aggiungere profilo (leggi riga 87)
 
-LISTACLASSIDOCENTI:
+**LISTACLASSIDOCENTI**:
 1) Finestre dei corsi gestiti dal docente
 2) Pulsante crea corso
 2) profilo+logout
 
-LISTACLASSISTUDENTI:
+**LISTACLASSISTUDENTI**:
 1) Finestre dei corsi in cui si è iscritti
 2) Pulsante unisciti a un corso
 2) profilo+logout
 
-PROFILO:
+**PROFILO**:
 1) informazioni essenziali (Usando principalente php)
 
-CLASSI:
+**CLASSI**:
 1) Iniziare a costruire le classi
 
-SEZIONE SOCIAL:
-Da fare tutta
+**SEZIONE SOCIAL**:
+1) Da fare tutta
 
-DATABASE:
+**DATABASE**:
 1) Completamento della tabella utente
 
 
