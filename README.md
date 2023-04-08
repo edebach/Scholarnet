@@ -19,12 +19,21 @@ create table 'nome_tabella' (
     attr_n 'tipo(dim)'
 );
 
-
 - Modifica tabella (aggiunta colonna):
 alter table 'nome_tabella' add 'new_column_name' 'data_type'(dim);
 
 - Inserimento dati:
 insert into 'nome_tabella' values('attr_1',...,'attr_n');
+
+- Esportare il db su pgAdmin4:
+1. Tasto destro sul db da esportare;
+2. Backup;
+3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
+
+- Importare il db su pgAdmin4:
+1. Tasto destro sul db da importare;
+2. Restore;
+3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
 
 
@@ -79,4 +88,6 @@ SEZIONE SOCIAL:
 Da fare tutta
 
 DATABASE:
-da fare da 0
+1) Completamento della tabella utente
+
+

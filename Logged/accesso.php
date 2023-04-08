@@ -8,6 +8,8 @@
 </head>
 <body>
     <?php
+    //File accesso.php pensato come gestione di accesso di un utente già registrato al servizio
+    //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
         header("Location: /");
     }
@@ -18,11 +20,16 @@
     }
 
     $email = $_POST['emailInputLogin'];
+
+    //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form login.php
     $q1 = "select * 
             from utente 
             where email = $1";
+
+    //il risultato della query me la salvo in un array
     $result = pg_query_params($dbconn, $q1, array($email));
     
+    //scorro sulle tuple dell'array e verifico se l'email inserita si trova nel mio db
     if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
         echo "<script>
                 alert('Non sei ancora iscritto');
@@ -31,6 +38,8 @@
     }
     else {
         $password = $_POST['passwordInput'];
+
+        //una volta che ho verificato l'utente è registrato verifico se ha inserito una corretta password
         $q2 = "select * 
                 from utente 
                 where email = $1 and pass = $2";

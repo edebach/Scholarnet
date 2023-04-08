@@ -81,7 +81,7 @@
                                 </svg>
                                 <!--Pensavo di implementare che al momento che passo col cursore sul bottone profilo, senza cliccarlo, ti usciva un piccola finestra con le informazioni dell'utente-->
                                 Profilo
-                            </a>    
+                            </a>
                             <a class="btn btn-danger" href="../index.html">Logout</a>
                         </div>
 					</li>
