@@ -1,0 +1,14 @@
+#annuncio-form {
+    display: none;
+  }
+
+  #annuncio-form.show{
+    display:contents;
+    transition: 1000ms ease-out ;
+  }
+#titoloClasse{
+    padding-top: 30px;
+}
+/* #headerClasse{
+    height: 120px;
+} */

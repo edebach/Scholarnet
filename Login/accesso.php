@@ -33,7 +33,7 @@
     if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
         echo "<script>
                 alert('Non sei ancora iscritto');
-                window.location.href='http://localhost:3000/login.php';
+                window.location.href='../Login/login.html';
             </script>";
     }
     else {
@@ -47,12 +47,12 @@
         if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
             echo "<script>
                     alert('Password errata!');
-                    window.location.href='http://localhost:3000/login.php';
+                    window.location.href='../Login/login.html';
                 </script>";
         }
         else {
             echo "<script>
-                    window.location.href='http://localhost:3000/Logged/IndexLogged.php';
+                    window.location.href='../Logged/IndexLogged.php';
                 </script>";
         }
     }

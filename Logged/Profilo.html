@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            const profileIcon = document.querySelector('.profile-icon');
+            const profileInfo = document.querySelector('.profile-info');
+
+            profileIcon.addEventListener('click', function() {
+            profileInfo.classList.toggle('open');
+            });
+
+            profileInfo.addEventListener('click', function(event) {
+            event.stopPropagation();
+            });
+
+            document.addEventListener('click', function() {
+            profileInfo.classList.remove('open');
+            });
+
+        </script>
+        <style>
+            .profile-info {
+                display: none;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                width: 200px;
+                padding: 10px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+            }
+            
+            .profile-icon:hover + .profile-info,
+            .profile-info:hover {
+                display: block;
+            }
+  
+        </style>
+    </head>
+    <body>
+        <div class="profile-icon">
+        <button type="button">button</button>
+            <div class="profile-info">
+                <h2>Nome Cognome</h2>
+                <p>Email: email@example.com</p>
+                <p>Telefono: 1234567890</p>
+            </div>
+        </div>
+    </body>
+</html>

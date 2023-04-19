@@ -39,7 +39,7 @@
     if (($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
         echo "<script>
                 alert('Risulti già iscritto!');
-                window.location.href='http://localhost:3000/login.php';
+                window.location.href='../Login/login.html';
             </script>";
     }
     else{
@@ -52,7 +52,7 @@
         if ($data) {
             echo "<script>
                     alert('Registrazione effettuata con successo!');
-                    window.location.href='http://localhost:3000/login.php';
+                    window.location.href='../Login/login.html';
                 </script>";
         }
     }

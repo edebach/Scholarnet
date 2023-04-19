@@ -1,6 +1,18 @@
+
+  
+
 {
+    "files.associations": {
+        "*.html": "html"
+      },
+
+
+
     "php.stubs": [
         "*",
         "pgsql"
     ]
+    
+
+
 }

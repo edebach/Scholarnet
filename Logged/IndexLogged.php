@@ -42,6 +42,10 @@
      </style>
 
     <link rel="stylesheet" href="../src/rating.css">
+    <!-- Riferimento al file js di profilo -->
+    <!-- <script src="./Profilo/profilo.js"></script> -->
+    <!-- Riferimento al file css id profilo -->
+    <!-- <link rel="stylesheet" href="./Profilo/profilo.css"> -->
 
     <title>Scholarnet</title>
 
