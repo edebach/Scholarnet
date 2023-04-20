@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-
+    session_start();
     //File registrati.php pensato come fase di registrazione di un utente
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -20,11 +20,14 @@
                 or die('Could not connect: ' . pg_last_error());
     }
 
-    $nome = $_POST['nomeInput'];
-    $cognome = $_POST['cognomeInput'];
+    $nome = $_SESSION['nome'];
+    $cognome = $_SESSION['cognome'];
     $email = $_POST['emailInput'];
-    $istituto = $_POST['floatingSelect'];
+    $istituto = $_SESSION['istituto'];
     $password = $_POST['passwordInput'];
+    $dataN=$_SESSION['dataN'];
+    $sesso=$_SESSION['sesso'];
+    // TODO: Aggiungere la variabile relativa a flagStudnete
 
 
     //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form signup.php
@@ -45,10 +48,10 @@
     else{
         //inserimento utente nel db
         //una volta che ho verificato l'utente non è registrato, inserisco i dati forniti nel form signup.php, nel mio db
-        $q2 = "insert into utente values ($1, $2, $3, $4, $5)";
+        $q2 = "insert into utente values ($1, $2, $3, $4, $5, $6, $7)";
 
         //il risultato della query me lo salvo in un array, in questo caso con tutti i dati forniti
-        $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto));
+        $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto,$sesso,$dataN));
         if ($data) {
             echo "<script>
                     alert('Registrazione effettuata con successo!');
@@ -56,6 +59,7 @@
                 </script>";
         }
     }
+    session_abort();
 
     ?>
 </body>

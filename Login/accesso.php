@@ -51,10 +51,15 @@
                 </script>";
         }
         else {
-        $nome=$tuple['nome'];
+            $_SESSION['email'] = $tuple['email'];
+            $_SESSION['nome'] = $tuple['nome'];
+            $_SESSION['istituto'] = $tuple['istituto'];
+            $_SESSION['sesso'] = $tuple['sesso'];
+            $_SESSION['dataN'] = $tuple['dataN'];
             echo "<script>
-                    window.location.href='../Logged/IndexLogged.php?name=$nome';
+                    window.location.href='../Logged/IndexLogged.php';
                 </script>";
+                
         }
             
     }

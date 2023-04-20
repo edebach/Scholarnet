@@ -68,6 +68,10 @@ recensione(utente(pk), data(pk), numStelle, descrizione)
 ```
 
 # COSE DA AGGIUNGERE:
+!IMPORTANTE!
+Bisogna modificare i file in file-php ma anche i loro riferimenti
+Bisogna aggiungere i session_start() nei vari vile
+
 **DA RICORDARE**:
 - Quando modificate i nomi dei file php ricordate che i riferimenti dei bottoni vanno modificati altrimenti il link resta ad un file html
 

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
 <html lang="it">
 <head>
     <!-- Required meta tags -->
@@ -121,7 +124,15 @@
         <!-- Titolo da modificare -->
         <div class="container">
             <?php
-                echo "<h2>Benvenuto " .$_GET['name']."!</h2>";
+            if($_SESSION['sesso']=="Maschio")
+                echo "<h2>Benvenuto " .$_SESSION['nome']."!</h2>";
+            else{
+                if($_SESSION['sesso']=="Femmina")
+                echo "<h2>Benvenuta " .$_SESSION['nome']."!</h2>";
+                else{
+                    echo "<h2>Benvenuto/a " .$_SESSION['nome']."!</h2>";
+                }
+            }
             ?>
         </div>
         <br>

@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
+<?php
+session_start();
+$_SESSION['nome'] = $_POST['nomeInput'];
+$_SESSION['cognome']  = $_POST['cognomeInput'];
+$_SESSION['istituto']  = $_POST['Istituti'];
+$_SESSION['dataN']  = $_POST['datePicker'];
+$_SESSION['sesso']  = $_POST['sesso'];
+
+?>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +24,7 @@
     <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
     <!-- Per gli stili nel file "Style.cc"-->
     <link rel="stylesheet" href="style.css">
+    <script src="./localStorage.js"></script>
     <style>
       /* Aggiunge il background grigio e centra il contenitore */
       body {
@@ -24,9 +34,14 @@
         align-items: center;
         height:100vh;
       }
-      #BottoneProsegui{
+      #BottoneIscriviti{
         padding-left: 0.3cm;
         padding-right: 0.3cm;
+      }
+      #BottoneIndietro{
+        padding-left: 0.3cm;
+        padding-right: 0.3cm;
+        padding-top: 0.1cm;
       }
 
       /* Aggiunge la forma quadrata al contenitore (forma diversa salla pagina di login)*/
@@ -48,42 +63,16 @@
         height: 150px;
       }
 
-      /* TODO: Regola l'omino accanto a Nome e cognome*/
+     /* TODO: Aggiungere il campo professore o studente */
     </style>
   </head>
   <body>
     <div class="square">
-      <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3" style="cursor:pointer"  onclick="location.href='../index.php'">
+      <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
       <form name="myForm" action="./registrati.php" method="POST">
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
-        <!-- Prima riga: form per nome e cognome.-->
-        <div class="row">
-          <div class="col">
-            <!-- IMMAGINE DELL'OMINO: guardare video del seguente link: https://www.youtube.com/watch?v=q93hR316nk4-->
-            <div class="mb-3 input-group">
-              <div class="input-group-text">
-                <i class="fa-solid fa-user"></i>
-              </div>
-              <div class="form-floating">
-                <input type="text" class="form-control" name="nomeInput" placeholder="Nome" required>
-                <label for="nomeInput" class="text-black text-opacity-50">Nome</label>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="mb-3 input-group">
-              <div class="input-group-text">
-                <i class="fa-solid fa-user"></i>
-              </div>
-              <div class="form-floating">
-                <input type="text" class="form-control" name="cognomeInput" placeholder="Cognome" required>
-                <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
-              </div>
-            </div>
-          </div>
-        </div><!--Fine prima riga-->
         <!-- Seconda riga: form solo per email.-->
         <div class="mb-3 input-group">
           <div class="input-group-text">
@@ -94,43 +83,6 @@
             <label for="emailInput" class="text-black text-opacity-50">Email</label>
           </div>
         </div><!--Fine seconda riga-->
-        <!--Terza riga: Form per inserire data di nascista.-->
-        <div class="mb-3 input-group">
-          <div class="input-group-text">
-            <i class="fa-solid fa-calendar"></i>
-          </div>
-          <div class="form-floating" id="datePicker">
-              <input type="text" class= "form-control" name="datePicker" placeholder="Date">
-              <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label>
-          </div>
-        </div>
-        <script>
-          $('#datePicker').calendar({
-          type: 'date',
-          format: 'yyyy-mm-dd'
-        });
-        </script>
-
-        <!--Quarta riga: Form per scelta scuola.-->
-        <div class="mb-3 input-group">
-          <div class="input-group-text">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div> 
-          <div class="form-floating">
-            <input list="istituti" name="floatingSelect" class="form-control" aria-label="Floating label select example" required>
-            <datalist id="istituti">
-              <option value="Sapienza">
-              <option value="RomaTre">
-              <option value="Tor vergata">
-              <option value="Luiss">
-              <option value="Lumsa">
-              <option value="Politecnico di Milano">
-              <option value="Politecnico di Torino">
-              <option value="Cattolica">
-              </datalist>
-              <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
-            </div>
-        </div><!--Fine terza riga-->
         <!--Quarta riga: form per la password -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
@@ -151,8 +103,11 @@
             <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
           </div><!--Fine quinta riga-->
         </div> 
-        <div class="row" id="BottoneProsegui">
-        <button type="submit" class="btn btn-primary">Prosegui</button>
+        <div class="row" id="BottoneIscriviti">
+          <button type="submit" class="btn btn-primary">Iscriviti</button>
+        </div>
+        <div class="row" id="BottoneIndietro">
+        <button onclick="window.history.back()" class="btn btn-secondary">Indietro</button>
         </div>
         <div class="mt-2">
           <!-- Da inserire il link al sign in -->

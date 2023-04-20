@@ -50,13 +50,16 @@
 
       /* TODO: Regola l'omino accanto a Nome e cognome*/
     </style>
+        
+    <script src="./localStorage.js"></script>
+
   </head>
   <body>
     <div class="square">
       <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3" style="cursor:pointer"  onclick="location.href='../index.php'">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
-      <form name="myForm" action="./registrati.php" method="POST">
+      <form name="signup1" action="./signup2.php" method="POST">
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
         <!-- Prima riga: form per nome e cognome.-->
         <div class="row">
@@ -96,18 +99,32 @@
         </div>
         <script>
           $('#datePicker').calendar({
-          type: 'date',
-          format: 'yyyy-mm-dd'
-        });
-        </script>
+            type: 'date',
+            format: 'yyyy-mm-dd'
+          });
+          </script>
 
-        <!--Quarta riga: Form per scelta scuola.-->
+          <div class="mb-3 input-group">
+            <div class="input-group-text">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+          <div class="form-floating"> 
+            <select class="form-select" name="sesso" aria-label="Floating label select example" required> 
+              <option selected></option>
+              <option value="Maschio">Maschio</option>
+              <option value="Femmina">Femmina</option>
+              <option value="vuoto">Non Specifico</option>
+            </select>
+            <label for="floatingSelect" class="text-black text-opacity-50">Sesso</label>
+            </div>
+          </div>
+<!--Quarta riga: Form per scelta scuola.-->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-graduation-cap"></i>
           </div> 
           <div class="form-floating">
-            <input list="istituti" name="floatingSelect" class="form-control" aria-label="Floating label select example" required>
+            <input list="istituti" name="Istituti" class="form-control" aria-label="Floating label select example" required>
             <datalist id="istituti">
               <option value="Sapienza">
               <option value="RomaTre">
@@ -121,9 +138,12 @@
               <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
             </div>
         </div><!--Fine terza riga-->
+
         <div class="row" id="BottoneProsegui">
-        <button type="submit" class="btn btn-primary">Prosegui</button>
+        <button type="submit" class="btn btn-primary" href="./signup2.php">Prosegui</button>
         </div>
+
+
         <div class="mt-2">
           <!-- Da inserire il link al sign in -->
           <div style="text-align: center">
