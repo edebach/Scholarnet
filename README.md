@@ -40,7 +40,7 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 **SCHEMA LOGICO**:
 - 
 ```bash
-utente(email(pk), nome, cognome, sesso, dataN, pass, flagStudente)
+utente(email(pk), nome, cognome, sesso, dataN, pass, istituto, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
     
 corso(codice(pk), materia, numIscritti)
