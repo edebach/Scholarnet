@@ -8,6 +8,7 @@
 </head>
 <body> 
     <?php
+    
     //File accesso.php pensato come gestione di accesso di un utente già registrato al servizio
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
