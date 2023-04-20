@@ -37,7 +37,26 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 2. `Restore`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
+**SCHEMA LOGICO**:
+- 
+```bash
+utente(email(pk), nome, cognome, sesso, dataN, pass, flagStudente)
+    vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
+    
+corso(codice(pk), materia, numIscritti)
+    inclusione: corso[codice] => insegna[]
+    
+insegna(docente(pk), corso(pk))
+    f.k.: insegna[docente] => utente[email]
+    f.k.: insegna[corso] => corso[codice]
+    
+partecipa(studente(pk), corso(pk))
+    f.k.: partecipa[studente] => utente[email]
+    f.k.: partecipa[corso] => corso[codice]
 
+recensione(utente(pk), data(pk), numStelle, descrizione)
+    f.k.: recensione[utente] => utente[email]
+```
 
 **COMANDI UTILI FABIO**:
 - `git add -A index.html`
