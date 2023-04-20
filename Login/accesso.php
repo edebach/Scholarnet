@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accesso</title>
 </head>
-<body>
+<body> 
     <?php
     //File accesso.php pensato come gestione di accesso di un utente già registrato al servizio
     //Connessione al dbname Scholarnet
