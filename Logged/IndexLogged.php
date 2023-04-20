@@ -16,6 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     
+    
     <!--Carosello immagine: SEZIONE CRITICA CHE FA APPARIRE L'IMMAGINE BIANCA-->
     <!--Icona stella-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -132,7 +133,7 @@
                             <h4 class="card-title">Iscriviti al corso</h4>
                             <ul>
                                 <li>Seleziona un corso del tuo istituto/università</li>
-                                <li>Utilizza un codice del corso con 5-7 lettere o numeri</li>
+                                <li>Utilizza un codice del corso con 8 lettere o numeri</li>
                             </ul>
                             <p>Se hai problemi a iscriverti al corso, consulta il <a target="_blank" href="#">Centro assistenza</a></p>
                             <button class="btn btn-primary" data-toggle="modal" data-target="#iscriviti-popup">Iscriviti</button>
@@ -174,7 +175,7 @@
                 
                     <form name="myForm" action="./Iscriviti/iscriviti.php" method="POST">
                         <div class="row">
-                            <input class="form-control" list="datalistOptions" name="codiceCorso" placeholder="Codice del corso" required>
+                            <input class="form-control" list="datalistOptions" name="codiceCorso" placeholder="Codice del corso" required pattern="[0-9A-Z]{8}">
                         </div>
                         <br>
                         <div class="row">
@@ -182,10 +183,7 @@
                         </div>
                     </form>
                 </div>
-        </div>
-                
-    
-            
+            </div>    
         </div>
         </div>
     </div>
@@ -195,23 +193,22 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="myModalLabel">Titolo della finestra di popup2</h5>
+            <h5 class="modal-title" id="myModalLabel">Crea corso</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
-            Contenuto della finestra di popup
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
-            <button type="button" class="btn btn-primary">Salva modifiche</button>
+                <form name="myForm" action="./Iscriviti/crea.php" method="POST">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                </div>
+                </form>
             </div>
         </div>
         </div>
     </div>
-
-
     
     <!-- Sezione Home -->
 	<section id="home-section" class="bg-image mt-5">
