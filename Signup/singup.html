@@ -96,14 +96,19 @@
             <i class="fa-solid fa-graduation-cap"></i>
           </div> 
           <div class="form-floating">
-            <select class="form-select" name="floatingSelect" aria-label="Floating label select example" required>
-              <option selected></option>
-              <option value="1">scuola 1</option>
-              <option value="2">scuola 2</option>
-              <option value="3">scuola 3</option>
-            </select>
-            <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
-          </div>
+            <input list="istituti" name="floatingSelect" class="form-control" aria-label="Floating label select example" required>
+            <datalist id="istituti">
+              <option value="Sapienza">
+              <option value="RomaTre">
+              <option value="Tor vergata">
+              <option value="Luiss">
+              <option value="Lumsa">
+              <option value="Politecnico di Milano">
+              <option value="Politecnico di Torino">
+              <option value="Cattolica">
+              </datalist>
+              <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
+            </div>
         </div><!--Fine terza riga-->
         <!--Quarta riga: form per la password -->
         <div class="mb-3 input-group">
