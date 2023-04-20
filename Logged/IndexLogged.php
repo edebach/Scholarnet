@@ -102,14 +102,7 @@
         <!-- Titolo da modificare -->
         <div class="container">
             <?php
-                 foreach($GLOBALS as $k => $v){
-                    echo "$k => ";
-                    //funzione che ti permette di stampare qualcosa in formato leggibile
-                    print_r($v);
-                    echo "<br><hr/><br>";
-                }
-
-                echo "<h2>Benvenuto ".$_GET['nome']."</h2>";
+                echo "<h2>Benvenuto " .$_GET['name']."!</h2>";
             ?>
         </div>
         <br>

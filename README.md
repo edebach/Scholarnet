@@ -37,7 +37,26 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 2. `Restore`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
+**SCHEMA LOGICO**:
+- 
+```bash
+utente(email(pk), nome, cognome, sesso, dataN, pass, flagStudente)
+    vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
+    
+corso(codice(pk), materia, numIscritti)
+    inclusione: corso[codice] => insegna[]
+    
+insegna(docente(pk), corso(pk))
+    f.k.: insegna[docente] => utente[email]
+    f.k.: insegna[corso] => corso[codice]
+    
+partecipa(studente(pk), corso(pk))
+    f.k.: partecipa[studente] => utente[email]
+    f.k.: partecipa[corso] => corso[codice]
 
+recensione(utente(pk), data(pk), numStelle, descrizione)
+    f.k.: recensione[utente] => utente[email]
+```
 
 **COMANDI UTILI FABIO**:
 - `git add -A index.html`
@@ -52,22 +71,28 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 **DA RICORDARE**:
 - Quando modificate i nomi dei file php ricordate che i riferimenti dei bottoni vanno modificati altrimenti il link resta ad un file html
 
-**SIGNUP**:
-1) Scelta se professore o studente
-2) Sesso della persona
-3) Aggiungere Lo step successivo dopo prosegui
-
 **INDEX**:
-1) Risolvere bug "immagine bianca" nel carosello(RISOLTO A META, GUARDARE IL COMMENTO A RIGA 18, SE SI TOLGONO QUEI LINK FUNZIONA)
-2) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
-3) Parte php
-4)avviso recensione (disponibile solo se loggato)
+1) Aggiungere il logo di "Scholarnet" in alto a sinistra nella navbar
+2)modifica recensione (disponibile solo se loggato)
+3)vediamo se gestire la newsletter
+4)modificare i campi di testo con informazioni vere
+
+
+
+**SIGNUP**:
+1) creare il file signup prosegui
+2) prima parte modifiacre: nome,cognome,data di nascita, istituto, sesso
+3)seconda parte signup: email password,conferma password, docente/studente
+
 
 **LOGIN**:
-1) Rendere tutti i pulsanti funzionanti
+1) Remember me 
 
 **INDEXLOGGED**:
-1) Aggiungere profilo (leggi riga 87)
+1) pulsanti crea e iscriviti al corso (meglio popup)
+2)Recensione funzionante
+3) modifica navbar con i miei corsi
+4) modifica campi di testo con info vere
 
 **LISTACLASSIDOCENTI**:
 1) Finestre dei corsi gestiti dal docente
@@ -80,10 +105,15 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 2) profilo+logout
 
 **PROFILO**:
-1) informazioni essenziali (Usando principalente php)
+1) info utente(nella tabella utente)+foto profilo opzionale
+2) pulsante modifica
+3) numero corsi a cui si è iscritto
 
 **CLASSI**:
-1) Iniziare a costruire le classi
+1) rendere funzionante i pulsanti
+2) sezione profile
+3) sezione elenco classi
+4) rendere il file duplicabile 
 
 **SEZIONE SOCIAL**:
 1) Da fare tutta
