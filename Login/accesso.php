@@ -51,8 +51,9 @@
                 </script>";
         }
         else {
+        $nome=$tuple['nome'];
             echo "<script>
-                    window.location.href='../Logged/IndexLogged.php';
+                    window.location.href='../Logged/IndexLogged.php?name=$nome';
                 </script>";
         }
     }

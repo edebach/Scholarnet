@@ -102,7 +102,7 @@
         <!-- Titolo da modificare -->
         <div class="container">
             <?php
-                echo "<h2>Benvenuto nome_utente!</h2>";
+                echo "<h2>Benvenuto " .$_GET['name']."!</h2>";
             ?>
         </div>
         <br>
