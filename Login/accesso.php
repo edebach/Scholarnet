@@ -51,11 +51,14 @@
                 </script>";
         }
         else {
+            $nome = $tuple['nome'];
             echo "<script>
-                    window.location.href='../Logged/IndexLogged.php';
-                </script>";
+                window.location.href='../Logged/IndexLogged.php?nome=$nome';
+            </script>";
         }
+            
     }
+    
 ?>
 </body>
 </html>
