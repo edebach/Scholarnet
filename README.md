@@ -90,7 +90,7 @@ recensione(utente(pk), data(pk), numStelle, descrizione)
 
 **INDEXLOGGED**:
 1) pulsanti crea e iscriviti al corso (meglio popup)
-2)Recensione funzionante
+2) Recensione funzionante
 3) modifica navbar con i miei corsi
 4) modifica campi di testo con info vere
 
