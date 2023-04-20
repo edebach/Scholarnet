@@ -78,6 +78,7 @@ recensione(utente(pk), data(pk), numStelle, descrizione)
 4)modificare i campi di testo con informazioni vere
 
 
+
 **SIGNUP**:
 1) creare il file signup prosegui
 2) prima parte modifiacre: nome,cognome,data di nascita, istituto, sesso
