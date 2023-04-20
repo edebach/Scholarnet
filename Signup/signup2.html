@@ -84,6 +84,16 @@
             </div>
           </div>
         </div><!--Fine prima riga-->
+        <!-- Seconda riga: form solo per email.-->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="form-floating">
+            <input type="email" class="form-control" name="emailInput" aria-describedby="emailHelp" placeholder="Enter email" required>
+            <label for="emailInput" class="text-black text-opacity-50">Email</label>
+          </div>
+        </div><!--Fine seconda riga-->
         <!--Terza riga: Form per inserire data di nascista.-->
         <div class="mb-3 input-group">
           <div class="input-group-text">
@@ -121,6 +131,26 @@
               <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
             </div>
         </div><!--Fine terza riga-->
+        <!--Quarta riga: form per la password -->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-lock"></i>
+          </div> 
+          <div class="form-floating">
+            <input type="password" class="form-control" name="passwordInput" placeholder="password" required>
+            <label for="passwordInput" class="text-black text-opacity-50">Password</label>
+          </div>
+        </div> <!--Fine quarta riga-->
+        <!--Quinta riga: form per reinserire password. DA FARE: CONTROLLARE CHE LA PASSWORD REINSERITA SIA UGUALE A QUELLA INSERITA IN PRECEDENZA -->
+        <div class="mb-3 input-group">
+          <div class="input-group-text">
+            <i class="fa-solid fa-key"></i>
+          </div> 
+          <div class="form-floating">
+            <input type="password" class="form-control" id="repasswordInput" placeholder="password" required>
+            <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
+          </div><!--Fine quinta riga-->
+        </div> 
         <div class="row" id="BottoneProsegui">
         <button type="submit" class="btn btn-primary">Prosegui</button>
         </div>
