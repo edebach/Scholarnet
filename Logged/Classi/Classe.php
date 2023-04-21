@@ -55,7 +55,7 @@
 			  <!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
 			<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
 			alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
-			  <!-- ?php include '../profilo.html'; ?> -->
+			   <!--php include '../profilo.html'; ?> -->
 			</div>
 		  </div>
 		  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">

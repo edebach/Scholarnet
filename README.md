@@ -5,7 +5,7 @@
 - `git push` pusha il codice su github
 - `git pull` prende il codice più recente da github
 - `git reset --hard HEAD^` resetta l'head al penultimo commit
-
+- `<?php include '../profilo.html'; ?>` importa un file html in un altro 
 
 **COMANDI UTILI MySQL (DBMS)**:
 - Creazione tabella:
@@ -40,10 +40,10 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 **SCHEMA LOGICO**:
 - 
 ```bash
-utente(email(pk), nome, cognome, sesso, dataN, pass, istituto, flagStudente)
+utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
     
-corso(codice(pk), materia, numIscritti)
+corso(codice(pk), nome, materia, numIscritti, link)
     inclusione: corso[codice] => insegna[]
     
 insegna(docente(pk), corso(pk))
