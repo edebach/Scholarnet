@@ -70,8 +70,8 @@
     if ($data) {
         echo "<script>
                 alert('Corso creato con successo!');
-                window.location.href='<?php echo $cartella_destinazione . $nome_file_nuovo; ?>';
             </script>";
+            header("Location: $link");
     }
     ?>
 </body>
