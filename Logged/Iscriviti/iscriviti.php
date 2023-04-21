@@ -8,6 +8,7 @@
 </head>
 <body>
     <?php
+        session_start();
         //Connessione al dbname Scholarnet
         if ($_SERVER["REQUEST_METHOD"] != "POST") {
             header("Location: /");
@@ -17,6 +18,14 @@
                     user=postgres password=biar") 
                     or die('Could not connect: ' . pg_last_error());
         }
+
+        $nome = $_SESSION['nome'];
+        $cognome = $_SESSION['cognome'];
+        $email = $_SESSION['emailInput'];
+        $istituto = $_SESSION['istituto'];
+        $password = $_SESSION['passwordInput'];
+        $dataN=$_SESSION['dataN'];
+        $sesso=$_SESSION['sesso'];
 
         $codCorso = $_POST['codiceCorso'];
 
@@ -30,6 +39,11 @@
             echo "<script>
                     alert('Corso non trovato. Verifica il codice e l\'account, quindi riprova.');
                     window.location.href='../IndexLogged.php';
+                </script>";
+        }else{
+            $link = $tuple['link'];
+            echo "<script>
+                window.location.href='./$link';
                 </script>";
         }
     ?>

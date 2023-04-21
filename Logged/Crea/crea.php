@@ -5,8 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creazione corso</title>
+
 </head>
 <body>
+    <?php
+    session_start();
+
+    //Connessione al dbname Scholarnet
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        header("Location: /");
+    }
+    else {
+        $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+                user=postgres password=biar") 
+                or die('Could not connect: ' . pg_last_error());
+    }
+
+    //Quando viene creato un corso viene generato in maniera casuale un codice di 8 cifre alfanumeriche
+    $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $codice = substr(str_shuffle($chars), 0, 8);
+
+    $nomeCorso = $_POST['nomeCorso'];
+    $materia = $_POST['materia'];
+    $numIscritti = 0;
+    $link = '';
+
+    do{
+        $q1 = "select * from corso where codice=$1";
+        $result = pg_query_params($dbconn, $q1, array($nomeCorso));
+        $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $codice = substr(str_shuffle($chars), 0, 8);
+    } while(($tuple=pg_fetch_array($result, null, PGSQL_ASSOC)));
+        
     
+
+    
+
+    $q2 = "insert into corso values ($1, $2, $3, $4, $5)";
+    $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $numIscritti, $link));
+    if ($data) {
+        echo "<script>
+                alert('Corso creato con successo!');
+                window.location.href='../IndexLogged.php';
+            </script>";
+    }
+    
+
+
+    ?>
 </body>
 </html>

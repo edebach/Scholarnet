@@ -49,7 +49,7 @@
         //inserimento utente nel db
         //una volta che ho verificato l'utente non è registrato, inserisco i dati forniti nel form signup.php, nel mio db
         $q2 = "insert into utente values ($1, $2, $3, $4, $5, $6, $7)";
-
+ 
         //il risultato della query me lo salvo in un array, in questo caso con tutti i dati forniti
         $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto,$sesso,$dataN));
         if ($data) {

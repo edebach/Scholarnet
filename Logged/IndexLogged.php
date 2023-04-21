@@ -62,9 +62,6 @@ session_start();
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
      
-    <!-- Libreria utile al Floating labels-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="../src/rating.css">
     <!-- Riferimento al file js di profilo -->
     <!-- <script src="./Profilo/profilo.js"></script> -->
@@ -179,7 +176,8 @@ session_start();
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <form name="myForm" action="./Iscriviti/iscriviti.php" method="POST">
+                    
+                    <form name="iscriviti" action="./Iscriviti/iscriviti.php" method="POST">
                         <div class="row">
                             <h6>Chiedi il codice del corso all'insegnante e inseriscilo qui.</h6>
                             <input class="form-control" list="datalistOptions" name="codiceCorso" placeholder="Codice del corso" required pattern="[0-9A-Z]{8}">
@@ -187,6 +185,7 @@ session_start();
                         <br>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-primary">Iscriviti</button>
+                            &nbsp;&nbsp;
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
                         </div>
                     </form>
@@ -204,18 +203,17 @@ session_start();
                 <h5 class="modal-title" id="myModalLabel">Crea corso</h5>
             </div>
             <div class="modal-body">
-                <form name="myForm" action="./Crea/crea.php" method="POST">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name="nomeCorso" placeholder="Nome corso" required>
-                    <label for="nomeInput" class="text-black text-opacity-50">Nome corso</label>
+
+                <form name="creazione" action="./Crea/crea.php" method="POST">
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
                 </div>
-                <br>
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="materia" placeholder="Materia">
-                    <label for="floatingInput" class="text-black text-opacity-50">Materia</label>
+                <div class="mb-3">
+                    <input class="form-control" type="text" name="materia" placeholder="Materia (non obbligatoria)">
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="submit" class="btn btn-primary">Crea</button>
+                    &nbsp;&nbsp;
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
                 </div>
                 </form>
