@@ -8,7 +8,7 @@
 </head>
 <body> 
     <?php
-    
+    session_start();
     //File accesso.php pensato come gestione di accesso di un utente già registrato al servizio
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -54,6 +54,7 @@
         else {
             $_SESSION['email'] = $tuple['email'];
             $_SESSION['nome'] = $tuple['nome'];
+            $_SESSION['cognome'] = $tuple['cognome'];
             $_SESSION['istituto'] = $tuple['istituto'];
             $_SESSION['sesso'] = $tuple['sesso'];
             $_SESSION['dataN'] = $tuple['dataN'];

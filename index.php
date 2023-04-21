@@ -40,7 +40,11 @@
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <!-- <div class="topleft"> -->
-                <a class="navbar-brand" href="#">Scholarnet</a>
+                <a class="navbar-brand" href="#">
+                <img src="./img/logo_nosfondo.png" alt="Logo Scholarnet" 
+                width="50" height="50" class="d-inline-block align-text-top">
+                    <!-- Scholarnet -->
+                </a>
             <!-- </div> -->
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
