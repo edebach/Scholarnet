@@ -221,12 +221,16 @@
                     </div>
                 </div>
             </div>
+
+            <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+            <div id="zonaDinamica">
+                Seleziona la stella da visualizzare
+            </div>
+
         </div>
 
-        <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
-        <div id="zonaDinamica">
-            
-        </div>
+        
+
 
     </section>
     <!-- Da completare -->

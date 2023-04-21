@@ -44,7 +44,7 @@
         }else{
             $link = $tuple['link'];
             //TODO: Dovremmo implementare la creazione di un file all'interno della cartella classi, in modo tale
-            // da accedere al corso tramite il link
+            // da accedere al corso tramite il link(URL)
             echo "<script>
                 window.location.href='./$link';
                 </script>";
