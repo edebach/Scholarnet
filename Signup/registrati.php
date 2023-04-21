@@ -31,9 +31,9 @@
 
 
     //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form signup.php
-    $q1 = "select email 
-            from utente 
-            where email=$1";
+    $q1 = "SELECT email 
+            FROM utente 
+            WHERE email=$1";
 
     //il risultato della query me lo salvo in un array
     $result = pg_query_params($dbconn, $q1, array($email));
@@ -48,7 +48,7 @@
     else{
         //inserimento utente nel db
         //una volta che ho verificato l'utente non è registrato, inserisco i dati forniti nel form signup.php, nel mio db
-        $q2 = "insert into utente values ($1, $2, $3, $4, $5, $6, $7)";
+        $q2 = "INSERT INTO utente VALUES ($1, $2, $3, $4, $5, $6, $7)";
  
         //il risultato della query me lo salvo in un array, in questo caso con tutti i dati forniti
         $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto,$sesso,$dataN));

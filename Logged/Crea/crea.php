@@ -22,8 +22,7 @@
     }
 
     //Quando viene creato un corso viene generato in maniera casuale un codice di 8 cifre alfanumeriche
-    $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $codice = substr(str_shuffle($chars), 0, 8);
+
 
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
@@ -34,24 +33,44 @@
 
     $numIscritti = 0;
     //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
-    $link = '';
+
 
     //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
     do{
-        $q1 = "select * from corso where codice=$1";
-        $result = pg_query_params($dbconn, $q1, array($nomeCorso));
         $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codice = substr(str_shuffle($chars), 0, 8);
+        $q1 = "SELECT * FROM corso WHERE codice=$1";
+        $result = pg_query_params($dbconn, $q1, array($codice));
+
     } while(($tuple=pg_fetch_array($result, null, PGSQL_ASSOC)));
         
-    
+    $nome_file_originale = "../Classi/Classe.php"; // nome del file PHP originale
+    $nome_file_nuovo = "Classe_" . $codice . ".php"; // crea il nuovo nome del file con il codice del corso
+
+    // imposta la cartella di destinazione dove verrà salvato il nuovo file
+    $cartella_destinazione = "../Classi/";
+
+    // copia il file originale nella cartella di destinazione con il nuovo nome
+    if (copy($nome_file_originale, $cartella_destinazione . $nome_file_nuovo)) {
+        // il file è stato copiato correttamente, rinomina il nuovo file
+        // rename($cartella_destinazione . $nome_file_nuovo, $cartella_destinazione . $nome_file_nuovo);
+        // echo "File generato correttamente.";
+    } else {
+        // si è verificato un errore durante la copia del file
+        echo "<script>
+        alert('Errore durante la copia del file.');
+        window.location.href='../IndexLogged.php';
+        </script>";
+    }
     //inserisco i valori nella tabella corso
-    $q2 = "insert into corso values ($1, $2, $3, $4, $5)";
+    $link = $cartella_destinazione. $nome_file_nuovo;
+    $q2 = "INSERT INTO corso VALUES ($1, $2, $3, $4, $5)";
     $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $numIscritti, $link));
+    print_r($data);
     if ($data) {
         echo "<script>
                 alert('Corso creato con successo!');
-                window.location.href='../IndexLogged.php';
+                window.location.href='<?php echo $cartella_destinazione . $nome_file_nuovo; ?>';
             </script>";
     }
     ?>

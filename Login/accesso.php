@@ -23,9 +23,9 @@
     $email = $_POST['emailInputLogin'];
 
     //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form login.php
-    $q1 = "select * 
-            from utente 
-            where email = $1";
+    $q1 = "SELECT * 
+            FROM utente 
+            WHERE email = $1";
 
     //il risultato della query me la salvo in un array
     $result = pg_query_params($dbconn, $q1, array($email));
@@ -41,9 +41,9 @@
         $password = $_POST['passwordInput'];
 
         //una volta che ho verificato l'utente è registrato verifico se ha inserito una corretta password
-        $q2 = "select * 
-                from utente 
-                where email = $1 and pass = $2";
+        $q2 = "SELECT * 
+                FROM utente 
+                WHERE email = $1 AND pass = $2";
         $result = pg_query_params($dbconn, $q2, array($email,$password));
         if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
             echo "<script>
