@@ -126,3 +126,4 @@ Bisogna aggiungere i session_start() nei vari vile
 1) Completamento della tabella utente
 
 
+**venerdi ho modificato il peofilo iniziando a inserire dati personalizzati

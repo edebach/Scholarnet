@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+            user=postgres password=biar") 
+            or die('Could not connect: ' . pg_last_error());
+?>
 <html lang="en">
     <head>
         <title></title>
@@ -42,10 +48,13 @@
                       <div class="col-md-4 gradient-custom text-center text-white"
                         style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                         <!-- immagine inserita da utente-->
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                        <img src=<?php
+                          include "./Profilo/fotoprofilo.php"
+                          ?>
                           alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                        <h5>Marie Horwitz</h5>
-                        <p>Web Designer</p>
+                          <?php
+                          include "./Profilo/nome_studprof.php"
+                          ?>
                         <i class="far fa-edit mb-5"></i>
                       </div>
                       <div class="col-md-8">
