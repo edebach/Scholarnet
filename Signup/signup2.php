@@ -25,6 +25,20 @@ $_SESSION['sesso']  = $_POST['sesso'];
     <!-- Per gli stili nel file "Style.cc"-->
     <link rel="stylesheet" href="style.css">
     <script src="./localStorage.js"></script>
+
+    <!--Verifica password-->
+    <script>
+      function validateForm() {
+        var password = document.forms["myForm"]["passwordInput"].value;
+        var repassword = document.forms["myForm"]["repasswordInput"].value;
+        if (password != repassword) {
+          alert("Le password non corrispondono");
+          return false;
+        }
+        return true;
+      }
+    </script>
+
     <style>
       /* Aggiunge il background grigio e centra il contenitore */
       body {
@@ -71,7 +85,7 @@ $_SESSION['sesso']  = $_POST['sesso'];
       <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3">
       <h2 class="text-center mb-3">Signup</h2>
       <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
-      <form name="myForm" action="./registrati.php" method="POST">
+      <form name="myForm" action="./registrati.php" method="POST" onsubmit="return validateForm()">
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
         <!-- Seconda riga: form solo per email.-->
         <div class="mb-3 input-group">

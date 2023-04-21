@@ -27,9 +27,16 @@
 
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
+
+    if($materia==""){
+        $materia = null;
+    }
+
     $numIscritti = 0;
+    //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
     $link = '';
 
+    //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
     do{
         $q1 = "select * from corso where codice=$1";
         $result = pg_query_params($dbconn, $q1, array($nomeCorso));
@@ -38,9 +45,7 @@
     } while(($tuple=pg_fetch_array($result, null, PGSQL_ASSOC)));
         
     
-
-    
-
+    //inserisco i valori nella tabella corso
     $q2 = "insert into corso values ($1, $2, $3, $4, $5)";
     $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $numIscritti, $link));
     if ($data) {
@@ -49,9 +54,6 @@
                 window.location.href='../IndexLogged.php';
             </script>";
     }
-    
-
-
     ?>
 </body>
 </html>

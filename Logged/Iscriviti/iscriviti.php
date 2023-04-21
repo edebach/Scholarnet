@@ -29,6 +29,7 @@
 
         $codCorso = $_POST['codiceCorso'];
 
+        //verifico che il codice del corso inserito sia corretto
         $q1 = "select * 
             from corso 
             where codice=$1";
@@ -42,6 +43,8 @@
                 </script>";
         }else{
             $link = $tuple['link'];
+            //TODO: Dovremmo implementare la creazione di un file all'interno della cartella classi, in modo tale
+            // da accedere al corso tramite il link
             echo "<script>
                 window.location.href='./$link';
                 </script>";

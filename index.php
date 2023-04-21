@@ -200,11 +200,9 @@
     <!-- Sezione Recensioni -->
     <section id="recensione">
         <div class="container ">
-            <!-- form da generare-->
-            <form action="" >
             <div class="row">
                 <div class="col-sm-12 ">
-                    <h2>Inserisci la tua recensione</h2>
+                    <h2>Ultime recensioni</h2>
                     <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
                     <!-- Modifica delle valutazioni usando icone di stelle -->
                     <div class="class=mb-5">
@@ -223,14 +221,13 @@
                     </div>
                 </div>
             </div>
-            <div class="form-floating">
-                <textarea class="form-control mb-2" placeholder="Feedback.." id="floatingTextarea2" style="height: 150px;width: 380px; resize:none"></textarea>
-                <label for="floatingTextarea2"></label>
-
-                <input type="submit" value="Invia" class="btn btn-outline-primary">
-            </div>             
-        </form>
         </div>
+
+        <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+        <div id="zonaDinamica">
+            
+        </div>
+
     </section>
     <!-- Da completare -->
     <div style="height: 20px; width: auto;"></div>
