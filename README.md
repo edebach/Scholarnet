@@ -61,6 +61,15 @@ recensione(utente(pk), data(pk), numStelle, descrizione)
 **COMANDI UTILI FABIO**:
 - `git add -A index.html`
 
+**COMANDI UTILI MARCO**:
+```bash
+foreach($GLOBALS as $k => $v){
+    echo "$k => ";
+    //funzione che ti permette di stampare qualcosa in formato leggibile
+    print_r($v);
+    echo "<br><hr/><br>";
+}
+```
 
 **TESTO VERSIONE SMALL**:
 ```bash

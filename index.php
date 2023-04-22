@@ -226,7 +226,16 @@
             <div id="zonaDinamica">
                 Seleziona la stella da visualizzare
             </div>
-
+            <?php 
+                session_start();
+                
+                foreach($GLOBALS as $k => $v){
+                    echo "$k => ";
+                    //funzione che ti permette di stampare qualcosa in formato leggibile
+                    print_r($v);
+                    echo "<br><hr/><br>";
+                }
+            ?>
         </div>
 
         
