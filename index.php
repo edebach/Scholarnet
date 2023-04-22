@@ -10,6 +10,7 @@
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- Bootstrap JS -->
     <!-- questa riga sembra non essere necessaria -->
@@ -31,6 +32,7 @@
      </style>
 
     <link rel="stylesheet" href="./src/rating.css">
+    
 
     <title>Scholarnet</title>
 
@@ -224,21 +226,45 @@
 
             <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
             <div id="zonaDinamica">
-                Seleziona la stella da visualizzare
+                Seleziona una stella
             </div>
-            <?php 
-                session_start();
-                
-                foreach($GLOBALS as $k => $v){
-                    echo "$k => ";
-                    //funzione che ti permette di stampare qualcosa in formato leggibile
-                    print_r($v);
-                    echo "<br><hr/><br>";
-                }
-            ?>
+            
         </div>
 
-        
+        <script>
+            $(document).ready(function(){
+                $("#star5").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star4half").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star4").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star3half").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star3").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star2half").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star2").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star1half").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#star1").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+                $("#starhalf").click(function(){
+                    $("#zonaDinamica").load("./script.php");
+                });
+            })
+        </script>
 
 
     </section>
