@@ -44,7 +44,7 @@ utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
     
 corso(codice(pk), nome, materia, numIscritti, link)
-    inclusione: corso[codice] => insegna[]
+    inclusione: corso[codice] => insegna[docente]
     
 insegna(docente(pk), corso(pk))
     f.k.: insegna[docente] => utente[email]
@@ -54,7 +54,7 @@ partecipa(studente(pk), corso(pk))
     f.k.: partecipa[studente] => utente[email]
     f.k.: partecipa[corso] => corso[codice]
 
-recensione(utente(pk), data(pk), numStelle, descrizione)
+recensione(utente(pk), data(pk), stelle, descrizione)
     f.k.: recensione[utente] => utente[email]
 ```
 
