@@ -29,7 +29,13 @@
           background-color: rgb(45, 42, 42);
           color: rgb(237, 237, 237);
         }
+        @media screen and (min-width: 768px) {
+        .collapse.navbar-collapse {
+          padding-left: 3.8cm;
+        }
+      }
      </style>
+
 
     <link rel="stylesheet" href="./src/rating.css">
     
@@ -39,7 +45,7 @@
             $("input[name='rating']").click(function() {
                 var rating = $(this).val();
                 $.ajax({
-                url: "./Recensioni/script.php",
+                url: ".Logged/Recensioni/script.php",
                 type: "POST",
                 data: { stelle: rating },
                 dataType: "json",
@@ -75,10 +81,10 @@
 <body>
     	<!-- Sezione Header: NON TOCCARE!!!!-->
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <!-- <div class="topleft"> -->
                 <a class="navbar-brand" href="#">
-                <img src="./img/logo_nosfondo.png" alt="Logo Scholarnet" 
+                <img src="./img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" 
                 width="50" height="50" class="d-inline-block align-text-top">
                     <!-- Scholarnet -->
                 </a>
@@ -240,7 +246,6 @@
             <div class="row">
                 <div class="col-sm-12 ">
                     <h2>Ultime recensioni</h2>
-                    <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
                     <!-- Modifica delle valutazioni usando icone di stelle -->
                     <div class="class=mb-5">
                     <fieldset class="rating">

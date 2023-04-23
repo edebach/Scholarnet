@@ -22,7 +22,7 @@ if($sesso=="Maschio"){
 else{
     if($sesso=="Femmina"){
         if($flagStudente!=""){
-            echo "./Profilo./img/studentessa.png";
+            echo "./Profilo./img/studentessa.jpg";
     
         }
         else{

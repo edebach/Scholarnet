@@ -36,7 +36,7 @@
 </head>
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
-	  <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <header class="navbar nav navbar-dark bg-dark">
 		<div class="container-fluid">
 		  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
 			<span class="navbar-toggler-icon"></span>
