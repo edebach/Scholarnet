@@ -17,21 +17,19 @@
     $sql = "SELECT * FROM recensione WHERE stelle = $1";
     $result = pg_query_params($conn, $sql, array($stelle));
 
-    // Costruisci l'HTML con le recensioni
-    $html = '';
-    if (!($row=pg_fetch_array($result))) {
-        while($row=pg_fetch_array($result)) {
-            $html .= '<div class="recensione">';
-            $html .= '<p>Utente: ' . $row['utente'] . '</p>';
-            $html .= '<p>Data: ' . $row['data'] . '</p>';
-            $html .= '<p>Stelle: ' . $row['stelle'] . '</p>';
-            $html .= '<p>Descrizione: ' . $row['descrizione'] . '</p>';
-            $html .= '</div>';
-        }
-    } else {
-        $html .= '<p>Nessuna recensione trovata per ' . $stelle . ' stelle.</p>';
+    // Costruisci un array con le recensioni
+    $recensioni = array();
+    while ($row = pg_fetch_array($result)) {
+        $recensioni[] = array(
+            'utente' => $row['utente'],
+            'data' => $row['data'],
+            'stelle' => $row['stelle'],
+            'descrizione' => $row['descrizione']
+        );
     }
 
-    // Restituisci l'HTML
-    echo $html;
+    // Restituisci l'array come JSON
+    header('Content-Type: application/json');
+    echo json_encode($recensioni);
+
 ?>
