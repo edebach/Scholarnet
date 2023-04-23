@@ -136,3 +136,5 @@ Bisogna aggiungere i session_start() nei vari vile
 
 
 **venerdi ho modificato il peofilo iniziando a inserire dati personalizzati
+
+https://www.remove.bg/it/upload
