@@ -36,74 +36,43 @@
 </head>
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
-	  <header class="navbar nav navbar-dark bg-dark">
+	<header class="navbar nav navbar-dark bg-dark">
 		<div class="container-fluid">
 		  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-			<span class="navbar-toggler-icon"></span>
-			<span class="visually-hidden">Toggle navigation</span>
+				<span class="navbar-toggler-icon"></span>
+				<span class="visually-hidden">Toggle navigation</span>
 		  </button>
 		  <a class="navbar-brand mx-auto" href="#">Nome del corso</a>
 		  <button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
-			<i class="fa-sharp fa-regular fa-user fa-lg"></i>
+				<i class="fa-sharp fa-regular fa-user fa-lg"></i>
 			</button>
 		  <div class="offcanvas offcanvas-end" tabindex="-1" id="profile" aria-labelledby="profile-label">
-			<div class="offcanvas-header">
-			  <h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
-			  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			</div>
-			<div class="offcanvas-body">
-			  <!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
-			<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
-			alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
-			   <!--php include '../profilo.html'; ?> -->
-			</div>
+				<div class="offcanvas-header">
+			  	<h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
+			  	<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
+					<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
+					alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
+					<!--php include '../profilo.html'; ?> -->
+				</div>
 		  </div>
 		  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
-			<div class="offcanvas-header">
-			  <h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
-			  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			</div>
-			<div class="offcanvas-body">
-			  <nav class="navbar navbar-dark bg-dark">
-				<ul class="navbar-nav">
-				  <!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
-				</ul>
-			  </nav>
-			</div>
+				<div class="offcanvas-header">
+			  	<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
+			  	<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+			  	<nav class="navbar navbar-dark bg-dark">
+						<ul class="navbar-nav">
+				  		<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
+						</ul>
+			  	</nav>
+				</div>
 		  </div>
 		</div>
-		<!-- <div class="container" id="headerClasse">
-			<div class="row">	
-				<h1 class="text-center display-4" id="titoloClasse">Classe</h1>
-				<nav class="navbar navbar-expand-lg navbar-dark">
-					<div class="container-fluid">
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarNav">
-							<ul class="navbar-nav">
-								<li class="nav-item">
-									<a class="nav-link active" aria-current="page" href="#">Home</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="compiti-nav-link" href="#">Compiti</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="profilo-nav-link" href="#">Profilo</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="mieClassi-nav-link" href="../IndexLogged.php">Le mie Classi</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="logout-nav-link" href="../../index.php">Logout</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div> -->
-	  </header> 
+	</header> 
 
 	<main class="container my-4">
 		<div class="row">

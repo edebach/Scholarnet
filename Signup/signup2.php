@@ -79,6 +79,10 @@ $_SESSION['flag'] = $_POST['flag'];
         width: 150px;
         height: 150px;
       }
+      /*Serve a regolare la larghezza dei campi della form*/
+      form[name="myForm"] {
+        width: 52%;
+      }
 
      /* TODO: Aggiungere il campo professore o studente */
     </style>
