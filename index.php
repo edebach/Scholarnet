@@ -35,7 +35,7 @@
         }
       }
       iframe{
-        width:80%; 
+        width:550px; 
         height:400px;
         border:1cm;
         background-color: ;
@@ -48,70 +48,101 @@
     <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
     <script>
        $(document).ready(function() {
-    $("input[name='rating']").click(function() {
-        var rating = $(this).val();
-        var iframeDoc = $('iframe').contents()[0];
-        var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
-        $.ajax({
-            url: "./Recensioni/script.php",
-            type: "POST",
-            data: { stelle: rating },
-            dataType: "json",
-            success: function(data) {
-                // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
-                var html = '';
+        $("input[name='rating']").click(function() {
+            var rating = $(this).val();
+            var iframeDoc = $('iframe').contents()[0];
+            var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
+            $.ajax({
+                url: "./Recensioni/script.php",
+                type: "POST",
+                data: { stelle: rating },
+                dataType: "json",
+                success: function(data) {
+                    // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
+                    var html = '';
 
-                //Bootstrap CSS
-                html += '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
-                html += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">';
-                
-                // Inizio struttura html
-                
-                
+                    //Bootstrap CSS
+                    html += '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+                    html += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">';
+                    
+                    // Inizio struttura html
+                    
+                    
 
-                if(data.length) {
-                    data.forEach(function(review) {
-                        html += "<div class='container'>";
-                        html += "<div class='row'>";
-                        html += "<div class='col-md-12 col-lg-10 col-xl-8'>";
-                        html += "<div class='card'>";
-                        html += "<div class='card-body p-4'>";
-                        html += "<h4 class='text-center mb-4 pb-2'>Nested comments section</h4>";
-                        html += '<div class="row">';
-                        html += '<div class="col">';
-                        html += '<div class="d-flex flex-start">';
-                        html += '<img class="rounded-circle shadow-1-strong me-3" src="https://www.dm.unibo.it/matecofin/img/empty.jpg" alt="avatar" width="65" height="65" />';
-                        html += '<div class="flex-grow-1 flex-shrink-1">';
-                        html += '<div>';
-                        html += '<div class="d-flex justify-content-between align-items-center">';
-                        html += "<p class='mb-1'>"+review.utente+"<span class='small'>- "+ review.data +"</span></p>";
-                        html += "<a href='#!'><i class='fas fa-reply fa-xs'></i><span class='small'> reply</span></a>";
-                        html += "</div>";
-                        html += "<p class='small mb-0'>"+review.descrizione+"</p>";
-                        html += "</div>";
-                        html += "</div>";
-                        html += "</div>";
-                        html += "</div>";
-                        html += "</div>";
-                        html += "</div>";
-                        html += "</div>";
-                    })
+                    if(data.length) {
+                        data.forEach(function(review) {
+                            html += 
+                            `<div class='container'>
+                                <div class='row'>
+                                    <div class='col-md-12 col-lg-10 col-xl-8'>
+                                        <div class='card'>
+                                            <div class='card-body p-4'>
+                                                <h4 class='text-center mb-4 pb-2'>Nested comments section</h4>
+                                                <div class='row'>
+                                                    <div class='col'>
+                                                        <div class='d-flex flex-start'>
+                                                            <img class='rounded-circle shadow-1-strong me-3' src='https://www.dm.unibo.it/matecofin/img/empty.jpg' alt='avatar' width='65' height='65' />
+                                                            <div class='flex-grow-1 flex-shrink-1'>
+                                                                <div>
+                                                                    <div class='d-flex justify-content-between align-items-center'>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                    </div>
+                                                                    <p class='small mb-0'>${review.descrizione}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            `;
+                        })
+                    }
+                    else {
+                        html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+                    }
+
+
+                    // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
+                    zonaDinamica.html(html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
                 }
-                else {
-                    html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
-                }
-
-
-                // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
-                zonaDinamica.html(html);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
+            });
         });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+      // Seleziona tutte le stelle
+      var stars = document.querySelectorAll('.rating input[type="radio"]');
+
+      // Aggiungi un ascoltatore di eventi a ciascuna stella
+      stars.forEach(function(star) {
+        star.addEventListener('click', function() {
+          // Se una stella viene selezionata, mostra l'iframe
+          var iframe = document.querySelector('iframe');
+          iframe.style.display = 'block';
+        });
+      });
+
+      // Aggiungi un ascoltatore di eventi al contenitore delle stelle
+      var rating = document.querySelector('.rating');
+      rating.addEventListener('mouseleave', function() {
+        // Se nessuna stella è selezionata, nascondi l'iframe
+        var iframe = document.querySelector('iframe');
+        if (!document.querySelector('.rating input[type="radio"]:checked')) {
+          iframe.style.display = 'none';
+        }
+      });
+
     });
-});
-        </script>
+    </script>
 
     <title>Scholarnet</title>
 
@@ -312,17 +343,8 @@
                 </html>"></iframe>
         </div>
     </section>
-    <!-- Da completare -->
-    <div style="height: 20px; width: auto;"></div>
-    <div id="includedContent"></div>
 
-    <!-- <footer> -->
-        <!-- Contatti per informazioni, logo ... -->
-<!--         <div class="col-md-12">
-            <h2>Contatti</h2>
-            Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco<br>
-            <a href="mailto:hege@example.com">hege@example.com</a>
-        </div> -->
+
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
             <div class="container p-4 pb-0">

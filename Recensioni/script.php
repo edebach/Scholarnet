@@ -14,14 +14,14 @@
     $stelle = $_POST['stelle'];
     
     // Esegui la query per recuperare le recensioni corrispondenti
-    $sql = "SELECT * FROM recensione WHERE stelle = $1";
+    $sql = "SELECT * FROM recensione JOIN utente on utente.email=recensione.utente WHERE stelle = $1 order by data DESC";
     $result = pg_query_params($conn, $sql, array($stelle));
 
     // Costruisci un array con le recensioni
     $recensioni = array();
     while ($row = pg_fetch_array($result)) {
         $recensioni[] = array(
-            'utente' => $row['utente'],
+            'utente' => $row['nome']." ".$row['cognome'],
             'data' => $row['data'],
             'stelle' => $row['stelle'],
             'descrizione' => $row['descrizione']
