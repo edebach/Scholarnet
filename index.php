@@ -34,6 +34,12 @@
           padding-left: 3.8cm;
         }
       }
+      iframe{
+        width:80%; 
+        height:200px;
+        border:1cm;
+        background-color: ;
+      }
      </style>
 
 
@@ -41,38 +47,40 @@
     
     <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
     <script>
-        $(document).ready(function() {
-            $("input[name='rating']").click(function() {
-                var rating = $(this).val();
-                $.ajax({
-                url: ".Logged/Recensioni/script.php",
-                type: "POST",
-                data: { stelle: rating },
-                dataType: "json",
-                success: function(data) {
-                    // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
-                    var html = '';
-                    if (data.length) {
-                        data.forEach(function(review) {
-                            html += '<div class="recensione">';
-                            html += '<p>Utente: ' + review.utente + '</p>';
-                            html += '<p>Data: ' + review.data + '</p>';
-                            html += '<p>Stelle: ' + review.stelle + '</p>';
-                            html += '<p>Descrizione: ' + review.descrizione + '</p>';
-                            html += '</div>';
-                        });
-                    } else {
-                        html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
-                    }
-                    // Aggiungi l'HTML generato al div "zonaDinamica"
-                    $('#zonaDinamica').html(html);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
+       $(document).ready(function() {
+    $("input[name='rating']").click(function() {
+        var rating = $(this).val();
+        var iframeDoc = $('iframe').contents()[0];
+        var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
+        $.ajax({
+            url: "./Recensioni/script.php",
+            type: "POST",
+            data: { stelle: rating },
+            dataType: "json",
+            success: function(data) {
+                // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
+                var html = '';
+                if (data.length) {
+                    data.forEach(function(review) {
+                        html += '<div class="recensione">';
+                        html += '<p>Utente: ' + review.utente + '</p>';
+                        html += '<p>Data: ' + review.data + '</p>';
+                        html += '<p>Stelle: ' + review.stelle + '</p>';
+                        html += '<p>Descrizione: ' + review.descrizione + '</p>';
+                        html += '</div>';
+                    });
+                } else {
+                    html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
                 }
-                });
-            });
+                // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
+                zonaDinamica.html(html);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
         });
+    });
+});
         </script>
 
     <title>Scholarnet</title>
@@ -260,9 +268,18 @@
             </div>
 
             <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
-            <div id="zonaDinamica">
-                Seleziona una stella
-            </div>
+            <iframe srcdoc="<html>
+                <head>
+                    <style>
+                        body { margin: 0; }
+                    </style>
+                </head>
+                <body>
+                    <div id='zonaDinamica'>
+                        Seleziona una stella
+                    </div>
+                </body>
+                </html>"></iframe>
         </div>
     </section>
     <!-- Da completare -->
