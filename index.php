@@ -39,7 +39,7 @@
             $("input[name='rating']").click(function() {
                 var rating = $(this).val();
                 $.ajax({
-                url: "./script.php",
+                url: "./Recensioni/script.php",
                 type: "POST",
                 data: { stelle: rating },
                 dataType: "json",
