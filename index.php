@@ -36,7 +36,7 @@
       }
       iframe{
         width:80%; 
-        height:200px;
+        height:400px;
         border:1cm;
         background-color: ;
       }
@@ -60,18 +60,48 @@
             success: function(data) {
                 // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
                 var html = '';
-                if (data.length) {
+
+                //Bootstrap CSS
+                html += '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+                html += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">';
+                
+                // Inizio struttura html
+                
+                
+
+                if(data.length) {
                     data.forEach(function(review) {
-                        html += '<div class="recensione">';
-                        html += '<p>Utente: ' + review.utente + '</p>';
-                        html += '<p>Data: ' + review.data + '</p>';
-                        html += '<p>Stelle: ' + review.stelle + '</p>';
-                        html += '<p>Descrizione: ' + review.descrizione + '</p>';
-                        html += '</div>';
-                    });
-                } else {
+                        html += "<div class='container'>";
+                        html += "<div class='row'>";
+                        html += "<div class='col-md-12 col-lg-10 col-xl-8'>";
+                        html += "<div class='card'>";
+                        html += "<div class='card-body p-4'>";
+                        html += "<h4 class='text-center mb-4 pb-2'>Nested comments section</h4>";
+                        html += '<div class="row">';
+                        html += '<div class="col">';
+                        html += '<div class="d-flex flex-start">';
+                        html += '<img class="rounded-circle shadow-1-strong me-3" src="https://www.dm.unibo.it/matecofin/img/empty.jpg" alt="avatar" width="65" height="65" />';
+                        html += '<div class="flex-grow-1 flex-shrink-1">';
+                        html += '<div>';
+                        html += '<div class="d-flex justify-content-between align-items-center">';
+                        html += "<p class='mb-1'>"+review.utente+"<span class='small'>- "+ review.data +"</span></p>";
+                        html += "<a href='#!'><i class='fas fa-reply fa-xs'></i><span class='small'> reply</span></a>";
+                        html += "</div>";
+                        html += "<p class='small mb-0'>"+review.descrizione+"</p>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += "</div>";
+                    })
+                }
+                else {
                     html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
                 }
+
+
                 // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
                 zonaDinamica.html(html);
             },
