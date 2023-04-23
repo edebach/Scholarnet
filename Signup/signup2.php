@@ -8,6 +8,9 @@ $_SESSION['istituto']  = $_POST['Istituti'];
 $_SESSION['dataN']  = $_POST['datePicker'];
 $_SESSION['sesso']  = $_POST['sesso'];
 
+$_SESSION['flag'] = $_POST['flag'];
+
+
 ?>
   <head>
     <meta charset="UTF-8">
@@ -97,6 +100,8 @@ $_SESSION['sesso']  = $_POST['sesso'];
             <label for="emailInput" class="text-black text-opacity-50">Email</label>
           </div>
         </div><!--Fine seconda riga-->
+        <!--Terza riga: form per il flagStudente -->
+        
         <!--Quarta riga: form per la password -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
@@ -107,7 +112,7 @@ $_SESSION['sesso']  = $_POST['sesso'];
             <label for="passwordInput" class="text-black text-opacity-50">Password</label>
           </div>
         </div> <!--Fine quarta riga-->
-        <!--Quinta riga: form per reinserire password. DA FARE: CONTROLLARE CHE LA PASSWORD REINSERITA SIA UGUALE A QUELLA INSERITA IN PRECEDENZA -->
+        <!--Sesta riga: form per reinserire password.-->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-key"></i>
@@ -115,7 +120,7 @@ $_SESSION['sesso']  = $_POST['sesso'];
           <div class="form-floating">
             <input type="password" class="form-control" id="repasswordInput" placeholder="password" required>
             <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
-          </div><!--Fine quinta riga-->
+          </div><!--Fine sesta riga-->
         </div> 
         <div class="row" id="BottoneIscriviti">
           <button type="submit" class="btn btn-primary">Iscriviti</button>

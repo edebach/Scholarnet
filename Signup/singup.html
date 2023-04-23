@@ -50,7 +50,7 @@
 
       /* TODO: Regola l'omino accanto a Nome e cognome*/
     </style>
-        
+    
     <script src="./localStorage.js"></script>
 
   </head>
@@ -68,7 +68,7 @@
             <div class="mb-3 input-group">
               <div class="input-group-text">
                 <i class="fa-solid fa-user"></i>
-              </div>
+              </div> 
               <div class="form-floating">
                 <input type="text" class="form-control" name="nomeInput" placeholder="Nome" required>
                 <label for="nomeInput" class="text-black text-opacity-50">Nome</label>
@@ -126,7 +126,7 @@
           <div class="form-floating">
             <input list="istituti" name="Istituti" class="form-control" aria-label="Floating label select example" required>
             <datalist id="istituti">
-              <option value="Sapienza">
+              <option value="La Sapienza">
               <option value="RomaTre">
               <option value="Tor vergata">
               <option value="Luiss">
@@ -138,6 +138,23 @@
               <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
             </div>
         </div><!--Fine terza riga-->
+
+        <!--Quinta riga: Checkbox flagStudente-->
+        <div class="mb-3 input-group">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flag" id="flexRadioDefault" value="0" required>
+            <label class="form-check-label" for="flexRadioDefault">
+              Docente
+            </label>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flag" id="flexRadioDefault" value="1" required>
+            <label class="form-check-label" for="flexRadioDefault">
+              Studente
+            </label>
+          </div>
+        </div> 
 
         <div class="row" id="BottoneProsegui">
         <button type="submit" class="btn btn-primary" href="./signup2.php">Prosegui</button>
