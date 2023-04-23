@@ -103,7 +103,7 @@ session_start();
                                 <!--Pensavo di implementare che al momento che passo col cursore sul bottone profilo, senza cliccarlo, ti usciva un piccola finestra con le informazioni dell'utente-->
                                 Profilo
                             </a>
-                            <a class="btn btn-danger" href="http://localhost:3000/index.php">Logout</a>
+                            <a class="btn btn-danger" href="./Logout/logout.php">Logout</a>
                         </div>
 					</li>
                     <!-- da inserire ancora i riferimenti -->
