@@ -59,7 +59,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                       </div>
                       <div class="col-md-8">
                         <div class="card-body p-4">
-                          <h6>Information</h6>
+                          <h6>Informazioni</h6>
                           <hr class="mt-0 mb-4">
                           <div class="row pt-1">
                             <div class="col-6 mb-3">

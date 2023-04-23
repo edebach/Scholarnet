@@ -36,55 +36,42 @@
 </head>
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
-	  <header>
-			<nav class="navbar nav navbar-dark bg-dark">
-				<div class="container-fluid">
-		  		<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-						<span class="navbar-toggler-icon"></span>
-						<span class="visually-hidden">Toggle navigation</span>
-		  		</button>
-		  		<a class="navbar-brand mx-auto" href="#">Nome del corso</a>
-					<li class="nav-item">
-						<a class="nav-link" href="#home-section">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#descrizione-section">Descrizione</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#qa-section">Q&amp;A</a>
-					</li>
-                    <li class="nav-item">
-						<a class="nav-link" href="#recensione">Recensioni</a>
-					</li>
-		  		<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
-						<i class="fa-sharp fa-regular fa-user fa-lg"></i>
-					</button>
-		  		<div class="offcanvas offcanvas-end" tabindex="-1" id="profile" aria-labelledby="profile-label">
-						<div class="offcanvas-header">
-			  			<h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
-			  			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-						<div class="offcanvas-body">
-							<!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
-						<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
-						alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
-							<!--php include '../profilo.html'; ?> -->
-						</div>
-		  		</div>
-		  		<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
-						<div class="offcanvas-header">
-			  			<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
-			  			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-						</div>
-						<div class="offcanvas-body">
-			  			<nav class="navbar navbar-dark bg-dark">
-								<ul class="navbar-nav">
-				  			<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
-								</ul>
-			  			</nav>
-						</div>
-		 			</div>
-				</div>
+	  <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+		  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+			<span class="navbar-toggler-icon"></span>
+			<span class="visually-hidden">Toggle navigation</span>
+		  </button>
+		  <a class="navbar-brand mx-auto" href="#">Nome del corso</a>
+		  <button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
+			<i class="fa-sharp fa-regular fa-user fa-lg"></i>
+			</button>
+		  <div class="offcanvas offcanvas-end" tabindex="-1" id="profile" aria-labelledby="profile-label">
+			<div class="offcanvas-header">
+			  <h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
+			  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+			  <!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
+			<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
+			alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
+			   <!--php include '../profilo.html'; ?> -->
+			</div>
+		  </div>
+		  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
+			<div class="offcanvas-header">
+			  <h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
+			  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+			  <nav class="navbar navbar-dark bg-dark">
+				<ul class="navbar-nav">
+				  <!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
+				</ul>
+			  </nav>
+			</div>
+		  </div>
+		</div>
 		<!-- <div class="container" id="headerClasse">
 			<div class="row">	
 				<h1 class="text-center display-4" id="titoloClasse">Classe</h1>

@@ -10,6 +10,7 @@
 <body>
     <?php
     session_start();
+    
 
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -66,13 +67,22 @@
     $link = $cartella_destinazione. $nome_file_nuovo;
     $q2 = "INSERT INTO corso VALUES ($1, $2, $3, $4, $5)";
     $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $numIscritti, $link));
-    print_r($data);
+    
+    //inserisco i valori nella tabella insegna
+    $flag = $_SESSION['flag']; //do per scontato che sia un docente
+    $email = $_SESSION['email'];
+    
+    $q4 = "INSERT INTO insegna VALUES($1, $2)";
+    $data2 = pg_query_params($dbconn, $q4, array($email, $codice));
+    
     if ($data) {
         echo "<script>
                 alert('Corso creato con successo!');
             </script>";
             header("Location: $link");
     }
+
+    
     ?>
 </body>
 </html>

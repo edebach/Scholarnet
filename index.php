@@ -29,10 +29,51 @@
           background-color: rgb(45, 42, 42);
           color: rgb(237, 237, 237);
         }
+        @media screen and (min-width: 768px) {
+        .collapse.navbar-collapse {
+          padding-left: 3.8cm;
+        }
+      }
      </style>
+
 
     <link rel="stylesheet" href="./src/rating.css">
     
+    <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+    <script>
+        $(document).ready(function() {
+            $("input[name='rating']").click(function() {
+                var rating = $(this).val();
+                $.ajax({
+                url: ".Logged/Recensioni/script.php",
+                type: "POST",
+                data: { stelle: rating },
+                dataType: "json",
+                success: function(data) {
+                    // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
+                    var html = '';
+                    if (data.length) {
+                        data.forEach(function(review) {
+                            html += '<div class="recensione">';
+                            html += '<p>Utente: ' + review.utente + '</p>';
+                            html += '<p>Data: ' + review.data + '</p>';
+                            html += '<p>Stelle: ' + review.stelle + '</p>';
+                            html += '<p>Descrizione: ' + review.descrizione + '</p>';
+                            html += '</div>';
+                        });
+                    } else {
+                        html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+                    }
+                    // Aggiungi l'HTML generato al div "zonaDinamica"
+                    $('#zonaDinamica').html(html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+                });
+            });
+        });
+        </script>
 
     <title>Scholarnet</title>
 
@@ -40,10 +81,10 @@
 <body>
     	<!-- Sezione Header: NON TOCCARE!!!!-->
 	<header>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <!-- <div class="topleft"> -->
                 <a class="navbar-brand" href="#">
-                <img src="./img/logo_nosfondo.png" alt="Logo Scholarnet" 
+                <img src="./img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" 
                 width="50" height="50" class="d-inline-block align-text-top">
                     <!-- Scholarnet -->
                 </a>
@@ -205,20 +246,14 @@
             <div class="row">
                 <div class="col-sm-12 ">
                     <h2>Ultime recensioni</h2>
-                    <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
                     <!-- Modifica delle valutazioni usando icone di stelle -->
                     <div class="class=mb-5">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                    <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
                         </fieldset>
                     </div>
                 </div>
@@ -228,45 +263,7 @@
             <div id="zonaDinamica">
                 Seleziona una stella
             </div>
-            
         </div>
-
-        <script>
-            $(document).ready(function(){
-                $("#star5").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star4half").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star4").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star3half").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star3").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star2half").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star2").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star1half").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#star1").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-                $("#starhalf").click(function(){
-                    $("#zonaDinamica").load("./script.php");
-                });
-            })
-        </script>
-
-
     </section>
     <!-- Da completare -->
     <div style="height: 20px; width: auto;"></div>

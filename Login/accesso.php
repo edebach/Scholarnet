@@ -58,6 +58,15 @@
             $_SESSION['istituto'] = $tuple['istituto'];
             $_SESSION['sesso'] = $tuple['sesso'];
             $_SESSION['dataN'] = $tuple['dataN'];
+
+            if ($tuple['flagStudente']=="t"){
+                $_SESSION['flag'] = "1";
+            }
+            else{
+                $_SESSION['flag'] = "0";
+            }
+
+
             echo "<script>
                     window.location.href='../Logged/IndexLogged.php';
                 </script>";

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+
+
 ?>
 <html lang="it">
 <head>
@@ -63,10 +65,6 @@ session_start();
     crossorigin="anonymous"></script>
      
     <link rel="stylesheet" href="../src/rating.css">
-    <!-- Riferimento al file js di profilo -->
-    <!-- <script src="./Profilo/profilo.js"></script> -->
-    <!-- Riferimento al file css id profilo -->
-    <!-- <link rel="stylesheet" href="./Profilo/profilo.css"> -->
 
     <title>Scholarnet</title>
 
@@ -107,7 +105,7 @@ session_start();
                                 <!--Pensavo di implementare che al momento che passo col cursore sul bottone profilo, senza cliccarlo, ti usciva un piccola finestra con le informazioni dell'utente-->
                                 Profilo
                             </a>
-                            <a class="btn btn-danger" href="http://localhost:3000/index.php">Logout</a>
+                            <a class="btn btn-danger" href="./Logout/logout.php">Logout</a>
                         </div>
 					</li>
                     <!-- da inserire ancora i riferimenti -->
@@ -135,36 +133,13 @@ session_start();
             ?>
         </div>
         <br>
-		<div class="container">
-			<div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Iscriviti al corso</h4>
-                            <ul>
-                                <li>Seleziona un corso del tuo istituto/università</li>
-                                <li>Utilizza un codice del corso con 8 lettere o numeri</li>
-                            </ul>
-                            <p>Se hai problemi a iscriverti al corso, consulta il <a target="_blank" href="#">Centro assistenza</a></p>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#iscriviti-popup">Iscriviti</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Crea corso</h4>
-                            <ul>
-                                <li>Interagisci con i tuoi alunni, pubblicando materiale didattico</li>
-                                <li>Genera una classe virtuale di studenti</li>
-                            </ul>
-                            <p>Se hai problemi a creare un corso, consulta il <a target="_blank" href="#">Centro assistenza</a></p>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#crea-popup">Crea</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <!--Controllo studente/docente per la visualizzazione dello script-->
+		<?php
+            if($_SESSION['flag']=="1") include './scriptStudente.html';
+            else include './scriptDocente.html';
+        ?>
+
     </section> 
     
     <!-- Finestra di Iscriviti corso -->
@@ -351,16 +326,11 @@ session_start();
                     <!-- Modifica delle valutazioni usando icone di stelle -->
                     <div class="class=mb-5">
                         <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4half" name="rating" value="4,5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3half" name="rating" value="3,5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2half" name="rating" value="2,5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1half" name="rating" value="1,5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                            <input type="radio" id="starhalf" name="rating" value="0,5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
                         </fieldset>
                     </div>
                 </div>
