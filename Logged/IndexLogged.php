@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+
+
 ?>
 <html lang="it">
 <head>
@@ -131,36 +133,13 @@ session_start();
             ?>
         </div>
         <br>
-		<div class="container">
-			<div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Iscriviti al corso</h4>
-                            <ul>
-                                <li>Seleziona un corso del tuo istituto/università</li>
-                                <li>Utilizza un codice del corso con 8 lettere o numeri</li>
-                            </ul>
-                            <p>Se hai problemi a iscriverti al corso, consulta il <a target="_blank" href="#">Centro assistenza</a></p>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#iscriviti-popup">Iscriviti</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Crea corso</h4>
-                            <ul>
-                                <li>Interagisci con i tuoi alunni, pubblicando materiale didattico</li>
-                                <li>Genera una classe virtuale di studenti</li>
-                            </ul>
-                            <p>Se hai problemi a creare un corso, consulta il <a target="_blank" href="#">Centro assistenza</a></p>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#crea-popup">Crea</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <!--Controllo studente/docente per la visualizzazione dello script-->
+		<?php
+            if($_SESSION['flag']=="1") include './scriptStudente.html';
+            else include './scriptDocente.html';
+        ?>
+
     </section> 
     
     <!-- Finestra di Iscriviti corso -->

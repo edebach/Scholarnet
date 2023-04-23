@@ -36,6 +36,12 @@
 
         $result = pg_query_params($dbconn, $q1, array($codCorso));
 
+        //inserisco i valori nella tabella partecipa
+        $email = $_SESSION['email'];
+        
+        $q4 = "INSERT INTO partecipa VALUES($1, $2)";
+        $data2 = pg_query_params($dbconn, $q4, array($email, $codCorso));
+
         if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
             echo "<script>
                     alert('Corso non trovato. Verifica il codice e l\'account, quindi riprova.');
@@ -43,10 +49,9 @@
                 </script>";
         }else{
             $link = $tuple['link'];
-            //TODO: Dovremmo implementare la creazione di un file all'interno della cartella classi, in modo tale
-            // da accedere al corso tramite il link(URL)
+    
             echo "<script>
-                window.location.href='./$link';
+                window.location.href='$link';
                 </script>";
         }
     ?>
