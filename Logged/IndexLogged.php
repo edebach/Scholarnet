@@ -2,7 +2,6 @@
 <?php
 session_start();
 
-
 ?>
 <html lang="it">
 <head>
@@ -15,22 +14,19 @@ session_start();
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
 
     <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- questa riga sembra non essere necessaria -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    
     
     <!--Carosello immagine: SEZIONE CRITICA CHE FA APPARIRE L'IMMAGINE BIANCA-->
     <!--Icona stella-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <style>
-        #TextareaRecensione{
-            resize:none;
-        }
-    </style>
     <style>
         footer {
           text-align: center;
@@ -38,33 +34,132 @@ session_start();
           background-color: rgb(45, 42, 42);
           color: rgb(237, 237, 237);
         }
-        /* Viene usato per staccare la scritta "Scholarnet" della Navbar */
-        .topleft {
-          position: absolute;
-          top: 8px;
-          left: 16px;
-          font-size: 18px;
+        @media screen and (min-width: 768px) {
+        .collapse.navbar-collapse {
+          padding-left: 3.8cm;
         }
-
+      }
+      iframe{
+        width:550px; 
+        height:400px;
+        border:1cm;
+        background-color: ;
+      }
      </style>
 
-    <!-- Librerie che implementano le finestre popup-->
-    <!-- CSS di Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- JavaScript di Bootstrap (inserisci prima di chiudere il tag body) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNVQ8ew"
-    crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-     
     <link rel="stylesheet" href="../src/rating.css">
+    
+    <!--ZONA DINAMICA2: Implementazione oggetto AJAX per bottone inserisci-->
+    <script>
+        $(document).ready(function() {
+
+            //quando clicco il bottone mi genera la form inserisci recensione
+            $("button").click(function(){
+                $("#zonaDinamica2").load("../Recensioni/FormRecensione.html");
+            });
+
+        });
+    </script>
+
+    <!--ZONA DINAMICA1: Implementazione oggetto AJAX per click stelle-->
+    <script>
+       $(document).ready(function() {
+        $("input[name='rating']").click(function() {
+            var rating = $(this).val();
+            var iframeDoc = $('iframe').contents()[0];
+            var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
+            $.ajax({
+                url: "../Recensioni/script.php",
+                type: "POST",
+                data: { stelle: rating },
+                dataType: "json",
+                success: function(data) {
+                    // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
+                    var html = '';
+
+                    //Bootstrap CSS
+                    html += '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+                    html += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">';
+                    
+                    // Inizio struttura html
+                    
+                    if(data.length) {
+                        data.forEach(function(review) {
+                            html += 
+                            `<div class='container'>
+                                <div class='row'>
+                                    <div class='col-md-12 col-lg-10 col-xl-8'>
+                                        <div class='card'>
+                                            <div class='card-body p-4'>
+                                                <h4 class='mb-4 pb-2'>${review.nome_recensione}</h4>
+                                                <div class='row'>
+                                                    <div class='col'>
+                                                        <div class='d-flex flex-start'>
+                                                            <img class='rounded-circle shadow-1-strong me-3' src='https://www.dm.unibo.it/matecofin/img/empty.jpg' alt='avatar' width='65' height='65' />
+                                                            <div class='flex-grow-1 flex-shrink-1'>
+                                                                <div>
+                                                                    <div class='d-flex justify-content-between align-items-center'>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                    </div>
+                                                                    <p class='small mb-0'>${review.descrizione}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            `;
+                        })
+                    }
+                    else {
+                        html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+                    }
+
+
+                    // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
+                    zonaDinamica.html(html);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function(){
+      // Seleziona tutte le stelle
+      var stars = document.querySelectorAll('.rating input[type="radio"]');
+
+      // Aggiungi un ascoltatore di eventi a ciascuna stella
+      stars.forEach(function(star) {
+        star.addEventListener('click', function() {
+          // Se una stella viene selezionata, mostra l'iframe
+          var iframe = document.querySelector('iframe');
+          iframe.style.display = 'block';
+        });
+      });
+
+      // Aggiungi un ascoltatore di eventi al contenitore delle stelle
+      var rating = document.querySelector('.rating');
+      rating.addEventListener('mouseleave', function() {
+        // Se nessuna stella è selezionata, nascondi l'iframe
+        var iframe = document.querySelector('iframe');
+        if (!document.querySelector('.rating input[type="radio"]:checked')) {
+          iframe.style.display = 'none';
+        }
+      });
+
+    });
+    </script>
 
     <title>Scholarnet</title>
 
@@ -317,37 +412,61 @@ session_start();
     <!-- Sezione Recensioni -->
     <section id="recensione">
         <div class="container ">
-            <!-- form da generare-->
-            <form name="recensioniForm" action="../Recensioni/recensioni.php" method="POST" >
-            <div class="row">
-                <div class="col-sm-12 ">
-                    <h2>Inserisci la tua recensione</h2>
-                    <!--La mia idea che voglio implementare è quella di inserire per ogni categoria visualizza le recensioni-->
-                    <!-- Modifica delle valutazioni usando icone di stelle -->
-                    <div class="class=mb-5">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
-                        </fieldset>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Ultime recensioni</h2>
                     </div>
                 </div>
-            </div>
-            <div class="form-floating">
-                <textarea class="form-control mb-2" placeholder="Feedback.." id="FeedbackRecensione" 
-                name="FeedbackRecensione" style="height: 150px;width: 380px; resize:none" maxlength="250"></textarea>
-                <label for="floatingTextarea2"></label>
+                <br>
+                <div class="row">
+                    <div class="col-sm">    
+                        <strong>Filtra per </strong>
+                    </div>
+                        <!-- Modifica delle valutazioni usando icone di stelle -->
+                        <div class="col-sm-12 class=mb-5">
+                            <fieldset class="rating">
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
+                            </fieldset>
+                        </div>
 
-                <input type="submit" value="Invia" class="btn btn-outline-primary">
-            </div>             
-        </form>
+                    
+                    <div class="col-sm-12 "> 
+                        <!--Visualizza il numero di recensioni totali-->
+                        <?php include '../Recensioni/num-recensioni.php'; ?>
+                    </div>
+                </div>
+                
+                <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+                <iframe srcdoc="<html>
+                    <head>
+                        <style>
+                            body { margin: 0; }
+                        </style>
+                    </head>
+                    <body>
+                        <div id='zonaDinamica'>
+                        </div>
+                    </body>
+                    </html>">
+                </iframe>
+                <br>
+
+            <!--Bottone per inserire la recensione: solo per utenti loggati-->
+            <div class="row">
+                <button id="insert "type="button" class="btn btn-primary">Inserisci la tua recensione</button>
+            </div>
+            <br>
+            <div class="col" id = "zonaDinamica2">
+                <!--Parte il file FormRecensione.html-->
+            </div>
         </div>
     </section>
-    <!-- Da completare -->
-    <div style="height: 20px; width: auto;"></div>
-    <div id="includedContent"></div>
+    
+    <br>
 
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
