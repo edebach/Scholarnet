@@ -37,8 +37,7 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 2. `Restore`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
-**SCHEMA LOGICO**:
-- 
+**SCHEMA LOGICO**: 
 ```bash
 utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
@@ -54,7 +53,7 @@ partecipa(studente(pk), corso(pk))
     f.k.: partecipa[studente] => utente[email]
     f.k.: partecipa[corso] => corso[codice]
 
-recensione(utente(pk), data(pk), stelle, descrizione)
+recensione(utente(pk), data(pk), stelle, descrizione, nome_recensione)
     f.k.: recensione[utente] => utente[email]
 ```
 
