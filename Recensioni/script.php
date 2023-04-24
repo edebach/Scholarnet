@@ -24,7 +24,8 @@
             'utente' => $row['nome']." ".$row['cognome'],
             'data' => $row['data'],
             'stelle' => $row['stelle'],
-            'descrizione' => $row['descrizione']
+            'descrizione' => $row['descrizione'],
+            'nome_recensione' => $row['nome_recensione']
         );
     }
 

@@ -67,8 +67,6 @@
                     
                     // Inizio struttura html
                     
-                    
-
                     if(data.length) {
                         data.forEach(function(review) {
                             html += 
@@ -77,7 +75,7 @@
                                     <div class='col-md-12 col-lg-10 col-xl-8'>
                                         <div class='card'>
                                             <div class='card-body p-4'>
-                                                <h4 class='text-center mb-4 pb-2'>Nested comments section</h4>
+                                                <h4 class='mb-4 pb-2'>${review.nome_recensione}</h4>
                                                 <div class='row'>
                                                     <div class='col'>
                                                         <div class='d-flex flex-start'>
@@ -117,6 +115,8 @@
         });
         });
     </script>
+
+
     <script>
         $(document).ready(function(){
       // Seleziona tutte le stelle
@@ -313,11 +313,18 @@
     <section id="recensione">
         <div class="container ">
             <div class="row">
-                <div class="col-sm-12 ">
+                <div class="col-sm-12">
                     <h2>Ultime recensioni</h2>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm">    
+                    <strong>Filtra per </strong>
+                </div>
                     <!-- Modifica delle valutazioni usando icone di stelle -->
-                    <div class="class=mb-5">
-                    <fieldset class="rating">
+                    <div class="col-sm-12 class=mb-5">
+                        <fieldset class="rating">
                             <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
                             <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
                             <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
@@ -325,9 +332,14 @@
                             <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
                         </fieldset>
                     </div>
+
+                
+                <div class="col-sm-12 "> 
+                    <!--Visualizza il numero di recensioni totali-->
+                    <?php include './Recensioni/num-recensioni.php'; ?>
                 </div>
             </div>
-
+            <br>
             <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
             <iframe srcdoc="<html>
                 <head>
@@ -337,13 +349,12 @@
                 </head>
                 <body>
                     <div id='zonaDinamica'>
-                        Seleziona una stella
                     </div>
                 </body>
                 </html>"></iframe>
         </div>
     </section>
-
+    <br>
 
         <footer class="bg-dark text-center text-white">
             <!-- Grid container -->
