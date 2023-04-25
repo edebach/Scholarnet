@@ -37,8 +37,7 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 2. `Restore`;
 3. Inserisci le informazioni che ti richiede (ricordati di salvarlo sulla cartella dove hai il progetto).
 
-**SCHEMA LOGICO**:
-- 
+**SCHEMA LOGICO**: 
 ```bash
 utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
@@ -54,7 +53,7 @@ partecipa(studente(pk), corso(pk))
     f.k.: partecipa[studente] => utente[email]
     f.k.: partecipa[corso] => corso[codice]
 
-recensione(utente(pk), data(pk), stelle, descrizione)
+recensione(utente(pk), data(pk), stelle, descrizione, nome_recensione)
     f.k.: recensione[utente] => utente[email]
 ```
 
@@ -135,6 +134,19 @@ Bisogna aggiungere i session_start() nei vari vile
 1) Completamento della tabella utente
 
 
-**venerdi ho modificato il peofilo iniziando a inserire dati personalizzati
+*venerdi ho modificato il profilo iniziando a inserire dati personalizzati
 
 https://www.remove.bg/it/upload
+
+UPDATE mytable SET myfield = 'nuovo_valore' WHERE id = 'valore_id';
+
+<!-- IMMAGINE DELL'OMINO: guardare video del seguente link: https://www.youtube.com/watch?v=q93hR316nk4-->
+
+
+INSERIRE I _TODO_:
+*INSERITI IN:*
+index.php
+login.html
+accesso.php
+signup.html
+signup2.php

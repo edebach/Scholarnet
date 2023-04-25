@@ -7,9 +7,7 @@ $_SESSION['cognome']  = $_POST['cognomeInput'];
 $_SESSION['istituto']  = $_POST['Istituti'];
 $_SESSION['dataN']  = $_POST['datePicker'];
 $_SESSION['sesso']  = $_POST['sesso'];
-
 $_SESSION['flag'] = $_POST['flag'];
-
 
 ?>
   <head>
@@ -18,10 +16,11 @@ $_SESSION['flag'] = $_POST['flag'];
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Signup page</title>
+    <title>Signup 2</title>
     <!-- Carica gli stili di Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Stili per il calendario, link: https://codepen.io/SaadRegal/pen/ezVBJL-->
+    <!-- TODO: Stessi problemi presenti in Signup1 -->
     <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
@@ -84,14 +83,12 @@ $_SESSION['flag'] = $_POST['flag'];
         width: 52%;
       }
 
-     /* TODO: Aggiungere il campo professore o studente */
     </style>
   </head>
   <body>
     <div class="square">
       <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3">
       <h2 class="text-center mb-3">Signup</h2>
-      <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
       <form name="myForm" action="./registrati.php" method="POST" onsubmit="return validateForm()">
         <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
         <!-- Seconda riga: form solo per email.-->
@@ -104,9 +101,8 @@ $_SESSION['flag'] = $_POST['flag'];
             <label for="emailInput" class="text-black text-opacity-50">Email</label>
           </div>
         </div><!--Fine seconda riga-->
-        <!--Terza riga: form per il flagStudente -->
         
-        <!--Quarta riga: form per la password -->
+        <!--Terza riga: form per la password -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-lock"></i>
@@ -115,8 +111,8 @@ $_SESSION['flag'] = $_POST['flag'];
             <input type="password" class="form-control" name="passwordInput" placeholder="password" required>
             <label for="passwordInput" class="text-black text-opacity-50">Password</label>
           </div>
-        </div> <!--Fine quarta riga-->
-        <!--Sesta riga: form per reinserire password.-->
+        </div> <!--Fine terza riga-->
+        <!--Quarta riga: form per reinserire password -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-key"></i>
@@ -124,24 +120,22 @@ $_SESSION['flag'] = $_POST['flag'];
           <div class="form-floating">
             <input type="password" class="form-control" id="repasswordInput" placeholder="password" required>
             <label for="repasswordInput" class="text-black text-opacity-50">Reinserisci password</label>
-          </div><!--Fine sesta riga-->
+          </div>
         </div> 
+        <!--Fine Quarta riga-->
         <div class="row" id="BottoneIscriviti">
           <button type="submit" class="btn btn-primary">Iscriviti</button>
         </div>
         <div class="row" id="BottoneIndietro">
-        <button onclick="window.history.back()" class="btn btn-secondary">Indietro</button>
+          <button onclick="window.history.back()" class="btn btn-secondary">Indietro</button>
         </div>
         <div class="mt-2">
-          <!-- Da inserire il link al sign in -->
           <div style="text-align: center">
+
             <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="../Login/login.html">Sei già iscritto? Effettua l'accesso!</a>
-          </div>
-          
-      </div>
+          </div> 
+        </div>
       </form>
     </div>
-
-    <!-- Carica gli script di Bootstrap -->
   </body>
 </html>
