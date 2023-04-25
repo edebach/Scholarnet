@@ -7,17 +7,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     
-
     <!-- Bootstrap JS -->
     <!-- questa riga sembra non essere necessaria -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     
     <!--Carosello immagine: SEZIONE CRITICA CHE FA APPARIRE L'IMMAGINE BIANCA-->
     <!--Icona stella-->
@@ -30,23 +28,23 @@
           background-color: rgb(45, 42, 42);
           color: rgb(237, 237, 237);
         }
-        @media screen and (min-width: 768px) {
-        .collapse.navbar-collapse {
-          padding-left: 3.8cm;
-        }
-      }
-      iframe{
-        width:550px; 
-        height:400px;
-        border:1cm;
-        background-color: ;
-      }
-     </style>
 
+        @media screen and (min-width: 768px) {
+            .collapse.navbar-collapse {
+            padding-left: 3.8cm;
+            }
+        }
+
+        iframe{
+            width:550px; 
+            height:400px;
+            border:1cm;
+        }
+    </style>
 
     <link rel="stylesheet" href="./src/rating.css">
     
-    <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+    <!--ZONA DINAMICA: Implementazione oggetto AJAX recensioni -->
     <script>
        $(document).ready(function() {
         $("input[name='rating']").click(function() {
@@ -80,7 +78,7 @@
                                                 <div class='row'>
                                                     <div class='col'>
                                                         <div class='d-flex flex-start'>
-                                                            <img class='rounded-circle shadow-1-strong me-3' src='https://www.dm.unibo.it/matecofin/img/empty.jpg' alt='avatar' width='65' height='65' />
+                                                            <img class='rounded-circle shadow-1-strong me-3' src='./img/empty.jpg' alt='avatar' width='65' height='65' />
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
@@ -108,16 +106,14 @@
 
                     // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
                     zonaDinamica.html(html);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
             });
         });
-        });
     </script>
-
-
     <script>
         $(document).ready(function(){
       // Seleziona tutte le stelle
@@ -149,17 +145,18 @@
 
 </head>
 <body>
-    	<!-- Sezione Header: NON TOCCARE!!!!-->
+    	<!--Sezione Header-->
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-            <!-- <div class="topleft"> -->
-                <a class="navbar-brand" href="#">
+            <div class="topleft">
+                <a class="navbar-brand" href="./index.php">
                 <img src="./img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" 
                 width="50" height="50" class="d-inline-block align-text-top">
                     <!-- Scholarnet -->
                 </a>
-            <!-- </div> -->
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            </div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" 
+            data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNav">
@@ -178,14 +175,12 @@
 					</li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                    <!-- da inserire ancora i riferimenti -->
 					<li class="nav-item">
                         <div class="col-md-12 text-right">
                             <a class="btn btn-outline-primary" href="./Login/login.html">Login</a>
                             <a class="btn btn-outline-secondary" href="./Signup/singup.html">Sign Up</a>
                         </div>
 					</li>
-                    <!-- da inserire ancora i riferimenti -->
 				</ul>
 			</div>
 		</nav>
@@ -197,7 +192,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-auto">
-                    <!-- Titolo da modificare -->
 					<h1>Scholarnet</h1>
                     <!-- immagine di prova (carosello)-->
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -219,38 +213,36 @@
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Previous</span>
+                          <span class="sr-only">Precedente</span>
                         </a>
                         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="sr-only">Next</span>
+                          <span class="sr-only">Successivo</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </section> 
-
-    <br>
-    <br>
-
+</br>
+</br>
     <!-- Sezione Descrizione -->
+    <!-- TODO:Da riempire -->
     <section id="descrizione-section">
         <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-            <h2>Descrizione</h2>
-            <!-- Da riempire -->
-            <p>Qui potrai trovare informazioni dettagliate sul nostro sito e sui servizi offerti. Scopri come possiamo aiutarti!</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Qui potrai trovare informazioni dettagliate sul nostro sito e sui servizi offerti. Scopri come possiamo aiutarti!</p>
+                </div>
             </div>
         </div>
-        </div>
-  </section>
+    </section>
   
-  <br>
-  <br>
+    <br>
+    <br>
 
     <!-- Sezione Q&A -->
+    <!-- TODO:Da riempire -->
     <section id="qa-section">
         <div class="container">
             <div class="row">
@@ -306,10 +298,8 @@
             </div>
         </div>
     </section>
-
-    <br>
-    <br>
-
+    </br>
+    </br>
     <!-- Sezione Recensioni -->
     <section id="recensione">
         <div class="container ">
@@ -318,30 +308,28 @@
                     <h2>Ultime recensioni</h2>
                 </div>
             </div>
-            <br>
+            </br>   
             <div class="row">
                 <div class="col-sm">    
                     <strong>Filtra per </strong>
                 </div>
-                    <!-- Modifica delle valutazioni usando icone di stelle -->
-                    <div class="col-sm-12 class=mb-5">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
-                        </fieldset>
-                    </div>
-
-                
+                <!-- Modifica delle valutazioni usando icone di stelle -->
+                <div class="col-sm-12 class=mb-5">
+                    <fieldset class="rating">
+                        <!-- TODO: modifica i title delle lable in italiano -->
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
+                    </fieldset>
+                </div>
                 <div class="col-sm-12 "> 
                     <!--Visualizza il numero di recensioni totali-->
                     <?php include './Recensioni/num-recensioni.php'; ?>
                 </div>
-            </div>
-            
-            <!--ZONA DINAMICA: Implementazione oggetto AJAX-->
+            </div>            
+            <!--ZONA DINAMICA: Implementazione oggetto AJAX display delle recensioni-->
             <iframe srcdoc="<html>
                 <head>
                     <style>
@@ -352,60 +340,54 @@
                     <div id='zonaDinamica'>
                     </div>
                 </body>
-                </html>"></iframe>
+                </html>">
+            </iframe>
         </div>
     </section>
-    <br>
+    </br>
 
-        <footer class="bg-dark text-center text-white">
-            <!-- Grid container -->
-            <div class="container p-4 pb-0">
-              <!-- Section: Form -->
-              <section>
-                <form action="">
-                  <!--Grid row-->
-                  <div class="row d-flex justify-content-center">
-                    <!--Grid column-->
-                    <div class="col-auto">
-                      <p class="pt-2">
-                        <strong>Sign up for our newsletter</strong>
-                      </p>
-                    </div>
-                    <!--Grid column-->
-          
-                    <!--Grid column-->
-                    <div class="col-md-5 col-12">
-                      <!-- Email input -->
-                      <div class="form-outline form-white mb-4">
-                        <input type="email" class="form-control" id="emailNewsletter" aria-describedby="emailHelp" placeholder="Inserici email">
-                      </div>
-                    </div>
-                    <!--Grid column-->
-          
-                    <!--Grid column-->
-                    <div class="col-auto">
-                      <!-- Submit button -->
-                      <button type="submit" class="btn btn-outline-light mb-4">
-                        Subscribe
-                      </button>
-                    </div>
-                    <!--Grid column-->
-                  </div>
-                  <!--Grid row-->
-                </form>
-              </section>
-              <!-- Section: Form -->
-            </div>
-            <!-- Grid container -->
-          
-            <!-- Copyright -->
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-              <a class="text-white" >Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco</a>
-            </div>
-            <!-- Copyright -->
-          </footer>
-    <!-- </footer> -->
+    <!-- TODO: fare in modo che il footer prenda tutta la riga togliendo i margini ai lati -->
+    <footer class="bg-dark text-center text-white">
+
+        <!-- Copyright -->
         
-
-</body>
+        <div class=" text-center m-0 p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <a class="text-white" >Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco</a>
+        </div>
+        <!-- Copyright -->
+        </footer>
+        
+    </body>
 </html>
+
+
+<!-- SEZIONE NEWSLETTER RIMOSSA -->
+<!-- <div class="container p-4 pb-0">
+
+            <section>
+            <form action="">
+
+                <div class="row d-flex justify-content-center">
+                <div class="col-auto">
+                    <p class="pt-2">
+                    <strong>Sign up for our newsletter</strong>
+                    </p>
+                </div>
+                <div class="col-md-5 col-12">
+
+                    <div class="form-outline form-white mb-4">
+                    <input type="email" class="form-control" id="emailNewsletter" aria-describedby="emailHelp" placeholder="Inserici email">
+                    </div>
+                </div>
+                <div class="col-auto">
+
+                    <button type="submit" class="btn btn-outline-light mb-4">
+                    Subscribe
+                    </button>
+                </div>
+                </div>
+            </form>
+            </section>
+        </div>
+
+         -->

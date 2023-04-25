@@ -9,7 +9,6 @@
 <body> 
     <?php
     session_start();
-    //File accesso.php pensato come gestione di accesso di un utente già registrato al servizio
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
         header("Location: /");
@@ -66,10 +65,7 @@
                 $_SESSION['flag'] = "0";
             }
 
-
-            echo "<script>
-                    window.location.href='../Logged/IndexLogged.php';
-                </script>";
+            header("Location: ../Logged/IndexLogged.php");
                 
         }
             

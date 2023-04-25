@@ -134,8 +134,14 @@ Bisogna aggiungere i session_start() nei vari vile
 1) Completamento della tabella utente
 
 
-**venerdi ho modificato il peofilo iniziando a inserire dati personalizzati
+*venerdi ho modificato il profilo iniziando a inserire dati personalizzati
 
 https://www.remove.bg/it/upload
 
 UPDATE mytable SET myfield = 'nuovo_valore' WHERE id = 'valore_id';
+
+
+INSERIRE I _TODO_:
+*INSERITI IN:*
+index.php
+login.html
