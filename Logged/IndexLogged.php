@@ -55,7 +55,7 @@ session_start();
         $(document).ready(function() {
 
             //quando clicco il bottone mi genera la form inserisci recensione
-            $("button").click(function(){
+            $("#insert").click(function(){
                 $("#zonaDinamica2").load("../Recensioni/FormRecensione.html");
             });
 
@@ -457,7 +457,7 @@ session_start();
 
             <!--Bottone per inserire la recensione: solo per utenti loggati-->
             <div class="row">
-                <button id="insert "type="button" class="btn btn-primary">Inserisci la tua recensione</button>
+                <button id="insert" type="button" class="btn btn-primary">Inserisci la tua recensione</button>
             </div>
             <br>
             <div class="col" id = "zonaDinamica2">
