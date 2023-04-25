@@ -23,15 +23,13 @@
     $nome = $_SESSION['nome'];
     $cognome = $_SESSION['cognome'];
     $email = $_POST['emailInput'];
-    $_SESSION['email'] = $_POST['emailInput'];
     $istituto = $_SESSION['istituto'];
     $password = $_POST['passwordInput'];
-    $_SESSION['password'] = $_POST['passwordInput']; //non so se ci servirà
     $dataN=$_SESSION['dataN'];
     $sesso=$_SESSION['sesso'];
     $flag=$_SESSION['flag'];
 
-    
+    $_SESSION['email'] = $_POST['emailInput'];
     //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form signup.php
     $q1 = "SELECT email 
             FROM utente 
@@ -52,7 +50,8 @@
         //una volta che ho verificato l'utente non è registrato, inserisco i dati forniti nel form signup.php, nel mio db
         $q2 = "INSERT INTO utente VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
 
- 
+        // TODO: Inserire l'hashing per la password prima di inserirla nel database
+
         //il risultato della query me lo salvo in un array, in questo caso con tutti i dati forniti
         $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto,$sesso,$dataN, $flag));
         if ($data) {

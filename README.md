@@ -140,8 +140,13 @@ https://www.remove.bg/it/upload
 
 UPDATE mytable SET myfield = 'nuovo_valore' WHERE id = 'valore_id';
 
+<!-- IMMAGINE DELL'OMINO: guardare video del seguente link: https://www.youtube.com/watch?v=q93hR316nk4-->
+
 
 INSERIRE I _TODO_:
 *INSERITI IN:*
 index.php
 login.html
+accesso.php
+signup.html
+signup2.php
