@@ -12,10 +12,10 @@ $flagStudente = $row['flag'];
 
 
 if($flagStudente!=""){
-    echo "<p>Studente</p>";
+    echo "<p class='text-center'>Studente</p>";
 }
 else{
-    echo "<p>Professore</p>";
+    echo "<p class='text-center'>Professore</p>";
 }
 
 

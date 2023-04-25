@@ -47,15 +47,14 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                         <button type="button" class="btn-close" aria-label="Close" onclick="window.history.back()"></button>
                       <div class="col-md-4 gradient-custom text-center text-white"
                         style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                        <!-- immagine inserita da utente-->
-                        <img src=<?php
+                        <!-- immagine profilo in base a professione e sesso -->
+                          <?php
                           include "./Profilo/fotoprofilo.php"
                           ?>
-                          alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
                           <?php
                           include "./Profilo/nome_studprof.php"
                           ?>
-                        <i class="far fa-edit mb-5"></i>
+                        <!-- <i class="far fa-edit mb-5"></i> -->
                       </div>
                       <div class="col-md-8">
                         <div class="card-body p-4">
