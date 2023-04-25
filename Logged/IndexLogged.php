@@ -49,18 +49,8 @@ session_start();
 
 
     <link rel="stylesheet" href="../src/rating.css">
+    <link rel="stylesheet" href="../src/rating1.css">
     
-    <!--ZONA DINAMICA2: Implementazione oggetto AJAX per bottone inserisci-->
-    <script>
-        $(document).ready(function() {
-
-            //quando clicco il bottone mi genera la form inserisci recensione
-            $("#insert").click(function(){
-                $("#zonaDinamica2").load("../Recensioni/FormRecensione.html");
-            });
-
-        });
-    </script>
 
     <!--ZONA DINAMICA1: Implementazione oggetto AJAX per click stelle-->
     <script>
@@ -457,13 +447,58 @@ session_start();
 
             <!--Bottone per inserire la recensione: solo per utenti loggati-->
             <div class="row">
-                <button id="insert" type="button" class="btn btn-primary">Inserisci la tua recensione</button>
+                <button id="insert" type="button" class="btn btn-primary" data-toggle="modal" data-target="#recensione-popup">Inserisci la tua recensione</button>
             </div>
-            <br>
-            <div class="col" id = "zonaDinamica2">
-                <!--Parte il file FormRecensione.html-->
-            </div>
-        </div>
+            
+            <!--Finestra inserisci recensione-->
+            <div class="modal fade" id="recensione-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">Inserisci recensione</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                        <form name="recensione" action="../Recensioni/recensioni.php" method="POST">
+                            <!--PRIMA RIGA: Campo nome recensione-->
+                            <div class="mb-3">
+                                <label class="form-label">Nome recensione</label>
+                                <input type="text" name="nomeRecensioneInput" class="form-control" id="exampleFormControlInput1" required>
+                            </div>
+
+                            <!--SECONDA RIGA: Campo descrizione-->
+                            <div class="mb-3">
+                                <label class="form-label">Descrizione</label>
+                                <textarea class="form-control" name="FeedbackRecensione" id="descrizione" rows="3" placeholder="Feedback..." required></textarea>
+                            </div>
+
+                            <!--TERZA RIGA: Campo valutazione-->
+                            <div class="col mb-3">
+                                <div class="row">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Valutazione</label>
+                                </div>
+                                <div class="row">
+                                    <fieldset class="rating1">
+                                        <input type="radio" id="star5" name="rating1" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="star4" name="rating1" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="star3" name="rating1" value="3" /><label for="star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="star2" name="rating1" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="star1" name="rating1" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <!--QUARTA RIGA: Campo bottoni-->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-success">Invia</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
+                            </div>
+
+                        </form>
+                        </div>
+                    </div>    
+                </div>
+                </div>
     </section>
     
     <br>
