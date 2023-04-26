@@ -91,13 +91,16 @@
         </div><!--Fine prima riga-->
         <!--Terza riga: Form per inserire data di nascita -->
         <!-- TODO: Decidere se cambiare formato o mantenere questo per l'inserimento della data di nascita -->
+        <!-- TODO: Valutare l'alternativa per selezionare la data commentata qui in seguito -->
         <div class="mb-3 input-group">
           <div class="input-group-text">
             <i class="fa-solid fa-calendar"></i>
           </div>
-          <div class="form-floating" id="datePicker">
-              <input type="text" class= "form-control" name="datePicker" placeholder="Date">
-              <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label>
+          <div class="form-floating" id="data-picker">
+              <!-- <input type="text" class= "form-control" name="datePicker" placeholder="Date">
+              <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label> -->
+              <input type="date" class="form-control" id="data" name="data" required>
+              <label for="data" class="form-label" >Data</label>
           </div>
         </div>
         <script>

@@ -6,15 +6,18 @@
 	<title>Classe</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<!-- Carica Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	
 	<style>
 		.card {
 		width: 600px;
 		}
 	</style>
+
 
 	<script>
 			$(document).ready(function() {
@@ -45,24 +48,27 @@
 
 
 
-			$('#annuncio-form').submit(function(event) {
-			event.preventDefault();
-			// Qui puoi aggiungere il codice per inviare l'annuncio al server
-			$('.card-body').removeClass('show');
-			});
+			// $('#annuncio-form').submit(function(event) {
+			// event.preventDefault();
+			// // Qui puoi aggiungere il codice per inviare l'annuncio al server
+			// $('.card-body').removeClass('show');
+			// });
 		});
-  </script>
+    </script>
   	<script>
 		$(document).ready(function() {
 			const mySwitch = document.getElementById("slider-compito");
+			$('#data-div').hide();
+			$('#ora-div').hide();
 
 			mySwitch.addEventListener("change", function() {
 			if (this.checked) {
-				// lo switch è attivo
-				console.log("Lo switch è attivo!");
+				$('#data-div').fadeIn('1000');
+				$('#ora-div').fadeIn('1000');
+
 			} else {
-				// lo switch è disattivo
-				console.log("Lo switch è disattivo!");
+				$('#data-div').fadeOut('1000');
+				$('#ora-div').fadeOut('1000');
 			}
 			});
 		});
@@ -76,6 +82,7 @@
 		}
 		
 	</style>
+
 </head>
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
@@ -90,17 +97,6 @@
 				
 					<a class="navbar-brand text-center" href="#">Nome del corso</a>
 				</div>
-				<!-- <ul class="nav nav-tabs">
-					<li class="nav-item">
-						<a class="nav-link" href="#stream-section">Stream</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#compiti-section">Compiti</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#persone-section">Persone</a>
-					</li>
-				</ul> -->
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
 				</button>
@@ -146,19 +142,6 @@
 				</ul>
 			</div>
 		</nav>
-		<!-- <div class="container-fluid mt-3">
-			<div class="row justify-content-center">
-			<div class="col-auto">
-				<a class="btn btn-primary" href="#stream-section">Stream</a>
-			</div>
-			<div class="col-auto">
-				<a class="btn btn-primary" href="#compiti-section">Compiti</a>
-			</div>
-			<div class="col-auto">
-				<a class="btn btn-primary" href="#persone-section">Persone</a>
-			</div>
-			</div>
-		</div> -->
 	</header> 
 
 <style>
@@ -202,12 +185,20 @@
 								<span class="slider"></span>
 							</label> Compito
 						</div>
+						<div class="mb-3" id="data-div">
+							<label for="data" class="form-label">Data</label>
+							<input type="date" class="form-control" id="data" name="data" required>
+						</div>
+						<div class="mb-3" id="ora-div">
+							<label for="orario" class="form-label">Orario</label>
+							<input type="time" class="form-control" id="orario" name="orario" required>
+						</div>
 						<button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
 						<button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
 					  </form>
 					</div>
 				</article>
-				  
+				
 				<h2 class="mb-4">Ultimi annunci</h2>
 				<div class="card text-black bg-light mb-3 d-inline-block">
 					<div class="card-body">
