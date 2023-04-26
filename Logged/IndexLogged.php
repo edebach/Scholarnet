@@ -281,6 +281,49 @@ session_start();
         </div>
         </div>
     </div>
+
+    <!-- Sezione I tuoi corsi -->
+    <section id="i-tuoi-corsi" class="bg-image mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>I tuoi corsi</h2>
+                </div>
+            </div>
+            <br>
+
+            <!--Elenco dei corsi in cui è iscritto l'utente-->
+            <?php include "./corsi.php"; ?>
+
+
+            <!--<div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>-->
+
+
+        </div>
+    </section>
     
     <!-- Sezione Home -->
 	<section id="home-section" class="bg-image mt-5">
@@ -414,13 +457,13 @@ session_start();
                     </div>
                         <!-- Modifica delle valutazioni usando icone di stelle -->
                         <div class="col-sm-12 class=mb-5">
-                            <fieldset class="rating">
+                            <!--<fieldset class="rating">
                                 <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
                                 <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
                                 <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh - 3 stars"></label>
                                 <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
                                 <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
-                            </fieldset>
+                            </fieldset>-->
                         </div>
 
                     
