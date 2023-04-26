@@ -3,44 +3,79 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Il mio blog</title>
+	<title>Classe</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-	<!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
+	<!-- Carica Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-	
 	<style>
-
-.card {
-  width: 600px;
-}
-
+		.card {
+		width: 600px;
+		}
 	</style>
 
 	<script>
-		$(document).ready(function() {
-		$('#show-form-btn').click(function() {
-			$('#annuncio-form').toggleClass('show');
-			$(this).fadeOut('600');
-	});
-	$('#ret-form-btn').click(function() {
-			$('#annuncio-form').toggleClass('show');
-			$('#show-form-btn').fadeIn('600');
-	});
+			$(document).ready(function() {
+				// Nascondi tutte le sezioni tranne quella iniziale ("Stream")
+				$("#compiti-section, #persone-section").hide();
 
-
-  
-    $('#annuncio-form').submit(function(event) {
-      event.preventDefault();
-      // Qui puoi aggiungere il codice per inviare l'annuncio al server
-      $('.card-body').removeClass('show');
-    });
-  });
-  
+				// Gestisci il click sui bottoni
+				$(".nav-link").click(function(event) {
+					event.preventDefault();
+					// Nascondi tutte le sezioni
+					$("#stream-section, #compiti-section, #persone-section").hide();
+					// Mostra la sezione corrispondente al bottone selezionato
+					$($(this).attr("href")).show();
+				});
+			});
 	</script>
+
+	<script>
+		$(document).ready(function() {
+			$('#show-form-btn').click(function() {
+				$('#annuncio-form').toggleClass('show');
+				$(this).fadeOut('600');
+		});
+		$('#ret-form-btn').click(function() {
+				$('#annuncio-form').toggleClass('show');
+				$('#show-form-btn').fadeIn('600');
+		});
+
+
+
+			$('#annuncio-form').submit(function(event) {
+			event.preventDefault();
+			// Qui puoi aggiungere il codice per inviare l'annuncio al server
+			$('.card-body').removeClass('show');
+			});
+		});
+  </script>
+  	<script>
+		$(document).ready(function() {
+			const mySwitch = document.getElementById("slider-compito");
+
+			mySwitch.addEventListener("change", function() {
+			if (this.checked) {
+				// lo switch è attivo
+				console.log("Lo switch è attivo!");
+			} else {
+				// lo switch è disattivo
+				console.log("Lo switch è disattivo!");
+			}
+			});
+		});
+	</script>
+	<style>
+		.navbar-brand {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		text-align: center;
+		}
+		
+	</style>
 </head>
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
@@ -48,14 +83,14 @@
 		<nav class="navbar nav navbar-dark bg-dark">
 			<div class="container-fluid">
 				<div class="d-flex align-items-center">
-					<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+					<button class="navbar-toggler ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
 						<span class="navbar-toggler-icon"></span>
 						<span class="visually-hidden">Toggle navigation</span>
 					</button>
 				
-					<a class="navbar-brand ms-3" href="#">Nome del corso</a>
+					<a class="navbar-brand text-center" href="#">Nome del corso</a>
 				</div>
-				<ul class="nav nav-tabs">
+				<!-- <ul class="nav nav-tabs">
 					<li class="nav-item">
 						<a class="nav-link" href="#stream-section">Stream</a>
 					</li>
@@ -65,7 +100,7 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#persone-section">Persone</a>
 					</li>
-				</ul>
+				</ul> -->
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
 				</button>
@@ -96,11 +131,52 @@
 				</div>
 			</div>
 		</nav>
+		<nav class="navbar nav navbar-white ">
+			<div class="container-fluid">
+				<ul class="nav nav-tabs mx-auto">
+					<li class="nav-item">
+						<a class="nav-link btn btn-lg" href="#stream-section">Stream</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-lg" href="#compiti-section">Compiti</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link btn btn-lg" href="#persone-section">Persone</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<!-- <div class="container-fluid mt-3">
+			<div class="row justify-content-center">
+			<div class="col-auto">
+				<a class="btn btn-primary" href="#stream-section">Stream</a>
+			</div>
+			<div class="col-auto">
+				<a class="btn btn-primary" href="#compiti-section">Compiti</a>
+			</div>
+			<div class="col-auto">
+				<a class="btn btn-primary" href="#persone-section">Persone</a>
+			</div>
+			</div>
+		</div> -->
 	</header> 
 
-	<main class="container my-4">
+<style>
+  header .container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  header .container-fluid .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+</style>
+
+	<main class="container my-4" id="stream-section">
 		<div class="row">
-			<section class="col-md-8">
+			<!-- inizio sesione stream -->
+			<section class="col-lg-8">
 				<article class="card mb-4">
 					<header class="card-header bg-light">
 					  <h3 class="card-title mb-0">Inserisci un nuovo annuncio</h3>
@@ -116,36 +192,42 @@
 						  <label for="testo" class="form-label">Testo</label>
 						  <textarea class="form-control" id="testo" name="testo" rows="3" required></textarea>
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 						  <label for="allegati" class="form-label">Allegati</label>
 						  <input type="file" class="form-control" id="allegati" name="allegati">
 						</div>
-						<button type="submit" class="btn btn-primary">Pubblica annuncio</button>
-						<button id="ret-form-btn" class="btn btn-secondary">Annulla</button>
+						<div>
+						<label class="switch">
+								<input type="checkbox" id="slider-compito">
+								<span class="slider"></span>
+							</label> Compito
+						</div>
+						<button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
+						<button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
 					  </form>
 					</div>
-				  </article>
+				</article>
 				  
 				<h2 class="mb-4">Ultimi annunci</h2>
-			<div class="card text-black bg-light mb-3 d-inline-block">
-				<div class="card-body">
-					<span style="font-size: 20px;">
-						<i class="fa-solid fa-book" style="font-size: 20px;"></i>
-						Compito
-					</span>
-					<header class="card-header bg-light text-black">
-						<p class="card-subtitle small" style="text-align: right;">Data di pubblicazione: 01/01/2022</p>
-					</header>
-
+				<div class="card text-black bg-light mb-3 d-inline-block">
 					<div class="card-body">
-						<p class="card-text">Testo dell'annuncio</p>
-						<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
+						<span style="font-size: 20px;">
+							<i class="fa-solid fa-book" style="font-size: 20px;"></i>
+							Compito
+						</span>
+						<header class="card-header bg-light text-black">
+							<p class="card-subtitle small" style="text-align: right;">Data di pubblicazione: 01/01/2022</p>
+						</header>
+
+						<div class="card-body">
+							<p class="card-text">Testo dell'annuncio</p>
+							<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
+						</div>
 					</div>
+					<footer class="card-footer">
+						<a href="#" class="card-link text-black">Commenti (3)</a>
+					</footer>
 				</div>
-				<footer class="card-footer">
-					<a href="#" class="card-link text-black">Commenti (3)</a>
-				</footer>
-			</div>
 				<article class="card mb-4">
 					<header class="card-header bg-light">
 						<h3 class="card-title mb-0"><a href="#">Titolo dell'annuncio</a></h3>
@@ -160,7 +242,7 @@
 					</footer>
 				</article>
 			</section>
-						<aside class="col-md-4">
+			<aside class="col-lg-4" id="aside-compiti">
 				<h2 class="mb-4">Compiti assegnati</h2>
 				<table class="table">
 					<thead>
@@ -186,6 +268,8 @@
 			</aside>
 		</div>
 	</main>
+
+	
 	<footer class="bg-light">
 		<div class="container py-3">
 			<p class="text-center mb-0">Il mio blog &copy; 2022</p>
