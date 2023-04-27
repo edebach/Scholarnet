@@ -73,6 +73,22 @@
 			});
 		});
 	</script>
+	<script>
+		$(document).ready(function() {
+			$("#btn-elimina-classe").click(function() {
+				if (confirm("Sei sicuro di voler eliminare la classe?")) {
+					$.post("<?php echo basename($_SERVER["PHP_SELF"]); ?>", { elimina_classe: true }, function(data) {
+						if (data.success) {
+							alert("Classe eliminata correttamente.");
+							window.location.href = "index.php";
+						} else {
+							alert("Errore durante l'eliminazione della classe.");
+						}
+					}, "json");
+				}
+			});
+		});
+	</script>
 	<style>
 		.navbar-brand {
 		position: absolute;
@@ -113,18 +129,27 @@
 					</div>
 				</div>
 				<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
-					<div class="offcanvas-header">
-						<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
-						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-					</div>
-					<div class="offcanvas-body">
-						<nav class="navbar navbar-dark bg-dark">
-							<ul class="navbar-nav">
-								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
-							</ul>
-						</nav>
-					</div>
-				</div>
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <nav class="navbar navbar-white bg-white">
+            <ul class="navbar-nav d-flex flex-row justify-content-between"> <!-- Aggiunta classi d-flex e flex-row -->
+                <!-- Inserimento pulsante "Elimina classe" -->
+                <li class="nav-item">
+					<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
+					onClick="window.location.href='../IndexLogged.php'">Home</button>
+                </li>
+                <!-- Inserimento pulsante "Home" -->
+                <li class="nav-item">
+					<button class="btn btn-outline-danger d-inline-block mx-1" id="btn-elimina-classe">Elimina classe</button>
+                </li>
+                <!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
+            </ul>
+        </nav>
+    </div>
+</div>
 			</div>
 		</nav>
 		<nav class="navbar nav navbar-white ">
@@ -166,7 +191,13 @@
 					</header>
 					<div class="card-body">
 					  <button id="show-form-btn" class="btn btn-primary">Inserisci nuovo annuncio</button>
-					  <form id="annuncio-form" action="#" method="post">
+					   <form id="annuncio-form" action="./annuncio.php" method="post">
+					   <?php
+							$file_name = basename($_SERVER['PHP_SELF']);
+							$value = substr($file_name, -12,-4);
+							echo "console.log($value)";
+						?>
+							<input type="hidden" name="classe" id="classe" value="<?php echo $value; ?>">
 						<div class="mb-3">
 						  <label for="titolo" class="form-label">Titolo</label>
 						  <input type="text" class="form-control" id="titolo" name="titolo" required>
@@ -176,12 +207,13 @@
 						  <textarea class="form-control" id="testo" name="testo" rows="3" required></textarea>
 						</div>
 						<div class="mb-2">
+							<!-- TODO: Non carica i file correttamente ma solo il nome del file -->
 						  <label for="allegati" class="form-label">Allegati</label>
 						  <input type="file" class="form-control" id="allegati" name="allegati">
 						</div>
 						<div>
 						<label class="switch">
-								<input type="checkbox" id="slider-compito">
+								<input type="checkbox" id="slider-compito" name="slider-compito">
 								<span class="slider"></span>
 							</label> Compito
 						</div>
@@ -256,6 +288,12 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Codice corso</h5>
+						<p class="card-text"><?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?></p>
+					</div>
+				</div>
 			</aside>
 		</div>
 	</main>
