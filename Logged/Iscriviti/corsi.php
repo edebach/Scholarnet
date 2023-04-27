@@ -1,11 +1,53 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+		$(document).ready(function() {
+			$("#btn-elimina-classe").click(function() {
+				if (confirm("Sei sicuro di voler eliminare la classe?")) {
+                    var url = $(this).data("action");
+                    var link = $(this).data("href");
+                    console.log(link);
+
+					$.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { elimina_classe: true, link: link },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.success) {
+                                alert("Classe eliminata correttamente.");
+                                window.location.href = "../IndexLogged.php";
+                            } else {
+                                alert("Errore durante l'eliminazione della classe.");
+                            }
+                        },
+                        error: function(jqXHR, status, error) {
+                            console.log(status + ": " + error);
+                            alert("Errore durante l'eliminazione della classe.");
+                        }
+                    });
+                    
+				}
+			});
+		});
+	</script>
+
+</head>
+<body>
+    <?php
 
     //Connessione al db
-    
+
     $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
             user=postgres password=biar") 
             or die('Could not connect: ' . pg_last_error());
-    
+
 
     $email = $_SESSION['email'];
     $flag = $_SESSION['flag'];
@@ -29,16 +71,31 @@
             echo "<div class='row'>";
             do {
                 //Parte l'interfaccia grafica: implementazione delle card corso
-                echo "
-                        <div class='card' style='width: 18rem;'>
-                            <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top' width='200' height='200'>
-                            <div class='card-body'>
-                                <h5 class='card-title'><a href='./Logged/".$row1['link']."'>".$row1['nome']."</a></h5>
-                                <p class='card-text'>".$row1['materia']."</p>
+                echo "        
+                <div class='card' style='width: 18rem;'>
+                    <div class='position-relative'>
+                        <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                        <div class='position-absolute top-0 end-0'>
+                            <div class='dropdown'>
+                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                <i class='bi bi-three-dots-vertical'></i>
+                                </button>
+                                <ul class='dropdown-menu'>
+                                    <li>
+                                    <button class='btn btn-light d-inline-block mx-1' id='btn-elimina-classe' 
+                                            data-action='./Elimina/eliminaclasse.php'  
+                                            data-href='". $row1['link']."'>Elimina classe
+                                    </button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                ";
+                    </div>
+                    <div class='card-body'>
+                        <h5 class='card-title'><a href='./Logged/".$row1['link']."'>".$row1['nome']."</a></h5>
+                        <p class='card-text'>".$row1['materia']."</p>
+                    </div>
+                </div>";
             
             } while ($row1 = pg_fetch_array($result1a));
             
@@ -48,7 +105,7 @@
         $q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
         $result1b = pg_query_params($dbconn, $q1b, array($email));
 
-       
+    
         if($row2=pg_fetch_array($result1b, null, PGSQL_ASSOC)){
 
             //Faccio il doppio ciclo while per evitare che il docente sia iscritto e insegna lo stesso corso
@@ -56,16 +113,26 @@
                 while ($row2= pg_fetch_array($result1b)){
                     if($row1['corso']!=$row2['corso']){
                         //Parte l'interfaccia grafica: implementazione delle card corso
-                        echo "
-                            
-                                <div class='card' style='width: 18rem;'>
-                                    <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
-                                    <div class='card-body'>
-                                    <h5 class='card-title'><a href='./Logged/".$row2['link']."'>".$row2['nome']."</a></h5>
-                                        <p class='card-text'>".$row2['materia']."</p>
+                        echo "        
+                        <div class='card' style='width: 18rem;'>
+                            <div class='position-relative'>
+                                <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                                <div class='position-absolute top-0 end-0'>
+                                    <div class='dropdown'>
+                                        <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                        <i class='bi bi-three-dots-vertical'></i>
+                                        </button>
+                                        <ul class='dropdown-menu'>
+                                            <li><button class='btn btn-light d-inline-block mx-1' id='btn-annulla-iscrizione'>Annulla iscrizione</button></li>
+                                        </ul>
                                     </div>
                                 </div>
-                            ";
+                            </div>
+                            <div class='card-body'>
+                                <h5 class='card-title'><a href='./Logged/".$row2['link']."'>".$row2['nome']."</a></h5>
+                                <p class='card-text'>".$row2['materia']."</p>
+                            </div>
+                        </div>";
                     }
                 }
             }
@@ -89,14 +156,25 @@
             do {
                 //Parte l'interfaccia grafica: implementazione delle card corso
                 echo "        
-                    <div class='card' style='width: 18rem;'>
+                <div class='card' style='width: 18rem;'>
+                    <div class='position-relative'>
                         <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
-                        <div class='card-body'>
-                        <h5 class='card-title'><a href='./Logged/".$row3['link']."'>".$row3['nome']."</a></h5>
-                            <p class='card-text'>".$row3['materia']."</p>
+                        <div class='position-absolute top-0 end-0'>
+                            <div class='dropdown'>
+                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                <i class='bi bi-three-dots-vertical'></i>
+                                </button>
+                                <ul class='dropdown-menu'>
+                                    <li><button class='btn btn-light d-inline-block mx-1' id='btn-annulla-iscrizione'>Annulla iscrizione</button></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>";
-
+                    </div>
+                    <div class='card-body'>
+                        <h5 class='card-title'><a href='./Logged/".$row3['link']."'>".$row3['nome']."</a></h5>
+                        <p class='card-text'>".$row3['materia']."</p>
+                    </div>
+                </div>";
 
             }  while ($row3 = pg_fetch_array($result2));
             echo "</div>";
@@ -105,4 +183,6 @@
             echo "<p>NON SEI ISCRITTO A NESSUN CORSO!</p>";
         }
     }
-?>
+    ?>
+</body>
+</html>
