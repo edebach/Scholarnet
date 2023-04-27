@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+	<?php
+	session_start();
+	$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+              user=postgres password=biar") 
+              or die('Could not connect: ' . pg_last_error());
+	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Classe</title>
@@ -73,14 +79,15 @@
 			});
 		});
 	</script>
-	<script>
+	<!-- <script>
 		$(document).ready(function() {
 			$("#btn-elimina-classe").click(function() {
 				if (confirm("Sei sicuro di voler eliminare la classe?")) {
-					$.post("<?php echo basename($_SERVER["PHP_SELF"]); ?>", { elimina_classe: true }, function(data) {
+					var url = $(this).data("action");
+					$.post(url, { elimina_classe: true }, function(data) {
 						if (data.success) {
 							alert("Classe eliminata correttamente.");
-							window.location.href = "index.php";
+							window.location.href = "../IndexLogged.php";
 						} else {
 							alert("Errore durante l'eliminazione della classe.");
 						}
@@ -88,7 +95,7 @@
 				}
 			});
 		});
-	</script>
+	</script> -->
 	<style>
 		.navbar-brand {
 		position: absolute;
@@ -129,27 +136,58 @@
 					</div>
 				</div>
 				<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <nav class="navbar navbar-white bg-white">
-            <ul class="navbar-nav d-flex flex-row justify-content-between"> <!-- Aggiunta classi d-flex e flex-row -->
-                <!-- Inserimento pulsante "Elimina classe" -->
-                <li class="nav-item">
-					<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
-					onClick="window.location.href='../IndexLogged.php'">Home</button>
-                </li>
-                <!-- Inserimento pulsante "Home" -->
-                <li class="nav-item">
-					<button class="btn btn-outline-danger d-inline-block mx-1" id="btn-elimina-classe">Elimina classe</button>
-                </li>
-                <!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
-            </ul>
-        </nav>
-    </div>
-</div>
+					<div class="offcanvas-header">
+						<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body">
+						<nav class="navbar navbar-white bg-white">
+							<ul class="navbar-nav d-flex flex-row justify-content-between"> <!-- Aggiunta classi d-flex e flex-row -->
+								<!-- Inserimento pulsante "Home" -->
+								<li class="nav-item">
+									<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
+									onClick="window.location.href='../IndexLogged.php'">Home</button>
+								</li>
+								<li class="nav-item">
+									<!-- Inserimento pulsante "Elimina classe" -->
+									<!-- <form action="../Elimina/eliminaclasse.php" method="post">
+										<button type="submit" class="btn btn-outline-danger d-inline-block mx-1" id="elimina_classe"
+										name="elimina_classe">Elimina classe</button>
+									</form> -->
+								</li>
+								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
+								<?php
+// Inserimento dell'elenco delle classi
+if (($_SESSION["flag"])=="0") {
+    $email = $_SESSION["email"];
+    $q1 = "SELECT corso.nome, corso.link FROM insegna JOIN corso ON insegna.corso = corso.codice WHERE insegna.docente = $1";
+    $result=pg_query_params($dbconn, $q1, array($_SESSION['email']));
+    $classe = array();
+    $count = 0; // Contatore per tenere traccia dei bottoni nella riga corrente
+    while ($row = pg_fetch_array($result)) {
+        $nome = $row["nome"];
+        $link = $row["link"];
+        if ($count % 2 == 0) {
+            // Inizia una nuova riga
+            echo "<div class='row'>";
+        }
+        echo "<div class='col-sm-6'><a href='$link' class='btn btn-outline-primary d-inline-block mx-1'>$nome</a></div>";
+        $count++;
+        if ($count % 2 == 0) {
+            // Chiudi la riga corrente
+            echo "</div>";
+        }
+    }
+    // Chiudi l'ultima riga se necessario
+    if ($count % 2 != 0) {
+        echo "</div>";
+    }
+}
+?>
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
 		</nav>
 		<nav class="navbar nav navbar-white ">
