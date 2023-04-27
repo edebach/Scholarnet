@@ -22,7 +22,6 @@
                         success: function(data) {
                             if (data.success) {
                                 alert("Classe eliminata correttamente.");
-                                window.location.href = "../IndexLogged.php";
                             } else {
                                 alert("Errore durante l'eliminazione della classe.");
                             }
