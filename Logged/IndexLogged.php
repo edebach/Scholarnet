@@ -265,22 +265,26 @@ session_start();
             <div class="modal-body">
 
                 <form name="creazione" action="./Crea/crea.php" method="POST">
-                <div class="mb-3">
-                    <input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
-                </div>
-                <div class="mb-3">
-                    <input class="form-control" type="text" name="materia" placeholder="Materia (non obbligatoria)">
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" class="btn btn-primary">Crea</button>
-                    &nbsp;&nbsp;
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                </div>
+                    <!--PRIMA RIGA: Campo nome corso-->
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
+                    </div>
+                    <!--SECONDA RIGA: Campo materia-->
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="materia" placeholder="Materia (non obbligatoria)">
+                    </div>
+                    <!--TERZA RIGA: Campo bottoni-->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">Crea</button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                    </div>
                 </form>
             </div>
         </div>
         </div>
     </div>
+
 
     <!-- Sezione I tuoi corsi -->
     <section id="i-tuoi-corsi" class="bg-image mt-5">
@@ -289,39 +293,13 @@ session_start();
                 <div class="col-md-12">
                     <h2>I tuoi corsi</h2>
                 </div>
+                
+                
             </div>
             <br>
-
             <!--Elenco dei corsi in cui è iscritto l'utente-->
-            <?php include "./corsi.php"; ?>
-
-
-            <!--<div class="row">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>-->
-
-
+            <?php include "./Iscriviti/corsi.php"; ?>
+            
         </div>
     </section>
     
