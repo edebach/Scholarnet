@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST["elimina_classe"])) {
     // Elimina il file corrente
-    $file = basename($_SERVER["PHP_SELF"]);
+    $file = $_POST['link'];
     unlink($file);
 
     // Elimina le tuple nel database associate alla classe

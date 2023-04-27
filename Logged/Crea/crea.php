@@ -27,6 +27,8 @@
 
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
+    
+
 
     if($materia==""){
         $materia = null;
@@ -71,6 +73,7 @@
     //inserisco i valori nella tabella insegna
     $flag = $_SESSION['flag']; //do per scontato che sia un docente
     $email = $_SESSION['email'];
+
     
     $q4 = "INSERT INTO insegna VALUES($1, $2)";
     $data2 = pg_query_params($dbconn, $q4, array($email, $codice));
@@ -82,7 +85,7 @@
             header("Location: $link");
     }
 
-    
+
     ?>
 </body>
 </html>

@@ -12,6 +12,14 @@ session_start();
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!--Elenco della tendina-->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
+
+    <!--I tre puntini nella card-->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -265,22 +273,26 @@ session_start();
             <div class="modal-body">
 
                 <form name="creazione" action="./Crea/crea.php" method="POST">
-                <div class="mb-3">
-                    <input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
-                </div>
-                <div class="mb-3">
-                    <input class="form-control" type="text" name="materia" placeholder="Materia (non obbligatoria)">
-                </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="submit" class="btn btn-primary">Crea</button>
-                    &nbsp;&nbsp;
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
-                </div>
+                    <!--PRIMA RIGA: Campo nome corso-->
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
+                    </div>
+                    <!--SECONDA RIGA: Campo materia-->
+                    <div class="mb-3">
+                        <input class="form-control" type="text" name="materia" placeholder="Materia (non obbligatoria)">
+                    </div>
+                    <!--TERZA RIGA: Campo bottoni-->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="submit" class="btn btn-primary">Crea</button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
+                    </div>
                 </form>
             </div>
         </div>
         </div>
     </div>
+
 
     <!-- Sezione I tuoi corsi -->
     <section id="i-tuoi-corsi" class="bg-image mt-5">
@@ -289,39 +301,13 @@ session_start();
                 <div class="col-md-12">
                     <h2>I tuoi corsi</h2>
                 </div>
+                
+                
             </div>
             <br>
-
             <!--Elenco dei corsi in cui è iscritto l'utente-->
-            <?php include "./corsi.php"; ?>
-
-
-            <!--<div class="row">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://it.sendinblue.com/wp-content/uploads/sites/4/2020/07/template-gratis.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>-->
-
-
+            <?php include "./Iscriviti/corsi.php"; ?>
+            
         </div>
     </section>
     
