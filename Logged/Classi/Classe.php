@@ -151,32 +151,36 @@
 								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
 								<?php
 									// Inserimento dell'elenco delle classi
-									if (($_SESSION["flag"])=="0") {
-										$email = $_SESSION["email"];
+									$email = $_SESSION["email"];
+									if (($_SESSION["flag"]) == "0") {
 										$q1 = "SELECT corso.nome, corso.link FROM insegna JOIN corso ON insegna.corso = corso.codice WHERE insegna.docente = $1";
-										$result=pg_query_params($dbconn, $q1, array($_SESSION['email']));
-										$classe = array();
-										$count = 0; // Contatore per tenere traccia dei bottoni nella riga corrente
-										while ($row = pg_fetch_array($result)) {
-											$nome = $row["nome"];
-											$link = $row["link"];
-											if ($count % 2 == 0) {
-												// Inizia una nuova riga
-												echo "<div class='row'>";
-											}
-											echo "<div class='col-sm-6'><a href='$link' class='btn btn-outline-primary d-inline-block mx-1'>$nome</a></div>";
-											$count++;
-											if ($count % 2 == 0) {
-												// Chiudi la riga corrente
-												echo "</div>";
-											}
-										}
-										// Chiudi l'ultima riga se necessario
-										if ($count % 2 != 0) {
-											echo "</div>";
-										}
+									} else {
+										$q1 = "SELECT corso.nome, corso.link FROM partecipa JOIN corso ON partecipa.corso = corso.codice WHERE partecipa.studente = $1";
 									}
-								?>
+									$result = pg_query_params($dbconn, $q1, array($_SESSION['email']));
+									$classe = array();
+									while ($row = pg_fetch_array($result)) {
+										$nome = $row["nome"];
+										$link = $row["link"];
+										echo ""; //TODO:Questa è la riga sove insserire le varie cartelle con le classi
+									// idea non funzionante (da inserire ddentro echo):
+									// <li><div class='col-sm-6'>
+									// 	<div class='card bg-light mb-3'>
+									// 	<div class='card-body'>
+									// 		<h5 class='card-title'>
+									// 		<a href=' $link' class='text-primary'>
+									// 			<i class='fas fa-chalkboard-teacher fa-lg mr-2'></i>
+									// 			$nome
+									// 		</a>
+									// 		</h5>
+									// 	</div>
+									// 	</div>
+									// </div>
+									// </li>
+									
+									}
+									?>
+
 							</ul>
 						</nav>
 					</div>
@@ -213,6 +217,18 @@
 </style>
 
 	<main class="container my-4" id="stream-section">
+	<div class="mx-auto">
+    <form class="form-inline my-2 my-lg-0" action="../../src/search.php" method="POST">
+      <input
+        class="form-control mr-sm-2"
+        name="searchText"
+        type="search"
+        value="<?php if (isset($_SESSION['searchText'])) echo $_SESSION['searchText'];?>"
+        placeholder="Search"
+        aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
 		<div class="row">
 			<!-- inizio sesione stream -->
 			<section class="col-lg-8">
@@ -332,7 +348,7 @@
 	
 	<footer class="bg-light">
 		<div class="container py-3">
-			<p class="text-center mb-0">Il mio blog &copy; 2022</p>
+			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
 		</div>
 	</footer>
 	<script src="script.js"></script>
