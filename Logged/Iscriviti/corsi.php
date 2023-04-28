@@ -12,7 +12,6 @@
 				if (confirm("Sei sicuro di voler eliminare la classe?")) {
                     var url = $(this).data("action");
                     var link = $(this).data("href");
-                    console.log(link);
 
 					$.ajax({
                         url: url,

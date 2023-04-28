@@ -34,7 +34,7 @@
         $materia = null;
     }
 
-    $numIscritti = 0;
+    
     //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
 
 
@@ -67,8 +67,8 @@
     }
     //inserisco i valori nella tabella corso
     $link = $cartella_destinazione. $nome_file_nuovo;
-    $q2 = "INSERT INTO corso VALUES ($1, $2, $3, $4, $5)";
-    $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $numIscritti, $link));
+    $q2 = "INSERT INTO corso VALUES ($1, $2, $3, $4)";
+    $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $link));
     
     //inserisco i valori nella tabella insegna
     $flag = $_SESSION['flag']; //do per scontato che sia un docente
