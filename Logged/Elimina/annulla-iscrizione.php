@@ -3,7 +3,7 @@
     
         $file = $_POST['link'];
         // Elimina le tuple nel database associate alla tabella partecipa
-    
+     
         //Connessione al dbname Scholarnet
         $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
                     user=postgres password=biar") 

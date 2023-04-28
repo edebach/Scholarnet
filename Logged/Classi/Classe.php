@@ -240,10 +240,10 @@
 					<div class="card-body">
 					  <button id="show-form-btn" class="btn btn-primary">Inserisci nuovo annuncio</button>
 					   <form id="annuncio-form" action="./annuncio.php" method="post">
-					   <?php
+					   <?php 
 							$file_name = basename($_SERVER['PHP_SELF']);
 							$value = substr($file_name, -12,-4);
-							echo "console.log($value)";
+							/*echo "console.log($value)";*/
 						?>
 							<input type="hidden" name="classe" id="classe" value="<?php echo $value; ?>">
 						<div class="mb-3">
@@ -325,78 +325,16 @@
 					</footer>
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
-        <div class="slideshow-container">
-          <!-- Full-width slides/quotes -->
-          <div class="mySlides">
-          <h2 class="mb-4">Compiti assegnati</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Compito</th>
-                  <th scope="col">Data di scadenza</th>
-                  <th scope="col">Tempo rimanente</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Compito 1</td>
-                  <td>01/01/2022</td>
-                  <td>1 giorno</td>
-                </tr>
-                <tr>
-                  <td colspan="3">
+        	<div class="slideshow-container">
 
-                    
-                    <p>TESTO </p>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mySlides">
-          <h2 class="mb-4">Compiti assegnati</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Compito</th>
-                  <th scope="col">Data di scadenza</th>
-                  <th scope="col">Tempo rimanente</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Compito 2</td>
-                  <td>01/01/2022</td>
-                  <td>1 giorno</td>
-                </tr>
-                <tr>
-                  <td colspan="3">
-
-                    
-                    <p>TESTO </p>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mySlides">
-            <q>I have not failed. I've just found 10,000 ways that won't work.</q>
-            <p class="author">- Thomas A. Edison</p>
-          </div>
-
+          	<!-- Full-width slides/quotes -->
+			<?php include "./compiti-assegnati.php"?>
+			
           <!-- Next/prev buttons -->
           <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-
-          <!-- Dots/bullets/indicators -->
-          <div class="dot-container">
-          <span class="dot" onclick="currentSlide(1)"></span> 
-          <span class="dot" onclick="currentSlide(2)"></span> 
-          <span class="dot" onclick="currentSlide(3)"></span>
-					</div>
+          
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Codice corso</h5>

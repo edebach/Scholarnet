@@ -4,7 +4,7 @@ if (isset($_POST["elimina_classe"])) {
     // Elimina il file corrente
     $file = $_POST['link'];
     unlink($file);
-
+ 
     // Elimina le tuple nel database associate alla classe
 
     //Connessione al dbname Scholarnet
