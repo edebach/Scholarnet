@@ -15,11 +15,13 @@
   $testo=$_POST['testo'];
   $allegati=$_POST['allegati'];
   $utente=$_SESSION['nome']." ".$_SESSION['cognome'];
+  $data= null;
+  $ora=null;
 
   if (isset($_POST['slider-compito']) && $_POST['slider-compito'] == 'on') {
     $data= $_POST['data'];
     $ora= $_POST['orario'];
-
+  }
     
     $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data, ora)
              VALUES ($1, $2, $3, $4, $5, $6, $7)";
@@ -37,9 +39,5 @@
       header("location: $redirect_link");
 
     }
-  }
-  else{
-    echo"non viene riconosciuto il post";
-  }
     
 ?>
