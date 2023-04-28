@@ -325,7 +325,6 @@
 					</footer>
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
-<<<<<<< HEAD
         <div class="slideshow-container">
           <!-- Full-width slides/quotes -->
           <div class="mySlides">
@@ -356,8 +355,30 @@
           </div>
 
           <div class="mySlides">
-            <q>But man is not made for defeat. A man can be destroyed but not defeated.</q>
-            <p class="author">- Ernest Hemingway</p>
+          <h2 class="mb-4">Compiti assegnati</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Compito</th>
+                  <th scope="col">Data di scadenza</th>
+                  <th scope="col">Tempo rimanente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Compito 2</td>
+                  <td>01/01/2022</td>
+                  <td>1 giorno</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+
+                    
+                    <p>TESTO </p>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div class="mySlides">
@@ -374,38 +395,14 @@
           <div class="dot-container">
           <span class="dot" onclick="currentSlide(1)"></span> 
           <span class="dot" onclick="currentSlide(2)"></span> 
-          <span class="dot" onclick="currentSlide(3)"></span> 
-        </div>
-=======
-				<h2 class="mb-4">Compiti assegnati</h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Compito</th>
-							<th scope="col">Data di scadenza</th>
-							<th scope="col">Tempo rimanente</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Compito 1</td>
-							<td>01/01/2022</td>
-							<td>1 giorno</td>
-						</tr>
-						<tr>
-							<td>Compito 2</td>
-							<td>02/01/2022</td>
-							<td>2 giorni</td>
-						</tr>
-					</tbody>
-				</table>
+          <span class="dot" onclick="currentSlide(3)"></span>
+					</div>
 				<div class="card">
 					<div class="card-body">
 						<h5 class="card-title">Codice corso</h5>
 						<p class="card-text"><?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?></p>
 					</div>
 				</div>
->>>>>>> 72db2e1fad43f4ec655a4dbb4c076ab1980d79ba
 			</aside>
 		</div>
 	</main>
@@ -423,7 +420,7 @@
       display: none;
       padding: 80px;
       text-align: center;
-      height: 680px;
+      height: 500px;
     }
 
     /* Next & previous buttons */
