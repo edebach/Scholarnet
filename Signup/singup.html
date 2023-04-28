@@ -12,9 +12,9 @@
     <!-- Stili per il calendario, link: https://codepen.io/SaadRegal/pen/ezVBJL -->
     <!-- TODO: Questa libreria per la data crea problemi al resto del codice -->
     
-    <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script> -->
     <!-- Per gli stili nel file "Style.cc" (sembra inutile)-->
     <!-- <link rel="stylesheet" href="../style.css"> -->
     <style>
@@ -37,8 +37,8 @@
 
       /* Aggiunge la forma quadrata al contenitore (forma diversa salla pagina di login)*/
       .square {
-        width: 650px;
-        height: 750px;
+        width: 630px;
+        height: 710px;
         background-color: #ffffff;
         border: 1px solid #dee2e6;
         border-radius: 20px;
@@ -50,8 +50,8 @@
 
       /* Aggiunge la larghezza e l'altezza al logo */
       .logo {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
       }
 
     </style>
@@ -98,18 +98,19 @@
           </div>
           <!-- <div class="form-floating" id="data-picker"> -->
           <div class="form-floating" id="datePicker">
-              <input type="text" class= "form-control" name="datePicker" placeholder="Date">
+            <input type="date" class="form-control" id="data"  
+            placeholder="" name="datePicker" required>
+              <!-- <input type="text" class= "form-control" name="datePicker" placeholder="Date"> -->
               <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label>
-              <!-- <input type="date" class="form-control" id="data" name="data" required>
-              <label for="data" class="form-label" >Data</label> -->
+              <!-- <label for="data" class="form-label" >Data</label> -->
           </div>
         </div>
-        <script>
+        <!-- <script>
           $('#datePicker').calendar({
             type: 'date',
             format: 'yyyy-mm-dd'
           });
-          </script>
+          </script> -->
 
           <div class="mb-3 input-group">
             <div class="input-group-text">
