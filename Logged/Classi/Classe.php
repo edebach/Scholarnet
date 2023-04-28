@@ -14,6 +14,7 @@
 		.card {
 		width: 600px;
 		}
+
 	</style>
 
 	<script>
@@ -211,14 +212,39 @@
 				<h2 class="mb-4">Ultimi annunci</h2>
 				<div class="card text-black bg-light mb-3 d-inline-block">
 					<div class="card-body">
-						<span style="font-size: 20px;">
-							<i class="fa-solid fa-book" style="font-size: 20px;"></i>
-							Compito
-						</span>
-						<header class="card-header bg-light text-black">
-							<p class="card-subtitle small" style="text-align: right;">Data di pubblicazione: 01/01/2022</p>
-						</header>
-
+						<div style="display: flex; align-items: center;">
+							<span class="card-text bg-light text-black" style="font-size: 20px;">
+								<i class="fa-solid fa-book" style="font-size: 20px;"></i>
+								Compito
+							</span>
+							<span style="margin-left: auto; font-size: 18px;">
+								Data di pubblicazione: 01/01/2022
+							</span>
+						</div>
+						<hr>
+						<div class="card-body">
+							<p class="card-text">Testo dell'annuncio</p>
+							<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
+						</div>
+						<hr>
+							<p class="card-text" style="margin-left: 18px">Data di consegna: 01/01/2022</p>
+					</div>
+					<footer class="card-footer">
+						<a href="#" class="card-link text-black">Commenti (3)</a>
+					</footer>
+				</div>
+				<div class="card text-black bg-light mb-3 d-inline-block">
+					<div class="card-body">
+						<div class="card-text bg-light text-black" style="display: flex; align-items: center;">
+							<span style="font-size: 20px;">
+							 <i class="fa-sharp fa-solid fa-scroll"></i>
+								Annuncio
+							</span>
+							<span style="margin-left: auto; font-size: 18px;">
+								Data di pubblicazione: 01/01/2022
+							</span>
+						</div>
+						<hr>
 						<div class="card-body">
 							<p class="card-text">Testo dell'annuncio</p>
 							<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
@@ -227,49 +253,158 @@
 					<footer class="card-footer">
 						<a href="#" class="card-link text-black">Commenti (3)</a>
 					</footer>
-				</div>
-				<article class="card mb-4">
-					<header class="card-header bg-light">
-						<h3 class="card-title mb-0"><a href="#">Titolo dell'annuncio</a></h3>
-						<p class="card-subtitle small">Data di pubblicazione: 01/01/2022</p>
-					</header>
-					<div class="card-body">
-						<p class="card-text">Testo dell'annuncio</p>
-						<p class="card-text">Allegati: <a href="#">file1.pdf</a></p>
-					</div>
-					<footer class="card-footer">
-						<a href="#" class="card-link">Commenti (1)</a>
-					</footer>
-				</article>
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
-				<h2 class="mb-4">Compiti assegnati</h2>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Compito</th>
-							<th scope="col">Data di scadenza</th>
-							<th scope="col">Tempo rimanente</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Compito 1</td>
-							<td>01/01/2022</td>
-							<td>1 giorno</td>
-						</tr>
-						<tr>
-							<td>Compito 2</td>
-							<td>02/01/2022</td>
-							<td>2 giorni</td>
-						</tr>
-					</tbody>
-				</table>
+        <div class="slideshow-container">
+          <!-- Full-width slides/quotes -->
+          <div class="mySlides">
+          <h2 class="mb-4">Compiti assegnati</h2>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Compito</th>
+                  <th scope="col">Data di scadenza</th>
+                  <th scope="col">Tempo rimanente</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Compito 1</td>
+                  <td>01/01/2022</td>
+                  <td>1 giorno</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+
+                    
+                    <p>TESTO </p>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mySlides">
+            <q>But man is not made for defeat. A man can be destroyed but not defeated.</q>
+            <p class="author">- Ernest Hemingway</p>
+          </div>
+
+          <div class="mySlides">
+            <q>I have not failed. I've just found 10,000 ways that won't work.</q>
+            <p class="author">- Thomas A. Edison</p>
+          </div>
+
+          <!-- Next/prev buttons -->
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+
+          <!-- Dots/bullets/indicators -->
+          <div class="dot-container">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
+        </div>
 			</aside>
 		</div>
 	</main>
+  <style>
+    * {box-sizing: border-box}
 
-	
+    /* Slideshow container */
+    .slideshow-container {
+      position: relative;
+      background: #f1f1f1f1;
+    }
+
+    /* Slides */
+    .mySlides {
+      display: none;
+      padding: 80px;
+      text-align: center;
+      height: 680px;
+    }
+
+    /* Next & previous buttons */
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -30px;
+      padding: 16px;
+      color: #888;
+      font-weight: bold;
+      font-size: 20px;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+      position: absolute;
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+      color: white;
+    }
+
+    /* The dot/bullet/indicator container */
+    .dot-container {
+        text-align: center;
+        padding: 20px;
+        background: #ddd;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    /* Add a background color to the active dot/circle */
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+</style>
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
 	<footer class="bg-light">
 		<div class="container py-3">
 			<p class="text-center mb-0">Il mio blog &copy; 2022</p>
