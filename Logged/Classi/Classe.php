@@ -280,49 +280,8 @@
 				</article>
 				
 				<h2 class="mb-4">Ultimi annunci</h2>
-				<div class="card text-black bg-light mb-3 d-inline-block">
-					<div class="card-body">
-						<div style="display: flex; align-items: center;">
-							<span class="card-text bg-light text-black" style="font-size: 20px;">
-								<i class="fa-solid fa-book" style="font-size: 20px;"></i>
-								Compito
-							</span>
-							<span style="margin-left: auto; font-size: 18px;">
-								Data di pubblicazione: 01/01/2022
-							</span>
-						</div>
-						<hr>
-						<div class="card-body">
-							<p class="card-text">Testo dell'annuncio</p>
-							<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
-						</div>
-						<hr>
-							<p class="card-text" style="margin-left: 18px">Data di consegna: 01/01/2022</p>
-					</div>
-					<footer class="card-footer">
-						<a href="#" class="card-link text-black">Commenti (3)</a>
-					</footer>
-				</div>
-				<div class="card text-black bg-light mb-3 d-inline-block">
-					<div class="card-body">
-						<div class="card-text bg-light text-black" style="display: flex; align-items: center;">
-							<span style="font-size: 20px;">
-							 <i class="fa-sharp fa-solid fa-scroll"></i>
-								Annuncio
-							</span>
-							<span style="margin-left: auto; font-size: 18px;">
-								Data di pubblicazione: 01/01/2022
-							</span>
-						</div>
-						<hr>
-						<div class="card-body">
-							<p class="card-text">Testo dell'annuncio</p>
-							<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
-						</div>
-					</div>
-					<footer class="card-footer">
-						<a href="#" class="card-link text-black">Commenti (3)</a>
-					</footer>
+				<?php include "./ultimi-annunci.php"; ?>
+				
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
         	<div class="slideshow-container">

@@ -3,7 +3,7 @@
     
         $file = $_POST['link'];
         // Elimina le tuple nel database associate alla tabella partecipa
-     
+    
         //Connessione al dbname Scholarnet
         $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
                     user=postgres password=biar") 
@@ -20,12 +20,6 @@
         //Seconda query che elimina la tupla con il codice_corso nella tabella partecipa
         $q2 = "DELETE FROM partecipa WHERE corso=$1";
         $result2 = pg_query_params($dbconn, $q2, array($codice_corso));
-        if (pg_affected_rows($result2) < 1) {
-            // La query non ha modificato alcuna riga
-            header("Content-Type: application/json");
-            echo json_encode(array("success" => false, "message" => "Errore nella cancellazione dello studente dal corso."));
-            exit;
-        }
 
         
         // Restituisce la risposta in formato JSON
