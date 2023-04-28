@@ -43,7 +43,7 @@ utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
     
 corso(codice(pk), nome, materia, numIscritti, link)
-    inclusione: corso[codice] => insegna[docente]
+    inclusione: corso[codice] => insegna[corso]
     
 insegna(docente(pk), corso(pk))
     f.k.: insegna[docente] => utente[email]
