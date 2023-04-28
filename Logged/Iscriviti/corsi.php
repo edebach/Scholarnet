@@ -8,7 +8,7 @@
 
     <script>
 		$(document).ready(function() {
-			$("#btn-elimina-classe").click(function() {
+			$(".btn-elimina-classe").click(function() {
 				if (confirm("Sei sicuro di voler eliminare la classe?")) {
                     var url = $(this).data("action");
                     var link = $(this).data("href");
@@ -81,7 +81,8 @@
                                 </button>
                                 <ul class='dropdown-menu'>
                                     <li>
-                                    <button class='btn btn-light d-inline-block mx-1' id='btn-elimina-classe' 
+                                    <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                            id='btn-elimina-classe-" . $row1['link'] . "' 
                                             data-action='./Elimina/eliminaclasse.php'  
                                             data-href='". $row1['link']."'>Elimina classe
                                     </button>

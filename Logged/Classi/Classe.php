@@ -148,42 +148,35 @@
 									<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
 									onClick="window.location.href='../IndexLogged.php'">Home</button>
 								</li>
-								<li class="nav-item">
-									<!-- Inserimento pulsante "Elimina classe" -->
-									<!-- <form action="../Elimina/eliminaclasse.php" method="post">
-										<button type="submit" class="btn btn-outline-danger d-inline-block mx-1" id="elimina_classe"
-										name="elimina_classe">Elimina classe</button>
-									</form> -->
-								</li>
 								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
 								<?php
-// Inserimento dell'elenco delle classi
-if (($_SESSION["flag"])=="0") {
-    $email = $_SESSION["email"];
-    $q1 = "SELECT corso.nome, corso.link FROM insegna JOIN corso ON insegna.corso = corso.codice WHERE insegna.docente = $1";
-    $result=pg_query_params($dbconn, $q1, array($_SESSION['email']));
-    $classe = array();
-    $count = 0; // Contatore per tenere traccia dei bottoni nella riga corrente
-    while ($row = pg_fetch_array($result)) {
-        $nome = $row["nome"];
-        $link = $row["link"];
-        if ($count % 2 == 0) {
-            // Inizia una nuova riga
-            echo "<div class='row'>";
-        }
-        echo "<div class='col-sm-6'><a href='$link' class='btn btn-outline-primary d-inline-block mx-1'>$nome</a></div>";
-        $count++;
-        if ($count % 2 == 0) {
-            // Chiudi la riga corrente
-            echo "</div>";
-        }
-    }
-    // Chiudi l'ultima riga se necessario
-    if ($count % 2 != 0) {
-        echo "</div>";
-    }
-}
-?>
+									// Inserimento dell'elenco delle classi
+									if (($_SESSION["flag"])=="0") {
+										$email = $_SESSION["email"];
+										$q1 = "SELECT corso.nome, corso.link FROM insegna JOIN corso ON insegna.corso = corso.codice WHERE insegna.docente = $1";
+										$result=pg_query_params($dbconn, $q1, array($_SESSION['email']));
+										$classe = array();
+										$count = 0; // Contatore per tenere traccia dei bottoni nella riga corrente
+										while ($row = pg_fetch_array($result)) {
+											$nome = $row["nome"];
+											$link = $row["link"];
+											if ($count % 2 == 0) {
+												// Inizia una nuova riga
+												echo "<div class='row'>";
+											}
+											echo "<div class='col-sm-6'><a href='$link' class='btn btn-outline-primary d-inline-block mx-1'>$nome</a></div>";
+											$count++;
+											if ($count % 2 == 0) {
+												// Chiudi la riga corrente
+												echo "</div>";
+											}
+										}
+										// Chiudi l'ultima riga se necessario
+										if ($count % 2 != 0) {
+											echo "</div>";
+										}
+									}
+								?>
 							</ul>
 						</nav>
 					</div>
