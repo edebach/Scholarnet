@@ -21,9 +21,7 @@
 
         $nome = $_SESSION['nome'];
         $cognome = $_SESSION['cognome'];
-        $email = $_SESSION['emailInput'];
         $istituto = $_SESSION['istituto'];
-        $password = $_SESSION['passwordInput'];
         $dataN=$_SESSION['dataN'];
         $sesso=$_SESSION['sesso'];
 
@@ -35,25 +33,43 @@
             where codice=$1";
 
         $result = pg_query_params($dbconn, $q1, array($codCorso));
-
-        //inserisco i valori nella tabella partecipa
-        $email = $_SESSION['email'];
-        
-        $q4 = "INSERT INTO partecipa VALUES($1, $2)";
-        $data2 = pg_query_params($dbconn, $q4, array($email, $codCorso));
-
         if (!($tuple=pg_fetch_array($result, null, PGSQL_ASSOC))) {
             echo "<script>
                     alert('Corso non trovato. Verifica il codice e l\'account, quindi riprova.');
                     window.location.href='../IndexLogged.php';
                 </script>";
         }else{
-            $link = $tuple['link'];
-    
-            echo "<script>
-                window.location.href='$link';
-                </script>";
+        $link = $tuple['link'];
         }
+
+        //inserisco i valori nella tabella partecipa
+        $email = $_SESSION['email'];
+
+        $q2 = "SELECT studente 
+            FROM partecipa 
+            WHERE corso=$1";
+
+    //il risultato della query me lo salvo in un array
+    $result1 = pg_query_params($dbconn, $q2, array($codCorso));
+    
+    //scorro sulle tuple dell'array e verifico se l'email inserita si trova nel mio db
+    if (($tuple=pg_fetch_array($result1, null, PGSQL_ASSOC))) {
+        echo "<script>
+            if (confirm('Risulti già iscritto al corso! Vuoi comunque procedere?')) {
+                window.location.href = '$link'; 
+            } else {
+                window.location.href='../IndexLogged.php'; 
+            }
+        </script>";
+    }
+        
+        $q4 = "INSERT INTO partecipa VALUES($1, $2)";
+        $data2 = pg_query_params($dbconn, $q4, array($email, $codCorso));
+
+        echo "<script>
+            window.location.href='$link';
+            </script>";
+        
     ?>
 </body>
 </html>

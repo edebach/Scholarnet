@@ -40,33 +40,33 @@
     <!--Script elimina_classe-->
     <script>
 		$(document).ready(function() {
-			$(".btn-elimina-classe").click(function() {
-				if (confirm("Sei sicuro di voler eliminare la classe?")) {
-                    var url = $(this).data("action");
-                    var link = $(this).data("href");
+    $(".btn-elimina-classe").click(function() {
+        if (confirm("Sei sicuro di voler eliminare la classe?")) {
+            var url = $(this).data("action");
+            var link = $(this).data("href");
 
-					$.ajax({
-                        url: url,
-                        type: 'post',
-                        data: { elimina_classe: true, link: link },
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data.success) {
-                                alert("Classe eliminata correttamente.");
-                                location.reload(); // Ricarica la pagina
-                            } else {
-                                alert("Errore durante l'eliminazione della classe.");
-                            }
-                        },
-                        error: function(jqXHR, status, error) {
-                            console.log(status + ": " + error);
-                            alert("Errore durante l'eliminazione della classe.");
-                        }
-                    });
-                    
-				}
-			});
-		});
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: { elimina_classe: true, link: link },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        alert("Classe eliminata correttamente.");
+                        location.reload(); // Ricarica la pagina
+                    } else {
+                        console.log(data.message);
+                        alert("Errore durante l'eliminazione della classe.");
+                    }
+                },
+                error: function(jqXHR, status, error) {
+                    console.log(status + ": " + error);
+                    alert("Errore durante l'eliminazione della classe.");
+                }
+            });
+        }
+    });
+});
 	</script>
 
 </head>
