@@ -253,7 +253,6 @@ session_start();
                         <br>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="submit" class="btn btn-primary">Iscriviti</button>
-                            &nbsp;&nbsp;
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
                         </div>
                     </form>
@@ -284,7 +283,6 @@ session_start();
                     <!--TERZA RIGA: Campo bottoni-->
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <button type="submit" class="btn btn-primary">Crea</button>
-                        &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Annulla</button>
                     </div>
                 </form>

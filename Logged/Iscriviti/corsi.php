@@ -6,6 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <!--Script annulla iscrizione-->
+    <script>
+		$(document).ready(function() {
+			$(".btn-annulla-iscrizione").click(function() {
+				if (confirm("Sei sicuro di voler annullare l'iscrizione alla classe?")) {
+                    var url = $(this).data("action");
+                    var link = $(this).data("href");
+					$.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { link: link },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.success) {
+                                alert("Iscrizione annullata correttamente.");
+                                location.reload(); // Ricarica la pagina
+                            } else {
+                                alert("Errore durante l'annullamento dell'iscrizione.");
+                            }
+                        },
+                        error: function(jqXHR, status, error) {
+                            console.log(status + ": " + error);
+                            alert("Errore durante l'annullamento dell'iscrizione.");
+                        }
+                    });
+                    
+				}
+			});
+		});
+	</script>
+
+    <!--Script elimina_classe-->
     <script>
 		$(document).ready(function() {
 			$(".btn-elimina-classe").click(function() {
@@ -21,6 +53,7 @@
                         success: function(data) {
                             if (data.success) {
                                 alert("Classe eliminata correttamente.");
+                                location.reload(); // Ricarica la pagina
                             } else {
                                 alert("Errore durante l'eliminazione della classe.");
                             }
@@ -64,8 +97,11 @@
         //Genera tutte le tuple che il docente insegna ai corsi
         $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
         $result1a = pg_query_params($dbconn, $q1a, array($email));
+        $var=0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+
 
         if($row1=pg_fetch_array($result1a, null, PGSQL_ASSOC)){
+            $var = 1; 
             echo "<div class='row'>";
             do {
                 //Parte l'interfaccia grafica: implementazione delle card corso
@@ -78,7 +114,7 @@
                                 <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                 <i class='bi bi-three-dots-vertical'></i>
                                 </button>
-                                <ul class='dropdown-menu'>
+                                <ul class='dropdown-menu dropdown-menu-end'>
                                     <li>
                                     <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
                                             id='btn-elimina-classe-" . $row1['link'] . "' 
@@ -100,47 +136,55 @@
             
         }
         
+        
         //Genera tutte le tuple che il docente partecipa ai corsi
         $q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
         $result1b = pg_query_params($dbconn, $q1b, array($email));
 
     
         if($row2=pg_fetch_array($result1b, null, PGSQL_ASSOC)){
-
-            //Faccio il doppio ciclo while per evitare che il docente sia iscritto e insegna lo stesso corso
-            while ($row1 = pg_fetch_array($result1a)){
-                while ($row2= pg_fetch_array($result1b)){
-                    if($row1['corso']!=$row2['corso']){
-                        //Parte l'interfaccia grafica: implementazione delle card corso
-                        echo "        
-                        <div class='card' style='width: 18rem;'>
-                            <div class='position-relative'>
-                                <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
-                                <div class='position-absolute top-0 end-0'>
-                                    <div class='dropdown'>
-                                        <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                        <i class='bi bi-three-dots-vertical'></i>
-                                        </button>
-                                        <ul class='dropdown-menu'>
-                                            <li><button class='btn btn-light d-inline-block mx-1' id='btn-annulla-iscrizione'>Annulla iscrizione</button></li>
-                                        </ul>
-                                    </div>
-                                </div>
+            $var=1;
+            echo "<div class='row'>";
+            do {
+                //Parte l'interfaccia grafica: implementazione delle card corso
+                echo "        
+                <div class='card' style='width: 18rem;'>
+                    <div class='position-relative'>
+                        <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                        <div class='position-absolute top-0 end-0'>
+                            <div class='dropdown'>
+                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                <i class='bi bi-three-dots-vertical'></i>
+                                </button>
+                                <ul class='dropdown-menu dropdown-menu-end'>
+                                    <li>
+                                    <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                            id='btn-elimina-classe-" . $row2['link'] . "' 
+                                            data-action='./Elimina/eliminaclasse.php'  
+                                            data-href='". $row2['link']."'>Elimina classe
+                                    </button>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class='card-body'>
-                                <h5 class='card-title'><a href='./Logged/".$row2['link']."'>".$row2['nome']."</a></h5>
-                                <p class='card-text'>".$row2['materia']."</p>
-                            </div>
-                        </div>";
-                    }
-                }
-            }
-
+                        </div>
+                    </div>
+                    <div class='card-body'>
+                        <h5 class='card-title'><a href='./Logged/".$row2['link']."'>".$row2['nome']."</a></h5>
+                        <p class='card-text'>".$row2['materia']."</p>
+                    </div>
+                </div>";
+            
+            } while ($row2 = pg_fetch_array($result1b));
+            
             echo "</div>";
         }
-        else{
+
+        
+        if($var==0){
             echo "<p>NON SEI ISCRITTO A NESSUN CORSO!</p>";
         }
+
+        
         
     }
     //Studente
@@ -163,8 +207,14 @@
                                 <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                 <i class='bi bi-three-dots-vertical'></i>
                                 </button>
-                                <ul class='dropdown-menu'>
-                                    <li><button class='btn btn-light d-inline-block mx-1' id='btn-annulla-iscrizione'>Annulla iscrizione</button></li>
+                                <ul class='dropdown-menu dropdown-menu-end'>
+                                    <li>
+                                    <button class='btn btn-light d-inline-block mx-1 btn-annulla-iscrizione' 
+                                            id='btn-annulla-iscrizione-".$row3['link']."'
+                                            data-action='./Elimina/annulla-iscrizione.php'
+                                            data-href='".$row3['link']."'>
+                                    Annulla iscrizione
+                                    </button></li>
                                 </ul>
                             </div>
                         </div>
