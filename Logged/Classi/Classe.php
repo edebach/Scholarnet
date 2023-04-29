@@ -143,7 +143,7 @@
 					</div>
 					<div class="offcanvas-body">
 						<nav class="navbar navbar-white bg-white">
-							<ul class="navbar-nav d-flex flex-row justify-content-between"> <!-- Aggiunta classi d-flex e flex-row -->
+							<ul class="navbar-nav d-block"> <!-- Aggiunta classi d-flex e flex-row -->
 								<!-- Inserimento pulsante "Home" -->
 								<li class="nav-item">
 									<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
@@ -151,6 +151,79 @@
 								</li>
 								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
 								<?php
+									
+									$email = $_SESSION['email'];
+									//STUDENTE
+									if($_SESSION['flag']=='1'){
+										//Genera tutte le tuple che lo studente partecipa ai corsi
+										$q1 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+										$result1 = pg_query_params($dbconn, $q1, array($email));
+										
+										
+										
+										if($row1=pg_fetch_array($result1, null, PGSQL_ASSOC)){
+											do{
+
+												$path = $row1['link'];
+												$file = './' . basename($path);
+												//Parte il layout
+												echo "	<br>
+														<li class='nav-item'>
+															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
+																	onClick=window.location.href='".$file."'>".$row1['nome']."</button>
+														</li>
+													";
+												
+											}while($row1=pg_fetch_array($result1, null, PGSQL_ASSOC));
+										}
+									}
+									//DOCENTE
+									else{
+
+										//Genera tutte le tuple che il docente insegna ai corsi
+										$q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
+										$result1a = pg_query_params($dbconn, $q1a, array($email));
+										$var=0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+
+										if($row2=pg_fetch_array($result1a, null, PGSQL_ASSOC)){
+
+											do {
+												$path = $row2['link'];
+												$file = './' . basename($path);
+												//Parte il layout
+												echo "	<br>
+														<li class='nav-item'>
+															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
+																	onClick=window.location.href='".$file."'>".$row2['nome']."</button>
+														</li>
+													";
+											}while($row2=pg_fetch_array($result1a, null, PGSQL_ASSOC));
+										}
+
+										//Genera tutte le tuple che il docente partecipa ai corsi
+										$q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+										$result1b = pg_query_params($dbconn, $q1b, array($email));
+
+									
+										if($row3=pg_fetch_array($result1b, null, PGSQL_ASSOC)){
+											
+											do {
+												$path = $row3['link'];
+												$file = './' . basename($path);
+												//Parte il layout
+												echo "	<br>
+														<li class='nav-item'>
+															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
+																	onClick=window.location.href='".$file."'>".$row3['nome']."</button>
+														</li>
+													";
+
+											} while($row3=pg_fetch_array($result1b, null, PGSQL_ASSOC));
+										}
+
+									}
+									
+									/*
 									// Inserimento dell'elenco delle classi
 									$email = $_SESSION["email"];
 									if (($_SESSION["flag"]) == "0") {
@@ -179,7 +252,7 @@
 									// </div>
 									// </li>
 									
-									}
+									}*/
 									?>
 
 							</ul>
