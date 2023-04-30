@@ -10,54 +10,65 @@
     <?php
         $codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
+        
         //Query
         $q = "SELECT * FROM compito WHERE classe=$1";
         $result = pg_query_params($dbconn, $q, array($codice_corso));
 
         if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
             do{
-                echo "
-                    <div class='mySlides'>
-                        <h2 class='mb-4'>Compiti assegnati</h2>
-                        <table class='table'>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>Compito</th>
-                                    <th scope='col'>Data di scadenza</th>
-                                    <th scope='col'>Tempo rimanente</th>
-                                </tr>
-                            </thead>
-                            <tbody>";
+                //Visualizza solamente i compiti assegnati
+                if(!(empty($row['data']))){
+                    echo "
+                        <div class='mySlides'>
+                            <h2 class='mb-4'>Compiti assegnati</h2>
+                            <table class='table'>
+                                <thead>
+                                    <tr>
+                                        <th scope='col'>Compito</th>
+                                        <th scope='col'>Data di scadenza</th>
+                                        <th scope='col'>Tempo rimanente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
 
-                                //impostiamo la data di scadenza del compito
-                                $data_scadenza = strtotime($row['data']);
+                                    //impostiamo la data di scadenza del compito
+                                    $data_scadenza = strtotime($row['data']);
 
-                                //impostiamo la data attuale
-                                $data_attuale = time();
+                                    //impostiamo la data attuale
+                                    $data_attuale = time();
 
-                                //calcoliamo il numero di giorni rimanenti
-                                $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
-                                $giorni_restanti+=1;
-                    echo            "<tr>
-                                    <td>".$row['titolo']."</td>
-                                    <td>".$row['data']."</td>";
+                                    //calcoliamo il numero di giorni rimanenti
+                                    $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
+                                    $giorni_restanti+=1;
+                        echo            "<tr>
+                                        <td>".$row['titolo']."</td>
+                                        <td>".$row['data']."</td>";
 
-                                    if($giorni_restanti==1){
-                                        echo "<td>".$giorni_restanti." giorno</td>";
-                                    }else{
-                                        echo "<td>".$giorni_restanti." giorni</td>";
-                                    }
-                                    
-                      echo         "</tr>
-                                <tr>
-                                    <td colspan='3'>
-                                        <p>".$row['testo']."</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                ";
+                                        if($giorni_restanti==1){
+                                            echo "<td>".$giorni_restanti." giorno</td>";
+                                        }else{
+                                            echo "<td>".$giorni_restanti." giorni</td>";
+                                        }
+                                        
+                        echo         "</tr>
+                                    <tr>
+                                        <td colspan='3'>
+                                            <p>".$row['testo']."</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ";
+                }
+                else{
+                    echo "
+                        <div class='mySlides'>
+                            <h2 class='mb-4'>Compiti assegnati</h2>
+                            <p>Non ci sono compiti assegnati</p>
+                        </div>";
+                }
             } while($row=pg_fetch_array($result, null, PGSQL_ASSOC));
         }
         else{
