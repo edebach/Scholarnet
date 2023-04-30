@@ -96,12 +96,12 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                 <div>
-                <button type="button" class="btn btn-link p-0" id="edit-password-btn">Modifica passsword</button>
+                <button type="button" class="btn btn-link p-0 btn-sm" id="edit-password-btn">Modifica password</button>
                 </div>
                 <div>
-                  <button type="button" class="btn btn-primary me-2" id="edit-profile-btn">Modifica profilo</button>
-                  <button type="button" class="btn btn-success d-none" id="save-profile-btn">Salva modifiche</button>
-                  <button type="button" class="btn btn-secondary d-none" id="cancel-profile-btn">Annulla modifiche</button>
+                  <button type="button" class="btn btn-primary btn-sm me-2" id="edit-profile-btn">Modifica profilo</button>
+                  <button type="button" class="btn btn-success btn-sm d-none" id="save-profile-btn">Salva modifiche</button>
+                  <button type="button" class="btn btn-secondary btn-sm d-none" id="cancel-profile-btn">Annulla modifiche</button>
                 </div>
                 <!-- Modal -->
                 <!-- TODO: I pulsanti chiudi finestra e annulla non funzionano -->
@@ -131,7 +131,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" >Annulla</button>
-                                <button type="submit" class="btn btn-primary" id="save-password-btn">Salva</button>
+                                <button type="submit" class="btn btn-primary " id="save-password-btn">Salva</button>
                             </div>
                         </form>
                     </div>

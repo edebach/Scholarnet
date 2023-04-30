@@ -116,11 +116,13 @@
                                 </button>
                                 <ul class='dropdown-menu dropdown-menu-end'>
                                     <li>
-                                    <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
-                                            id='btn-elimina-classe-" . $row1['link'] . "' 
-                                            data-action='./Elimina/eliminaclasse.php'  
-                                            data-href='". $row1['link']."'>Elimina classe
-                                    </button>
+                                        <div class='text-center'>
+                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                                    id='btn-elimina-classe-" . $row1['link'] . "' 
+                                                    data-action='./Elimina/eliminaclasse.php'  
+                                                    data-href='". $row1['link']."'>Elimina classe
+                                            </button>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -158,11 +160,13 @@
                                 </button>
                                 <ul class='dropdown-menu dropdown-menu-end'>
                                     <li>
-                                    <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
-                                            id='btn-elimina-classe-" . $row2['link'] . "' 
-                                            data-action='./Elimina/eliminaclasse.php'  
-                                            data-href='". $row2['link']."'>Elimina classe
-                                    </button>
+                                        <div class='text-center'>
+                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                                    id='btn-elimina-classe-" . $row2['link'] . "' 
+                                                    data-action='./Elimina/eliminaclasse.php'  
+                                                    data-href='". $row2['link']."'>Elimina classe
+                                            </button>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -209,12 +213,15 @@
                                 </button>
                                 <ul class='dropdown-menu dropdown-menu-end'>
                                     <li>
-                                    <button class='btn btn-light d-inline-block mx-1 btn-annulla-iscrizione' 
-                                            id='btn-annulla-iscrizione-".$row3['link']."'
-                                            data-action='./Elimina/annulla-iscrizione.php'
-                                            data-href='".$row3['link']."'>
-                                    Annulla iscrizione
-                                    </button></li>
+                                        <div class='text-center'>
+                                            <button class='btn btn-light d-inline-block mx-1 btn-annulla-iscrizione' 
+                                                    id='btn-annulla-iscrizione-".$row3['link']."'
+                                                    data-action='./Elimina/annulla-iscrizione.php'
+                                                    data-href='".$row3['link']."'>
+                                                    Annulla iscrizione
+                                            </button>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
