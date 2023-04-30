@@ -150,3 +150,14 @@ login.html
 accesso.php
 signup.html
 signup2.php
+
+**Cose Da Fare Rimaste**
+1) Popup modifica password non si chiude (MARCO)
+2) Titolo compito: (FABIO)
+    -aggiungere il pattern per un limite massimo di caratteri 
+    -allargare la finestra dell'aside nello stream dei compiti assegnati
+    -tenere la data di scadenza centrale nella sezione compiti
+3) Barra di ricerca, spostare il pulsante e farla funzionare (FABIO/MARCO)
+4)aggiungere la possibilità di cancellare/editare i post solo se sei professore (EMA)
+5)Togliere la possibilità agli studenti di inserire un compito (EMA)
+6)Aggiungere nome di chi fa il post (EMA)
