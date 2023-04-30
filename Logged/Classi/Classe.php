@@ -80,23 +80,7 @@
 			});
 		});
 	</script>
-	<!-- <script>
-		$(document).ready(function() {
-			$("#btn-elimina-classe").click(function() {
-				if (confirm("Sei sicuro di voler eliminare la classe?")) {
-					var url = $(this).data("action");
-					$.post(url, { elimina_classe: true }, function(data) {
-						if (data.success) {
-							alert("Classe eliminata correttamente.");
-							window.location.href = "../IndexLogged.php";
-						} else {
-							alert("Errore durante l'eliminazione della classe.");
-						}
-					}, "json");
-				}
-			});
-		});
-	</script> -->
+
 	<style>
 		.navbar-brand {
 		position: absolute;
@@ -105,6 +89,61 @@
 		text-align: center;
 		}
 		
+	</style>
+	<script>
+		function copy() {
+			// seleziona l'elemento che contiene il testo da copiare
+			const paragrafo = document.querySelector('.card-text');
+
+			// crea un nuovo elemento di tipo textarea
+			const textarea = document.createElement('textarea');
+
+			// imposta il valore del textarea al testo del paragrafo
+			textarea.value = paragrafo.textContent;
+
+			// aggiungi il textarea alla pagina, ma fuori dalla visualizzazione
+			textarea.setAttribute('readonly', '');
+			textarea.style.position = 'absolute';
+			textarea.style.left = '-9999px';
+			document.body.appendChild(textarea);
+
+			// seleziona il contenuto del textarea
+			textarea.select();
+
+			// copia il contenuto selezionato negli appunti
+			document.execCommand('copy');
+
+			// rimuovi il textarea dalla pagina
+			document.body.removeChild(textarea);
+
+			alert('Testo copiato negli appunti!');
+		}
+
+	</script>
+
+	<script>
+		function toggleFieldDataOra() {
+			var slider = document.getElementById("slider-compito");
+			var dataInput = document.getElementById("data");
+			var oraInput = document.getElementById("orario");
+
+			if (slider.checked) {
+				dataInput.setAttribute("required", "");
+				oraInput.setAttribute("value", "23:59");
+			} else {
+				dataInput.removeAttribute("required");
+				oraInput.removeAttribute("value");
+			}
+		}
+	</script>
+
+	<style>
+		#codiceCliccabile:hover {
+			
+			color: blue;
+        	position: relative
+
+		}
 	</style>
 
 </head>
@@ -334,17 +373,17 @@
 						</div>
 						<div>
 						<label class="switch">
-								<input type="checkbox" id="slider-compito" name="slider-compito">
+								<input type="checkbox" id="slider-compito" name="slider-compito" onchange="toggleFieldDataOra()">
 								<span class="slider"></span>
 							</label> Compito
 						</div>
 						<div class="mb-3" id="data-div">
 							<label for="data" class="form-label">Data</label>
-							<input type="date" class="form-control" id="data" name="data" required>
+							<input type="date" class="form-control" id="data" name="data">
 						</div>
 						<div class="mb-3" id="ora-div">
 							<label for="orario" class="form-label">Orario</label>
-							<input type="time" class="form-control" id="orario" name="orario" required>
+							<input type="time" class="form-control" id="orario" name="orario" value="">
 						</div>
 						<button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
 						<button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
@@ -367,10 +406,10 @@
           <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
           
-				<div class="card">
+				<div class="card" id="codicecorsoCard">
 					<div class="card-body">
 						<h5 class="card-title">Codice corso</h5>
-						<p class="card-text"><?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?></p>
+						<p class="card-text" title="copia" id="codiceCliccabile" onclick="copy();"><?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?></p>
 					</div>
 				</div>
 			</aside>
