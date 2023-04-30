@@ -23,7 +23,6 @@
 	
 
 	<style>
-
 		.card {
 		width: 600px;
 		}
@@ -485,6 +484,81 @@
 				</div>
 			</aside>
 		</div>
+	</main>
+
+	<main class="container my-4" id="compiti-section">
+		<?php
+			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
+			
+			//Query
+			$q = "SELECT * FROM compito WHERE classe=$1 AND data is not null";
+			$result = pg_query_params($dbconn, $q, array($codice_corso));
+
+			if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
+				echo "<div class='accordion accordion-flush' id='accordionFlushExample'>";
+
+				$i = 0;
+
+				do{
+					$i++;
+        			$var = "flush-collapse-".$i;
+					echo   
+						"<div class='accordion-item'>
+							<h2 class='accordion-header'>
+								<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='false' aria-controls='".$var."'>
+								<span class='card-text bg-light text-black' style='font-size: 20px;'>
+									<i class='fa-solid fa-book' style='font-size: 20px;'></i>"
+									.$row['titolo'].
+								"</span>";
+
+								//impostiamo la data di scadenza del compito
+								$data_scadenza = strtotime($row['data']);
+
+								//impostiamo la data attuale
+								$data_attuale = time();
+
+								//calcoliamo il numero di giorni rimanenti
+								$giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
+								$giorni_restanti+=1;
+								if($giorni_restanti<0) {
+									echo "
+										<span style='margin-left: auto; font-size: 14px;'>
+											Tempo scaduto
+										</span>";
+								}
+								else if($giorni_restanti==1){
+									echo 
+									"<span style='margin-left: auto; font-size: 14px;'>"
+											.$giorni_restanti." giorno
+										</span>";
+								}
+								else{
+									echo 
+									"<span style='margin-left: auto; font-size: 14px;'>"
+											.$giorni_restanti." giorni
+										</span>";
+								}
+								echo      
+									"</button>
+									</h2>
+									<div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
+										<div class='accordion-body'>
+											<p>".$row['testo']."</p>
+											<p>ALLEGATI</p>
+										</div>
+									</div>
+						</div> ";
+
+				} while($row=pg_fetch_array($result, null, PGSQL_ASSOC));
+
+				echo "</div>";
+			}
+			else{
+				echo "<p>Non ci sono compiti assegnati";
+			}
+		?>
+								
+								
 	</main>
 
 	<main class="container my-4" id="persone-section">
