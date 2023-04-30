@@ -13,18 +13,99 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
 
+	<script src="script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<!-- Carica Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	
+
 	<style>
+
 		.card {
 		width: 600px;
 		}
 
-	</style>
+		* {box-sizing: border-box}
 
+		/* Slideshow container */
+		.slideshow-container {
+		position: relative;
+		background: #f1f1f1f1;
+		}
+
+		/* Slides */
+		.mySlides {
+		display: none;
+		padding: 80px;
+		text-align: center;
+		height: 500px;
+		}
+
+		/* Next & previous buttons */
+		.prev, .next {
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		width: auto;
+		margin-top: -30px;
+		padding: 16px;
+		color: #888;
+		font-weight: bold;
+		font-size: 20px;
+		border-radius: 0 3px 3px 0;
+		user-select: none;
+		}
+
+		/* Position the "next button" to the right */
+		.next {
+		position: absolute;
+		right: 0;
+		border-radius: 3px 0 0 3px;
+		}
+
+		/* On hover, add a black background color with a little bit see-through */
+		.prev:hover, .next:hover {
+		background-color: rgba(0,0,0,0.8);
+		color: white;
+		}
+
+		/* The dot/bullet/indicator container */
+		.dot-container {
+			text-align: center;
+			padding: 20px;
+			background: #ddd;
+		}
+
+		/* The dots/bullets/indicators */
+		.dot {
+		cursor: pointer;
+		height: 15px;
+		width: 15px;
+		margin: 0 2px;
+		background-color: #bbb;
+		border-radius: 50%;
+		display: inline-block;
+		transition: background-color 0.6s ease;
+		}
+
+		/* Add a background color to the active dot/circle */
+		.active, .dot:hover {
+		background-color: #717171;
+		}
+
+		header .container-fluid {
+		padding-right: 0;
+		padding-left: 0;
+		}
+
+		header .container-fluid .row {
+			margin-right: 0;
+			margin-left: 0;
+		}
+	</style>
 
 	<script>
 			$(document).ready(function() {
@@ -317,17 +398,7 @@
 		</nav>
 	</header> 
 
-<style>
-  header .container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-  }
 
-  header .container-fluid .row {
-    margin-right: 0;
-    margin-left: 0;
-  }
-</style>
 
 	<main class="container my-4" id="stream-section">
 	<div class="mx-auto">
@@ -415,75 +486,61 @@
 			</aside>
 		</div>
 	</main>
-  <style>
-    * {box-sizing: border-box}
 
-    /* Slideshow container */
-    .slideshow-container {
-      position: relative;
-      background: #f1f1f1f1;
-    }
+	<main class="container my-4" id="persone-section">
+		<h1 class="display-6"><strong>Professori</strong></h1>
+		<hr color="red">
+		<?php
 
-    /* Slides */
-    .mySlides {
-      display: none;
-      padding: 80px;
-      text-align: center;
-      height: 500px;
-    }
+			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-    /* Next & previous buttons */
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      margin-top: -30px;
-      padding: 16px;
-      color: #888;
-      font-weight: bold;
-      font-size: 20px;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-    }
+			//Visualizza la lista dei professori che insegnano il corso
+			$q1 = "SELECT u.nome, u.cognome 
+					FROM corso c JOIN insegna i ON c.codice=i.corso JOIN utente u ON u.email=i.docente 
+					WHERE c.codice=$1";
 
-    /* Position the "next button" to the right */
-    .next {
-      position: absolute;
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
+			$result1 = pg_query_params($dbconn, $q1, array($codice_corso));
 
-    /* On hover, add a black background color with a little bit see-through */
-    .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.8);
-      color: white;
-    }
+			if($row1=pg_fetch_array($result1, null, PGSQL_ASSOC)){
+				echo "<ul class='list-group list-group-flush'>";
+				do{
+					echo "<li class='list-group-item'>".$row1['nome']." ".$row1['cognome']."</li>";
+				} while($row1=pg_fetch_array($result1, null, PGSQL_ASSOC));
+				echo "</ul>";
+			}
+			else {
+				echo "<p>Nessun partecipante.</p>";
+			}
 
-    /* The dot/bullet/indicator container */
-    .dot-container {
-        text-align: center;
-        padding: 20px;
-        background: #ddd;
-    }
+		?>
+		<br>
 
-    /* The dots/bullets/indicators */
-    .dot {
-      cursor: pointer;
-      height: 15px;
-      width: 15px;
-      margin: 0 2px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
+		<h1 class="display-6"><strong>Compagni di classe</strong></h1>
+		<hr>
+		<?php
+			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-    /* Add a background color to the active dot/circle */
-    .active, .dot:hover {
-      background-color: #717171;
-    }
-</style>
+			//Visualizza la lista dei studenti che partecipano al corso
+			$q2 = "SELECT u.nome, u.cognome 
+					FROM corso c JOIN partecipa p ON c.codice=p.corso JOIN utente u ON u.email=p.studente 
+					WHERE c.codice=$1";
+
+			$result2 = pg_query_params($dbconn, $q2, array($codice_corso));
+
+			if($row2=pg_fetch_array($result2, null, PGSQL_ASSOC)){
+				echo "<ul class='list-group list-group-flush'>";
+				do{
+					echo "<li class='list-group-item'>".$row2['nome']." ".$row2['cognome']."</li>";
+				} while($row2=pg_fetch_array($result2, null, PGSQL_ASSOC));
+				echo "</ul>";
+			}
+			else {
+				echo "<p>Nessun partecipante.</p>";
+			}
+		?>
+
+	</main>
+  
 <script>
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -517,7 +574,6 @@ function showSlides(n) {
 			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
 		</div>
 	</footer>
-	<script src="script.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>
