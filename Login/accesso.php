@@ -58,6 +58,7 @@
                     $_SESSION['istituto'] = $tuple['istituto'];
                     $_SESSION['sesso'] = $tuple['sesso'];
                     $_SESSION['dataN'] = $tuple['dataN'];
+                    $_SESSION['telefono']=$tuple['telefono'];
 
                     if ($tuple['flagStudente']=="t"){
                         $_SESSION['flag'] = "1";

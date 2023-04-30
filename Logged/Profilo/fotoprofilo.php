@@ -11,7 +11,7 @@
     $flagStudente = $row['flag'];
     $sesso=$_SESSION['sesso'];
     if($sesso=="Maschio"){
-        if($flagStudente!=""){
+        if($flagStudente=="1"){
             echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='./Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
 
         }
@@ -22,7 +22,7 @@
     }
     else{
         if($sesso=="Femmina"){
-            if($flagStudente!=""){
+            if($flagStudente=="1"){
 
                 echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='./Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
 
