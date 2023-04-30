@@ -12,14 +12,12 @@
 
         
         //Query
-        $q = "SELECT * FROM compito WHERE classe=$1";
+        $q = "SELECT * FROM compito WHERE classe=$1 AND data is not null";
         $result = pg_query_params($dbconn, $q, array($codice_corso));
 
         if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
             do{
-                //Visualizza solamente i compiti assegnati
-                if(!(empty($row['data']))){
-                    echo "
+                echo "
                         <div class='mySlides'>
                             <h2 class='mb-4'>Compiti assegnati</h2>
                             <table class='table'>
@@ -41,11 +39,14 @@
                                     //calcoliamo il numero di giorni rimanenti
                                     $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
                                     $giorni_restanti+=1;
+
                         echo            "<tr>
                                         <td>".$row['titolo']."</td>
                                         <td>".$row['data']."</td>";
-
-                                        if($giorni_restanti==1){
+                                        if($giorni_restanti<0){
+                                            echo "<td>Tempo scaduto</td>";
+                                        }
+                                        else if($giorni_restanti==1){
                                             echo "<td>".$giorni_restanti." giorno</td>";
                                         }else{
                                             echo "<td>".$giorni_restanti." giorni</td>";
@@ -61,14 +62,7 @@
                             </table>
                         </div>
                     ";
-                }
-                else{
-                    echo "
-                        <div class='mySlides'>
-                            <h2 class='mb-4'>Compiti assegnati</h2>
-                            <p>Non ci sono compiti assegnati</p>
-                        </div>";
-                }
+                
             } while($row=pg_fetch_array($result, null, PGSQL_ASSOC));
         }
         else{
