@@ -28,6 +28,7 @@
     $dataN=$_SESSION['dataN'];
     $sesso=$_SESSION['sesso'];
     $flag=$_SESSION['flag'];
+    $telefono="";
 
     $_SESSION['email'] = $_POST['emailInput'];
     //query che restituisce tutte le tuple della tabella utente con l'email inserita nella form signup.php

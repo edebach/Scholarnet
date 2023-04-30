@@ -11,7 +11,7 @@ $row = pg_fetch_array($result, null, PGSQL_ASSOC);
 $flagStudente = $row['flag'];
 
 
-if($flagStudente!=""){
+if($flagStudente=="1"){
     echo "<p class='text-center'>Studente</p>";
 }
 else{
