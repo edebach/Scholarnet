@@ -2,10 +2,21 @@
 <html lang="it">
 <head>
 	<?php
-	session_start();
-	$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-              user=postgres password=biar") 
-              or die('Could not connect: ' . pg_last_error());
+		session_start();
+		$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+				user=postgres password=biar") 
+				or die('Could not connect: ' . pg_last_error());
+
+		$file_name = basename($_SERVER['PHP_SELF']);
+		$codice_corso = substr($file_name, -12,-4);
+
+		$q1="SELECT * FROM corso where codice=$1";
+		$result = pg_query_params($dbconn, $q1, array($codice_corso));
+		$row = pg_fetch_array($result);
+		$nome=$row['nome'];
+		$materia=$row['materia'];
+		$link=$row['link'];
+		
 	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +36,10 @@
 	<style>
 		.card {
 		width: 600px;
+		}
+		#codicecorsoCard{
+			width: 180px;
+			margin-top: 4px;
 		}
 
 		* {box-sizing: border-box}
@@ -173,7 +188,7 @@
 	<script>
 		function copy() {
 			// seleziona l'elemento che contiene il testo da copiare
-			const paragrafo = document.querySelector('.card-text');
+			const paragrafo = document.querySelector('#codiceCliccabile');
 
 			// crea un nuovo elemento di tipo textarea
 			const textarea = document.createElement('textarea');
@@ -238,7 +253,7 @@
 						<span class="visually-hidden">Toggle navigation</span>
 					</button>
 				
-					<a class="navbar-brand text-center" href="#">Nome del corso</a>
+					<a class="navbar-brand text-center" href="#"><?php echo $nome ?></a>
 				</div>
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
@@ -422,12 +437,7 @@
 					<div class="card-body">
 					  <button id="show-form-btn" class="btn btn-primary">Inserisci nuovo annuncio</button>
 					   <form id="annuncio-form" action="./annuncio.php" method="post">
-					   <?php 
-							$file_name = basename($_SERVER['PHP_SELF']);
-							$value = substr($file_name, -12,-4);
-							/*echo "console.log($value)";*/
-						?>
-							<input type="hidden" name="classe" id="classe" value="<?php echo $value; ?>">
+							<input type="hidden" name="classe" id="classe"value="<?php echo $codice_corso; ?>">
 						<div class="mb-3">
 						  <label for="titolo" class="form-label">Titolo</label>
 						  <input type="text" class="form-control" id="titolo" name="titolo" required>
@@ -479,7 +489,7 @@
 				<div class="card" id="codicecorsoCard">
 					<div class="card-body">
 						<h5 class="card-title">Codice corso</h5>
-						<p class="card-text" title="copia" id="codiceCliccabile" onclick="copy();"><?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?></p>
+						<p class="card-text" title="copia" id="codiceCliccabile" onclick="copy();"><?php echo $codice_corso;?></p>
 					</div>
 				</div>
 			</aside>
@@ -487,9 +497,7 @@
 	</main>
 
 	<main class="container my-4" id="compiti-section">
-		<?php
-			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
-			
+		<?php		
 			//Query
 			$q = "SELECT * FROM compito WHERE classe=$1 AND data is not null";
 			$result = pg_query_params($dbconn, $q, array($codice_corso));

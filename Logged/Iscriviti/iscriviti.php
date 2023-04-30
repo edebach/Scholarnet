@@ -24,6 +24,7 @@
         $istituto = $_SESSION['istituto'];
         $dataN=$_SESSION['dataN'];
         $sesso=$_SESSION['sesso'];
+        $studente=$_SESSION['flag'];
 
         $codCorso = $_POST['codiceCorso'];
 
@@ -47,10 +48,10 @@
 
         $q2 = "SELECT studente 
             FROM partecipa 
-            WHERE corso=$1";
+            WHERE corso=$1 AND studente=$2";
 
     //il risultato della query me lo salvo in un array
-    $result1 = pg_query_params($dbconn, $q2, array($codCorso));
+    $result1 = pg_query_params($dbconn, $q2, array($codCorso,$email));
     
     //scorro sulle tuple dell'array e verifico se l'email inserita si trova nel mio db
     if (($tuple=pg_fetch_array($result1, null, PGSQL_ASSOC))) {
@@ -62,13 +63,37 @@
             }
         </script>";
     }
+    $q3 = "SELECT docente 
+    FROM insegna 
+    WHERE corso=$1 AND docente=$2";
+
+    //il risultato della query me lo salvo in un array
+    $result2 = pg_query_params($dbconn, $q3, array($codCorso,$email));
+
+    //scorro sulle tuple dell'array e verifico se l'email inserita si trova nel mio db
+    if (($tuple=pg_fetch_array($result2, null, PGSQL_ASSOC))) {
+    echo "<script>
+        if (confirm('Risulti già un docente in questo corso! Vuoi comunque procedere?')) {
+            window.location.href = '$link'; 
+        } else {
+            window.location.href='../IndexLogged.php'; 
+        }
+    </script>";
+    }
+    if($studente){
         
-        $q4 = "INSERT INTO partecipa VALUES($1, $2)";
+        $q4 = "INSERT INTO partecipa(studente,corso) VALUES($1, $2)";
         $data2 = pg_query_params($dbconn, $q4, array($email, $codCorso));
+    }
+    else{
+        $q4 = "INSERT INTO insegna(docente,corso) VALUES($1, $2)";
+        $data2 = pg_query_params($dbconn, $q4, array($email, $codCorso));
+    }
 
         echo "<script>
             window.location.href='$link';
             </script>";
+
         
     ?>
 </body>
