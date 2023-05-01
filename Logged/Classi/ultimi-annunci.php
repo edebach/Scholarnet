@@ -61,7 +61,7 @@
 		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
 		//Query
-		$q = "SELECT * FROM compito WHERE classe=$1";
+		$q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
 		$result = pg_query_params($dbconn, $q, array($codice_corso));
 
 		if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
