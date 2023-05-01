@@ -146,7 +146,7 @@
 									".$row['titolo']."-".$utente."
 								</span>
 								<span style='margin-left: auto; font-size: 18px;'>
-									Data di pubblicazione: ".date('d/m/Y', time())."
+									Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."
 								</span>
 							</div>
 							<hr>
