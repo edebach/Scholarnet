@@ -15,17 +15,19 @@
   $testo=$_POST['testo'];
   $allegati=$_POST['allegati'];
   $utente=$_SESSION['nome']." ".$_SESSION['cognome'];
-  $data= null;
+  $data_scadenza= null;
   $ora=null;
 
   if (isset($_POST['slider-compito']) && $_POST['slider-compito'] == 'on') {
-    $data= $_POST['data'];
+    $data_scadenza= $_POST['data_scadenza'];
     $ora= $_POST['orario'];
   }
-    
-    $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data, ora)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)";
-    $res=pg_query_params($dbconn, $q1, array($classe,$titolo,$testo,$allegati,$utente,$data,$ora));
+  
+  $pubblicazione = date('d/m/Y', time());
+
+    $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data_scadenza, ora, pubblicazione)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
+    $res=pg_query_params($dbconn, $q1, array($classe,$titolo,$testo,$allegati,$utente,$data_scadenza,$ora,$pubblicazione));
   if(!$res)
       echo"errore di inserimento del post";
     else {
