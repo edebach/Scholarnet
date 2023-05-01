@@ -18,8 +18,10 @@
     $query1 = "SELECT * FROM utente WHERE email = $1 AND pass = $2";
     $result = pg_query_params($dbconn, $query1, array($email,$vecchia_password));
     if (pg_num_rows($result) == 0) {
-        echo "<script> alert('La vecchia password non è corretta.')</script>";
-        header('Location: ../Profilo.php');
+        echo "<script> 
+                alert('La vecchia password non è corretta.');
+                window.location.href='../Profilo.php';
+                </script>";
         exit();
     }
 
@@ -27,8 +29,10 @@
     $nuova_password = $_POST['nuova-password'];
     $conferma_password = $_POST['conferma-password'];
     if ($nuova_password !== $conferma_password) {
-        echo "<script> alert('Le password non coincidono.')</script>";
-        header('Location: ../Profilo.php'); 
+        echo "<script> 
+                alert('Le password non coincidono.');
+                window.location.href='../Profilo.php';
+            </script>";
         exit();
     }
 
@@ -36,13 +40,18 @@
     $query2 = "UPDATE utente SET pass = $1 WHERE email = $2";
     $result = pg_query_params($dbconn, $query2, array($nuova_password,$email));
     if (!$result) {
-        echo "<script> alert('Si è verificato un errore nell\'aggiornamento della password.')</script>";
-        header('Location: ../Profilo.php');
+        echo "<script> 
+            alert('Si è verificato un errore nell\'aggiornamento della password.');
+            window.location.href='../Profilo.php';
+            </script>";
+       
         exit();
     }
 
     // La password è stata aggiornata con successo
-    echo "<script> alert('La password è stata aggiornata con successo.')</script>";
-    header('Location: ../Profilo.php'); // Redirezionamento alla pagina del profilo
+    echo "<script> 
+        alert('La password è stata aggiornata con successo.');
+        window.location.href='../Profilo.php';
+        </script>";
     exit();
 ?>

@@ -219,7 +219,7 @@
 	<script>
 		function toggleFieldDataOra() {
 			var slider = document.getElementById("slider-compito");
-			var dataInput = document.getElementById("data");
+			var dataInput = document.getElementById("data_scadenza");
 			var oraInput = document.getElementById("orario");
 
 			if (slider.checked) {
@@ -458,8 +458,8 @@
 							</label> Compito
 						</div>
 						<div class="mb-3" id="data-div">
-							<label for="data" class="form-label">Data</label>
-							<input type="date" class="form-control" id="data" name="data">
+							<label for="data_scadenza" class="form-label">Data</label>
+							<input type="date" class="form-control" id="data_scadenza" name="data_scadenza">
 						</div>
 						<div class="mb-3" id="ora-div">
 							<label for="orario" class="form-label">Orario</label>
@@ -499,7 +499,7 @@
 	<main class="container my-4" id="compiti-section">
 		<?php		
 			//Query
-			$q = "SELECT * FROM compito WHERE classe=$1 AND data is not null";
+			$q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null";
 			$result = pg_query_params($dbconn, $q, array($codice_corso));
 
 			if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
@@ -520,7 +520,7 @@
 								"</span>";
 
 								//impostiamo la data di scadenza del compito
-								$data_scadenza = strtotime($row['data']);
+								$data_scadenza = strtotime($row['data_scadenza']);
 
 								//impostiamo la data attuale
 								$data_attuale = time();

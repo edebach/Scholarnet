@@ -23,7 +23,12 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                 }
         </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
+    
+    <!-- Librerie di modal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
+  
      <!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -34,7 +39,8 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
         right: .2cm;
       }
     </style>
-      <script>
+    
+      <script type="text/javascript" language="javascript">
         function confrontaPassword() {
         var nuovaPassword = document.getElementById("nuova-password").value;
         var confermaPassword = document.getElementById("conferma-password").value;
@@ -45,6 +51,69 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
         return true;
       }
       </script>
+
+      <script>
+        $(document).ready(function() {
+          var passwordModal = new bootstrap.Modal(document.getElementById('password-modal'));
+          $('#edit-password-btn').click(function() {
+            passwordModal.show();
+          });
+        });
+        $(document).ready(function() {
+          // Gestisci il clic sul pulsante "Modifica profilo"
+          $('#edit-profile-btn').on('click', function() {
+            $('.editable').addClass('d-none');
+            $('.form-control').removeClass('d-none');
+            $('#edit-profile-btn').addClass('d-none');
+            $('#save-profile-btn').removeClass('d-none');
+            $('#cancel-profile-btn').removeClass('d-none');
+          });
+          $('#cancel-profile-btn').on('click', function() {
+            // Ripristina i valori precedenti di email e telefono
+            // $("#email-input").val($("#email").text());
+            $("#phone-input").val($("#phone").text());
+            // Nascondi il pulsante "Salva modifiche" e mostra il pulsante "Modifica profilo"
+            $('.editable').removeClass('d-none');
+            $('.form-control').addClass('d-none');
+            $("#save-profile-btn").addClass("d-none");
+            $("#edit-profile-btn").removeClass("d-none");
+            // Nascondi il pulsante "Annulla modifiche"
+            $("#cancel-profile-btn").addClass("d-none");
+          });
+
+          // Gestisci il clic sul pulsante "Salva modifiche"
+          $('#save-profile-btn').on('click', function() {
+            if(confirm("vuoi salvare le modifiche?")){
+              $('.editable').removeClass('d-none');
+              $('.form-control').addClass('d-none');
+              $('#edit-profile-btn').removeClass('d-none');
+              $('#save-profile-btn').addClass('d-none');
+              $('#cancel-profile-btn').addClass('d-none');
+
+              // Aggiorna le informazioni nel database tramite una chiamata AJAX
+              $.ajax({
+                url: './Modifica/update_profile.php',
+                type: 'POST',
+                data: { // passa i dati aggiornati tramite POST
+                  // email: $('#email-input').val(),
+                  telefono: $('#phone-input').val()
+                },
+                dataType: "json",
+                success: function(response) {
+                  // gestisci la risposta del server
+                  location.reload();
+                  console.log(response);
+                },
+                error: function(xhr, status, error) {
+                  console.log(xhr.responseText);
+                }
+              });
+            }
+          });
+
+        });
+      </script>
+
     </head>
     <body>
 
@@ -96,15 +165,16 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                 </div>
                 <div class="d-flex justify-content-between mt-4">
                 <div>
-                <button type="button" class="btn btn-link p-0 btn-sm" id="edit-password-btn">Modifica password</button>
+                <button type="button" class="btn btn-link p-0 btn-sm" id="edit-password-btn" data-target="#password-modal" data-toggle="modal">Modifica password</button>
                 </div>
                 <div>
                   <button type="button" class="btn btn-primary btn-sm me-2" id="edit-profile-btn">Modifica profilo</button>
                   <button type="button" class="btn btn-success btn-sm d-none" id="save-profile-btn">Salva modifiche</button>
                   <button type="button" class="btn btn-secondary btn-sm d-none" id="cancel-profile-btn">Annulla modifiche</button>
                 </div>
+
+
                 <!-- Modal -->
-                <!-- TODO: I pulsanti chiudi finestra e annulla non funzionano -->
                 <div class="modal fade" id="password-modal" tabindex="-1" role="dialog" aria-labelledby="password-modal-label" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -114,7 +184,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form name="resetPassword" action="./Profilo/resetPassword.php" method="POST" onsubmit="confrontaPassword();">
+                        <form name="resetPassword" action="./Profilo/resetPassword.php" method="POST" onSubmit="return confrontaPassword();">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="old-password">Vecchia password</label>
@@ -137,6 +207,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
             </div>
@@ -147,68 +218,6 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
   </div>
 </section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  $(document).ready(function() {
-    var passwordModal = new bootstrap.Modal(document.getElementById('password-modal'));
-    $('#edit-password-btn').click(function() {
-      passwordModal.show();
-    });
-  });
-  $(document).ready(function() {
-    // Gestisci il clic sul pulsante "Modifica profilo"
-    $('#edit-profile-btn').on('click', function() {
-      $('.editable').addClass('d-none');
-      $('.form-control').removeClass('d-none');
-      $('#edit-profile-btn').addClass('d-none');
-      $('#save-profile-btn').removeClass('d-none');
-      $('#cancel-profile-btn').removeClass('d-none');
-    });
-    $('#cancel-profile-btn').on('click', function() {
-      // Ripristina i valori precedenti di email e telefono
-      // $("#email-input").val($("#email").text());
-      $("#phone-input").val($("#phone").text());
-      // Nascondi il pulsante "Salva modifiche" e mostra il pulsante "Modifica profilo"
-      $('.editable').removeClass('d-none');
-      $('.form-control').addClass('d-none');
-      $("#save-profile-btn").addClass("d-none");
-      $("#edit-profile-btn").removeClass("d-none");
-      // Nascondi il pulsante "Annulla modifiche"
-      $("#cancel-profile-btn").addClass("d-none");
-    });
 
-    // Gestisci il clic sul pulsante "Salva modifiche"
-    $('#save-profile-btn').on('click', function() {
-      if(confirm("vuoi salvare le modifiche?")){
-        $('.editable').removeClass('d-none');
-        $('.form-control').addClass('d-none');
-        $('#edit-profile-btn').removeClass('d-none');
-        $('#save-profile-btn').addClass('d-none');
-        $('#cancel-profile-btn').addClass('d-none');
-
-        // Aggiorna le informazioni nel database tramite una chiamata AJAX
-        $.ajax({
-          url: './Modifica/update_profile.php',
-          type: 'POST',
-          data: { // passa i dati aggiornati tramite POST
-            // email: $('#email-input').val(),
-            telefono: $('#phone-input').val()
-          },
-          dataType: "json",
-          success: function(response) {
-            // gestisci la risposta del server
-            location.reload();
-            console.log(response);
-          },
-          error: function(xhr, status, error) {
-            console.log(xhr.responseText);
-          }
-        });
-      }
-    });
-
-  });
-</script>
     </body>
 </html>

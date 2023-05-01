@@ -68,7 +68,7 @@
 
 			do{ 
 				//ANNUNCIO
-				if(empty($row['data'])){
+				if(empty($row['data_scadenza'])){
 					echo "
 					<div class='card text-black bg-light mb-3 d-inline-block'>
 						<div class='card-body'>";
@@ -97,7 +97,7 @@
 									<i class='fa-sharp fa-solid fa-scroll'></i>
 									".$row['titolo']."-".$utente."
 								</span>
-								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>".date('d/m/Y', time())."</span>
+								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>".date('d/m/Y', strtotime($row['pubblicazione']))."</span>
 							</div>
 							<hr>
 							<div class='card-body'>
@@ -145,8 +145,8 @@
 									<i class='fa-solid fa-book' style='font-size: 18px;'></i>
 									".$row['titolo']."-".$utente."
 								</span>
-								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
-									".date('d/m/Y', time())."
+								<span style='margin-left: auto; font-size: 18px;'>
+									Data di pubblicazione: ".date('d/m/Y', time())."
 								</span>
 							</div>
 							<hr>
@@ -155,7 +155,7 @@
 								<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
 							</div>
 							<hr>
-								<p class='card-text' style='margin-left: 12px'>Data di consegna: ".date('d/m/Y', strtotime($row['data']))."</p>
+								<p class='card-text' style='margin-left: 12px'>Data di consegna: ".date('d/m/Y', strtotime($row['data_scadenza']))."</p>
 						</div>
 						<footer class='card-footer'>
 							<a href='#' class='card-link text-black'>Commenti (3)</a>

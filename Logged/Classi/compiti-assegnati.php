@@ -12,7 +12,7 @@
 
         
         //Query
-        $q = "SELECT * FROM compito WHERE classe=$1 AND data is not null";
+        $q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null";
         $result = pg_query_params($dbconn, $q, array($codice_corso));
 
         if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
@@ -31,7 +31,7 @@
                                 <tbody>";
 
                                     //impostiamo la data di scadenza del compito
-                                    $data_scadenza = strtotime($row['data']);
+                                    $data_scadenza = strtotime($row['data_scadenza']);
 
                                     //impostiamo la data attuale
                                     $data_attuale = time();
@@ -42,7 +42,7 @@
 
                         echo            "<tr>
                                         <td>".$row['titolo']."</td>
-                                        <td>".$row['data']."</td>";
+                                        <td>".date('d/m/Y', strtotime($row['data_scadenza']))."</td>";
                                         if($giorni_restanti<0){
                                             echo "<td>Tempo scaduto</td>";
                                         }
