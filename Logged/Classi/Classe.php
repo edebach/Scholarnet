@@ -16,6 +16,7 @@
 		$nome=$row['nome'];
 		$materia=$row['materia'];
 		$link=$row['link'];
+		$studente=$_SESSION['flag'];
 		
 	?>
 	<meta charset="UTF-8">
@@ -162,7 +163,8 @@
 			const mySwitch = document.getElementById("slider-compito");
 			$('#data-div').hide();
 			$('#ora-div').hide();
-
+			if(<?php echo "$studente";?>=="1") {$('#creaCompito').hide();}
+			else{
 			mySwitch.addEventListener("change", function() {
 			if (this.checked) {
 				$('#data-div').fadeIn('1000');
@@ -173,6 +175,7 @@
 				$('#ora-div').fadeOut('1000');
 			}
 			});
+		}
 		});
 	</script>
 
@@ -435,7 +438,7 @@
 					  <h3 class="card-title mb-0">Inserisci un nuovo annuncio</h3>
 					</header>
 					<div class="card-body">
-					  <button id="show-form-btn" class="btn btn-primary">Inserisci nuovo annuncio</button>
+					  <button id="show-form-btn" class="btn btn-primary">Inserisci</button>
 					   <form id="annuncio-form" action="./annuncio.php" method="post">
 							<input type="hidden" name="classe" id="classe"value="<?php echo $codice_corso; ?>">
 						<div class="mb-3">
@@ -451,7 +454,7 @@
 						  <label for="allegati" class="form-label">Allegati</label>
 						  <input type="file" class="form-control" id="allegati" name="allegati">
 						</div>
-						<div>
+						<div id="creaCompito">
 						<label class="switch">
 								<input type="checkbox" id="slider-compito" name="slider-compito" onchange="toggleFieldDataOra()">
 								<span class="slider"></span>
