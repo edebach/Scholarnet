@@ -56,27 +56,6 @@
         }
       });
     });
-
-		$("#search-btn2").click(function(){
-        $("#ultimi-annunci").hide();
-      });
-
-      $("#search-btn2").click(function() {
-      var searchText = $("#input-search2").val(); // Recupera il valore del campo input-search
-      var utente = "<?php echo $_SESSION['nome']." ".$_SESSION['cognome']?>";  //Recupera il valore dell'utente
-      var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
-      var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
-
-      $.ajax({
-        url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
-        type: "POST",
-        data: { searchText: searchText, utente: utente, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
-        success: function(result) {
-          $("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
-        }
-      });
-    });
-
   });
   </script>
 
@@ -103,7 +82,7 @@
 		display: none;
 		padding: 80px;
 		text-align: center;
-		height: 500px;
+		height: 600px;
 		}
 
 		/* Next & previous buttons */
@@ -132,30 +111,6 @@
 		.prev:hover, .next:hover {
 		background-color: rgba(0,0,0,0.8);
 		color: white;
-		}
-
-		/* The dot/bullet/indicator container */
-		.dot-container {
-			text-align: center;
-			padding: 20px;
-			background: #ddd;
-		}
-
-		/* The dots/bullets/indicators */
-		.dot {
-		cursor: pointer;
-		height: 15px;
-		width: 15px;
-		margin: 0 2px;
-		background-color: #bbb;
-		border-radius: 50%;
-		display: inline-block;
-		transition: background-color 0.6s ease;
-		}
-
-		/* Add a background color to the active dot/circle */
-		.active, .dot:hover {
-		background-color: #717171;
 		}
 
 		header .container-fluid {
@@ -302,11 +257,7 @@
 						<span class="navbar-toggler-icon"></span>
 						<span class="visually-hidden">Toggle navigation</span>
 					</button>
-					<div class="mx-auto d-none d-md-block" style="padding-left: 10px">
-						<input type="text" id="input-search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
-					</div>
-					<a class="navbar-brand text-center" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"><?php echo $nome ?></a>
+					<a class="navbar-brand text-center" href="#"><?php echo $nome ?></a>
 				</div>
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
@@ -436,10 +387,6 @@
 	</header> 
 
 	<main class="container my-4" id="stream-section">
-		<div class="mx-auto d-block d-md-none">
-			<input type="text" id="input-search2">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn2">Search</button>
-		</div>
 		<div class="row">
 			<!-- inizio sesione stream -->
 			<section class="col-lg-8">
@@ -451,14 +398,15 @@
 					  <button id="show-form-btn" class="btn btn-primary">Inserisci</button>
 					   <form id="annuncio-form" action="./annuncio.php" method="post">
 							<input type="hidden" name="classe" id="classe"value="<?php echo $codice_corso; ?>">
-						<div class="mb-3">
-						  <label for="titolo" class="form-label">Titolo</label>
-						  <input type="text" class="form-control" id="titolo" name="titolo" required>
-						</div>
-						<div class="mb-3">
-						  <label for="testo" class="form-label">Testo</label>
-						  <textarea class="form-control" id="testo" name="testo" rows="3" required></textarea>
-						</div>
+							<div class="mb-3">
+								<label for="titolo" class="form-label">Titolo</label>
+								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="8" required>
+								<small class="form-text text-muted">Massimo 8 caratteri</small>
+							</div>
+							<div class="mb-3">
+								<label for="testo" class="form-label">Testo</label>
+								<textarea class="form-control" id="testo" name="testo" rows="3" maxlength="20" required></textarea>
+							</div>
 						<div class="mb-2">
 							<!-- TODO: Non carica i file correttamente ma solo il nome del file -->
 						  <label for="allegati" class="form-label">Allegati</label>
@@ -485,7 +433,10 @@
 				</article>
 				
 				<h2 class="mb-4">Ultimi annunci</h2>
-
+				<div class="mx-auto">
+						<input type="text" id="input-search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
+				</div>
 				<!--ZONA DINAMICA: Implementazione oggetto AJAX display search-->
 				<div id="zonaDinamica">
 

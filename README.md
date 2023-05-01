@@ -156,12 +156,12 @@ signup2.php
 
 **Cose Da Fare Rimaste**
 1) Titolo compito: (FABIO)
-    -aggiungere il pattern per un limite massimo di caratteri 
+    -aggiungere il pattern per un limite massimo di caratteri TODO: FATTO
     -allargare la finestra dell'aside nello stream dei compiti assegnati
     -tenere la data di scadenza centrale nella sezione compiti
 2) Gestire l'eliminazione del compito/annuncio nella barra di ricerca (MARCO)
-3) Spostare la barra di ricerca sotto gli ultimi annunci (FABIO)
-4) Case sensitive sulla ricerca (FABIO)
+3) Spostare la barra di ricerca sotto gli ultimi annunci (FABIO) TODO:FATTO
+4) Case sensitive sulla ricerca (FABIO) TODO:FATTO 
 5) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE)
 6) Nel file profilo.php: (EMANUELE)
 - controllo form telefono

@@ -12,7 +12,7 @@
 
 
     // Query
-    $sql = "SELECT * FROM compito WHERE testo LIKE $1 OR titolo LIKE $1 ORDER BY pubblicazione DESC";
+    $sql = "SELECT * FROM compito WHERE testo ILIKE $1 OR titolo ILIKE $1 ORDER BY pubblicazione DESC";
     $result = pg_query_params($conn, $sql, array($searchText));
 
     if($row = pg_fetch_array($result)){
