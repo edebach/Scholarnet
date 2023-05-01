@@ -33,6 +33,32 @@
 	<!-- Carica Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	
+  <!--Script per visualizzare la search-->
+  <script>
+    $(document).ready(function(){
+      //Al momento del click del bottone search, gli ultimi annunci si nascondono
+      $("#search-btn").click(function(){
+        $("#ultimi-annunci").hide();
+      });
+
+      $("#search-btn").click(function() {
+      var searchText = $("#input-search").val(); // Recupera il valore del campo input-search
+      var utente = "<?php echo $_SESSION['nome']." ".$_SESSION['cognome']?>";  //Recupera il valore dell'utente
+      var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
+      var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
+
+      $.ajax({
+        url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
+        type: "POST",
+        data: { searchText: searchText, utente: utente, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
+        success: function(result) {
+          $("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
+        }
+      });
+    });
+  });
+  </script>
+
 
 	<style>
 		.card {
@@ -360,36 +386,6 @@
 
 									}
 									
-									/*
-									// Inserimento dell'elenco delle classi
-									$email = $_SESSION["email"];
-									if (($_SESSION["flag"]) == "0") {
-										$q1 = "SELECT corso.nome, corso.link FROM insegna JOIN corso ON insegna.corso = corso.codice WHERE insegna.docente = $1";
-									} else {
-										$q1 = "SELECT corso.nome, corso.link FROM partecipa JOIN corso ON partecipa.corso = corso.codice WHERE partecipa.studente = $1";
-									}
-									$result = pg_query_params($dbconn, $q1, array($_SESSION['email']));
-									$classe = array();
-									while ($row = pg_fetch_array($result)) {
-										$nome = $row["nome"];
-										$link = $row["link"];
-										echo ""; //TODO:Questa è la riga sove insserire le varie cartelle con le classi
-									// idea non funzionante (da inserire ddentro echo):
-									// <li><div class='col-sm-6'>
-									// 	<div class='card bg-light mb-3'>
-									// 	<div class='card-body'>
-									// 		<h5 class='card-title'>
-									// 		<a href=' $link' class='text-primary'>
-									// 			<i class='fas fa-chalkboard-teacher fa-lg mr-2'></i>
-									// 			$nome
-									// 		</a>
-									// 		</h5>
-									// 	</div>
-									// 	</div>
-									// </div>
-									// </li>
-									
-									}*/
 									?>
 
 							</ul>
@@ -419,16 +415,10 @@
 
 	<main class="container my-4" id="stream-section">
 	<div class="mx-auto">
-    <form class="form-inline my-2 my-lg-0" action="../../src/search.php" method="POST">
-      <input
-        class="form-control mr-sm-2"
-        name="searchText"
-        type="search"
-        value="<?php if (isset($_SESSION['searchText'])) echo $_SESSION['searchText'];?>"
-        placeholder="Search"
-        aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    
+    <input type="text" id="input-search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
+    
   </div>
 		<div class="row">
 			<!-- inizio sesione stream -->
@@ -475,7 +465,14 @@
 				</article>
 				
 				<h2 class="mb-4">Ultimi annunci</h2>
-				<?php include "./ultimi-annunci.php"; ?>
+
+				<!--ZONA DINAMICA: Implementazione oggetto AJAX display search-->
+				<div id="zonaDinamica">
+
+				</div>
+        <div id="ultimi-annunci">
+				  <?php include "./ultimi-annunci.php"; ?>
+        </div>
 				
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
