@@ -159,6 +159,14 @@ signup2.php
     -aggiungere il pattern per un limite massimo di caratteri 
     -allargare la finestra dell'aside nello stream dei compiti assegnati
     -tenere la data di scadenza centrale nella sezione compiti
-2) Barra di ricerca, spostare il pulsante e farla funzionare (FABIO/MARCO)
-3) Togliere la possibilità agli studenti di inserire un compito (EMA)
+2) Gestire l'eliminazione del compito/annuncio nella barra di ricerca (MARCO)
+3) Spostare la barra di ricerca sotto gli ultimi annunci (FABIO)
+4) Case sensitive sulla ricerca (FABIO)
+5) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE)
+6) Nel file profilo.php: (EMANUELE)
+- controllo form telefono
+- implementare i miei corsi, corso con più iscritti
+7) Implementare il mio profilo nel file classe.php (includere il profilo già creato in profilo.php) (EMANUELE)
+8) Il signup in index, indexlogged va tolto e risolvere il problema delle stelle in inserisci recensione (EMANUELE/MARCO/FABIO DOMANI SERA)
+9) Implementare bottone profilo in indexlogged, e modificare la navbar (Scholarnet al centro, e il logo tutto a sinistra) (MARCO)
 
