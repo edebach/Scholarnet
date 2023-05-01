@@ -42,7 +42,7 @@ insert into 'nome_tabella' values('value_attr_1',...,'value_attr_n');
 utente(nome, cognome, email(pk), pass, istituto, sesso, dataN, flagStudente)
     vincolo: dataN deve essere scritta nel formato hhhh/mm/dd
     
-corso(codice(pk), nome, materia, numIscritti, link)
+corso(codice(pk), nome, materia, link)
     inclusione: corso[codice] => insegna[corso]
     
 insegna(docente(pk), corso(pk))
@@ -55,6 +55,9 @@ partecipa(studente(pk), corso(pk))
 
 recensione(utente(pk), data(pk), stelle, descrizione, nome_recensione)
     f.k.: recensione[utente] => utente[email]
+    
+compito(classe, titolo, testo, allegati, utente, data_scadenza, ora, pubblicazione)
+    f.k.: compito[classe] => corso[codice]
 ```
 
 **COMANDI UTILI FABIO**:
