@@ -61,7 +61,7 @@
 		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
 		//Query
-		$q = "SELECT * FROM compito WHERE classe=$1";
+		$q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
 		$result = pg_query_params($dbconn, $q, array($codice_corso));
 
 		if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
@@ -145,7 +145,7 @@
 									<i class='fa-solid fa-book' style='font-size: 18px;'></i>
 									".$row['titolo']."-".$utente."
 								</span>
-								<span style='margin-left: auto; font-size: 18px;'>
+								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
 									Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."
 								</span>
 							</div>

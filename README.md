@@ -157,6 +157,5 @@ signup2.php
     -allargare la finestra dell'aside nello stream dei compiti assegnati
     -tenere la data di scadenza centrale nella sezione compiti
 2) Barra di ricerca, spostare il pulsante e farla funzionare (FABIO/MARCO)
-3) aggiungere la possibilità di cancellare/editare i post solo se sei professore (EMA)
-4) Togliere la possibilità agli studenti di inserire un compito (EMA)
-5) Aggiungere nome di chi fa il post (EMA)
+3) Togliere la possibilità agli studenti di inserire un compito (EMA)
+

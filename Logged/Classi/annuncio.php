@@ -23,7 +23,7 @@
     $ora= $_POST['orario'];
   }
   
-  $pubblicazione = date('d/m/Y', time());
+  $pubblicazione = date('d-m-Y H:i:s');
 
     $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data_scadenza, ora, pubblicazione)
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8)";
