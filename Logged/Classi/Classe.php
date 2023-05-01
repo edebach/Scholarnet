@@ -306,7 +306,7 @@
 						<input type="text" id="input-search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
 					</div>
-					<a class="navbar-brand text-center" href="#"><?php echo $nome ?></a>
+					<a class="navbar-brand text-center" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"><?php echo $nome ?></a>
 				</div>
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
