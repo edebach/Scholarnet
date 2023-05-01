@@ -56,6 +56,27 @@
         }
       });
     });
+
+		$("#search-btn2").click(function(){
+        $("#ultimi-annunci").hide();
+      });
+
+      $("#search-btn2").click(function() {
+      var searchText = $("#input-search2").val(); // Recupera il valore del campo input-search
+      var utente = "<?php echo $_SESSION['nome']." ".$_SESSION['cognome']?>";  //Recupera il valore dell'utente
+      var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
+      var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
+
+      $.ajax({
+        url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
+        type: "POST",
+        data: { searchText: searchText, utente: utente, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
+        success: function(result) {
+          $("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
+        }
+      });
+    });
+
   });
   </script>
 
@@ -281,7 +302,10 @@
 						<span class="navbar-toggler-icon"></span>
 						<span class="visually-hidden">Toggle navigation</span>
 					</button>
-				
+					<div class="mx-auto d-none d-md-block" style="padding-left: 10px">
+						<input type="text" id="input-search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
+					</div>
 					<a class="navbar-brand text-center" href="#"><?php echo $nome ?></a>
 				</div>
 				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
@@ -411,15 +435,11 @@
 		</nav>
 	</header> 
 
-
-
 	<main class="container my-4" id="stream-section">
-	<div class="mx-auto">
-    
-    <input type="text" id="input-search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
-    
-  </div>
+		<div class="mx-auto d-block d-md-none">
+			<input type="text" id="input-search2">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn2">Search</button>
+		</div>
 		<div class="row">
 			<!-- inizio sesione stream -->
 			<section class="col-lg-8">
