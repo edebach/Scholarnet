@@ -145,7 +145,7 @@
 									<i class='fa-solid fa-book' style='font-size: 18px;'></i>
 									".$row['titolo']."-".$utente."
 								</span>
-								<span style='margin-left: auto; font-size: 18px;'>
+								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
 									Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."
 								</span>
 							</div>

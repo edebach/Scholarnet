@@ -63,7 +63,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
           // Gestisci il clic sul pulsante "Modifica profilo"
           $('#edit-profile-btn').on('click', function() {
             $('.editable').addClass('d-none');
-            $('.form-control').removeClass('d-none');
+            $('.form-control.profilo').removeClass('d-none');
             $('#edit-profile-btn').addClass('d-none');
             $('#save-profile-btn').removeClass('d-none');
             $('#cancel-profile-btn').removeClass('d-none');
@@ -74,7 +74,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
             $("#phone-input").val($("#phone").text());
             // Nascondi il pulsante "Salva modifiche" e mostra il pulsante "Modifica profilo"
             $('.editable').removeClass('d-none');
-            $('.form-control').addClass('d-none');
+            $('.form-control.profilo').addClass('d-none');
             $("#save-profile-btn").addClass("d-none");
             $("#edit-profile-btn").removeClass("d-none");
             // Nascondi il pulsante "Annulla modifiche"
@@ -85,7 +85,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
           $('#save-profile-btn').on('click', function() {
             if(confirm("vuoi salvare le modifiche?")){
               $('.editable').removeClass('d-none');
-              $('.form-control').addClass('d-none');
+              $('.form-control.profilo').addClass('d-none');
               $('#edit-profile-btn').removeClass('d-none');
               $('#save-profile-btn').addClass('d-none');
               $('#cancel-profile-btn').addClass('d-none');
@@ -147,7 +147,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                     <h6>Telefono</h6>
                     <p class="text-muted">
                       <span class="editable" id="phone"><?php echo $_SESSION["telefono"];?></span>
-                      <input type="tel" class="form-control d-none" id="phone-input" value="<?php echo $_SESSION["telefono"];?>">
+                      <input type="tel" class="form-control profilo d-none" id="phone-input" value="<?php echo $_SESSION["telefono"];?>">
                     </p>
                   </div>
                 </div>
