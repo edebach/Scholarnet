@@ -284,8 +284,10 @@
 							<ul class="navbar-nav d-block"> <!-- Aggiunta classi d-flex e flex-row -->
 								<!-- Inserimento pulsante "Home" -->
 								<li class="nav-item">
-									<button class="btn btn-outline-info d-inline-block mx-1" id="btn-ritorna-index" 
-									onClick="window.location.href='../IndexLogged.php'">Home</button>
+									<a href="../IndexLogged.php" class="btn btn-outline-primary px-4 py-2">
+									<i class="fas fa-home mr-2"></i> 
+									<span class="font-weight-bold">Home</span>
+									</a>
 								</li>
 								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
 								<?php
@@ -306,11 +308,16 @@
 												$file = './' . basename($path);
 												//Parte il layout
 												echo "	<br>
-														<li class='nav-item'>
-															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
-																	onClick=window.location.href='".$file."'>".$row1['nome']."</button>
-														</li>
-													";
+												<li class='nav-item'>
+												<div class='card w-100 h-100'>
+												<div class='card-body d-flex flex-column '>
+													<h4 class='card-title'>".$row1['nome']."</h4>
+													<button type='button' class='btn btn-outline-info d-inline-block mx-1'
+															onClick=window.location.href='".$file."'>Vai al corso</button>
+												</div>
+											</div>
+												</li>
+											";
 												
 											}while($row1=pg_fetch_array($result1, null, PGSQL_ASSOC));
 										}
@@ -330,11 +337,16 @@
 												$file = './' . basename($path);
 												//Parte il layout
 												echo "	<br>
-														<li class='nav-item'>
-															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
-																	onClick=window.location.href='".$file."'>".$row2['nome']."</button>
-														</li>
-													";
+												<li class='nav-item'>
+												<div class='card w-100 h-100'>
+												<div class='card-body d-flex flex-column '>
+													<h4 class='card-title'>".$row2['nome']."</h4>
+													<button type='button' class='btn btn-outline-info d-inline-block mx-1'
+															onClick=window.location.href='".$file."'>Vai al corso</button>
+												</div>
+											</div>
+												</li>
+											";
 											}while($row2=pg_fetch_array($result1a, null, PGSQL_ASSOC));
 										}
 
@@ -622,7 +634,7 @@ function showSlides(n) {
   dots[slideIndex-1].className += " active";
 }
 </script>
-	<footer class="bg-light">
+	<footer class="bg-light fixed-bottom">
 		<div class="container py-3">
 			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
 		</div>
