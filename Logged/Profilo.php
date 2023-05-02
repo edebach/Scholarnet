@@ -4,6 +4,17 @@ session_start();
 $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
             user=postgres password=biar") 
             or die('Could not connect: ' . pg_last_error());
+$q1="SELECT SUM(conteggio) AS somma
+    FROM (
+      SELECT count(*) AS conteggio
+      FROM partecipa
+      WHERE studente=$1
+      UNION ALL
+      SELECT count(*) AS conteggio
+      FROM insegna
+      WHERE docente=$1
+    ) AS conteggi; ";
+    $num_corsi = pg_query_params($dbconn, $q1, array($email));
 ?>
 <html lang="en">
     <head>
@@ -147,7 +158,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                     <h6>Telefono</h6>
                     <p class="text-muted">
                       <span class="editable" id="phone"><?php echo $_SESSION["telefono"];?></span>
-                      <input type="tel" class="form-control profilo d-none" id="phone-input" value="<?php echo $_SESSION["telefono"];?>">
+                      <input type="tel" class="form-control profilo d-none" id="phone-input" pattern="^\+?\d{1,3}\s?\d{6,}$" value="<?php echo $_SESSION["telefono"];?>">
                     </p>
                   </div>
                 </div>
@@ -156,7 +167,7 @@ $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet
                 <div class="row pt-1">
                   <div class="col-6 mb-3">
                     <h6>Miei Corsi</h6>
-                    <p class="text-muted">Lorem ipsum</p>
+                    <p class="text-muted"><?php echo $num_corsi;?></p>
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Corso con più iscritti</h6>
