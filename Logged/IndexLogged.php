@@ -187,29 +187,12 @@ session_start();
 					<!-- da inserire ancora i riferimenti -->
 					<li class="nav-item">
 						<div class="col-md-12 text-right">
-							<!--<a class="btn btn-outline-primary" href="./Profilo.php">
+							<a class="btn btn-outline-primary" href="./Profilo.php">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
 									<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
 								</svg>
 								Profilo
-							</a>-->
-
-							<button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-									<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-								</svg>
-								Profilo
-							</button>
-
-							<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-							<div class="offcanvas-header">
-								<h5 class="offcanvas-title" id="offcanvasRightLabel">Nome Cognome</h5>
-								<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-							</div>
-								<div class="offcanvas-body" style="text-align: left;">
-									Implementazione del profilo
-								</div>
-							</div>
+							</a>
 
 							<a class="btn btn-outline-danger" href="./Logout/logout.php">Logout</a>
 						</div>
