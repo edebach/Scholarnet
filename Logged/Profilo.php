@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <?php
-session_start();
-$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-            user=postgres password=biar") 
-            or die('Could not connect: ' . pg_last_error());
-$q1="SELECT SUM(conteggio) AS somma
-    FROM (
-      SELECT count(*) AS conteggio
-      FROM partecipa
-      WHERE studente=$1
-      UNION ALL
-      SELECT count(*) AS conteggio
-      FROM insegna
-      WHERE docente=$1
-    ) AS conteggi; ";
-    $num_corsi = pg_query_params($dbconn, $q1, array($email));
+  session_start();
+  $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+              user=postgres password=biar") 
+              or die('Could not connect: ' . pg_last_error());
+  $q1="SELECT SUM(conteggio) AS somma
+      FROM (
+        SELECT count(*) AS conteggio
+        FROM partecipa
+        WHERE studente=$1
+        UNION ALL
+        SELECT count(*) AS conteggio
+        FROM insegna
+        WHERE docente=$1
+      ) AS conteggi; ";
+      $ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
+      $num_corsi = pg_fetch_result($ris, 0, 'somma');
+  $q2="SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
+        FROM corso c
+        LEFT JOIN insegna i ON c.codice = i.corso
+        LEFT JOIN partecipa p ON c.codice = p.corso
+        WHERE i.docente = $1 OR p.studente = $1
+        GROUP BY c.nome
+        ORDER BY num_iscritti DESC
+        LIMIT 1;
+        ";
+  $max_corso="";
+  $ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
+  if (pg_num_rows($ris) > 0)
+  $max_corso = pg_fetch_result($ris, 0, 'corso');
+      
 ?>
 <html lang="en">
     <head>
@@ -124,6 +139,30 @@ $q1="SELECT SUM(conteggio) AS somma
 
         });
       </script>
+      <script type="text/javascript" language="javascript">
+        function validaInputTel() {
+          var input = document.getElementById("phone-input");
+          var errorMsg = document.getElementById("error-msg");
+
+          if (input.value) {
+            input.setCustomValidity(""); // resetta eventuali errori precedenti
+
+            if (!input.checkValidity()) {
+              input.setCustomValidity("Formato richiesto: (+XXX) XXXXXXX");
+              errorMsg.innerHTML = "Formato richiesto: (+XXX) XXXXXXX";
+              input.style.color = "red";
+            } else {
+              input.setCustomValidity("");
+              input.style.color = "";
+              errorMsg.innerHTML = "";
+            }
+          } else {
+            input.setCustomValidity("");
+            input.style.color = "";
+            errorMsg.innerHTML = "";
+          }
+        }
+      </script>
 
     </head>
     <body>
@@ -158,7 +197,8 @@ $q1="SELECT SUM(conteggio) AS somma
                     <h6>Telefono</h6>
                     <p class="text-muted">
                       <span class="editable" id="phone"><?php echo $_SESSION["telefono"];?></span>
-                      <input type="tel" class="form-control profilo d-none" id="phone-input" pattern="^\+?\d{1,3}\s?\d{6,}$" value="<?php echo $_SESSION["telefono"];?>">
+                      <input type="tel" class="form-control profilo d-none" id="phone-input" oninput="validaInputTel()" pattern="^\+?\d{1,3}\s?\d{6,}$" value="<?php echo $_SESSION["telefono"];?>">
+                      <span id="error-msg" style="color: red;"></span>
                     </p>
                   </div>
                 </div>
@@ -171,7 +211,7 @@ $q1="SELECT SUM(conteggio) AS somma
                   </div>
                   <div class="col-6 mb-3">
                     <h6>Corso con più iscritti</h6>
-                    <p class="text-muted">Dolor sit amet</p>
+                    <p class="text-muted"><?php echo $max_corso;?></p>
                   </div>
                 </div>
                 <div class="d-flex justify-content-between mt-4">
