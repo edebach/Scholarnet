@@ -30,7 +30,7 @@ session_start();
 	<!-- questa riga sembra non essere necessaria -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+	
 	<!-- FONT-AWESOME -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -163,28 +163,24 @@ session_start();
 
 </head>
 <body>
-	<!-- Sezione Header: NON TOCCARE!!!!-->
+	<!-- Sezione Header-->
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-			<!-- <div class="topleft"> -->
-				<a class="navbar-brand" href="#">Scholarnet</a>
-			<!-- </div> -->
+			<div class="topleft">
+                <a class="navbar-brand" href="./IndexLogged.php"> <!--TODO: Da vedere il percorso -->
+                <img src="../img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" 
+                width="50" height="50" class="d-inline-block align-text-top">
+                </a>
+            </div>
+			
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
+
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ml-md-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="#home-section">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#descrizione-section">Descrizione</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#qa-section">Q&amp;A</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#recensione">Recensioni</a>
+						<a class="navbar-brand" href="#">Scholarnet</a>
 					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
@@ -195,7 +191,6 @@ session_start();
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
 									<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
 								</svg>
-								<!--Pensavo di implementare che al momento che passo col cursore sul bottone profilo, senza cliccarlo, ti usciva un piccola finestra con le informazioni dell'utente-->
 								Profilo
 							</a>
 							<a class="btn btn-outline-danger" href="./Logout/logout.php">Logout</a>
