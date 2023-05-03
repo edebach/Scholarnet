@@ -163,6 +163,6 @@ signup2.php
 
 3) Implementare il mio profilo nel file classe.php (MARCO)TODO: FATTO
 4) Il signup in index, indexlogged va tolto e risolvere il problema delle stelle in inserisci recensione (EMANUELE/MARCO/FABIO STASERA POST PARTITA) TODO:
-4) LINK IMMAGINI CORSO (MARCO)TODO:
+4) LINK IMMAGINI CORSO (MARCO)TODO: FATTO
 5) RIVEDERE LO SFONDO(EMA)TODO:
 INIZIARE A MODIFICARE I CAMPI I TESTO DAL PRIMO FILE(FABIO) TODO:
