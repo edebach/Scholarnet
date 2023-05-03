@@ -156,17 +156,13 @@ signup2.php
 
 **Cose Da Fare Rimaste**
 1) Titolo compito: (FABIO)
-    -aggiungere il pattern per un limite massimo di caratteri TODO: FATTO
-    -allargare la finestra dell'aside nello stream dei compiti assegnati MANCANTE
-    -tenere la data di scadenza centrale nella sezione compiti MANCANTE
-2) Gestire l'eliminazione del compito/annuncio nella barra di ricerca (MARCO): FATTO
-3) Spostare la barra di ricerca sotto gli ultimi annunci (FABIO) TODO:FATTO
-4) Case sensitive sulla ricerca (FABIO) TODO:FATTO 
-5) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE) MANCANTE
-6) Nel file profilo.php: (EMANUELE) TODO:FATTO 
-- controllo form telefono
-- implementare i miei corsi, corso con più iscritti
-7) Implementare il mio profilo nel file classe.php (includere il profilo già creato in profilo.php) (EMANUELE)TODO: NON FARE PIù 
-8) Il signup in index, indexlogged va tolto e risolvere il problema delle stelle in inserisci recensione (EMANUELE/MARCO/FABIO DOMANI SERA) MANCANTE
-9) Implementare bottone profilo in indexlogged, e modificare la navbar (Scholarnet al centro, e il logo tutto a sinistra) (MARCO) TODO:FATTO
+    -aggiungere il pattern per un limite massimo di caratteri TODO: CAMBIARE LIMITE
+    -allargare la finestra dell'aside nello stream dei compiti assegnati TODO:
+    -tenere la data di scadenza centrale nella sezione compiti TODO:
+2) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE) TODO:DA RIVEDERE
 
+3) Implementare il mio profilo nel file classe.php (MARCO)TODO:
+4) Il signup in index, indexlogged va tolto e risolvere il problema delle stelle in inserisci recensione (EMANUELE/MARCO/FABIO STASERA POST PARTITA) TODO:
+4) LINK IMMAGINI CORSO (MARCO)TODO:
+5)RIVEDERE LO SFONDO(EMA)TODO:
+INIZIARE A MODIFICARE I CAMPI I TESTO DAL PRIMO FILE(FABIO) TODO:
