@@ -161,7 +161,7 @@ signup2.php
     -tenere la data di scadenza centrale nella sezione compiti TODO:
 2) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE) TODO:DA RIVEDERE
 
-3) Implementare il mio profilo nel file classe.php (MARCO)TODO:
+3) Implementare il mio profilo nel file classe.php (MARCO)TODO: FATTO
 4) Il signup in index, indexlogged va tolto e risolvere il problema delle stelle in inserisci recensione (EMANUELE/MARCO/FABIO STASERA POST PARTITA) TODO:
 4) LINK IMMAGINI CORSO (MARCO)TODO:
 5) RIVEDERE LO SFONDO(EMA)TODO:
