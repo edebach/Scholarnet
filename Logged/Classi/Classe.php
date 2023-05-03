@@ -277,12 +277,74 @@
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
-						<!-- TODO: Qui puoi inserire il contenuto della finestra con le informazioni del tuo profilo -->
-						<!-- Possiamo inserire direttamente il file profilo all'interno del tab, creerei una versione
-						alternativa minimizzata da mettere qui e una completa da lasciare a parte se si vuole senno la eliminiamo -->
-						<!--php include '../profilo.html'; ?> -->
+						<?php
+							//Prendiamo dal db tutte le informazione dell'utente
+							$email = $_SESSION['email'];
+							$q="SELECT * FROM utente WHERE email=$1";
+							$result = pg_query_params($dbconn, $q, array($email));
+							$row = pg_fetch_array($result);
+						?>
+						
+						<div class="container">
+							<!-- Campo informazioni generali: nome e cognome, con immagine e email-->
+							<div class="row">
+								<table>
+									<tr>
+										<td>
+											<!-- Caricamento immagine -->
+											<?php
+												if($row['sesso']=="Maschio"){
+													if($_SESSION['flag']=="1"){
+														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
+													}
+													else{
+														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
+													}
+												}
+												else if($row['sesso']=="Femmina"){
+													if($_SESSION['flag']=="1"){
+														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
+													}
+													else{
+														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
+													}
+												}
+												else{
+													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
+												}
+											?>
+										</td>
+										<td><?php echo "<br><h7><strong>".$row['nome']." ".$row['cognome']."</strong></h7>
+														<br>
+														<h9>".$row['email']."</h9>"; ?></td>
+									</tr>
+								</table>
+							</div>
+							<hr>
+							<div class="row">
+								<!--Campo istituto-->
+								<p><?php echo "Istituto/Università: ".$row['istituto']; ?></p>
+								<?php 
+									//Campo data di nascita
+									if($row['sesso']=="Femmina")
+										echo "<p>Nata il ".date('d/m/Y', strtotime($row['dataN']))."</p>";
+									else
+										echo "<p>Nato il ".date('d/m/Y', strtotime($row['dataN']))."</p>";
+									
+									//Campo telefono se esiste
+									if($row['telefono']!="")
+										echo "<p>Numero di telefono: ".$row['telefono']."</p>";
+									
+									//Campo data iscrizione
+									echo "<p>Iscritto dal ".date('d/m/Y', strtotime($row['data_iscrizione']))."</p>";
+									
+								?>
+								
+							</div>
+						</div>
 					</div>
 				</div>
+
 				<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
 					<div class="offcanvas-header">
 						<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
@@ -487,7 +549,8 @@
 			</aside>
 		</div>
 	</main>
-
+	<br>
+	<br>
 	<main class="container my-4" id="compiti-section">
 		<?php		
 			//Query
