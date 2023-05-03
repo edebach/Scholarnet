@@ -108,7 +108,7 @@
                 echo "        
                 <div class='card' style='width: 18rem;'>
                     <div class='position-relative'>
-                        <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                        <img src='".$row1['link_imm']."' class='card-img-top'>
                         <div class='position-absolute top-0 end-0'>
                             <div class='dropdown'>
                                 <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -152,7 +152,7 @@
                 echo "        
                 <div class='card' style='width: 18rem;'>
                     <div class='position-relative'>
-                        <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                        <img src='".$row2['link_imm']."' class='card-img-top'>
                         <div class='position-absolute top-0 end-0'>
                             <div class='dropdown'>
                                 <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -205,7 +205,7 @@
                 echo "        
                 <div class='card' style='width: 18rem;'>
                     <div class='position-relative'>
-                        <img src='https://images7.alphacoders.com/114/1141397.jpg' class='card-img-top'>
+                        <img src='".$row3['link_imm']."' class='card-img-top'>
                         <div class='position-absolute top-0 end-0'>
                             <div class='dropdown'>
                                 <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>

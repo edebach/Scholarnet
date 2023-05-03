@@ -67,8 +67,22 @@
     }
     //inserisco i valori nella tabella corso
     $link = $cartella_destinazione. $nome_file_nuovo;
-    $q2 = "INSERT INTO corso(codice,nome,materia,link) VALUES ($1, $2, $3, $4)";
-    $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $link));
+    
+    // Array di 5 link di immagini
+    $image_links = array(
+        "https://cdn.pixabay.com/photo/2017/02/24/02/37/classroom-2093744_1280.jpg",
+        "https://cdn.pixabay.com/photo/2020/10/23/20/56/classroom-5679949_1280.jpg",
+        "https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/7767141/classroom-in-the-school-clipart-md.png",
+        "https://exahgedxnp7.exactdn.com/wp-content/uploads/2020/07/libri-per-imprenditori-1.jpg?strip=all&lossy=1&ssl=1",
+        "https://www.librinews.it/wp-content/uploads/2022/10/welfare-aziendale-libri.jpeg"
+    );
+
+    // Genera un numero casuale tra 0 e 4 per selezionare un link casuale dall'array
+    $random_index = rand(0, 4);
+    $link_imm = $image_links[$random_index];
+
+    $q2 = "INSERT INTO corso(codice,nome,materia,link, link_imm) VALUES ($1, $2, $3, $4, $5)";
+    $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $link, $link_imm));
     
     //inserisco i valori nella tabella insegna
     $flag = $_SESSION['flag']; //do per scontato che sia un docente
