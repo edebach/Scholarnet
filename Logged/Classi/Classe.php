@@ -43,14 +43,13 @@
 
       $("#search-btn").click(function() {
       var searchText = $("#input-search").val(); // Recupera il valore del campo input-search
-      var utente = "<?php echo $_SESSION['nome']." ".$_SESSION['cognome']?>";  //Recupera il valore dell'utente
-      var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
+    	var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
       var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
 
       $.ajax({
         url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
         type: "POST",
-        data: { searchText: searchText, utente: utente, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
+        data: { searchText: searchText, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
         success: function(result) {
           $("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
         }

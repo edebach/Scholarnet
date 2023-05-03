@@ -14,10 +14,6 @@
 					var titolo = $(this).data("titolo");
 					var testo = $(this).data("testo");
 					var corso = $(this).data("corso");
-					console.log(url);
-					console.log(titolo);
-					console.log(testo);
-					console.log(corso);
 
 					$.ajax({
 						url: url,
@@ -55,7 +51,6 @@
 		
 		//recupera il valore di search, %: la parola ricercata si può trovare in qualsiasi punto del testo o titolo
 		$searchText = '%' . $_POST['searchText'] . '%';
-		$utente = $_POST['utente'];
 		$codice_corso = $_POST['codice_corso'];
 		$flag = $_POST['flag'];
 
@@ -94,7 +89,7 @@
 							echo	"<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
 									<span style='font-size: 18px;'>
 										<i class='fa-sharp fa-solid fa-scroll'></i>
-										".$row['titolo']."-".$utente."
+										".$row['titolo']."-".$row['utente']."
 									</span>
 									<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>".date('d/m/Y', strtotime($row['pubblicazione']))."</span>
 								</div>
@@ -142,7 +137,7 @@
 								<div style='display: flex; align-items: center;'>
 									<span class='card-text bg-light text-black' style='font-size: 18px;'>
 										<i class='fa-solid fa-book' style='font-size: 18px;'></i>
-										".$row['titolo']."-".$utente."
+										".$row['titolo']."-".$row['utente']."
 									</span>
 									<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
 										Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."

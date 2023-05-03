@@ -57,7 +57,7 @@
 </head>
 <body>
 	<?php
-		$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
+		//$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
 		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
 		//Query
@@ -95,7 +95,7 @@
 						echo	"<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
 								<span style='font-size: 18px;'>
 									<i class='fa-sharp fa-solid fa-scroll'></i>
-									".$row['titolo']."-".$utente."
+									".$row['titolo']."-".$row['utente']."
 								</span>
 								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>".date('d/m/Y', strtotime($row['pubblicazione']))."</span>
 							</div>
@@ -143,7 +143,7 @@
 							<div style='display: flex; align-items: center;'>
 								<span class='card-text bg-light text-black' style='font-size: 18px;'>
 									<i class='fa-solid fa-book' style='font-size: 18px;'></i>
-									".$row['titolo']."-".$utente."
+									".$row['titolo']."-".$row['utente']."
 								</span>
 								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
 									Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."
