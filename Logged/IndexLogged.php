@@ -33,7 +33,15 @@ session_start();
 	
 	<!-- FONT-AWESOME -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body{
+		/* fallback per browser meno recenti */
+		background: #e2f3f5;
 
+		/* per browser recenti */
+		background: linear-gradient(to right bottom, #e2f3f5, #b1d8db, #81bdcf, #539fc2, #1f7ea3);
+			}
+    </style>
 	<style>
 		footer {
 		  text-align: center;

@@ -25,6 +25,16 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="style.css">
 
+	<style>
+		body{
+		/* fallback per browser meno recenti */
+		background: #e2f3f5;
+
+		/* per browser recenti */
+		background: linear-gradient(to right bottom, #e2f3f5, #b1d8db, #81bdcf, #539fc2, #1f7ea3);
+			}
+    </style>
+
 	<script src="script.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 	
