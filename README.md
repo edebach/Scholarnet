@@ -179,4 +179,5 @@ signup2.php
 1) Vedere parte degli allegati (MARCO E EMANUELE) TODO:
 2) Vedere parte dei commenti (MARCO) TODO:
 3) Gestire l'inserimento delle recensioni (massimo una a settimana per utente) TODO:
+4) Aggiungere una sezione chat nel file Classe.php (MARCO) TODO:
 
