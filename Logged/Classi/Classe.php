@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 	<?php
-		session_start();
-		$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-				user=postgres password=biar") 
-				or die('Could not connect: ' . pg_last_error());
+	session_start();
+	$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+				user=postgres password=biar")
+		or die('Could not connect: ' . pg_last_error());
 
-		$file_name = basename($_SERVER['PHP_SELF']);
-		$codice_corso = substr($file_name, -12,-4);
+	$file_name = basename($_SERVER['PHP_SELF']);
+	$codice_corso = substr($file_name, -12, -4);
 
-		$q1="SELECT * FROM corso where codice=$1";
-		$result = pg_query_params($dbconn, $q1, array($codice_corso));
-		$row = pg_fetch_array($result);
-		$nome=$row['nome'];
-		$materia=$row['materia'];
-		$link=$row['link'];
-		$studente=$_SESSION['flag'];
-		
+	$q1 = "SELECT * FROM corso where codice=$1";
+	$result = pg_query_params($dbconn, $q1, array($codice_corso));
+	$row = pg_fetch_array($result);
+	$nome = $row['nome'];
+	$materia = $row['materia'];
+	$link = $row['link'];
+	$studente = $_SESSION['flag'];
+
 	?>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,94 +30,98 @@
 
 	<script src="script.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	
+
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<!-- Carica Fontawesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	
-  <!--Script per visualizzare la search-->
-  <script>
-    $(document).ready(function(){
-      //Al momento del click del bottone search, gli ultimi annunci si nascondono
-      $("#search-btn").click(function(){
-        $("#ultimi-annunci").hide();
-      });
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-      $("#search-btn").click(function() {
-      var searchText = $("#input-search").val(); // Recupera il valore del campo input-search
-    	var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
-      var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
+	<!--Script per visualizzare la search-->
+	<script>
+		$(document).ready(function () {
+			//Al momento del click del bottone search, gli ultimi annunci si nascondono
+			$("#search-btn").click(function () {
+				$("#ultimi-annunci").hide();
+			});
 
-      $.ajax({
-        url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
-        type: "POST",
-        data: { searchText: searchText, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
-        success: function(result) {
-          $("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
-        }
-      });
-    });
-  });
-  </script>
+			$("#search-btn").click(function () {
+				var searchText = $("#input-search").val(); // Recupera il valore del campo input-search
+				var codice_corso = "<?php echo substr(basename($_SERVER["PHP_SELF"]), -12, 8); ?>";  //Recupera il valore del codice del corso
+				var flag = "<?php echo $_SESSION['flag'] ?>"; //Recupera il valore del flag
 
+				$.ajax({
+					url: "../../src/search.php", // URL della pagina PHP che esegue la query al database
+					type: "POST",
+					data: { searchText: searchText, codice_corso: codice_corso, flag: flag }, // Passa il valore di input-search come parametro della query
+					success: function (result) {
+						$("#zonaDinamica").html(result); // Aggiorna la zona dinamica con la tabella risultante dalla query
+					}
+				});
+			});
+		});
+	</script>
 
 	<style>
 		.card {
-		width: 600px;
+			width: 600px;
 		}
-		#codicecorsoCard{
+
+		#codicecorsoCard {
 			width: 180px;
 			margin-top: 4px;
 		}
 
-		* {box-sizing: border-box}
+		* {
+			box-sizing: border-box
+		}
 
 		/* Slideshow container */
 		.slideshow-container {
-		position: relative;
-		background: #f1f1f1f1;
+			position: relative;
+			background: #f1f1f1f1;
 		}
 
 		/* Slides */
 		.mySlides {
-		display: none;
-		padding: 80px;
-		text-align: center;
-		height: 600px;
+			display: none;
+			padding: 80px;
+			text-align: center;
+			height: 600px;
 		}
 
 		/* Next & previous buttons */
-		.prev, .next {
-		cursor: pointer;
-		position: absolute;
-		top: 50%;
-		width: auto;
-		margin-top: -30px;
-		padding: 16px;
-		color: #888;
-		font-weight: bold;
-		font-size: 20px;
-		border-radius: 0 3px 3px 0;
-		user-select: none;
+		.prev,
+		.next {
+			cursor: pointer;
+			position: absolute;
+			top: 50%;
+			width: auto;
+			margin-top: -30px;
+			padding: 16px;
+			color: #888;
+			font-weight: bold;
+			font-size: 20px;
+			border-radius: 0 3px 3px 0;
+			user-select: none;
 		}
 
 		/* Position the "next button" to the right */
 		.next {
-		position: absolute;
-		right: 0;
-		border-radius: 3px 0 0 3px;
+			position: absolute;
+			right: 0;
+			border-radius: 3px 0 0 3px;
 		}
 
 		/* On hover, add a black background color with a little bit see-through */
-		.prev:hover, .next:hover {
-		background-color: rgba(0,0,0,0.8);
-		color: white;
+		.prev:hover,
+		.next:hover {
+			background-color: rgba(0, 0, 0, 0.8);
+			color: white;
 		}
 
 		header .container-fluid {
-		padding-right: 0;
-		padding-left: 0;
+			padding-right: 0;
+			padding-left: 0;
 		}
 
 		header .container-fluid .row {
@@ -126,31 +131,31 @@
 	</style>
 
 	<script>
-			$(document).ready(function() {
-				// Nascondi tutte le sezioni tranne quella iniziale ("Stream")
-				$("#compiti-section, #persone-section").hide();
+		$(document).ready(function () {
+			// Nascondi tutte le sezioni tranne quella iniziale ("Stream")
+			$("#compiti-section, #persone-section").hide();
 
-				// Gestisci il click sui bottoni
-				$(".nav-link").click(function(event) {
-					event.preventDefault();
-					// Nascondi tutte le sezioni
-					$("#stream-section, #compiti-section, #persone-section").hide();
-					// Mostra la sezione corrispondente al bottone selezionato
-					$($(this).attr("href")).show();
-				});
+			// Gestisci il click sui bottoni
+			$(".nav-link").click(function (event) {
+				event.preventDefault();
+				// Nascondi tutte le sezioni
+				$("#stream-section, #compiti-section, #persone-section").hide();
+				// Mostra la sezione corrispondente al bottone selezionato
+				$($(this).attr("href")).show();
 			});
+		});
 	</script>
 
 	<script>
-		$(document).ready(function() {
-			$('#show-form-btn').click(function() {
+		$(document).ready(function () {
+			$('#show-form-btn').click(function () {
 				$('#annuncio-form').toggleClass('show');
 				$(this).fadeOut('600');
-		});
-		$('#ret-form-btn').click(function() {
+			});
+			$('#ret-form-btn').click(function () {
 				$('#annuncio-form').toggleClass('show');
 				$('#show-form-btn').fadeIn('600');
-		});
+			});
 
 
 
@@ -160,36 +165,35 @@
 			// $('.card-body').removeClass('show');
 			// });
 		});
-    </script>
-  	<script>
-		$(document).ready(function() {
+	</script>
+	<script>
+		$(document).ready(function () {
 			const mySwitch = document.getElementById("slider-compito");
 			$('#data-div').hide();
 			$('#ora-div').hide();
-			if(<?php echo "$studente";?>=="1") {$('#creaCompito').hide();}
-			else{
-			mySwitch.addEventListener("change", function() {
-			if (this.checked) {
-				$('#data-div').fadeIn('1000');
-				$('#ora-div').fadeIn('1000');
+			if (<?php echo "$studente"; ?> == "1") { $('#creaCompito').hide(); }
+			else {
+				mySwitch.addEventListener("change", function () {
+					if (this.checked) {
+						$('#data-div').fadeIn('1000');
+						$('#ora-div').fadeIn('1000');
 
-			} else {
-				$('#data-div').fadeOut('1000');
-				$('#ora-div').fadeOut('1000');
+					} else {
+						$('#data-div').fadeOut('1000');
+						$('#ora-div').fadeOut('1000');
+					}
+				});
 			}
-			});
-		}
 		});
 	</script>
 
 	<style>
 		.navbar-brand {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		text-align: center;
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			text-align: center;
 		}
-		
 	</style>
 	<script>
 		function copy() {
@@ -240,43 +244,48 @@
 
 	<style>
 		#codiceCliccabile:hover {
-			
-			color: blue;
-        	position: relative
 
+			color: blue;
+			position: relative
 		}
 	</style>
 
 </head>
+
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
 	<header>
 		<nav class="navbar nav navbar-dark bg-dark">
 			<div class="container-fluid">
 				<div class="d-flex align-items-center">
-					<button class="navbar-toggler ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+					<button class="navbar-toggler ms-1" type="button" data-bs-toggle="offcanvas"
+						data-bs-target="#sidebar" aria-controls="sidebar">
 						<span class="navbar-toggler-icon"></span>
 						<span class="visually-hidden">Toggle navigation</span>
 					</button>
-					<a class="navbar-brand text-center" href="#"><?php echo $nome ?></a>
+					<a class="navbar-brand text-center" href="#">
+						<?php echo $nome ?>
+					</a>
 				</div>
-				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#profile">
+				<button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas"
+					data-bs-target="#profile">
 					<i class="fa-sharp fa-regular fa-user fa-lg"></i>
 				</button>
 				<div class="offcanvas offcanvas-end" tabindex="-1" id="profile" aria-labelledby="profile-label">
 					<div class="offcanvas-header">
 						<h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
-						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+							aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
 						<?php
-							//Prendiamo dal db tutte le informazione dell'utente
-							$email = $_SESSION['email'];
-							$q="SELECT * FROM utente WHERE email=$1";
-							$result = pg_query_params($dbconn, $q, array($email));
-							$row = pg_fetch_array($result);
+						//Prendiamo dal db tutte le informazione dell'utente
+						$email = $_SESSION['email'];
+						$q = "SELECT * FROM utente WHERE email=$1";
+						$result = pg_query_params($dbconn, $q, array($email));
+						$row = pg_fetch_array($result);
 						?>
-						
+
 						<div class="container">
 							<!-- Campo informazioni generali: nome e cognome, con immagine e email-->
 							<div class="row">
@@ -285,53 +294,53 @@
 										<td>
 											<!-- Caricamento immagine -->
 											<?php
-												if($row['sesso']=="Maschio"){
-													if($_SESSION['flag']=="1"){
-														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
-													}
-													else{
-														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
-													}
+											if ($row['sesso'] == "Maschio") {
+												if ($_SESSION['flag'] == "1") {
+													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
+												} else {
+													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
 												}
-												else if($row['sesso']=="Femmina"){
-													if($_SESSION['flag']=="1"){
-														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
-													}
-													else{
-														echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
-													}
+											} else if ($row['sesso'] == "Femmina") {
+												if ($_SESSION['flag'] == "1") {
+													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
+												} else {
+													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
 												}
-												else{
-													echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
-												}
+											} else {
+												echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
+											}
 											?>
 										</td>
-										<td><?php echo "<br><h7><strong>".$row['nome']." ".$row['cognome']."</strong></h7>
+										<td>
+											<?php echo "<br><h7><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h7>
 														<br>
-														<h9>".$row['email']."</h9>"; ?></td>
+														<h9>" . $row['email'] . "</h9>"; ?>
+										</td>
 									</tr>
 								</table>
 							</div>
 							<hr>
 							<div class="row">
 								<!--Campo istituto-->
-								<p><?php echo "Istituto/Università: ".$row['istituto']; ?></p>
-								<?php 
-									//Campo data di nascita
-									if($row['sesso']=="Femmina")
-										echo "<p>Nata il ".date('d/m/Y', strtotime($row['dataN']))."</p>";
-									else
-										echo "<p>Nato il ".date('d/m/Y', strtotime($row['dataN']))."</p>";
-									
-									//Campo telefono se esiste
-									if($row['telefono']!="")
-										echo "<p>Numero di telefono: ".$row['telefono']."</p>";
-									
-									//Campo data iscrizione
-									echo "<p>Iscritto dal ".date('d/m/Y', strtotime($row['data_iscrizione']))."</p>";
-									
+								<p>
+									<?php echo "Istituto/Università: " . $row['istituto']; ?>
+								</p>
+								<?php
+								//Campo data di nascita
+								if ($row['sesso'] == "Femmina")
+									echo "<p>Nata il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+								else
+									echo "<p>Nato il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+
+								//Campo telefono se esiste
+								if ($row['telefono'] != "")
+									echo "<p>Numero di telefono: " . $row['telefono'] . "</p>";
+
+								//Campo data iscrizione
+								echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
+
 								?>
-								
+
 							</div>
 						</div>
 					</div>
@@ -340,7 +349,8 @@
 				<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
 					<div class="offcanvas-header">
 						<h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
-						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+							aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
 						<nav class="navbar navbar-white bg-white">
@@ -348,95 +358,95 @@
 								<!-- Inserimento pulsante "Home" -->
 								<li class="nav-item">
 									<a href="../IndexLogged.php" class="btn btn-outline-primary px-4 py-2">
-									<i class="fas fa-home mr-2"></i> 
-									<span class="font-weight-bold">Home</span>
+										<i class="fas fa-home mr-2"></i>
+										<span class="font-weight-bold">Home</span>
 									</a>
 								</li>
 								<!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
 								<?php
-									
-									$email = $_SESSION['email'];
-									//STUDENTE
-									if($_SESSION['flag']=='1'){
-										//Genera tutte le tuple che lo studente partecipa ai corsi
-										$q1 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
-										$result1 = pg_query_params($dbconn, $q1, array($email));
-										
-										
-										
-										if($row1=pg_fetch_array($result1, null, PGSQL_ASSOC)){
-											do{
 
-												$path = $row1['link'];
-												$file = './' . basename($path);
-												//Parte il layout
-												echo "	<br>
+								$email = $_SESSION['email'];
+								//STUDENTE
+								if ($_SESSION['flag'] == '1') {
+									//Genera tutte le tuple che lo studente partecipa ai corsi
+									$q1 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+									$result1 = pg_query_params($dbconn, $q1, array($email));
+
+
+
+									if ($row1 = pg_fetch_array($result1, null, PGSQL_ASSOC)) {
+										do {
+
+											$path = $row1['link'];
+											$file = './' . basename($path);
+											//Parte il layout
+											echo "	<br>
 												<li class='nav-item'>
 												<div class='card w-100 h-100'>
 												<div class='card-body d-flex flex-column '>
-													<h4 class='card-title'>".$row1['nome']."</h4>
+													<h4 class='card-title'>" . $row1['nome'] . "</h4>
 													<button type='button' class='btn btn-outline-info d-inline-block mx-1'
-															onClick=window.location.href='".$file."'>Vai al corso</button>
+															onClick=window.location.href='" . $file . "'>Vai al corso</button>
 												</div>
 											</div>
 												</li>
 											";
-												
-											}while($row1=pg_fetch_array($result1, null, PGSQL_ASSOC));
-										}
+
+										} while ($row1 = pg_fetch_array($result1, null, PGSQL_ASSOC));
 									}
-									//DOCENTE
-									else{
+								}
+								//DOCENTE
+								else {
 
-										//Genera tutte le tuple che il docente insegna ai corsi
-										$q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
-										$result1a = pg_query_params($dbconn, $q1a, array($email));
-										$var=0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+									//Genera tutte le tuple che il docente insegna ai corsi
+									$q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
+									$result1a = pg_query_params($dbconn, $q1a, array($email));
+									$var = 0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+								
+									if ($row2 = pg_fetch_array($result1a, null, PGSQL_ASSOC)) {
 
-										if($row2=pg_fetch_array($result1a, null, PGSQL_ASSOC)){
-
-											do {
-												$path = $row2['link'];
-												$file = './' . basename($path);
-												//Parte il layout
-												echo "	<br>
+										do {
+											$path = $row2['link'];
+											$file = './' . basename($path);
+											//Parte il layout
+											echo "	<br>
 												<li class='nav-item'>
 												<div class='card w-100 h-100'>
 												<div class='card-body d-flex flex-column '>
-													<h4 class='card-title'>".$row2['nome']."</h4>
+													<h4 class='card-title'>" . $row2['nome'] . "</h4>
 													<button type='button' class='btn btn-outline-info d-inline-block mx-1'
-															onClick=window.location.href='".$file."'>Vai al corso</button>
+															onClick=window.location.href='" . $file . "'>Vai al corso</button>
 												</div>
 											</div>
 												</li>
 											";
-											}while($row2=pg_fetch_array($result1a, null, PGSQL_ASSOC));
-										}
+										} while ($row2 = pg_fetch_array($result1a, null, PGSQL_ASSOC));
+									}
 
-										//Genera tutte le tuple che il docente partecipa ai corsi
-										$q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
-										$result1b = pg_query_params($dbconn, $q1b, array($email));
+									//Genera tutte le tuple che il docente partecipa ai corsi
+									$q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+									$result1b = pg_query_params($dbconn, $q1b, array($email));
 
-									
-										if($row3=pg_fetch_array($result1b, null, PGSQL_ASSOC)){
-											
-											do {
-												$path = $row3['link'];
-												$file = './' . basename($path);
-												//Parte il layout
-												echo "	<br>
+
+									if ($row3 = pg_fetch_array($result1b, null, PGSQL_ASSOC)) {
+
+										do {
+											$path = $row3['link'];
+											$file = './' . basename($path);
+											//Parte il layout
+											echo "	<br>
 														<li class='nav-item'>
 															<button type='button' class='btn btn-outline-info d-inline-block mx-1'
-																	onClick=window.location.href='".$file."'>".$row3['nome']."</button>
+																	onClick=window.location.href='" . $file . "'>" . $row3['nome'] . "</button>
 														</li>
 													";
 
-											} while($row3=pg_fetch_array($result1b, null, PGSQL_ASSOC));
-										}
-
+										} while ($row3 = pg_fetch_array($result1b, null, PGSQL_ASSOC));
 									}
-									
-									?>
+
+								}
+
+								?>
 
 							</ul>
 						</nav>
@@ -459,7 +469,7 @@
 				</ul>
 			</div>
 		</nav>
-	</header> 
+	</header>
 
 	<main class="container my-4" id="stream-section">
 		<div class="row">
@@ -467,75 +477,80 @@
 			<section class="col-lg-8">
 				<article class="card mb-4">
 					<header class="card-header bg-light">
-					  <h3 class="card-title mb-0">Inserisci un nuovo annuncio</h3>
+						<h3 class="card-title mb-0">Inserisci un nuovo annuncio</h3>
 					</header>
 					<div class="card-body">
-					  <button id="show-form-btn" class="btn btn-primary">Inserisci</button>
-					   <form id="annuncio-form" action="./annuncio.php" method="post">
-							<input type="hidden" name="classe" id="classe"value="<?php echo $codice_corso; ?>">
+						<button id="show-form-btn" class="btn btn-primary">Inserisci</button>
+						<form id="annuncio-form" action="./annuncio.php" method="post">
+							<input type="hidden" name="classe" id="classe" value="<?php echo $codice_corso; ?>">
 							<div class="mb-3">
 								<label for="titolo" class="form-label">Titolo</label>
-								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="8" required>
+								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="8"
+									required>
 								<small class="form-text text-muted">Massimo 8 caratteri</small>
 							</div>
 							<div class="mb-3">
 								<label for="testo" class="form-label">Testo</label>
-								<textarea class="form-control" id="testo" name="testo" rows="3" maxlength="20" required></textarea>
+								<textarea class="form-control" id="testo" name="testo" rows="3" maxlength="20"
+									required></textarea>
 							</div>
-						<div class="mb-2">
-							<!-- TODO: Non carica i file correttamente ma solo il nome del file -->
-						  <label for="allegati" class="form-label">Allegati</label>
-						  <input type="file" class="form-control" id="allegati" name="allegati">
-						</div>
-						<div id="creaCompito">
-						<label class="switch">
-								<input type="checkbox" id="slider-compito" name="slider-compito" onchange="toggleFieldDataOra()">
-								<span class="slider"></span>
-							</label> Compito
-						</div>
-						<div class="mb-3" id="data-div">
-							<label for="data_scadenza" class="form-label">Data</label>
-							<input type="date" class="form-control" id="data_scadenza" name="data_scadenza">
-						</div>
-						<div class="mb-3" id="ora-div">
-							<label for="orario" class="form-label">Orario</label>
-							<input type="time" class="form-control" id="orario" name="orario" value="">
-						</div>
-						<button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
-						<button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
-					  </form>
+							<div class="mb-2">
+								<!-- TODO: Non carica i file correttamente ma solo il nome del file -->
+								<label for="allegati" class="form-label">Allegati</label>
+								<input type="file" class="form-control" id="allegati" name="allegati">
+							</div>
+							<div id="creaCompito">
+								<label class="switch">
+									<input type="checkbox" id="slider-compito" name="slider-compito"
+										onchange="toggleFieldDataOra()">
+									<span class="slider"></span>
+								</label> Compito
+							</div>
+							<div class="mb-3" id="data-div">
+								<label for="data_scadenza" class="form-label">Data</label>
+								<input type="date" class="form-control" id="data_scadenza" name="data_scadenza">
+							</div>
+							<div class="mb-3" id="ora-div">
+								<label for="orario" class="form-label">Orario</label>
+								<input type="time" class="form-control" id="orario" name="orario" value="">
+							</div>
+							<button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
+							<button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
+						</form>
 					</div>
 				</article>
-				
+
 				<h2 class="mb-4">Ultimi annunci</h2>
 				<div class="mx-auto">
-						<input type="text" id="input-search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
+					<input type="text" id="input-search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
 				</div>
 				<!--ZONA DINAMICA: Implementazione oggetto AJAX display search-->
 				<div id="zonaDinamica">
 
 				</div>
-        <div id="ultimi-annunci">
-				  <?php include "./ultimi-annunci.php"; ?>
-        </div>
-				
+				<div id="ultimi-annunci">
+					<?php include "./ultimi-annunci.php"; ?>
+				</div>
+
 			</section>
 			<aside class="col-lg-4" id="aside-compiti">
-        	<div class="slideshow-container">
+				<div class="slideshow-container">
 
-          	<!-- Full-width slides/quotes -->
-			<?php include "./compiti-assegnati.php"?>
-			
-          <!-- Next/prev buttons -->
-          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-          <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-          
+					<!-- Full-width slides/quotes -->
+					<?php include "./compiti-assegnati.php" ?>
+
+					<!-- Next/prev buttons -->
+					<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+					<a class="next" onclick="plusSlides(1)">&#10095;</a>
+				</div>
+
 				<div class="card" id="codicecorsoCard">
 					<div class="card-body">
 						<h5 class="card-title">Codice corso</h5>
-						<p class="card-text" title="copia" id="codiceCliccabile" onclick="copy();"><?php echo $codice_corso;?></p>
+						<p class="card-text" title="copia" id="codiceCliccabile" onclick="copy();">
+							<?php echo $codice_corso; ?>
+						</p>
 					</div>
 				</div>
 			</aside>
@@ -544,76 +559,73 @@
 	<br>
 	<br>
 	<main class="container my-4" id="compiti-section">
-		<?php		
-			//Query
-			$q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null";
-			$result = pg_query_params($dbconn, $q, array($codice_corso));
+		<?php
+		//Query
+		$q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null";
+		$result = pg_query_params($dbconn, $q, array($codice_corso));
 
-			if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
-				echo "<div class='accordion accordion-flush' id='accordionFlushExample'>";
+		if ($row = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+			echo "<div class='accordion accordion-flush' id='accordionFlushExample'>";
 
-				$i = 0;
+			$i = 0;
 
-				do{
-					$i++;
-        			$var = "flush-collapse-".$i;
-					echo   
-						"<div class='accordion-item'>
+			do {
+				$i++;
+				$var = "flush-collapse-" . $i;
+				echo
+					"<div class='accordion-item'>
 							<h2 class='accordion-header'>
-								<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='false' aria-controls='".$var."'>
+								<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='false' aria-controls='" . $var . "'>
 								<span class='card-text bg-light text-black' style='font-size: 20px;'>
 									<i class='fa-solid fa-book' style='font-size: 20px;'></i>"
-									.$row['titolo'].
-								"</span>";
+					. $row['titolo'] .
+					"</span>";
 
-								//impostiamo la data di scadenza del compito
-								$data_scadenza = strtotime($row['data_scadenza']);
+				//impostiamo la data di scadenza del compito
+				$data_scadenza = strtotime($row['data_scadenza']);
 
-								//impostiamo la data attuale
-								$data_attuale = time();
+				//impostiamo la data attuale
+				$data_attuale = time();
 
-								//calcoliamo il numero di giorni rimanenti
-								$giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
-								$giorni_restanti+=1;
-								if($giorni_restanti<0) {
-									echo "
+				//calcoliamo il numero di giorni rimanenti
+				$giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
+				$giorni_restanti += 1;
+				if ($giorni_restanti < 0) {
+					echo "
 										<span style='margin-left: auto; font-size: 14px;'>
 											Tempo scaduto
 										</span>";
-								}
-								else if($giorni_restanti==1){
-									echo 
-									"<span style='margin-left: auto; font-size: 14px;'>"
-											.$giorni_restanti." giorno
+				} else if ($giorni_restanti == 1) {
+					echo
+						"<span style='margin-left: auto; font-size: 14px;'>"
+						. $giorni_restanti . " giorno
 										</span>";
-								}
-								else{
-									echo 
-									"<span style='margin-left: auto; font-size: 14px;'>"
-											.$giorni_restanti." giorni
+				} else {
+					echo
+						"<span style='margin-left: auto; font-size: 14px;'>"
+						. $giorni_restanti . " giorni
 										</span>";
-								}
-								echo      
-									"</button>
+				}
+				echo
+					"</button>
 									</h2>
-									<div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
+									<div id='" . $var . "' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
 										<div class='accordion-body'>
-											<p>".$row['testo']."</p>
+											<p>" . $row['testo'] . "</p>
 											<p>ALLEGATI</p>
 										</div>
 									</div>
 						</div> ";
 
-				} while($row=pg_fetch_array($result, null, PGSQL_ASSOC));
+			} while ($row = pg_fetch_array($result, null, PGSQL_ASSOC));
 
-				echo "</div>";
-			}
-			else{
-				echo "<p>Non ci sono compiti assegnati";
-			}
+			echo "</div>";
+		} else {
+			echo "<p>Non ci sono compiti assegnati";
+		}
 		?>
-								
-								
+
+
 	</main>
 
 	<main class="container my-4" id="persone-section">
@@ -621,25 +633,24 @@
 		<hr color="red">
 		<?php
 
-			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
+		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-			//Visualizza la lista dei professori che insegnano il corso
-			$q1 = "SELECT u.nome, u.cognome 
+		//Visualizza la lista dei professori che insegnano il corso
+		$q1 = "SELECT u.nome, u.cognome 
 					FROM corso c JOIN insegna i ON c.codice=i.corso JOIN utente u ON u.email=i.docente 
 					WHERE c.codice=$1";
 
-			$result1 = pg_query_params($dbconn, $q1, array($codice_corso));
+		$result1 = pg_query_params($dbconn, $q1, array($codice_corso));
 
-			if($row1=pg_fetch_array($result1, null, PGSQL_ASSOC)){
-				echo "<ul class='list-group list-group-flush'>";
-				do{
-					echo "<li class='list-group-item'>".$row1['nome']." ".$row1['cognome']."</li>";
-				} while($row1=pg_fetch_array($result1, null, PGSQL_ASSOC));
-				echo "</ul>";
-			}
-			else {
-				echo "<p>Nessun partecipante.</p>";
-			}
+		if ($row1 = pg_fetch_array($result1, null, PGSQL_ASSOC)) {
+			echo "<ul class='list-group list-group-flush'>";
+			do {
+				echo "<li class='list-group-item'>" . $row1['nome'] . " " . $row1['cognome'] . "</li>";
+			} while ($row1 = pg_fetch_array($result1, null, PGSQL_ASSOC));
+			echo "</ul>";
+		} else {
+			echo "<p>Nessun partecipante.</p>";
+		}
 
 		?>
 		<br>
@@ -647,62 +658,62 @@
 		<h1 class="display-6"><strong>Compagni di classe</strong></h1>
 		<hr>
 		<?php
-			$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
+		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-			//Visualizza la lista dei studenti che partecipano al corso
-			$q2 = "SELECT u.nome, u.cognome 
+		//Visualizza la lista dei studenti che partecipano al corso
+		$q2 = "SELECT u.nome, u.cognome 
 					FROM corso c JOIN partecipa p ON c.codice=p.corso JOIN utente u ON u.email=p.studente 
 					WHERE c.codice=$1";
 
-			$result2 = pg_query_params($dbconn, $q2, array($codice_corso));
+		$result2 = pg_query_params($dbconn, $q2, array($codice_corso));
 
-			if($row2=pg_fetch_array($result2, null, PGSQL_ASSOC)){
-				echo "<ul class='list-group list-group-flush'>";
-				do{
-					echo "<li class='list-group-item'>".$row2['nome']." ".$row2['cognome']."</li>";
-				} while($row2=pg_fetch_array($result2, null, PGSQL_ASSOC));
-				echo "</ul>";
-			}
-			else {
-				echo "<p>Nessun partecipante.</p>";
-			}
+		if ($row2 = pg_fetch_array($result2, null, PGSQL_ASSOC)) {
+			echo "<ul class='list-group list-group-flush'>";
+			do {
+				echo "<li class='list-group-item'>" . $row2['nome'] . " " . $row2['cognome'] . "</li>";
+			} while ($row2 = pg_fetch_array($result2, null, PGSQL_ASSOC));
+			echo "</ul>";
+		} else {
+			echo "<p>Nessun partecipante.</p>";
+		}
 		?>
 
 	</main>
-  
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+	<script>
+		var slideIndex = 1;
+		showSlides(slideIndex);
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
+		function plusSlides(n) {
+			showSlides(slideIndex += n);
+		}
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
+		function currentSlide(n) {
+			showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+			var i;
+			var slides = document.getElementsByClassName("mySlides");
+			var dots = document.getElementsByClassName("dot");
+			if (n > slides.length) { slideIndex = 1 }
+			if (n < 1) { slideIndex = slides.length }
+			for (i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			for (i = 0; i < dots.length; i++) {
+				dots[i].className = dots[i].className.replace(" active", "");
+			}
+			slides[slideIndex - 1].style.display = "block";
+			dots[slideIndex - 1].className += " active";
+		}
+	</script>
 	<footer class="bg-light fixed-bottom">
 		<div class="container py-3">
 			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
 		</div>
 	</footer>
-	
+
 </body>
+
 </html>
