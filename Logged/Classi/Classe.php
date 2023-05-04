@@ -338,9 +338,10 @@
 
 								//Campo data iscrizione
 								echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
-
+								
 								?>
-
+								<!--Link al file Profilo.php-->
+								<p><a href="../Profilo.php">Vai al mio profilo</a></p>
 							</div>
 						</div>
 					</div>
