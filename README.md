@@ -160,20 +160,19 @@ signup2.php
     - allargare la finestra dell'aside nello stream dei compiti assegnati. TODO:
     - tenere la data di scadenza centrale nella sezione compiti. TODO:
 2) Sostituire i bottoni nel file classe.php, i tuoi corsi. (EMANUELE) TODO: DA RIVEDERE
-3) Implementare il mio profilo nel file classe.php, inserire link profilo. (MARCO) TODO: 
 
-4) FILE DA GESTIRE (rividere il layout in generale; la responsive net: modificando la versione della finestra; pulizia codice):
+3) FILE DA GESTIRE (rividere il layout in generale; la responsive net: modificando la versione della finestra; pulizia codice):
 - index.php (f: num-recensioni.php) -> MARCO
 - IndexLogged.php (f: script-studente.html, script-docente.html, corsi.php) -> FABIO
 - Profilo.php (f: fotoprofilo.php, nome_studprof.php) -> MARCO
 - Classe.php (f: annuncio.php, compiti-assegnati.php, ultimi-annunci.php, search.php) -> EMANUELE
 
-5) FILE SEMI-COMPLETATI (rividere soltanto la responsive net: modificando la versione della finestra; pulizia codice):
+4) FILE SEMI-COMPLETATI (rividere soltanto la responsive net: modificando la versione della finestra; pulizia codice):
 - login.html -> FABIO
 - signup.html -> FABIO
 - signup2.php -> FABIO
 
-6) FILE COMPLETATI:
+5) FILE COMPLETATI:
 
 
 **PROSSIMAMENTE**
