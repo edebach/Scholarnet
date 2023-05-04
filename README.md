@@ -177,7 +177,7 @@ signup2.php
 
 
 **PROSSIMAMENTE**
-7) Vedere parte degli allegati (MARCO E EMANUELE) TODO:
-8) Vedere parte dei commenti (MARCO) TODO:
-9) Gestire l'inserimento delle recensioni (massimo una a settimana per utente) TODO:
+1) Vedere parte degli allegati (MARCO E EMANUELE) TODO:
+2) Vedere parte dei commenti (MARCO) TODO:
+3) Gestire l'inserimento delle recensioni (massimo una a settimana per utente) TODO:
 
