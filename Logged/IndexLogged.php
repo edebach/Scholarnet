@@ -33,15 +33,7 @@ session_start();
 	
 	<!-- FONT-AWESOME -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<style>
-		body{
-		/* fallback per browser meno recenti */
-		background: #e2f3f5;
 
-		/* per browser recenti */
-		background: linear-gradient(to right bottom, #e2f3f5, #b1d8db, #81bdcf, #539fc2, #1f7ea3);
-			}
-    </style>
 	<style>
 		footer {
 		  text-align: center;
@@ -124,7 +116,13 @@ session_start();
 						})
 					}
 					else {
-						html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+						if(rating=="1"){
+							html += '<p>Nessuna recensione trovata per ' + rating + ' stella.</p>';
+						}
+						else{
+							html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';							
+						}
+					
 					}
 
 
@@ -313,124 +311,6 @@ session_start();
 		</div>
 	</section>
 
-
-	<!-- Sezione Home -->
-	<!--
-	<section id="home-section" class="bg-image mt-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-auto">
-		-->
-					<!-- immagine di prova (carosello)-->
-					<!--
-					<div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-						<ol class="carousel-indicators">
-						  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-						  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-						</ol>
-						<div class="carousel-inner">
-						  <div class="carousel-item active">
-							<img class="d-block" src="https://images.pexels.com/photos/256395/pexels-photo-256395.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="First slide" style="width:1280px; height:720px;">
-						  </div>
-						  <div class="carousel-item">
-							<img class="d-block" src="https://images.pexels.com/photos/6209801/pexels-photo-6209801.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Second slide" style="width:1280px; height:720px;">
-						  </div>
-						  <div class="carousel-item">
-							<img class="d-block" src="https://images.pexels.com/photos/2874782/pexels-photo-2874782.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Third slide" style="width:1280px; height:720px;">
-						  </div>
-						</div>
-						<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-						  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						  <span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-						  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-						  <span class="sr-only">Next</span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<br>
-	<br>
-		-->
-	<!-- Sezione Descrizione -->
-	<!--
-	<section id="descrizione-section">
-		<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-			<h2>Descrizione</h2>
-			
-			<p>Qui potrai trovare informazioni dettagliate sul nostro sito e sui servizi offerti. Scopri come possiamo aiutarti!</p>
-			</div>
-		</div>
-		</div>
-  </section>
-
-  <br>
-  <br>
-		-->
-	<!-- Sezione Q&A -->
-	<!--<section id="qa-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<h2>Domande frequenti</h2>
-					<p>Qui troverai le risposte alle domande più frequenti sulla nostra azienda e i nostri prodotti.</p>
-					<div class="accordion" id="accordionExample">
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h3 class="mb-0">
-									<button class="btn btn-link dropdown" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-										Qual è il vostro prodotto più venduto?
-									</button>
-								</h3>
-							</div>
-
-							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-								<div class="card-body">
-									Il nostro prodotto più venduto è il nostro prodotto di punta, il quale è stato sviluppato con grande cura e attenzione ai dettagli per garantire una qualità eccellente.
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header" id="headingTwo">
-								<h3 class="mb-0">
-									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-										Come posso effettuare un ordine?
-									</button>
-								</h3>
-							</div>
-							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-								<div class="card-body">
-									Puoi effettuare un ordine sul nostro sito web, oppure contattarci telefonicamente o via e-mail per effettuare l'ordine.
-								</div>
-							</div>
-						</div>
-						<div class="card">
-							<div class="card-header" id="headingThree">
-								<h3 class="mb-0">
-									<button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-										Quanto tempo impiegate per la consegna?
-									</button>
-								</h3>
-							</div>
-							<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-								<div class="card-body">
-									Il tempo di consegna dipende dalla zona di consegna e dal tipo di prodotto. Solitamente la consegna avviene entro 3-5 giorni lavorativi.
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
--->
 	<br>
 	<br>
 		
@@ -494,7 +374,7 @@ session_start();
 					</div>
 					<div class="modal-body">
 						<div class="container">
-						<form name="recensione" action="../Recensioni/recensioni.php" method="POST">
+						<form name="inserisciRecensione" action="../Recensioni/recensioni.php" method="POST">
 							<!--PRIMA RIGA: Campo nome recensione-->
 							<div class="mb-3">
 								<label class="form-label">Nome recensione</label>
@@ -514,11 +394,11 @@ session_start();
 								</div>
 								<div>
 									<fieldset class="rating1 text-left">
-										<input type="radio" id="star5" name="rating1" value="5" /><label for="star5" title="Awesome - 5 stars"></label>
-										<input type="radio" id="star4" name="rating1" value="4" /><label for="star4" title="Pretty good - 4 stars"></label>
-										<input type="radio" id="star3" name="rating1" value="3" /><label for="star3" title="Meh - 3 stars"></label>
-										<input type="radio" id="star2" name="rating1" value="2" /><label for="star2" title="Kinda bad - 2 stars"></label>
-										<input type="radio" id="star1" name="rating1" value="1" /><label for="star1" title="Sucks big time - 1 star"></label>
+										<input type="radio" id="star5ins" name="rating1" value="5" /><label for="star5ins" title="Awesome - 5 stars"></label>
+										<input type="radio" id="star4ins" name="rating1" value="4" /><label for="star4ins" title="Pretty good - 4 stars"></label>
+										<input type="radio" id="star3ins" name="rating1" value="3" /><label for="star3ins" title="Meh - 3 stars"></label>
+										<input type="radio" id="star2ins" name="rating1" value="2" /><label for="star2ins" title="Kinda bad - 2 stars"></label>
+										<input type="radio" id="star1ins" name="rating1" value="1" /><label for="star1ins" title="Sucks big time - 1 star"></label>
 									</fieldset>
 								</div>
 							</div>
