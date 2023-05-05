@@ -62,6 +62,16 @@
 	</script>
 
 	<style>
+		.icona-grigia {
+			color: 	#DCDCDC;
+		}
+		.icona-nera {
+			color: #777777;
+		}
+		.icona:hover {
+			font-size: 1.5rem;
+			color: black;
+		}
 		.card {
 			width: 600px;
 		}
@@ -132,42 +142,6 @@
 
 	<script>
 		$(document).ready(function () {
-			// Nascondi tutte le sezioni tranne quella iniziale ("Stream")
-			$("#compiti-section, #persone-section").hide();
-
-			// Gestisci il click sui bottoni
-			$(".nav-link").click(function (event) {
-				event.preventDefault();
-				// Nascondi tutte le sezioni
-				$("#stream-section, #compiti-section, #persone-section").hide();
-				// Mostra la sezione corrispondente al bottone selezionato
-				$($(this).attr("href")).show();
-			});
-		});
-	</script>
-
-	<script>
-		$(document).ready(function () {
-			$('#show-form-btn').click(function () {
-				$('#annuncio-form').toggleClass('show');
-				$(this).fadeOut('600');
-			});
-			$('#ret-form-btn').click(function () {
-				$('#annuncio-form').toggleClass('show');
-				$('#show-form-btn').fadeIn('600');
-			});
-
-
-
-			// $('#annuncio-form').submit(function(event) {
-			// event.preventDefault();
-			// // Qui puoi aggiungere il codice per inviare l'annuncio al server
-			// $('.card-body').removeClass('show');
-			// });
-		});
-	</script>
-	<script>
-		$(document).ready(function () {
 			const mySwitch = document.getElementById("slider-compito");
 			$('#data-div').hide();
 			$('#ora-div').hide();
@@ -195,52 +169,6 @@
 			text-align: center;
 		}
 	</style>
-	<script>
-		function copy() {
-			// seleziona l'elemento che contiene il testo da copiare
-			const paragrafo = document.querySelector('#codiceCliccabile');
-
-			// crea un nuovo elemento di tipo textarea
-			const textarea = document.createElement('textarea');
-
-			// imposta il valore del textarea al testo del paragrafo
-			textarea.value = paragrafo.textContent;
-
-			// aggiungi il textarea alla pagina, ma fuori dalla visualizzazione
-			textarea.setAttribute('readonly', '');
-			textarea.style.position = 'absolute';
-			textarea.style.left = '-9999px';
-			document.body.appendChild(textarea);
-
-			// seleziona il contenuto del textarea
-			textarea.select();
-
-			// copia il contenuto selezionato negli appunti
-			document.execCommand('copy');
-
-			// rimuovi il textarea dalla pagina
-			document.body.removeChild(textarea);
-
-			alert('Testo copiato negli appunti!');
-		}
-
-	</script>
-
-	<script>
-		function toggleFieldDataOra() {
-			var slider = document.getElementById("slider-compito");
-			var dataInput = document.getElementById("data_scadenza");
-			var oraInput = document.getElementById("orario");
-
-			if (slider.checked) {
-				dataInput.setAttribute("required", "");
-				oraInput.setAttribute("value", "23:59");
-			} else {
-				dataInput.removeAttribute("required");
-				oraInput.removeAttribute("value");
-			}
-		}
-	</script>
 
 	<style>
 		#codiceCliccabile:hover {
@@ -249,6 +177,11 @@
 			position: relative
 		}
 	</style>
+	<script>
+
+	</script>
+
+<script src="./classe.js" language="javascript"></script>
 
 </head>
 
@@ -489,9 +422,19 @@
 								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="30" required>
 								<small class="form-text text-muted">Massimo 8 caratteri</small>
 							</div>
-							<div class="mb-3">
+							<div class="mb-3 position-relative">
 								<label for="testo" class="form-label">Testo</label>
-								<textarea class="form-control" id="testo" name="testo" rows="3" required></textarea>
+								<textarea class="form-control" id="testoAnnuncioForm" name="testo" rows="3" 
+								style="height: 200px; overflow-y: auto; padding-bottom: 60px; resize: none;"required></textarea>
+								<a href="#" class="position-absolute bottom-0 start-0" style="margin: 10px 5px 5px 10px;"> 
+									<i class="fa-sharp fa-solid fa-bold icona icona-grassetto icona-nera" id="icona-grassetto" title="grassetto"></i> 
+								</a>
+								<a href="#" class="position-absolute bottom-0 start-0 icona" style="margin: 10px 5px 5px 30px;">
+									<i class="fa-sharp fa-solid fa-italic icona icona-italic icona-nera" id="icona-italic" title="italic"></i> 
+							 	</a>
+								<a href="#" class="position-absolute bottom-0 start-0 icona" style="margin: 10px 5px 5px 50px;">
+									<i class="fa-sharp fa-solid fa-underline icona icona-underline icona-nera" id="icona-underline" title="underline"></i> 
+							 	</a>
 							</div>
 							<div class="mb-2">
 								<!-- TODO: Non carica i file correttamente ma solo il nome del file -->
