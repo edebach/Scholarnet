@@ -56,171 +56,150 @@
 	</script>
 </head>
 <body>
-	<?php
-		//$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
-		$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
+<?php
+//$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
+$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-		//Query
-		$q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
-		$result = pg_query_params($dbconn, $q, array($codice_corso));
+//Query
+$q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
+$result = pg_query_params($dbconn, $q, array($codice_corso));
 
-		if($row=pg_fetch_array($result, null, PGSQL_ASSOC)){
+// Calcola il numero totale di compiti per la classe
+$num_compiti = pg_num_rows($result);
 
-			do{ 
-				//ANNUNCIO
-				if(empty($row['data_scadenza'])){
-					echo "
-					<div class='card text-black bg-light mb-3 d-inline-block'>
-						<div class='card-body'>";
-						if(!$_SESSION['flag'] or $row['email']==$_SESSION['email']) echo "
-						<div class='position-absolute top-0 end-0'>
-                            <div class='dropdown'>
-                                <button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-								<i class='fa-solid fa-xmark fa-xs'></i>                                </button>
-                                <ul class='dropdown-menu dropdown-menu-end'>
-                                    <li>
-                                        <div class='text-center'>
-                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
-                                                    data-action='../Elimina/elimina-annuncio.php' 
-													data-testo='".$row['testo']."' 
-													data-titolo='".$row['titolo']."'
-													data-corso='".$codice_corso."'
-													>Elimina annuncio
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>";
-						echo	"<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
-								<span style='font-size: 18px;'>
-									<i class='fa-sharp fa-solid fa-scroll'></i>
-									".$row['titolo']."-".$row['utente']."
-								</span>
-								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>".date('d/m/Y', strtotime($row['pubblicazione']))."</span>
-							</div>
-							<hr>
-							<div class='card-body'>
-								<p class='card-text'>".$row['testo']."</p>
-								<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
-							</div>
+// Calcola il numero di pagine
+$num_pagine = ceil($num_compiti / 5);
+
+// Ottieni il numero di pagina corrente dalla query string
+$pagina_corrente = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
+
+// Calcola l'indice di partenza del subset di compiti da visualizzare
+$indice_inizio = ($pagina_corrente - 1) * 5;
+
+// Seleziona i 5 compiti più recenti per la pagina corrente
+if (pg_num_rows($result) > 0) {
+	pg_result_seek($result, $indice_inizio);
+	$row= pg_fetch_array($result, null, PGSQL_ASSOC);
+	$count=0;
+
+	do {
+		//ANNUNCIO
+		if (empty($row['data_scadenza'])) {
+			echo "
+				<div class='card text-black bg-light mb-3 d-inline-block'>
+					<div class='card-body'>";
+			if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
+				echo "
+					<div class='position-absolute top-0 end-0'>
+						<div class='dropdown'>
+							<button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+							<i class='fa-solid fa-xmark fa-xs'></i>                                </button>
+							<ul class='dropdown-menu dropdown-menu-end'>
+								<li>
+									<div class='text-center'>
+										<button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
+												data-action='../Elimina/elimina-annuncio.php' 
+												data-testo='" . $row['testo'] . "' 
+												data-titolo='" . $row['titolo'] . "'
+												data-corso='" . $codice_corso . "'
+												>Elimina annuncio
+										</button>
+									</div>
+								</li>
+							</ul>
 						</div>
-						<footer class='card-footer'>
-							<a href='#' class='card-link text-black'>Commenti (3)</a>
-						</footer>
 					</div>";
-				}
-				//COMPITO
-				else{
-					echo "
-					<div class='card text-black bg-light mb-3 d-inline-block'>
+			echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
+							<span style='font-size: 18px;'>
+								<i class='fa-sharp fa-solid fa-scroll'></i>
+								" . $row['titolo'] . "-" . $row['utente'] . "
+							</span>
+							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>" . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
+						</div>
+						<hr>
 						<div class='card-body'>
-						";
-						if(!$_SESSION['flag']) echo "
-						<div class='position-absolute top-0 end-0'>
-                            <div class='dropdown'>
-                                <button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                <i class='fa-solid fa-xmark fa-xs'></i>
-                                </button>
-                                <ul class='dropdown-menu dropdown-menu-end'>
-                                    <li>
-                                        <div class='text-center'>
-                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
-                                                    data-action='../Elimina/elimina-annuncio.php'
-													data-testo='".$row['testo']."' 
-													data-titolo='".$row['titolo']."'
-													data-corso='".$codice_corso."'													  
-                                                    	>Elimina annuncio
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>";
-						echo	"
-
-
-							<div style='display: flex; align-items: center;'>
-								<span class='card-text bg-light text-black' style='font-size: 18px;'>
-									<i class='fa-solid fa-book' style='font-size: 18px;'></i>
-									".$row['titolo']."-".$row['utente']."
-								</span>
-								<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
-									Data di pubblicazione: ".date('d/m/Y', strtotime($row['pubblicazione']))."
-								</span>
-							</div>
-							<hr>
-							<div class='card-body'>
-								<p class='card-text'>".$row['testo']."</p>
-								<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
-							</div>
-							<hr>
-								<p class='card-text' style='margin-left: 12px'>Data di consegna: ".date('d/m/Y', strtotime($row['data_scadenza']))."</p>
+							<p class='card-text'>" . $row['testo'] . "</p>
+							<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
 						</div>
-						<footer class='card-footer'>
-							<a href='#' class='card-link text-black'>Commenti (3)</a>
-						</footer>
+					</div>
+					<footer class='card-footer'>
+						<a href='#' class='card-link text-black'>Commenti (3)</a>
+					</footer>
+				</div>";
+		}
+		//COMPITO
+		else {
+			echo "
+				<div class='card text-black bg-light mb-3 d-inline-block'>
+					<div class='card-body'>
+					";
+			if (!$_SESSION['flag'])
+				echo "
+					<div class='position-absolute top-0 end-0'>
+						<div class='dropdown'>
+							<button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+							<i class='fa-solid fa-xmark fa-xs'></i>
+							</button>
+							<ul class='dropdown-menu dropdown-menu-end'>
+								<li>
+									<div class='text-center'>
+										<button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
+												data-action='../Elimina/elimina-annuncio.php'
+												data-testo='" . $row['testo'] . "' 
+												data-titolo='" . $row['titolo'] . "'
+												data-corso='" . $codice_corso . "'													  
+													>Elimina annuncio
+										</button>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>";
-
-				}
-
-			} while($row=pg_fetch_array($result, null, PGSQL_ASSOC));
+			echo "
 
 
+						<div style='display: flex; align-items: center;'>
+							<span class='card-text bg-light text-black' style='font-size: 18px;'>
+								<i class='fa-solid fa-book' style='font-size: 18px;'></i>
+								" . $row['titolo'] . "-" . $row['utente'] . "
+							</span>
+							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
+								Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "
+							</span>
+						</div>
+						<hr>
+						<div class='card-body'>
+							<p class='card-text'>" . $row['testo'] . "</p>
+							<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
+						</div>
+						<hr>
+							<p class='card-text' style='margin-left: 12px'>Data di consegna: " . date('d/m/Y', strtotime($row['data_scadenza'])) . "</p>
+					</div>
+					<footer class='card-footer'>
+						<a href='#' class='card-link text-black'>Commenti (3)</a>
+					</footer>
+				</div>";
 
 		}
-		else{
-			echo "<p>Al momento non ci sono annunci.</p>";
-		}
+		$count++;
 
-	?>
-	<!--COMPITO-->
-	<!--<div class="card text-black bg-light mb-3 d-inline-block">
-		<div class="card-body">
-			<div style="display: flex; align-items: center;">
-				<span class="card-text bg-light text-black" style="font-size: 20px;">
-				<i class="fa-solid fa-book" style="font-size: 20px;"></i>
-				Compito
-				</span>
-				<span style="margin-left: auto; font-size: 18px;">
-					Data di pubblicazione: 01/01/2022
-				</span>
-			</div>
-			<hr>
-			<div class="card-body">
-				<p class="card-text">Testo dell'annuncio</p>
-				<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
-			</div>
-			<hr>
-				<p class="card-text" style="margin-left: 18px">Data di consegna: 01/01/2022</p>
-		</div>
-		<footer class="card-footer">
-			<a href="#" class="card-link text-black">Commenti (3)</a>
-		</footer>
-	</div>-->
+	} while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) and $count<5);
 
-	<!--ANNUNCIO-->
-	<!--<div class="card text-black bg-light mb-3 d-inline-block">
-		<div class="card-body">
-			<div class="card-text bg-light text-black" style="display: flex; align-items: center;">
-				<span style="font-size: 20px;">
-					<i class="fa-sharp fa-solid fa-scroll"></i>
-					Annuncio
-				</span>
-				<span style="margin-left: auto; font-size: 18px;">
-					Data di pubblicazione: 01/01/2022
-				</span>
-			</div>
-			<hr>
-			<div class="card-body">
-				<p class="card-text">Testo dell'annuncio</p>
-				<p class="card-text ml-3">Allegati: <a class="card-link text-black" href="#">file1.pdf</a>, <a class="card-link text-black"href="#">file2.docx</a></p>
-			</div>
-		</div>
-		<footer class="card-footer">
-			<a href="#" class="card-link text-black">Commenti (3)</a>
-		</footer>
-	</div>-->
+	// Mostra l'elenco di numeri di pagina per la paginazione
+	echo "<nav aria-label='Page navigation example'>
+			<ul class='pagination '>";
+	for ($pagina = 1; $pagina <= $num_pagine; $pagina++) {
+		if ($pagina == $pagina_corrente) {
+			echo "<li class='page-item active'><a class='page-link' href='#'>$pagina</a></li>";
+		} else {
+			echo "<li class='page-item'><a class='page-link' href='?pagina=$pagina'>$pagina</a></li>";
+		}		
+	}
+	echo "</ul></nav>";
+} else {
+	echo "<p>Al momento non ci sono annunci.</p>";
+}
+?>
 
 </body>
 </html>

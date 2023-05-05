@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,49 +8,49 @@
     <title>Creazione corso</title>
 
 </head>
+
 <body>
     <?php
     session_start();
-    
+
 
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
         header("Location: /");
-    }
-    else {
+    } else {
         $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-                user=postgres password=biar") 
-                or die('Could not connect: ' . pg_last_error());
+                user=postgres password=biar")
+            or die('Could not connect: ' . pg_last_error());
     }
 
     //Quando viene creato un corso viene generato in maniera casuale un codice di 8 cifre alfanumeriche
-
+    
 
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
-    
 
 
-    if($materia==""){
+
+    if ($materia == "") {
         $materia = null;
     }
 
-    
-    //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
 
+    //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
+    
 
     //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
-    do{
+    do {
         $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codice = substr(str_shuffle($chars), 0, 8);
         $q1 = "SELECT * FROM corso WHERE codice=$1";
         $result = pg_query_params($dbconn, $q1, array($codice));
 
-    } while(($tuple=pg_fetch_array($result, null, PGSQL_ASSOC)));
-        
+    } while (($tuple = pg_fetch_array($result, null, PGSQL_ASSOC)));
+
     $nome_file_originale = "../Classi/Classe.php"; // nome del file PHP originale
     $nome_file_nuovo = "Classe_" . $codice . ".php"; // crea il nuovo nome del file con il codice del corso
-
+    
     // imposta la cartella di destinazione dove verrà salvato il nuovo file
     $cartella_destinazione = "../Classi/";
 
@@ -66,8 +67,8 @@
         </script>";
     }
     //inserisco i valori nella tabella corso
-    $link = $cartella_destinazione. $nome_file_nuovo;
-    
+    $link = $cartella_destinazione . $nome_file_nuovo;
+
     // Array di 5 link di immagini
     $image_links = array(
         "https://cdn.pixabay.com/photo/2017/02/24/02/37/classroom-2093744_1280.jpg",
@@ -83,23 +84,24 @@
 
     $q2 = "INSERT INTO corso(codice,nome,materia,link, link_imm) VALUES ($1, $2, $3, $4, $5)";
     $data = pg_query_params($dbconn, $q2, array($codice, $nomeCorso, $materia, $link, $link_imm));
-    
+
     //inserisco i valori nella tabella insegna
     $flag = $_SESSION['flag']; //do per scontato che sia un docente
     $email = $_SESSION['email'];
 
-    
+
     $q4 = "INSERT INTO insegna VALUES($1, $2)";
     $data2 = pg_query_params($dbconn, $q4, array($email, $codice));
-    
+
     if ($data) {
         echo "<script>
                 alert('Corso creato con successo!');
             </script>";
-            header("Location: $link");
+        header("Location: $link");
     }
 
 
     ?>
 </body>
+
 </html>
