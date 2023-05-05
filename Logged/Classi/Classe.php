@@ -338,9 +338,10 @@
 
 								//Campo data iscrizione
 								echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
-
+								
 								?>
-
+								<!--Link al file Profilo.php-->
+								<p><a href="../Profilo.php">Vai al mio profilo</a></p>
 							</div>
 						</div>
 					</div>
@@ -485,14 +486,12 @@
 							<input type="hidden" name="classe" id="classe" value="<?php echo $codice_corso; ?>">
 							<div class="mb-3">
 								<label for="titolo" class="form-label">Titolo</label>
-								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="8"
-									required>
+								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="30" required>
 								<small class="form-text text-muted">Massimo 8 caratteri</small>
 							</div>
 							<div class="mb-3">
 								<label for="testo" class="form-label">Testo</label>
-								<textarea class="form-control" id="testo" name="testo" rows="3" maxlength="20"
-									required></textarea>
+								<textarea class="form-control" id="testo" name="testo" rows="3" required></textarea>
 							</div>
 							<div class="mb-2">
 								<!-- TODO: Non carica i file correttamente ma solo il nome del file -->

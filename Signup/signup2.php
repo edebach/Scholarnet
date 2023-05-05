@@ -129,12 +129,6 @@ $_SESSION['flag'] = $_POST['flag'];
         <div class="row" id="BottoneIndietro">
           <button onclick="window.history.back()" class="btn btn-secondary">Indietro</button>
         </div>
-        <div class="mt-2">
-          <div style="text-align: center">
-
-            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="../Login/login.html">Sei già iscritto? Effettua l'accesso!</a>
-          </div> 
-        </div>
       </form>
     </div>
   </body>

@@ -155,16 +155,29 @@ signup.html
 signup2.php
 
 **Cose Da Fare Rimaste**
-1) Titolo compito: (FABIO)
-    -aggiungere il pattern per un limite massimo di caratteri TODO: CAMBIARE LIMITE
-    -allargare la finestra dell'aside nello stream dei compiti assegnati TODO:
-    -tenere la data di scadenza centrale nella sezione compiti TODO:
-2) Sostituire i bottoni nel file classe.php, i tuoi corsi (EMANUELE) TODO:DA RIVEDERE
+1) Titolo compito: (EMANUELE)
+    - aggiungere il pattern per un limite massimo di caratteri 30 caratteri, testo no limite. TODO:
+    - allargare la finestra dell'aside nello stream dei compiti assegnati. TODO:
+    - tenere la data di scadenza centrale nella sezione compiti. TODO:
+2) Sostituire i bottoni nel file classe.php, i tuoi corsi. (EMANUELE) TODO: DA RIVEDERE
 
-3) Implementare il mio profilo nel file classe.php, inserire link profilo (MARCO)TODO: 
-4) RIVEDERE LO SFONDO(EMA)TODO:
-5) INIZIARE A MODIFICARE I CAMPI I TESTO DAL PRIMO FILE(FABIO) TODO:
-6) 
-7) Vedere parte degli allegati (MARCO E EMANUELE) TODO:
-8) Vedere parte dei commenti (MARCO) TODO:
+3) FILE DA GESTIRE (rividere il layout in generale; la responsive net: modificando la versione della finestra; pulizia codice):
+- index.php (f: num-recensioni.php) -> MARCO
+- IndexLogged.php (f: script-studente.html, script-docente.html, corsi.php) -> FABIO
+- Profilo.php (f: fotoprofilo.php, nome_studprof.php) -> MARCO
+- Classe.php (f: annuncio.php, compiti-assegnati.php, ultimi-annunci.php, search.php) -> EMANUELE
+
+4) FILE SEMI-COMPLETATI (rividere soltanto la responsive net: modificando la versione della finestra; pulizia codice):
+- login.html -> FABIO
+- signup.html -> FABIO
+- signup2.php -> FABIO
+
+5) FILE COMPLETATI:
+
+
+**PROSSIMAMENTE**
+1) Vedere parte degli allegati (MARCO E EMANUELE) TODO:
+2) Vedere parte dei commenti (MARCO) TODO:
+3) Gestire l'inserimento delle recensioni (massimo una a settimana per utente) TODO:
+4) Aggiungere una sezione chat nel file Classe.php (MARCO) TODO:
 

@@ -291,7 +291,7 @@ session_start();
 					<form name="creazione" action="./Crea/crea.php" method="POST">
 						<!--PRIMA RIGA: Campo nome corso-->
 						<div class="mb-3">
-							<input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" required>
+							<input class="form-control" type="text" name="nomeCorso" placeholder="Nome corso" maxlength="50" required>
 						</div>
 						<!--SECONDA RIGA: Campo materia-->
 						<div class="mb-3">
