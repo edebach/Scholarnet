@@ -29,16 +29,16 @@
 
   <style>
     footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(45, 42, 42);
-  color: rgb(237, 237, 237);
-  text-align: center;
-  padding: 1px;
-  z-index: 9999;
-}
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: rgb(45, 42, 42);
+      color: rgb(237, 237, 237);
+      text-align: center;
+      padding: 1px;
+      z-index: 9999;
+    }
 
     @media screen and (min-width: 768px) {
       .collapse.navbar-collapse {
