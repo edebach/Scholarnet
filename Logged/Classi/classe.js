@@ -98,8 +98,8 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(0, selectionStart) +
         boldText +
         textarea.value.substring(selectionEnd);
-      // textarea.selectionStart = selectionStart + 2;
-      // textarea.selectionEnd = selectionEnd + 2;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     } else {
       const selectedText = textarea.value.substring(
         selectionStart,
@@ -112,9 +112,10 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(selectionEnd);
       textarea.value = newText;
       // riposizioniamo il cursore dopo il testo in grassetto
-      // textarea.selectionStart = selectionStart + 2;
-      // textarea.selectionEnd = selectionEnd + 2;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     }
+    textarea.focus();
   });
   italicButton.addEventListener("click", function () {
     const selectionStart = textarea.selectionStart;
@@ -128,8 +129,8 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(0, selectionStart) +
         ialicText +
         textarea.value.substring(selectionEnd);
-      // textarea.selectionStart = selectionStart + 1;
-      // textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 1;
+      textarea.selectionEnd = selectionEnd + 1;
     } else {
       const selectedText = textarea.value.substring(
         selectionStart,
@@ -142,9 +143,10 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(selectionEnd);
       textarea.value = newText;
       // riposizioniamo il cursore dopo il testo
-      // textarea.selectionStart = selectionStart + 1;
-      // textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 1;
+      textarea.selectionEnd = selectionEnd + 1;
     }
+    textarea.focus();
   });
   underlineButton.addEventListener("click", function () {
     const selectionStart = textarea.selectionStart;
@@ -158,8 +160,8 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(0, selectionStart) +
         underlineText +
         textarea.value.substring(selectionEnd);
-      // textarea.selectionStart = selectionStart + 1;
-      // textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 1;
+      textarea.selectionEnd = selectionEnd + 1;
     } else {
       const selectedText = textarea.value.substring(
         selectionStart,
@@ -172,9 +174,10 @@ $iconaitalic.on("click", function () {
         textarea.value.substring(selectionEnd);
       textarea.value = newText;
       // riposizioniamo il cursore dopo il testo
-      // textarea.selectionStart = selectionStart + 1;
-      // textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 1;
+      textarea.selectionEnd = selectionEnd + 1;
     }
+    textarea.focus();
   });
 
 

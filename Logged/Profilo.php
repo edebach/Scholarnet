@@ -199,7 +199,6 @@
                         <span class="text-muted" id="email">
                           <?php echo $_SESSION["email"]; ?>
                         </span>
-                        <?php echo $_SESSION["email"]; ?>
                       </p>
                     </div>
                     <div class="col-6 mb-3">

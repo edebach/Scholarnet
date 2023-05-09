@@ -24,7 +24,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Classe</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="classe.css">
 
 
 
@@ -63,85 +63,7 @@
 	</script>
 
 	<style>
-		.navbar .btn:last-child:hover {
-    		transition: background-color 0.5s ease-out;
-		}
-		.icona-grigia {
-			color: 	#DCDCDC;
-		}
-		.icona-nera {
-			color: #777777;
-		}
-		.icona:hover {
-			font-size: 1.5rem;
-			color: black;
-		}
-		.card {
-			width: 600px;
-		}
 
-		#codicecorsoCard {
-			width: 180px;
-			margin-top: 4px;
-		}
-
-		* {
-			box-sizing: border-box
-		}
-
-		/* Slideshow container */
-		.slideshow-container {
-			position: relative;
-			background: #f1f1f1f1;
-		}
-
-		/* Slides */
-		.mySlides {
-			display: none;
-			padding: 80px;
-			text-align: center;
-			height: 600px;
-		}
-
-		/* Next & previous buttons */
-		.prev,
-		.next {
-			cursor: pointer;
-			position: absolute;
-			top: 50%;
-			width: auto;
-			margin-top: -30px;
-			padding: 16px;
-			color: #888;
-			font-weight: bold;
-			font-size: 20px;
-			border-radius: 0 3px 3px 0;
-			user-select: none;
-		}
-
-		/* Position the "next button" to the right */
-		.next {
-			position: absolute;
-			right: 0;
-			border-radius: 3px 0 0 3px;
-		}
-
-		/* On hover, add a black background color with a little bit see-through */
-		.prev:hover,
-		.next:hover {
-			background-color: rgba(0, 0, 0, 0.8);
-			color: white;
-		}
-
-		header .container-fluid {
-			padding-right: 0;
-			padding-left: 0;
-		}
-
-		header .container-fluid .row {
-			margin-right: 0;
-			margin-left: 0;
-		}
 	</style>
 
 	<script>
@@ -166,20 +88,11 @@
 	</script>
 
 	<style>
-		.navbar-brand {
-			position: absolute;
-			left: 50%;
-			transform: translateX(-50%);
-			text-align: center;
-		}
+
 	</style>
 
 	<style>
-		#codiceCliccabile:hover {
 
-			color: blue;
-			position: relative
-		}
 	</style>
 	<script>
 
@@ -192,7 +105,7 @@
 <body>
 	<!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
 	<header>
-		<nav class="navbar nav navbar-dark bg-dark">
+		<nav class="navbar nav navbar-dark bg-dark flex-wrap">
 			<div class="container-fluid">
 				<div class="d-flex align-items-center">
 					<button class="navbar-toggler ms-1" type="button" data-bs-toggle="offcanvas"
@@ -413,7 +326,7 @@
 		<div class="row">
 			<!-- inizio sesione stream -->
 			<section class="col-lg-8">
-				<article class="card mb-4">
+				<article class="card mb-4 col-12 w-100" style="max-width: 500px;">
 					<header class="card-header bg-light">
 						<h3 class="card-title mb-0">Inserisci un nuovo annuncio</h3>
 					</header>
@@ -424,7 +337,6 @@
 							<div class="mb-3">
 								<label for="titolo" class="form-label">Titolo</label>
 								<input type="text" class="form-control" id="titolo" name="titolo" maxlength="30" required>
-								<small class="form-text text-muted">Massimo 8 caratteri</small>
 							</div>
 							<div class="mb-3 position-relative">
 								<label for="testo" class="form-label">Testo</label>
@@ -520,12 +432,14 @@
 				$var = "flush-collapse-" . $i;
 				echo
 					"<div class='accordion-item'>
-							<h2 class='accordion-header'>
-								<button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='false' aria-controls='" . $var . "'>
-								<span class='card-text bg-light text-black' style='font-size: 20px;'>
-									<i class='fa-solid fa-book' style='font-size: 20px;'></i>"
-					. $row['titolo'] .
-					"</span>";
+						<h2 class='accordion-header'>
+							<button class='accordion-button collapsed row align-items-center' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='false' aria-controls='" . $var . "'>
+								<div class='col-4'>
+									<span class='card-text text-black' style='font-size: 20px;'>
+										<i class='fa-solid fa-book' style='font-size: 20px;'></i>
+										<label class='ml-2'>" . $row['titolo'] . "</label>
+									</span>
+								</div>";
 
 				//impostiamo la data di scadenza del compito
 				$data_scadenza = strtotime($row['data_scadenza']);
@@ -536,32 +450,20 @@
 				//calcoliamo il numero di giorni rimanenti
 				$giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
 				$giorni_restanti += 1;
-				if ($giorni_restanti < 0) {
-					echo "
-										<span style='margin-left: auto; font-size: 14px;'>
-											Tempo scaduto
-										</span>";
-				} else if ($giorni_restanti == 1) {
-					echo
-						"<span style='margin-left: auto; font-size: 14px;'>"
-						. $giorni_restanti . " giorno
-										</span>";
-				} else {
-					echo
-						"<span style='margin-left: auto; font-size: 14px;'>"
-						. $giorni_restanti . " giorni
-										</span>";
-				}
+
+				echo "<div class='col-4 text-center  '>" . $giorni_restanti . " giorni</div>";
+				echo "<div class='col-4  '></div>";
+
 				echo
 					"</button>
-									</h2>
-									<div id='" . $var . "' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
-										<div class='accordion-body'>
-											<p>" . $row['testo'] . "</p>
-											<p>ALLEGATI</p>
-										</div>
-									</div>
-						</div> ";
+						</h2>
+						<div id='" . $var . "' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
+							<div class='accordion-body'>
+								<p>" . $row['testo'] . "</p>
+								<p>ALLEGATI</p>
+							</div>
+						</div>
+					</div> ";
 
 			} while ($row = pg_fetch_array($result, null, PGSQL_ASSOC));
 
