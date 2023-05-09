@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <?php
-session_start();
-$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-              user=postgres password=biar")
-  or die('Could not connect: ' . pg_last_error());
-$q1 = "SELECT SUM(conteggio) AS somma
-      FROM (
-        SELECT count(*) AS conteggio
-        FROM partecipa
-        WHERE studente=$1
-        UNION ALL
-        SELECT count(*) AS conteggio
-        FROM insegna
-        WHERE docente=$1
-      ) AS conteggi; ";
-$ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
-$num_corsi = pg_fetch_result($ris, 0, 'somma');
-$q2 = "SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
-        FROM corso c
-        LEFT JOIN insegna i ON c.codice = i.corso
-        LEFT JOIN partecipa p ON c.codice = p.corso
-        WHERE i.docente = $1 OR p.studente = $1
-        GROUP BY c.nome
-        ORDER BY num_iscritti DESC
-        LIMIT 1;
-        ";
-$max_corso = "";
-$ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
-if (pg_num_rows($ris) > 0)
-  $max_corso = pg_fetch_result($ris, 0, 'corso');
-
+  session_start();
+  $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+                user=postgres password=biar")
+    or die('Could not connect: ' . pg_last_error());
+  $q1 = "SELECT SUM(conteggio) AS somma
+        FROM (
+          SELECT count(*) AS conteggio
+          FROM partecipa
+          WHERE studente=$1
+          UNION ALL
+          SELECT count(*) AS conteggio
+          FROM insegna
+          WHERE docente=$1
+        ) AS conteggi; ";
+  $ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
+  $num_corsi = pg_fetch_result($ris, 0, 'somma');
+  $q2 = "SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
+          FROM corso c
+          LEFT JOIN insegna i ON c.codice = i.corso
+          LEFT JOIN partecipa p ON c.codice = p.corso
+          WHERE i.docente = $1 OR p.studente = $1
+          GROUP BY c.nome
+          ORDER BY num_iscritti DESC
+          LIMIT 1;
+          ";
+  $max_corso = "";
+  $ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
+  if (pg_num_rows($ris) > 0)
+    $max_corso = pg_fetch_result($ris, 0, 'corso');
 ?>
+
 <html lang="en">
 
 <head>
@@ -182,10 +182,11 @@ if (pg_num_rows($ris) > 0)
               <button type="button" class="btn-close" aria-label="Close" onclick="window.history.back()"></button>
               <div class="col-md-4 gradient-custom text-center text-white"
                 style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+
                 <!-- immagine profilo in base a professione e sesso -->
                 <?php include "./Profilo/fotoprofilo.php" ?>
                 <?php include "./Profilo/nome_studprof.php" ?>
-                <!-- <i class="far fa-edit mb-5"></i> -->
+                
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
@@ -198,11 +199,10 @@ if (pg_num_rows($ris) > 0)
                         <span class="text-muted" id="email">
                           <?php echo $_SESSION["email"]; ?>
                         </span>
-                        <!-- <input type="email" class="form-control d-none" id="email-input" value="<?php echo $_SESSION["email"]; ?>"> -->
+                        <?php echo $_SESSION["email"]; ?>
                       </p>
                     </div>
                     <div class="col-6 mb-3">
-                      <!-- TODO: numero di telefono da inserire da interfaccia utente editabile più volte -->
                       <h6>Telefono</h6>
                       <p class="text-muted">
                         <span class="editable" id="phone">
@@ -294,8 +294,5 @@ if (pg_num_rows($ris) > 0)
     </div>
     </div>
   </section>
-
-
 </body>
-
 </html>
