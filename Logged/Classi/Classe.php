@@ -29,6 +29,7 @@
 
 
 	<script src="script.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -62,6 +63,9 @@
 	</script>
 
 	<style>
+		.navbar .btn:last-child:hover {
+    		transition: background-color 0.5s ease-out;
+		}
 		.icona-grigia {
 			color: 	#DCDCDC;
 		}
