@@ -40,33 +40,33 @@
     <!--Script elimina_classe-->
     <script>
 		$(document).ready(function() {
-    $(".btn-elimina-classe").click(function() {
-        if (confirm("Sei sicuro di voler eliminare la classe?")) {
-            var url = $(this).data("action");
-            var link = $(this).data("href");
+            $(".btn-elimina-classe").click(function() {
+                if (confirm("Sei sicuro di voler eliminare la classe?")) {
+                    var url = $(this).data("action");
+                    var link = $(this).data("href");
 
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: { elimina_classe: true, link: link },
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success) {
-                        alert("Classe eliminata correttamente.");
-                        location.reload(); // Ricarica la pagina
-                    } else {
-                        console.log(data.message);
-                        alert("Errore durante l'eliminazione della classe.");
-                    }
-                },
-                error: function(jqXHR, status, error) {
-                    console.log(status + ": " + error);
-                    alert("Errore durante l'eliminazione della classe.");
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: { elimina_classe: true, link: link },
+                        dataType: 'json',
+                        success: function(data) {
+                            if (data.success) {
+                                alert("Classe eliminata correttamente.");
+                                location.reload(); // Ricarica la pagina
+                            } else {
+                                console.log(data.message);
+                                alert("Errore durante l'eliminazione della classe.");
+                            }
+                        },
+                        error: function(jqXHR, status, error) {
+                            console.log(status + ": " + error);
+                            alert("Errore durante l'eliminazione della classe.");
+                        }
+                    });
                 }
             });
-        }
-    });
-});
+        });
 	</script>
 
 </head>
@@ -83,18 +83,11 @@
     $email = $_SESSION['email'];
     $flag = $_SESSION['flag'];
 
-    /*foreach($GLOBALS as $k => $v){
-        echo "$k => ";
-        //funzione che ti permette di stampare qualcosa in formato leggibile
-        print_r($v);
-        echo "<br><hr/><br>";
-    }*/
+    // Controlliamo se si tratta di uno studente o docente: 
+    // Nel caso il flag sia 0 si trattadi un docente, nel caso in cui è 1 di uno studente
+    if($flag=='0'){ // Docente
 
-    //Controlliamo se si tratta di uno studente o docente
-    //Docente
-    if($flag=='0'){
-
-        //Genera tutte le tuple che il docente insegna ai corsi
+        //Genera tutte le tuple dove il docente insegna in dei corsi
         $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
         $result1a = pg_query_params($dbconn, $q1a, array($email));
         $var=0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
@@ -179,22 +172,15 @@
                 </div>";
             
             } while ($row2 = pg_fetch_array($result1b));
-            
+
             echo "</div>";
         }
 
-        
         if($var==0){
             echo "<p>Non sei iscritto a nessun corso.</p>";
-        }
-
-        
-        
-    }
-    //Studente
-    else {
-
-        //Genera tutte le tuple che lo studente partecipa ai corsi
+        }        
+    } else {//Studente
+        //Genera tutte le tuple che rappresentano i corsi a cui partecipa lo studente
         $q2 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
         $result2 = pg_query_params($dbconn, $q2, array($email));
         

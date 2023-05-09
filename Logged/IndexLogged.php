@@ -200,7 +200,6 @@ session_start();
 					</li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
-					<!-- da inserire ancora i riferimenti -->
 					<li class="nav-item">
 						<div class="col-md-12 text-right">
 							<a class="btn btn-outline-primary" href="./Profilo.php">
@@ -215,7 +214,6 @@ session_start();
 							<a class="btn btn-outline-danger" href="./Logout/logout.php">Logout</a>
 						</div>
 					</li>
-					<!-- da inserire ancora i riferimenti -->
 				</ul>
 			</div>
 		</nav>
