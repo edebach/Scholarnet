@@ -28,17 +28,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <style>
-    footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      background-color: rgb(45, 42, 42);
-      color: rgb(237, 237, 237);
-      text-align: center;
-      padding: 1px;
-      z-index: 9999;
-    }
+   
 
     @media screen and (min-width: 768px) {
       .collapse.navbar-collapse {
@@ -485,13 +475,11 @@
   </br>
 
 
-  <footer class="bg-dark text-center text-white">
-    <!-- Copyright -->
-    <div class=" text-center m-0 p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      <a class="text-white">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+  <footer class="bg-light fixed-bottom">
+		<div class="container py-3">
+			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
+		</div>
+	</footer>
 
 
 </body>
