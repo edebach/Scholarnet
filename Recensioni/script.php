@@ -12,10 +12,15 @@
 
     // Recupera il numero di stelle selezionato
     $stelle = $_POST['stelle'];
-    
-    // Esegui la query per recuperare le recensioni corrispondenti
-    $sql = "SELECT * FROM recensione JOIN utente on utente.email=recensione.utente WHERE stelle = $1 order by data DESC";
-    $result = pg_query_params($conn, $sql, array($stelle));
+    if ($stelle=="0"){
+        $sql = "SELECT * FROM recensione JOIN utente on utente.email=recensione.utente order by data DESC";
+        $result = pg_query($conn, $sql);
+    }
+    else{
+        $sql = "SELECT * FROM recensione JOIN utente on utente.email=recensione.utente WHERE stelle = $1 order by data DESC";
+        $result = pg_query_params($conn, $sql, array($stelle));
+    }
+        // Esegui la query per recuperare le recensioni corrispondenti
 
     // Costruisci un array con le recensioni
     $recensioni = array();

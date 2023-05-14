@@ -58,8 +58,79 @@
   <!--ZONA DINAMICA: Implementazione oggetto AJAX recensioni -->
   <script>
     $(document).ready(function () {
+      $('#allrec').trigger('click');
+      $('#star1').prop('checked', true);
+    });
+
+    
+    $(document).ready(function () {
       $("input[name='rating']").click(function () {
         var rating = $(this).val();
+        var iframeDoc = $('iframe').contents()[0];
+        var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
+        $.ajax({
+          url: "./Recensioni/script.php",
+          type: "POST",
+          data: { stelle: rating },
+          dataType: "json",
+          success: function (data) {
+            // Rimuovi il log sulla console e costruisci l'HTML con le recensioni
+            var html = '';
+
+            //Bootstrap CSS
+            html += '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">';
+            html += '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">';
+
+            // Inizio struttura html
+            if (data.length) {
+              data.forEach(function (review) {
+                html +=
+                  `<div class='container'>
+                                <div class='row'>
+                                    <div class='col-md-12 col-lg-10 col-xl-8'>
+                                        <div class='card'>
+                                            <div class='card-body p-4'>
+                                                <h4 class='mb-4 pb-2'>${review.nome_recensione}</h4>
+                                                <div class='row'>
+                                                    <div class='col'>
+                                                        <div class='d-flex flex-start'>
+                                                            <img class='rounded-circle shadow-1-strong me-3' src='./img/empty.jpg' alt='avatar' width='65' height='65' />
+                                                            <div class='flex-grow-1 flex-shrink-1'>
+                                                                <div>
+                                                                    <div class='d-flex justify-content-between align-items-center'>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                    </div>
+                                                                    <p class='small mb-0'>${review.descrizione}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            `;
+              })
+            }
+            else {
+              html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+            }
+
+
+            // Aggiungi l'HTML generato alla <div> "zonaDinamica" all'interno dell'<iframe>
+            zonaDinamica.html(html);
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          }
+        });
+      });
+      $("#allrec").click(function () {
+        console.log('Bottone cliccato');
+        var rating = "0";
         var iframeDoc = $('iframe').contents()[0];
         var zonaDinamica = $(iframeDoc).find('#zonaDinamica');
         $.ajax({
@@ -450,7 +521,9 @@
               title="Sufficiente - 2 stelle"></label>
             <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
               title="Insufficiente - 1 stella"></label>
-          </fieldset>
+            </fieldset>
+            <button class="btn btn-outline-info ml-3" id="allrec" value="0"><label for="allrec"
+              title="visualizza tutte le recensioni"> tutte le recensioni </label> </button>
         </div>
       </div>
       <div class="row">
@@ -480,11 +553,8 @@
       </div>
     </div>
   </section>
-
   </br>
   </br>
-
-
   <footer class="bg-dark text-center text-white">
     <!-- Copyright -->
     <div class=" text-center m-0 p-3" style="background-color: rgba(0, 0, 0, 0.2);">
