@@ -451,11 +451,15 @@
         $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
         $giorni_restanti += 1;
         if($giorni_restanti<0){
-          echo "<div class='col-4 text-center  '>Tempo scaduto</div>";
+          echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
           echo "<div class='col-4  '></div>";
         }
+        else if($giorni_restanti==1){
+          echo "<div class='col-4 text-center' style='color: orange;'>" . $giorni_restanti . " giorno</div>";
+          echo "<div class='col-4  '></div>";          
+        }
         else{
-          echo "<div class='col-4 text-center  '>" . $giorni_restanti . " giorni</div>";
+          echo "<div class='col-4 text-center' style='color: green;'>" . $giorni_restanti . " giorni</div>";
           echo "<div class='col-4  '></div>";
         }
         

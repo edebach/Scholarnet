@@ -201,5 +201,7 @@ $iconaitalic.on("click", function () {
     textarea.value = newText;
     newText = textarea.value.replace(regexCross, "<del>$1</del>");
     textarea.value = newText;
+    newText = textarea.value.replace(/\n/g, "<br>");
+    textarea.value = newText;
   });
 });

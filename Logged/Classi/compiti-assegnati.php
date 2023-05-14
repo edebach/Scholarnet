@@ -44,12 +44,12 @@
                                         <td>".$row['titolo']."</td>
                                         <td>".date('d/m/Y', strtotime($row['data_scadenza']))."</td>";
                                         if($giorni_restanti<0){
-                                            echo "<td>Tempo scaduto</td>";
+                                            echo "<td  style='color: red;'>Tempo scaduto</td>";
                                         }
                                         else if($giorni_restanti==1){
-                                            echo "<td>".$giorni_restanti." giorno</td>";
+                                            echo "<td  style='color: orange;'>".$giorni_restanti." giorno</td>";
                                         }else{
-                                            echo "<td>".$giorni_restanti." giorni</td>";
+                                            echo "<td  style='color: green;'>".$giorni_restanti." giorni</td>";
                                         }
                                         
                         echo         "</tr>
