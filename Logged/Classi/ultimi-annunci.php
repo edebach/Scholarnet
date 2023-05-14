@@ -1,95 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- jQuery -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<title>Ultimi annunci</title>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>Ultimi annunci</title>
 
-	<style>
-		iframe{
-            width:550px; 
-            height:400px;
-            border:1cm;
+  <style>
+    iframe {
+      width: 550px;
+      height: 400px;
+      border: 1cm;
+    }
+  </style>
+
+  <!--Script elimina_classe-->
+  <script>
+    $(document).ready(function () {
+      $(".btn-elimina-annuncio").click(function () {
+        if (confirm("Sei sicuro di voler eliminare il post?")) {
+          var url = $(this).data("action");
+          var titolo = $(this).data("titolo");
+          var testo = $(this).data("testo");
+          var corso = $(this).data("corso");
+          console.log(titolo);
+          console.log(testo);
+          console.log(corso);
+
+          $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+              elimina_annuncio: true,
+              testo: testo, corso: corso, titolo: titolo
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.success) {
+                alert("Annuncio eliminato correttamente.");
+                location.reload(); // Ricarica la pagina
+              } else {
+                console.log(data.message);
+                alert("Errore durante l'eliminazione dell\' annuncio.");
+              }
+            },
+            error: function (jqXHR, status, error) {
+              console.log(status + ": " + error);
+              alert("Errore durante l\'eliminazione della classe.");
+            }
+          });
         }
-	</style>
-
-	 <!--Script elimina_classe-->
-	 <script>
-		$(document).ready(function() {
-			$(".btn-elimina-annuncio").click(function() {
-				if (confirm("Sei sicuro di voler eliminare il post?")) {
-					var url = $(this).data("action");
-					var titolo = $(this).data("titolo");
-					var testo = $(this).data("testo");
-					var corso = $(this).data("corso");
-					console.log(titolo);
-					console.log(testo);
-					console.log(corso);
-
-					$.ajax({
-						url: url,
-						type: 'post',
-						data: { elimina_annuncio: true, 
-								testo: testo, corso:corso, titolo:titolo },
-						dataType: 'json',
-						success: function(data) {
-							if (data.success) {
-								alert("Annuncio eliminato correttamente.");
-								location.reload(); // Ricarica la pagina
-							} else {
-								console.log(data.message);
-								alert("Errore durante l'eliminazione dell\' annuncio.");
-							}
-						},
-						error: function(jqXHR, status, error) {
-							console.log(status + ": " + error);
-							alert("Errore durante l\'eliminazione della classe.");
-						}
-					});
-				}
-			});
-		});
-	</script>
+      });
+    });
+  </script>
 </head>
+
 <body>
-<?php
-//$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
-$codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
+  <?php
+  //$utente=$_SESSION['nome']." ".$_SESSION['cognome'];
+  $codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-//Query
-$q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
-$result = pg_query_params($dbconn, $q, array($codice_corso));
+  //Query
+  $q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
+  $result = pg_query_params($dbconn, $q, array($codice_corso));
 
-// Calcola il numero totale di compiti per la classe
-$num_compiti = pg_num_rows($result);
+  // Calcola il numero totale di compiti per la classe
+  $num_compiti = pg_num_rows($result);
 
-// Calcola il numero di pagine
-$num_pagine = ceil($num_compiti / 5);
+  // Calcola il numero di pagine
+  $num_pagine = ceil($num_compiti / 5);
 
-// Ottieni il numero di pagina corrente dalla query string
-$pagina_corrente = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
+  // Ottieni il numero di pagina corrente dalla query string
+  $pagina_corrente = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
 
-// Calcola l'indice di partenza del subset di compiti da visualizzare
-$indice_inizio = ($pagina_corrente - 1) * 5;
+  // Calcola l'indice di partenza del subset di compiti da visualizzare
+  $indice_inizio = ($pagina_corrente - 1) * 5;
 
-// Seleziona i 5 compiti più recenti per la pagina corrente
-if (pg_num_rows($result) > 0) {
-	pg_result_seek($result, $indice_inizio);
-	$row= pg_fetch_array($result, null, PGSQL_ASSOC);
-	$count=0;
+  // Seleziona i 5 compiti più recenti per la pagina corrente
+  if (pg_num_rows($result) > 0) {
+    pg_result_seek($result, $indice_inizio);
+    $row = pg_fetch_array($result, null, PGSQL_ASSOC);
+    $count = 0;
 
-	do {
-		//ANNUNCIO
-		if (empty($row['data_scadenza'])) {
-			echo "
+    do {
+      //ANNUNCIO
+      if (empty($row['data_scadenza'])) {
+        echo "
 				<div class='card text-black bg-light mb-3 d-inline-block'>
 					<div class='card-body'>";
-			if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
-				echo "
+        if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
+          echo "
 					<div class='position-absolute top-0 end-0'>
 						<div class='dropdown'>
 							<button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -109,12 +113,13 @@ if (pg_num_rows($result) > 0) {
 							</ul>
 						</div>
 					</div>";
-			echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
+        echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
 							<span style='font-size: 18px;'>
 								<i class='fa-sharp fa-solid fa-scroll'></i>
-								" . $row['titolo'] . "-" . $row['utente'] . "
+								" . $row['titolo'] . " - " . $row['utente'] . "
 							</span>
-							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>" . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
+							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
+              Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
 						</div>
 						<hr>
 						<div class='card-body'>
@@ -126,15 +131,15 @@ if (pg_num_rows($result) > 0) {
 						<a href='#' class='card-link text-black'>Commenti (3)</a>
 					</footer>
 				</div>";
-		}
-		//COMPITO
-		else {
-			echo "
+      }
+      //COMPITO
+      else {
+        echo "
 				<div class='card text-black bg-light mb-3 d-inline-block'>
 					<div class='card-body'>
 					";
-			if (!$_SESSION['flag'])
-				echo "
+        if (!$_SESSION['flag'])
+          echo "
 					<div class='position-absolute top-0 end-0'>
 						<div class='dropdown'>
 							<button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
@@ -155,13 +160,13 @@ if (pg_num_rows($result) > 0) {
 							</ul>
 						</div>
 					</div>";
-			echo "
+        echo "
 
 
 						<div style='display: flex; align-items: center;'>
 							<span class='card-text bg-light text-black' style='font-size: 18px;'>
 								<i class='fa-solid fa-book' style='font-size: 18px;'></i>
-								" . $row['titolo'] . "-" . $row['utente'] . "
+								" . $row['titolo'] . " - " . $row['utente'] . "
 							</span>
 							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
 								Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "
@@ -180,26 +185,27 @@ if (pg_num_rows($result) > 0) {
 					</footer>
 				</div>";
 
-		}
-		$count++;
+      }
+      $count++;
 
-	} while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) and $count<5);
+    } while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) and $count < 5);
 
-	// Mostra l'elenco di numeri di pagina per la paginazione
-	echo "<nav aria-label='Page navigation example'>
+    // Mostra l'elenco di numeri di pagina per la paginazione
+    echo "<nav aria-label='Page navigation example'>
 			<ul class='pagination '>";
-	for ($pagina = 1; $pagina <= $num_pagine; $pagina++) {
-		if ($pagina == $pagina_corrente) {
-			echo "<li class='page-item active'><a class='page-link' href='#'>$pagina</a></li>";
-		} else {
-			echo "<li class='page-item'><a class='page-link' href='?pagina=$pagina'>$pagina</a></li>";
-		}		
-	}
-	echo "</ul></nav>";
-} else {
-	echo "<p>Al momento non ci sono annunci.</p>";
-}
-?>
+    for ($pagina = 1; $pagina <= $num_pagine; $pagina++) {
+      if ($pagina == $pagina_corrente) {
+        echo "<li class='page-item active'><a class='page-link' href='#'>$pagina</a></li>";
+      } else {
+        echo "<li class='page-item'><a class='page-link' href='?pagina=$pagina'>$pagina</a></li>";
+      }
+    }
+    echo "</ul></nav>";
+  } else {
+    echo "<p>Al momento non ci sono annunci.</p>";
+  }
+  ?>
 
 </body>
+
 </html>

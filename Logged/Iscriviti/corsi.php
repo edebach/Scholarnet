@@ -222,7 +222,7 @@
             echo "</div>";
         }
         else{
-            echo "<p>NON SEI ISCRITTO A NESSUN CORSO!</p>";
+            echo "<p>Non sei iscritto a nessun corso.</p>";
         }
     }
     ?>
