@@ -28,8 +28,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <style>
-   
-
     @media screen and (min-width: 768px) {
       .collapse.navbar-collapse {
         padding-left: 3.8cm;
@@ -52,7 +50,7 @@
       $('#star1').prop('checked', true);
     });
 
-    
+
     $(document).ready(function () {
       $("input[name='rating']").click(function () {
         var rating = $(this).val();
@@ -74,13 +72,19 @@
             // Inizio struttura html
             if (data.length) {
               data.forEach(function (review) {
+                if(review.stelle=="1"){
+                  html_s = "stella";
+                }
+                else{
+                    html_s = "stelle";
+                }
                 html +=
                   `<div class='container'>
                                 <div class='row'>
                                     <div class='col-md-12 col-lg-10 col-xl-8'>
                                         <div class='card'>
                                             <div class='card-body p-4'>
-                                                <h4 class='mb-4 pb-2'>${review.nome_recensione}</h4>
+                                                <h4 class='mb-4 pb-2'>${review.nome_recensione} - ${review.stelle+" "+html_s}</h4>
                                                 <div class='row'>
                                                     <div class='col'>
                                                         <div class='d-flex flex-start'>
@@ -88,7 +92,7 @@
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
-                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'> - ${review.data}</span></p>
                                                                     </div>
                                                                     <p class='small mb-0'>${review.descrizione}</p>
                                                                 </div>
@@ -106,7 +110,12 @@
               })
             }
             else {
-              html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+              if (rating == "1") {
+                html += '<p>Nessuna recensione trovata per ' + rating + ' stella.</p>';
+              }
+              else {
+                html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+              }
             }
 
 
@@ -118,6 +127,7 @@
           }
         });
       });
+
       $("#allrec").click(function () {
         console.log('Bottone cliccato');
         var rating = "0";
@@ -139,13 +149,19 @@
             // Inizio struttura html
             if (data.length) {
               data.forEach(function (review) {
+                if(review.stelle=="1"){
+                  html_s = "stella";
+                }
+                else{
+                    html_s = "stelle";
+                }
                 html +=
                   `<div class='container'>
                                 <div class='row'>
                                     <div class='col-md-12 col-lg-10 col-xl-8'>
                                         <div class='card'>
                                             <div class='card-body p-4'>
-                                                <h4 class='mb-4 pb-2'>${review.nome_recensione}</h4>
+                                                <h4 class='mb-4 pb-2'>${review.nome_recensione} - ${review.stelle+" "+html_s}</h4>
                                                 <div class='row'>
                                                     <div class='col'>
                                                         <div class='d-flex flex-start'>
@@ -153,7 +169,7 @@
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
-                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'> - ${review.data}</span></p>
                                                                     </div>
                                                                     <p class='small mb-0'>${review.descrizione}</p>
                                                                 </div>
@@ -171,7 +187,7 @@
               })
             }
             else {
-              html += '<p>Nessuna recensione trovata per ' + rating + ' stelle.</p>';
+              html += '<p>Ancora nessuna recensione.</p>';
             }
 
 
@@ -511,8 +527,8 @@
               title="Sufficiente - 2 stelle"></label>
             <input type="radio" id="star1" name="rating" value="1" /><label for="star1"
               title="Insufficiente - 1 stella"></label>
-            </fieldset>
-            <button class="btn btn-outline-info ml-3" id="allrec" value="0"><label for="allrec"
+          </fieldset>
+          <button class="btn btn-outline-info ml-3" id="allrec" value="0"><label for="allrec"
               title="visualizza tutte le recensioni"> tutte le recensioni </label> </button>
         </div>
       </div>
@@ -531,10 +547,67 @@
                         <style>
                             body { margin: 0; }
                         </style>
+
+                        <!-- Bootstrap CSS -->
+                        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+                        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'>
                     </head>
                     <body>
                         <div id='zonaDinamica'>
-                          <?php include "./Recensioni/all-recensioni.php"; ?>
+                          <?php
+                          //Visualizza tutte le recensioni
+                          $conn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+                                                user=postgres password=biar")
+                                                        or die('Could not connect: ' . pg_last_error());
+
+                          $q = "SELECT * FROM recensione r JOIN utente u ON u.email=r.utente order by data DESC";
+                          $result = pg_query($conn, $q);
+
+                          if($row = pg_fetch_array($result)){
+                              do{
+                                echo "
+                              <div class='container'>
+                                <div class='row'>
+                                    <div class='col-md-12 col-lg-10 col-xl-8'>
+                                        <div class='card'>
+                                            <div class='card-body p-4'>
+                                                <h4 class='mb-4 pb-2'>".$row['nome_recensione']." - ";
+                                                if($row['stelle']=="1"){
+                                                  echo "1 stella</h4>";
+                                                }
+                                                else{
+                                                  echo $row['stelle']." stelle</h4>";
+                                                }
+                                                
+                                                echo "<div class='row'>
+                                                    <div class='col'>
+                                                        <div class='d-flex flex-start'>
+                                                            <img class='rounded-circle shadow-1-strong me-3' src='./img/empty.jpg' alt='avatar' width='65' height='65' />
+                                                            <div class='flex-grow-1 flex-shrink-1'>
+                                                                <div>
+                                                                    <div class='d-flex justify-content-between align-items-center'>
+                                                                        <p class='mb-1'><strong>".$row['nome']." ".$row['cognome']."</strong><span class='small'> - ".$row['data']."</span></p>
+                                                                    </div>
+                                                                    <p class='small mb-0'>".$row['descrizione']."</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>";
+
+                              }while($row = pg_fetch_array($result));
+                          }
+                          else{
+                            echo "<p>Ancora nessuna recensione.</p>";
+                          }
+
+                          ?>
                         </div>
                     </body>
                     </html>">
@@ -548,10 +621,10 @@
 
 
   <footer class="bg-light fixed-bottom">
-		<div class="container py-3">
-			<p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
-		</div>
-	</footer>
+    <div class="container py-3">
+      <p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
+    </div>
+  </footer>
 
 
 </body>
