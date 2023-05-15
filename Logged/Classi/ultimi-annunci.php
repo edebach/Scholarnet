@@ -29,14 +29,14 @@
           var corso = $(this).data("corso");
           var allegati = $(this).data("allegati");
           console.log(allegati);
-          
+
 
           $.ajax({
             url: url,
             type: 'post',
             data: {
               elimina_annuncio: true,
-              testo: testo, corso: corso, titolo: titolo, allegati:allegati
+              testo: testo, corso: corso, titolo: titolo, allegati: allegati
             },
             dataType: 'json',
             success: function (data) {
@@ -54,6 +54,44 @@
             }
           });
         }
+      });
+    });
+  </script>
+
+  <!--Script inserisci commento-->
+  <script>
+    $(document).ready(function () {
+      $(".btn-inserisci-commento").click(function () {
+
+        var url = $(this).data("action");
+        var descrizione = $("#descrizione-commento").val();
+        var titolo = $(this).data("titolo");
+        var pubblicazione = $(this).data("pubblicazione");
+        var email = $(this).data("email");
+
+        $.ajax({
+          url: url,
+          type: 'post',
+          data: {
+            inserisci_commento: true,
+            pubblicazione: pubblicazione, email: email, titolo: titolo, descrizione: descrizione
+          },
+          dataType: 'json',
+          success: function (data) {
+            if (data.success) {
+              alert("Commento inserito correttamente.");
+              location.reload(); // Ricarica la pagina
+            } else {
+              console.log(data.message);
+              alert("Errore durante l\'inserimento del commento.");
+            }
+          },
+          error: function (jqXHR, status, error) {
+            console.log(status + ": " + error);
+            alert("Errore durante l\'inserimento del commento.");
+          }
+        });
+
       });
     });
   </script>
@@ -86,13 +124,12 @@
     $row = pg_fetch_array($result, null, PGSQL_ASSOC);
     $count = 0;
     do {
-      if(empty($row['allegati'])){
-        $percorso_file=null;
+      if (empty($row['allegati'])) {
+        $percorso_file = null;
+      } else {
+        $percorso_file = "../../Allegati/" . $row['allegati'];
       }
-      else{
-        $percorso_file="../../Allegati/".$row['allegati'];
-      }
-      $nome_file= substr($row['allegati'], 4);
+      $nome_file = substr($row['allegati'], 4);
       //ANNUNCIO
       if (empty($row['data_scadenza'])) {
         echo "
@@ -112,7 +149,7 @@
 												data-testo='" . $row['testo'] . "' 
 												data-titolo='" . $row['titolo'] . "'
 												data-corso='" . $codice_corso . "'
-                        data-allegati='".$percorso_file."'
+                        data-allegati='" . $percorso_file . "'
 												>Elimina annuncio
 										</button>
 									</div>
@@ -139,9 +176,35 @@
         echo "
 						</div>
 					</div>
-					<footer class='card-footer'>
-						<a href='#' class='card-link text-black'>Commenti (3)</a>
-					</footer>
+          <hr>
+
+          <div class='m-3 zonaCommenti'>
+            Zona commenti (file che ti mostra tutti i commenti)
+          </div>
+
+          <hr style='opacity:20%'>
+
+          <div class='m-3 d-flex align-items-center'>  
+            <img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $_SESSION['immagine_profilo'] . "' alt='avatar' width='35' height='35' />
+            
+            <div class='input-group'>
+              <input type='text' class='form-control' name='descrizione' id='descrizione-commento' placeholder='Aggiungi commento...'>
+              <button class='btn btn-outline-secondary btn-inserisci-commento' 
+                      data-action='./commento.php' 
+                      data-titolo='" . $row['titolo'] . "'
+                      data-pubblicazione='" . $row['pubblicazione'] . "'
+                      data-email='" . $row['email'] . "'>
+                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-send' viewBox='0 0 16 16'>
+                <path d='M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z'/>
+                </svg>
+              </button>
+            </div>  
+            
+          </div>
+           
+              
+              
+          
 				</div>";
       }
       //COMPITO
@@ -174,8 +237,6 @@
 						</div>
 					</div>";
         echo "
-
-
 						<div style='display: flex; align-items: center;'>
 							<span class='card-text bg-light text-black' style='font-size: 18px;'>
 								<i class='fa-solid fa-book' style='font-size: 18px;'></i>
