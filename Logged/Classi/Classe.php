@@ -427,6 +427,12 @@
       $i = 0;
 
       do {
+        if (empty($row['allegati'])) {
+          $percorso_file = null;
+        } else {
+          $percorso_file = "../../Allegati/" . $row['allegati'];
+        }
+        $nome_file = substr($row['allegati'], 4);
         $i++;
         $var = "flush-collapse-" . $i;
         echo
@@ -469,7 +475,15 @@
 						<div id='" . $var . "' class='accordion-collapse collapse' data-bs-parent='#accordionFlushExample'>
 							<div class='accordion-body'>
 								<p>" . $row['testo'] . "</p>
-								<p>ALLEGATI</p>
+                ";
+        if (!empty($row['allegati'])) {
+          echo "<p class='card-text ml-3'> <a href='" . $percorso_file . "' target='_blank'>
+                <button type='button' class='btn btn-link allegato' style='text-decoration: none; padding: 5px; border-radius: 999px;'>
+                  <i class='fas fa-file'></i> " . $nome_file . "
+                </button>
+              </a></p>";
+        }
+                echo "
 							</div>
 						</div>
 					</div> ";

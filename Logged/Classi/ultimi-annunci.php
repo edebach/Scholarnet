@@ -133,8 +133,11 @@
 							<p class='card-text'>" . $row['testo'] . "</p>
               ";
         if (!empty($row['allegati'])) {
-          echo "<p class='card-text ml-3'>Allegati: <a href='" . $percorso_file . "' target='_blank'>
-                " . $nome_file . "</a></p>";
+          echo "<p class='card-text ml-3'> <a href='" . $percorso_file . "' target='_blank'>
+                <button type='button' class='btn btn-link allegato' style='text-decoration: none; padding: 5px; border-radius: 999px;'>
+                  <i class='fas fa-file'></i> " . $nome_file . "
+                </button>
+              </a></p>";
         }
         echo "
 						</div>
@@ -190,8 +193,11 @@
 							<p class='card-text'>" . $row['testo'] . "</p>
               ";
         if (!empty($row['allegati'])) {
-          echo "<p class='card-text ml-3'>Allegati: <a href='" . $percorso_file . "' target='_blank'>
-                " . $nome_file . "</a></p>";
+          echo "<p class='card-text ml-3'> <a href='" . $percorso_file . "' target='_blank'>
+                <button type='button' class='btn btn-link allegato' style='text-decoration: none; padding: 5px; border-radius: 999px;'>
+                  <i class='fas fa-file'></i> " . $nome_file . "
+                </button>
+              </a></p>";
         }
         echo "
 						</div>
