@@ -381,6 +381,7 @@
           <input type="text" id="input-search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
         </div>
+        <br>
         <!--ZONA DINAMICA: Implementazione oggetto AJAX display search-->
         <div id="zonaDinamica">
 

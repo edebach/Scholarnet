@@ -157,3 +157,9 @@ header .container-fluid .row {
   transform: translateX(-50%);
   text-align: center;
 }
+#input-search{
+  height: 36px;
+}
+#search-btn{
+  margin-left: 5px;
+}
