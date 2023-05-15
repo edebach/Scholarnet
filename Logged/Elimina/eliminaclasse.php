@@ -22,9 +22,10 @@ if (isset($_POST["elimina_classe"])) {
     $result2 = pg_query_params($dbconn, $q, array($file));
     
     while($row = pg_fetch_array($result1, null, PGSQL_ASSOC)){
-        
-        $percorso_file = "../../Allegati/" . $row['allegati'];
-        unlink($percorso_file);
+        if(!empty($row['allegati'])){
+            $percorso_file = "../../Allegati/" . $row['allegati'];
+            unlink($percorso_file);
+        }
     }
     // Restituisce la risposta in formato JSON
     header("Content-Type: application/json");
