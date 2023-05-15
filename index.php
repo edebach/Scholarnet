@@ -33,7 +33,6 @@
         padding-left: 3.8cm;
       }
     }
-
     iframe {
       width: 550px;
       height: 400px;
@@ -276,10 +275,10 @@
       </div>
     </nav>
   </header>
-  <br>
+
 
   <!-- Sezione Home -->
-  <section id="home-section" class="bg-image mt-5">
+  <section id="home-section" class="bg-image" style="padding-top: 80px;">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -323,11 +322,9 @@
       </div>
     </div>
   </section>
-  </br>
-  </br>
 
   <!-- Sezione Descrizione -->
-  <section id="descrizione-section">
+  <section id="descrizione-section" style="padding-top: 90px;">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -347,11 +344,8 @@
     </div>
   </section>
 
-  </br>
-  </br>
-
   <!-- Sezione Q&A -->
-  <section id="qa-section">
+  <section id="qa-section" style="padding-top: 90px;">
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
@@ -496,11 +490,9 @@
       </div>
     </div>
   </section>
-  </br>
-  </br>
 
   <!-- Sezione Recensioni -->
-  <section id="recensione">
+  <section id="recensione" style="padding-top: 80px;">
     <div class="container ">
       <div class="row">
         <div class="col-sm-12">

@@ -1,0 +1,6 @@
+              ";
+              if(($row['allegati'])){
+							echo "<p class='card-text ml-3'>Allegati: <a href='". $percorso_file ."' target='_blank'>
+                ".$nome_file."</a></p>";
+              }
+              echo "

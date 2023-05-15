@@ -44,11 +44,12 @@
                 if (confirm("Sei sicuro di voler eliminare la classe?")) {
                     var url = $(this).data("action");
                     var link = $(this).data("href");
+                    var codice_corso= $(this).data("classe");
 
                     $.ajax({
                         url: url,
                         type: 'post',
-                        data: { elimina_classe: true, link: link },
+                        data: { elimina_classe: true, link: link, codice_corso: codice_corso},
                         dataType: 'json',
                         success: function(data) {
                             if (data.success) {
@@ -112,6 +113,7 @@
                                         <div class='text-center'>
                                             <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
                                                     id='btn-elimina-classe-" . $row1['link'] . "' 
+                                                    data-classe='".substr($row1['link'], -12, -4)."'
                                                     data-action='./Elimina/eliminaclasse.php'  
                                                     data-href='". $row1['link']."'>Elimina classe
                                             </button>
@@ -156,6 +158,7 @@
                                         <div class='text-center'>
                                             <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
                                                     id='btn-elimina-classe-" . $row2['link'] . "' 
+                                                    data-classe='" . substr($row2['link'], -12, -4) . "'
                                                     data-action='./Elimina/eliminaclasse.php'  
                                                     data-href='". $row2['link']."'>Elimina classe
                                             </button>

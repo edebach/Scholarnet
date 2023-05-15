@@ -14,6 +14,10 @@ if (isset($_POST["elimina_annuncio"])) {
     
     $q = "DELETE FROM compito WHERE classe=$1 AND titolo=$2 AND testo=$3";
     $result = pg_query_params($dbconn, $q, array($codice_corso,$titolo,$testo));
+    if(!empty($_POST['allegati'])){
+        $file = $_POST['allegati'];
+        unlink($file);
+    }
 
     // Restituisce la risposta in formato JSON
     header("Content-Type: application/json");

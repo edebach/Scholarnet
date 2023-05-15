@@ -27,16 +27,16 @@
           var titolo = $(this).data("titolo");
           var testo = $(this).data("testo");
           var corso = $(this).data("corso");
-          console.log(titolo);
-          console.log(testo);
-          console.log(corso);
+          var allegati = $(this).data("allegati");
+          console.log(allegati);
+          
 
           $.ajax({
             url: url,
             type: 'post',
             data: {
               elimina_annuncio: true,
-              testo: testo, corso: corso, titolo: titolo
+              testo: testo, corso: corso, titolo: titolo, allegati:allegati
             },
             dataType: 'json',
             success: function (data) {
@@ -45,12 +45,12 @@
                 location.reload(); // Ricarica la pagina
               } else {
                 console.log(data.message);
-                alert("Errore durante l'eliminazione dell\' annuncio.");
+                alert("Errore durante l\'eliminazione dell\' annuncio.");
               }
             },
             error: function (jqXHR, status, error) {
               console.log(status + ": " + error);
-              alert("Errore durante l\'eliminazione della classe.");
+              alert("Errore durante l\'eliminazione dell\' annuncio.");
             }
           });
         }
@@ -85,8 +85,14 @@
     pg_result_seek($result, $indice_inizio);
     $row = pg_fetch_array($result, null, PGSQL_ASSOC);
     $count = 0;
-
     do {
+      if(empty($row['allegati'])){
+        $percorso_file=null;
+      }
+      else{
+        $percorso_file="../../Allegati/".$row['allegati'];
+      }
+      $nome_file= substr($row['allegati'], 4);
       //ANNUNCIO
       if (empty($row['data_scadenza'])) {
         echo "
@@ -106,6 +112,7 @@
 												data-testo='" . $row['testo'] . "' 
 												data-titolo='" . $row['titolo'] . "'
 												data-corso='" . $codice_corso . "'
+                        data-allegati='".$percorso_file."'
 												>Elimina annuncio
 										</button>
 									</div>
@@ -124,7 +131,12 @@
 						<hr>
 						<div class='card-body'>
 							<p class='card-text'>" . $row['testo'] . "</p>
-							<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
+              ";
+        if (!empty($row['allegati'])) {
+          echo "<p class='card-text ml-3'>Allegati: <a href='" . $percorso_file . "' target='_blank'>
+                " . $nome_file . "</a></p>";
+        }
+        echo "
 						</div>
 					</div>
 					<footer class='card-footer'>
@@ -152,7 +164,8 @@
 												data-action='../Elimina/elimina-annuncio.php'
 												data-testo='" . $row['testo'] . "' 
 												data-titolo='" . $row['titolo'] . "'
-												data-corso='" . $codice_corso . "'													  
+												data-corso='" . $codice_corso . "'
+                        data-allegati='" . $percorso_file . "'													  
 													>Elimina annuncio
 										</button>
 									</div>
@@ -175,7 +188,12 @@
 						<hr>
 						<div class='card-body'>
 							<p class='card-text'>" . $row['testo'] . "</p>
-							<p class='card-text ml-3'>Allegati: <a class='card-link text-black' href='#'>file1.pdf</a>, <a class='card-link text-black'href='#'>file2.docx</a></p>
+              ";
+        if (!empty($row['allegati'])) {
+          echo "<p class='card-text ml-3'>Allegati: <a href='" . $percorso_file . "' target='_blank'>
+                " . $nome_file . "</a></p>";
+        }
+        echo "
 						</div>
 						<hr>
 							<p class='card-text' style='margin-left: 12px'>Data di consegna: " . date('d/m/Y', strtotime($row['data_scadenza'])) . "</p>
