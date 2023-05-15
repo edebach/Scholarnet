@@ -377,7 +377,7 @@
         </article>
 
         <h2 class="mb-4">Ultimi annunci</h2>
-        <div class="mx-auto">
+        <div class="mx-auto d-flex align-items-center">
           <input type="text" id="input-search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
         </div>
