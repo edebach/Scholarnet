@@ -114,7 +114,7 @@ session_start();
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
-                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'>- ${review.data}</span></p>
+                                                                        <p class='mb-1'><strong>${review.utente}</strong><span class='small'> - ${review.data}</span></p>
                                                                     </div>
                                                                     <p class='small mb-0'>${review.descrizione}</p>
                                                                 </div>
