@@ -17,7 +17,16 @@
       border: 1cm;
     }
   </style>
-
+  <style>
+    .accordion-container {
+      max-height: 300px; /* Altezza massima del contenitore */
+      overflow-y: auto; /* Abilita la scrollbar quando il contenuto supera l'altezza massima */
+    }
+    .btn-attivo:hover {
+        background-color: green;
+        color: white;
+    }
+  </style>
   
 
   <!--Script elimina_classe-->
@@ -63,6 +72,17 @@
   <!--Script inserisci commento-->
   <script>
     $(document).ready(function () {
+      $(".input-group input[type='text']").on("input", function() { // Aggiunge un listener all'evento "input" dell'input text
+            var input = $(this);
+            var btn = input.siblings("button");
+            if (input.val().trim() === "") { // Controlla se l'input è vuoto o contiene solo spazi
+                btn.prop("disabled", true); // Disabilita il bottone se l'input è vuoto
+                btn.removeClass("btn-attivo");
+            } else {
+                btn.prop("disabled", false); // Abilita il bottone se l'input non è vuoto
+                btn.addClass("btn-attivo");
+            }
+        });
       
       $(".btn-inserisci-commento").click(function () {
        
@@ -83,7 +103,6 @@
           dataType: 'json',
           success: function (data) {
             if (data.success) {
-              alert("Commento inserito correttamente.");
               location.reload(); // Ricarica la pagina
             } else {
               console.log(data.message);
@@ -185,24 +204,25 @@
         echo "
 						</div>
 					</div>
-          <hr>";
+          ";
 
+          
           $i++;
           $var = "collapse-" . $i;
-
+        // Commento in annunci
           echo "
-            <div class='accordion' id='accordionExample'>
+            <div class='accordion ' id='div-commento-'".$var.">
               <div class='accordion-item'>
                 <h2 class='accordion-header'>
-                  <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='true' aria-controls='".$var."'>
+                  <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='true' aria-controls='".$var."'>
                     Commenti &nbsp;
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sticky' viewBox='0 0 16 16'>
                       <path d='M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z'/>
                     </svg>
                   </button>
                 </h2>
-                <div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
-                  <div class='accordion-body'>";
+                <div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#div-commento-'".$var.">
+                  <div class='accordion-body accordion-container'>";
                     $pubb = $row['pubblicazione'];
                     $titolo = $row['titolo'];
 
@@ -221,7 +241,8 @@
                         echo "<tr>
                                   <td><img class='rounded-circle shadow-1-strong me-3' src='../../img/empty.jpg' alt='avatar' width='35' height='35' /></td>
                                   <td><strong>" . $row1['nome'] . " " . $row1['cognome'] . "</strong><br>" . $row1['descrizione'] . "</td>
-                                </tr>";
+                                  </tr>
+                                ";
                       } while ($row1 = pg_fetch_array($ris, null, PGSQL_ASSOC));
                       echo "
                         </table>";
@@ -234,14 +255,14 @@
                         <img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $_SESSION['immagine_profilo'] . "' alt='avatar' width='35' height='35' />
                         
                         <div class='input-group'>
-                          <input type='text' class='form-control' name='descrizione' id='descrizione-commento" . $row['id_post'] . "' placeholder='Aggiungi un commento...'>
+                          <input type='text' class='form-control' name='descrizione' id='descrizione-commento". $row['id_post'] . "' placeholder='Aggiungi un commento...'>
                           <button class='btn btn-outline-secondary btn-inserisci-commento'
                                   id = btn-inserisci-commento" . $row['id_post'] . "
                                   data-action='./commento.php' 
                                   data-id='" . $row['id_post'] . "'
                                   data-titolo='" . $row['titolo'] . "'
                                   data-pubblicazione='" . $row['pubblicazione'] . "'
-                                  data-email='" . $_SESSION['email'] . "'>
+                                  data-email='" . $_SESSION['email'] . "' disabled>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-send' viewBox='0 0 16 16'>
                             <path d='M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z'/>
                             </svg>

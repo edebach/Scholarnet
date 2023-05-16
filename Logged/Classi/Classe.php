@@ -84,18 +84,6 @@
       }
     });
   </script>
-
-  <style>
-
-  </style>
-
-  <style>
-
-  </style>
-  <script>
-
-  </script>
-
   <script src="./classe.js" language="javascript"></script>
 
 </head>
