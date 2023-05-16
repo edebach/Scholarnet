@@ -259,7 +259,7 @@ session_start();
 <body>
   <!-- Sezione Header-->
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <div class="topleft">
         <a class="navbar-brand" href="./IndexLogged.php"> <!--TODO: Da vedere il percorso -->
           <img src="../img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" width="50" height="50"
@@ -588,7 +588,6 @@ session_start();
       <p class="text-center mb-0">Autori: Emanuele Elie Debach, Fabio Priori, Marco Giangreco &copy; 2023</p>
     </div>
   </footer>
-
 </body>
 
 </html>
