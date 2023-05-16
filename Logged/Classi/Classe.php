@@ -59,11 +59,6 @@
       });
     });
   </script>
-
-  <style>
-
-  </style>
-
   <script>
     $(document).ready(function () {
       const mySwitch = document.getElementById("slider-compito");
