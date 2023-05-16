@@ -435,7 +435,7 @@
         $nome_file = substr($row['allegati'], 4);
         $i++;
         $var = "flush-collapse-" . $i;
-        echo
+        echo 
           "<div class='accordion-item'>
 						<h2 class='accordion-header'>
 							<button class='accordion-button collapsed row align-items-center' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='false' aria-controls='" . $var . "'>

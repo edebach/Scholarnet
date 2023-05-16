@@ -18,6 +18,8 @@
     }
   </style>
 
+  
+
   <!--Script elimina_classe-->
   <script>
     $(document).ready(function () {
@@ -61,10 +63,12 @@
   <!--Script inserisci commento-->
   <script>
     $(document).ready(function () {
+      
       $(".btn-inserisci-commento").click(function () {
-
+       
+        var id_post = $(this).data("id"); 
         var url = $(this).data("action");
-        var descrizione = $("#descrizione-commento").val();
+        var descrizione = $("#descrizione-commento"+id_post).val();
         var titolo = $(this).data("titolo");
         var pubblicazione = $(this).data("pubblicazione");
         var email = $(this).data("email");
@@ -117,12 +121,13 @@
 
   // Calcola l'indice di partenza del subset di compiti da visualizzare
   $indice_inizio = ($pagina_corrente - 1) * 5;
-
+  $i = 0;
   // Seleziona i 5 compiti più recenti per la pagina corrente
   if (pg_num_rows($result) > 0) {
     pg_result_seek($result, $indice_inizio);
     $row = pg_fetch_array($result, null, PGSQL_ASSOC);
     $count = 0;
+    
     do {
       if (empty($row['allegati'])) {
         $percorso_file = null;
@@ -132,6 +137,7 @@
       $nome_file = substr($row['allegati'], 4);
       //ANNUNCIO
       if (empty($row['data_scadenza'])) {
+        
         echo "
 				<div class='card text-black bg-light mb-3 d-inline-block'>
 					<div class='card-body'>";
@@ -178,66 +184,81 @@
         }
         echo "
 						</div>
-					</div>";
-          
-          $pubb = $row['pubblicazione'];
-          $titolo = $row['titolo'];
-        
-          //Restituisce tutti i commenti per quell'annuncio
-          $q = "SELECT * 
-                FROM commento c1 JOIN compito c2 ON c1.pubblicazione=c2.pubblicazione AND c1.titolo=c2.titolo JOIN utente u ON u.email=c1.email
-                WHERE c1.pubblicazione=$1 AND c2.titolo=$2";
+					</div>
+          <hr>";
 
-          $ris = pg_query_params($dbconn, $q, array($pubb, $titolo));
+          $i++;
+          $var = "collapse-" . $i;
 
-          if(($row1 = pg_fetch_array($ris, null, PGSQL_ASSOC))){
-            echo "<hr>
-
-            <div class='m-3 zonaCommenti'>
-            <p>
-              Commenti
-              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sticky' viewBox='0 0 16 16'>
-                <path d='M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z'/>
-              </svg>
-            </p>";
-            
-            echo "<table cellpadding='5' cellspacing='15'>";
-            do {
-              echo "<tr>
-                      <td><img class='rounded-circle shadow-1-strong me-3' src='../../img/empty.jpg' alt='avatar' width='35' height='35' /></td>
-                      <td><strong>" . $row1['nome'] . " " . $row1['cognome'] . "</strong><br>" . $row1['descrizione'] . "</td>
-                    </tr>";
-            } while ($row1 = pg_fetch_array($ris, null, PGSQL_ASSOC));
-            echo "
-            </table>
-            </div>";
-          }
-          
           echo "
-          <hr style='opacity:20%'>
+            <div class='accordion' id='accordionExample'>
+              <div class='accordion-item'>
+                <h2 class='accordion-header'>
+                  <button class='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='true' aria-controls='".$var."'>
+                    Commenti &nbsp;
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sticky' viewBox='0 0 16 16'>
+                      <path d='M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z'/>
+                    </svg>
+                  </button>
+                </h2>
+                <div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#accordionExample'>
+                  <div class='accordion-body'>";
+                    $pubb = $row['pubblicazione'];
+                    $titolo = $row['titolo'];
 
-          <div class='m-3 d-flex align-items-center'>  
-            <img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $_SESSION['immagine_profilo'] . "' alt='avatar' width='35' height='35' />
-            
-            <div class='input-group'>
-              <input type='text' class='form-control' name='descrizione' id='descrizione-commento' placeholder='Aggiungi un commento...'>
-              <button class='btn btn-outline-secondary btn-inserisci-commento' 
-                      data-action='./commento.php' 
-                      data-titolo='" . $row['titolo'] . "'
-                      data-pubblicazione='" . $row['pubblicazione'] . "'
-                      data-email='" . $_SESSION['email'] . "'>
-                <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-send' viewBox='0 0 16 16'>
-                <path d='M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z'/>
-                </svg>
-              </button>
-            </div>  
-            
-          </div>
-           
-              
-              
-          
-				</div>";
+                    //Restituisce tutti i commenti per quell'annuncio
+                    $q = "SELECT * 
+                            FROM commento c1 JOIN compito c2 ON c1.pubblicazione=c2.pubblicazione AND c1.titolo=c2.titolo JOIN utente u ON u.email=c1.email
+                            WHERE c1.pubblicazione=$1 AND c2.titolo=$2";
+
+                    $ris = pg_query_params($dbconn, $q, array($pubb, $titolo));
+
+                    if (($row1 = pg_fetch_array($ris, null, PGSQL_ASSOC))) {
+
+
+                      echo "<table cellpadding='5' cellspacing='15'>";
+                      do {
+                        echo "<tr>
+                                  <td><img class='rounded-circle shadow-1-strong me-3' src='../../img/empty.jpg' alt='avatar' width='35' height='35' /></td>
+                                  <td><strong>" . $row1['nome'] . " " . $row1['cognome'] . "</strong><br>" . $row1['descrizione'] . "</td>
+                                </tr>";
+                      } while ($row1 = pg_fetch_array($ris, null, PGSQL_ASSOC));
+                      echo "
+                        </table>";
+                    }
+
+                    echo "
+                      <hr style='opacity:20%'>
+
+                      <div class='m-3 d-flex align-items-center'>  
+                        <img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $_SESSION['immagine_profilo'] . "' alt='avatar' width='35' height='35' />
+                        
+                        <div class='input-group'>
+                          <input type='text' class='form-control' name='descrizione' id='descrizione-commento" . $row['id_post'] . "' placeholder='Aggiungi un commento...'>
+                          <button class='btn btn-outline-secondary btn-inserisci-commento'
+                                  id = btn-inserisci-commento" . $row['id_post'] . "
+                                  data-action='./commento.php' 
+                                  data-id='" . $row['id_post'] . "'
+                                  data-titolo='" . $row['titolo'] . "'
+                                  data-pubblicazione='" . $row['pubblicazione'] . "'
+                                  data-email='" . $_SESSION['email'] . "'>
+                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-send' viewBox='0 0 16 16'>
+                            <path d='M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z'/>
+                            </svg>
+                          </button>
+                        </div>  
+                        
+                      </div>
+                      
+                          
+                          
+                      
+                    </div>";
+
+                    echo " </div>
+                            </div>
+                          </div>
+                        </div>";  
       }
       //COMPITO
       else {

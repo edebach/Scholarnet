@@ -38,10 +38,19 @@
       echo 'Si è verificato un errore durante il caricamento del file.';
     }
   }
+ 
 
-    $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data_scadenza, ora, pubblicazione,email)
-             VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)";
-    $res=pg_query_params($dbconn, $q1, array($classe,$titolo,$testo,$allegati,$utente,$data_scadenza,$ora,$pubblicazione,$email));
+  do {
+    $id_post = mt_rand(1, 99999999);
+    $q1 = "SELECT * FROM compito WHERE id_post=$1";
+    $result = pg_query_params($dbconn, $q1, array($id_post));
+
+  } while (($tuple = pg_fetch_array($result, null, PGSQL_ASSOC)));
+  
+
+    $q1="INSERT INTO compito (classe, titolo, testo, allegati, utente, data_scadenza, ora, pubblicazione,email, id_post)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+    $res=pg_query_params($dbconn, $q1, array($classe,$titolo,$testo,$allegati,$utente,$data_scadenza,$ora,$pubblicazione,$email, $id_post));
   if(!$res)
       echo"errore di inserimento del post";
     else {
