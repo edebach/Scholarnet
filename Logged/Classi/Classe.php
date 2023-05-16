@@ -59,11 +59,6 @@
       });
     });
   </script>
-
-  <style>
-
-  </style>
-
   <script>
     $(document).ready(function () {
       const mySwitch = document.getElementById("slider-compito");
@@ -83,17 +78,6 @@
         });
       }
     });
-  </script>
-
-  <style>
-
-  </style>
-
-  <style>
-
-  </style>
-  <script>
-
   </script>
 
   <script src="./classe.js" language="javascript"></script>
