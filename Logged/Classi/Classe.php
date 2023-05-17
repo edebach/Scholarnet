@@ -119,35 +119,32 @@
             <div class="container">
               <!-- Campo informazioni generali: nome e cognome, con immagine e email-->
               <div class="row">
-                <table>
-                  <tr>
-                    <td>
-                      <!-- Caricamento immagine -->
-                      <?php
-                      if ($row['sesso'] == "Maschio") {
-                        if ($_SESSION['flag'] == "1") {
-                          echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
-                        } else {
-                          echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
-                        }
-                      } else if ($row['sesso'] == "Femmina") {
-                        if ($_SESSION['flag'] == "1") {
-                          echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
-                        } else {
-                          echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
-                        }
+                <div class="d-flex align-items-center">
+                  <div class="me-3">
+                    <!-- Caricamento immagine -->
+                    <?php
+                    if ($row['sesso'] == "Maschio") {
+                      if ($_SESSION['flag'] == "1") {
+                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
                       } else {
-                        echo "<br><img class='rounded-circle shadow-1-strong me-3 mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
+                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
                       }
-                      ?>
-                    </td>
-                    <td>
-                      <?php echo "<br><h7><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h7>
-														<br>
-														<h9>" . $row['email'] . "</h9>"; ?>
-                    </td>
-                  </tr>
-                </table>
+                    } else if ($row['sesso'] == "Femmina") {
+                      if ($_SESSION['flag'] == "1") {
+                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
+                      } else {
+                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
+                      }
+                    } else {
+                      echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
+                    }
+                    ?>
+                  </div>
+                  <div>
+                    <?php echo "<h6><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h6>
+                      <p class='mb-0'>" . $row['email'] . "</p>"; ?>
+                  </div>
+                </div>
               </div>
               <hr>
               <div class="row">
