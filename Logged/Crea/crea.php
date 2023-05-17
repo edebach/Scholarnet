@@ -12,20 +12,13 @@
     }
 
     //Quando viene creato un corso viene generato in maniera casuale un codice di 8 cifre alfanumeriche
-
-
+    
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
-
-
 
     if ($materia == "") {
         $materia = null;
     }
-
-
-    //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
-
 
     //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
     do {

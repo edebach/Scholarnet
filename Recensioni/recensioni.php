@@ -16,8 +16,7 @@
   $data = date("Y-m-d H:i:s");
 
   $utente = $_SESSION['nome'] . " " . $_SESSION['cognome'];
-  // TODO: inserire un controllo che mandi un allert se viene fatta più di una recensione al giorno
-  // e modificare il formato nel database da date a varchar (forse)
+
   $query = "INSERT INTO recensione (utente,data,stelle,descrizione,nome_recensione) VALUES
                   ($1, $2, $3, $4, $5)";
   $res = pg_query_params($dbconn, $query, array($_SESSION['email'], $data, $stelle, $descrizione, $nomeRecensione));

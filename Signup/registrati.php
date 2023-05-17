@@ -67,8 +67,6 @@
         //una volta che ho verificato l'utente non è registrato, inserisco i dati forniti nel form signup.php, nel mio db
         $q2 = "INSERT INTO utente VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10,$11)";
 
-        // TODO: Inserire l'hashing per la password prima di inserirla nel database
-
         //il risultato della query me lo salvo in un array, in questo caso con tutti i dati forniti
         $data = pg_query_params($dbconn, $q2, array($nome, $cognome, $email, $password, $istituto,$sesso,$dataN, $flag, $telefono, $data_iscrizione, $immagine));
         if ($data) {

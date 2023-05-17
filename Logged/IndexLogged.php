@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <?php
-session_start();
-// TODO: Inserire un controllo periodico per verificare che la sessione dell'utente
-//       non sia scaduta, altrimenti rimandarlo al login
+  session_start();
+
 ?>
 <html lang="it">
 
@@ -47,7 +46,6 @@ session_start();
       }
     }
 
-    /* TODO: Bordo non visibile, verificare se si può risolvere altrimenti cancellare quel parametro */
     iframe {
       width: 550px;
       height: 400px;
@@ -325,7 +323,7 @@ session_start();
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <div class="topleft">
-        <a class="navbar-brand" href="./IndexLogged.php"> <!--TODO: Da vedere il percorso -->
+        <a class="navbar-brand" href="./IndexLogged.php">
           <img src="../img/logo_nosfondo.png" id="logoScholarnet" alt="Logo Scholarnet" width="50" height="50"
             class="d-inline-block align-text-top">
         </a>

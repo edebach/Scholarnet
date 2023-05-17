@@ -1,182 +1,171 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <title>Signup page</title>
-    <!-- Carica gli stili di Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <!-- Stili per il calendario, link: https://codepen.io/SaadRegal/pen/ezVBJL -->
-    <!-- TODO: Questa libreria per la data crea problemi al resto del codice -->
-    
-    <!-- <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script> -->
-    <!-- Per gli stili nel file "Style.cc" (sembra inutile)-->
-    <!-- <link rel="stylesheet" href="../style.css"> -->
-    <style>
-      /* Aggiunge il background grigio e centra il contenitore */
-      body {
-        background-color: #f8f9fa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height:100vh;
-      }
-      #BottoneIscriviti{
-        padding-left: 0.3cm;
-        padding-right: 0.3cm;
-      }
-      #BottoneReset{
 
-        padding-top: 0.1cm;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Signup page</title>
+  <!-- Carica gli stili di Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <style>
+    /* Aggiunge il background grigio e centra il contenitore */
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-      /* Aggiunge la forma quadrata al contenitore (forma diversa salla pagina di login)*/
-      .square {
-        width: 630px;
-        height: 710px;
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
+    #BottoneIscriviti {
+      padding-left: 0.3cm;
+      padding-right: 0.3cm;
+    }
 
-      /* Aggiunge la larghezza e l'altezza al logo */
-      .logo {
-        width: 130px;
-        height: 130px;
-      }
+    #BottoneReset {
 
-    </style>
-    <title>Signup</title>
-  </head>
-  <body>
-    <div class="square">
-      <img src="../img/logo.jpg" alt="Logo del sito" class="logo" style="cursor:pointer"  onclick="location.href='../index.php'">
-      <h2 class="text-center mb-3">Signup</h2>
-      <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
-      <form name="signup1" action="./signup2.php" method="POST">
-        <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
-        <!-- Prima riga: form per nome e cognome.-->
-        <div class="row">
-          <div class="col">
-            <div class="mb-3 input-group">
-              <div class="input-group-text">
-                <i class="fa-solid fa-user"></i>
-              </div> 
-              <div class="form-floating">
-                <input type="text" class="form-control" name="nomeInput" placeholder="Nome" required>
-                <label for="nomeInput" class="text-black text-opacity-50">Nome</label>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="mb-3 input-group">
-              <div class="input-group-text">
-                <i class="fa-solid fa-user"></i>
-              </div>
-              <div class="form-floating">
-                <input type="text" class="form-control" name="cognomeInput" placeholder="Cognome" required>
-                <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
-              </div>
-            </div>
-          </div>
-        </div><!--Fine prima riga-->
-        <!--Terza riga: Form per inserire data di nascita -->
-        <!-- TODO: Decidere se cambiare formato o mantenere questo per l'inserimento della data di nascita -->
-        <!-- TODO: Valutare l'alternativa per selezionare la data commentata qui in seguito -->
-        <div class="mb-3 input-group">
-          <div class="input-group-text">
-            <i class="fa-solid fa-calendar"></i>
-          </div>
-          <!-- <div class="form-floating" id="data-picker"> -->
-          <div class="form-floating" id="datePicker">
-            <input type="date" class="form-control" id="data"  
-            placeholder="" name="datePicker" required>
-              <!-- <input type="text" class= "form-control" name="datePicker" placeholder="Date"> -->
-              <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label>
-              <!-- <label for="data" class="form-label" >Data</label> -->
-          </div>
-        </div>
-        <!-- <script>
-          $('#datePicker').calendar({
-            type: 'date',
-            format: 'yyyy-mm-dd'
-          });
-          </script> -->
+      padding-top: 0.1cm;
+    }
 
+    /* Aggiunge la forma quadrata al contenitore (forma diversa salla pagina di login)*/
+    .square {
+      width: 630px;
+      height: 710px;
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Aggiunge la larghezza e l'altezza al logo */
+    .logo {
+      width: 130px;
+      height: 130px;
+    }
+  </style>
+  <title>Signup</title>
+</head>
+
+<body>
+  <div class="square">
+    <img src="../img/logo.jpg" alt="Logo del sito" class="logo" style="cursor:pointer"
+      onclick="location.href='../index.php'">
+    <h2 class="text-center mb-3">Signup</h2>
+    <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
+    <form name="signup1" action="./signup2.php" method="POST">
+      <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
+      <!-- Prima riga: form per nome e cognome.-->
+      <div class="row">
+        <div class="col">
           <div class="mb-3 input-group">
             <div class="input-group-text">
-              <i class="fa-solid fa-graduation-cap"></i>
+              <i class="fa-solid fa-user"></i>
             </div>
-          <div class="form-floating"> 
-            <select class="form-select" name="sesso" aria-label="Floating label select example" required> 
-              <option selected></option>
-              <option value="Maschio">Maschio</option>
-              <option value="Femmina">Femmina</option>
-              <option value="vuoto">Non Specifico</option>
-            </select>
-            <label for="floatingSelect" class="text-black text-opacity-50">Sesso</label>
+            <div class="form-floating">
+              <input type="text" class="form-control" name="nomeInput" placeholder="Nome" required>
+              <label for="nomeInput" class="text-black text-opacity-50">Nome</label>
             </div>
           </div>
-<!--Quarta riga: Form per scelta scuola.-->
-        <div class="mb-3 input-group">
-          <div class="input-group-text">
-            <i class="fa-solid fa-graduation-cap"></i>
-          </div> 
-          <div class="form-floating">
-            <input list="istituti" name="Istituti" class="form-control" aria-label="Floating label select example" required>
-            <datalist id="istituti">
-              <option value="La Sapienza">
-              <option value="RomaTre">
-              <option value="Tor vergata">
-              <option value="Luiss">
-              <option value="Lumsa">
-              <option value="Politecnico di Milano">
-              <option value="Politecnico di Torino">
-              <option value="Cattolica">
-              </datalist>
-              <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
+        </div>
+        <div class="col">
+          <div class="mb-3 input-group">
+            <div class="input-group-text">
+              <i class="fa-solid fa-user"></i>
             </div>
-        </div><!--Fine terza riga-->
-
-        <!--Quinta riga: RadioButton flagStudente-->
-        <div class="mb-3 input-group">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flag" id="Docente" value="0" required>
-            <label class="form-check-label" for="Docente">
-              Docente
-            </label>
-          </div>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- spazi bianchi -->
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flag" id="Studente" value="1" required>
-            <label class="form-check-label" for="Studente">
-              Studente
-            </label>
-          </div>
-        </div> 
-
-        <div class="row" id="BottoneProsegui">
-          <button type="submit" class="btn btn-primary" href="./signup2.php">Prosegui</button>
-        </div>
-        <div class="row" id="BottoneReset">
-          <button type="reset" class="btn btn-warning" >Ripristina</button>
-        </div>
-
-        <div class="mt-2">
-          <div style="text-align: center">
-            <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="../Login/login.html">Sei già iscritto? Effettua l'accesso!</a>
+            <div class="form-floating">
+              <input type="text" class="form-control" name="cognomeInput" placeholder="Cognome" required>
+              <label for="cognomeInput" class="text-black text-opacity-50">Cognome</label>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
-  </body>
+      </div><!--Fine prima riga-->
+      <!--Terza riga: Form per inserire data di nascita -->
+
+      <div class="mb-3 input-group">
+        <div class="input-group-text">
+          <i class="fa-solid fa-calendar"></i>
+        </div>
+        <!-- <div class="form-floating" id="data-picker"> -->
+        <div class="form-floating" id="datePicker">
+          <input type="date" class="form-control" id="data" placeholder="" name="datePicker" required>
+          <label for="datePicker" class="text-black text-opacity-50">Data di nascita</label>
+
+        </div>
+      </div>
+      <div class="mb-3 input-group">
+        <div class="input-group-text">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="form-floating">
+          <select class="form-select" name="sesso" aria-label="Floating label select example" required>
+            <option selected></option>
+            <option value="Maschio">Maschio</option>
+            <option value="Femmina">Femmina</option>
+            <option value="vuoto">Non Specifico</option>
+          </select>
+          <label for="floatingSelect" class="text-black text-opacity-50">Sesso</label>
+        </div>
+      </div>
+      <!--Quarta riga: Form per scelta scuola.-->
+      <div class="mb-3 input-group">
+        <div class="input-group-text">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="form-floating">
+          <input list="istituti" name="Istituti" class="form-control" aria-label="Floating label select example"
+            required>
+          <datalist id="istituti">
+            <option value="La Sapienza">
+            <option value="RomaTre">
+            <option value="Tor vergata">
+            <option value="Luiss">
+            <option value="Lumsa">
+            <option value="Politecnico di Milano">
+            <option value="Politecnico di Torino">
+            <option value="Cattolica">
+          </datalist>
+          <label for="floatingSelect" class="text-black text-opacity-50">Istituto</label>
+        </div>
+      </div><!--Fine terza riga-->
+
+      <!--Quinta riga: RadioButton flagStudente-->
+      <div class="mb-3 input-group">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flag" id="Docente" value="0" required>
+          <label class="form-check-label" for="Docente">
+            Docente
+          </label>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <!-- spazi bianchi -->
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flag" id="Studente" value="1" required>
+          <label class="form-check-label" for="Studente">
+            Studente
+          </label>
+        </div>
+      </div>
+
+      <div class="row" id="BottoneProsegui">
+        <button type="submit" class="btn btn-primary" href="./signup2.php">Prosegui</button>
+      </div>
+      <div class="row" id="BottoneReset">
+        <button type="reset" class="btn btn-warning">Ripristina</button>
+      </div>
+
+      <div class="mt-2">
+        <div style="text-align: center">
+          <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+            href="../Login/login.html">Sei già iscritto? Effettua l'accesso!</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
 </html>

@@ -37,7 +37,6 @@
                         window.location.href='../Login/login.html';
                     </script>";
   } else {
-    // TODO: Utilizzare l'hashing della password per confrontarla con quella inserita nel database(da fare dopo aver modificato il file registrati.php)
     $password = $_POST['passwordInput'];
 
     //una volta che ho verificato l'utente è registrato verifico se ha inserito una corretta password

@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // TODO: gli alert non funzionano
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
         header("Location: /");
