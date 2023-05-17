@@ -177,4 +177,9 @@ header .container-fluid .row {
   .navbar {
     width: 110%;
   }
+
+  #codicecorsoCard {
+    margin-top: 604px;
+  }
 }
+
