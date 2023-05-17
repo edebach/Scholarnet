@@ -241,7 +241,7 @@
                       echo "<table cellpadding='5' cellspacing='15'>";
                       do {
                         echo "<tr>
-                                  <td><img class='rounded-circle shadow-1-strong me-3' src='../../img/empty.jpg' alt='avatar' width='35' height='35' /></td>
+                                  <td><img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/".$row1['immagine']."' alt='avatar' width='35' height='35' /></td>
                                   <td><strong>" . $row1['nome'] . " " . $row1['cognome'] . "</strong><br>" . $row1['descrizione'] . "</td>
                                   </tr>
                                 ";
@@ -368,7 +368,7 @@
           echo "<table cellpadding='5' cellspacing='15'>";
           do {
             echo "<tr>
-                      <td><img class='rounded-circle shadow-1-strong me-3' src='../../img/empty.jpg' alt='avatar' width='35' height='35' /></td>
+                      <td><img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $row2['immagine'] . "' alt='avatar' width='35' height='35' /></td>
                       <td><strong>" . $row2['nome'] . " " . $row2['cognome'] . "</strong><br>" . $row2['descrizione'] . "</td>
                     </tr>";
           } while ($row2 = pg_fetch_array($ris1, null, PGSQL_ASSOC));

@@ -353,7 +353,7 @@
                 <label for="orario" class="form-label">Orario</label>
                 <input type="time" class="form-control" id="orario" name="orario" value="">
               </div>
-              <button type="submit" class="btn btn-primary mt-3">Pubblica annuncio</button>
+              <button type="submit" class="btn btn-primary mt-3">Pubblica</button>
               <button id="ret-form-btn" class="btn btn-secondary mt-3">Annulla</button>
             </form>
           </div>
@@ -401,7 +401,7 @@
   <main class="container my-4" id="compiti-section">
     <?php
     //Query
-    $q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null";
+    $q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null ORDER BY  data_scadenza DESC";
     $result = pg_query_params($dbconn, $q, array($codice_corso));
 
     if ($row = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -434,6 +434,8 @@
 
         //impostiamo la data attuale
         $data_attuale = time();
+        $ora_attuale = date("H:i");
+        $ora = substr($row['ora'], 0, 5);
 
         //calcoliamo il numero di giorni rimanenti
         $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
@@ -441,6 +443,15 @@
         if($giorni_restanti<0){
           echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
           echo "<div class='col-4  '></div>";
+        }
+        else if($giorni_restanti==0){
+          if ($ora <= $ora_attuale) {
+            echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
+            echo "<div class='col-4  '></div>";
+          } else {
+            echo "<div class='col-4 text-center'  style='color: orange;'>oggi alle: " . $ora . "</div>";
+            echo "<div class='col-4  '></div>";
+          }
         }
         else if($giorni_restanti==1){
           echo "<div class='col-4 text-center' style='color: orange;'>" . $giorni_restanti . " giorno</div>";

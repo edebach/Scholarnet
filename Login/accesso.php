@@ -64,31 +64,7 @@
       } else {
         $_SESSION['flag'] = "0";
       }
-
-      $flagStudente = $_SESSION['flag'];
-      $sesso = $_SESSION['sesso'];
-      if ($sesso == "Maschio") {
-        if ($flagStudente == "1") {
-          $_SESSION['immagine_profilo'] = 'studente.png';
-        } else {
-          $_SESSION['immagine_profilo'] = 'professore.png';
-        }
-      } else {
-        if ($sesso == "Femmina") {
-          if ($flagStudente == "1") {
-            
-            $_SESSION['immagine_profilo'] = 'studentessa.png';
-          } else {
-
-            
-            $_SESSION['immagine_profilo'] = 'professoressa.png';
-          }
-        } else {
-
-         
-          $_SESSION['immagine_profilo'] = 'neutro.png';
-        }
-      }
+      $_SESSION['immagine_profilo'] = $tuple['immagine'];
 
       header("Location: ../Logged/IndexLogged.php");
 

@@ -30,7 +30,8 @@
             'data' => $row['data'],
             'stelle' => $row['stelle'],
             'descrizione' => $row['descrizione'],
-            'nome_recensione' => $row['nome_recensione']
+            'nome_recensione' => $row['nome_recensione'],
+            'immagine' => $row['immagine']
         );
     }
 
