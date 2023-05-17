@@ -59,7 +59,6 @@
       });
     });
   </script>
-  <!-- Nascondi lo slider compito se studente -->
   <script>
     $(document).ready(function () {
       const mySwitch = document.getElementById("slider-compito");
@@ -85,6 +84,7 @@
 </head>
 
 <body>
+  <!-- TODO: bisogna risolvere il bug della navbar quando si va mette lo schermo intero -->
   <header>
     <nav class="navbar nav navbar-dark bg-dark flex-wrap">
       <div class="container-fluid">
@@ -189,7 +189,9 @@
                     <span class="font-weight-bold">Home</span>
                   </a>
                 </li>
+                <!-- TODO: Qui dobbiamo inserire l'elenco delle classi le classi -->
                 <?php
+
                 $email = $_SESSION['email'];
                 //STUDENTE
                 if ($_SESSION['flag'] == '1') {
@@ -330,6 +332,7 @@
                 </a>
               </div>
               <div class="mb-2">
+                <!-- TODO: Non carica i file correttamente ma solo il nome del file -->
                 <label for="allegati" class="form-label">Allegati</label>
                 <input type="file" class="form-control" id="allegati" name="allegati">
               </div>

@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creazione corso</title>
-
-</head>
-
-<body>
-    <?php
+<?php
     session_start();
-
 
     //Connessione al dbname Scholarnet
     if ($_SERVER["REQUEST_METHOD"] != "POST") {
@@ -24,7 +12,7 @@
     }
 
     //Quando viene creato un corso viene generato in maniera casuale un codice di 8 cifre alfanumeriche
-    
+
 
     $nomeCorso = $_POST['nomeCorso'];
     $materia = $_POST['materia'];
@@ -37,7 +25,7 @@
 
 
     //TODO: Per adesso ho inizializzato il link ad una stringa vuota, parte di implementazione del link alla classe
-    
+
 
     //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
     do {
@@ -50,7 +38,7 @@
 
     $nome_file_originale = "../Classi/Classe.php"; // nome del file PHP originale
     $nome_file_nuovo = "Classe_" . $codice . ".php"; // crea il nuovo nome del file con il codice del corso
-    
+
     // imposta la cartella di destinazione dove verrà salvato il nuovo file
     $cartella_destinazione = "../Classi/";
 
@@ -99,9 +87,4 @@
             </script>";
         header("Location: $link");
     }
-
-
-    ?>
-</body>
-
-</html>
+?>

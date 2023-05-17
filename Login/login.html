@@ -48,8 +48,6 @@
     <div class="square">
       <img src="../img/logo.jpg" alt="Logo del sito" class="logo mb-3" style="cursor:pointer" onclick="location.href='../index.php'">
       <h2 class="text-center mb-3">Login</h2>
-      <!-- Il form è ancora statico, va settato in modo da verificare le credenziali e fornire accesso al sito -->
-      
       <form name="myForm" action="./accesso.php" method="POST">
       
       <!--Prima riga: form per la password -->
@@ -72,17 +70,6 @@
             <label for="passwordInput" class="text-black text-opacity-50">Password</label>
           </div>
         </div> <!--Fine seconda riga-->
-        <!--Terza riga: remember me checkbox -->
-        <!-- TODO: Decidere se implementare il pulsante ricordami o no -->
-          <!-- <div class="mb-3">
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-              <label class="form-check-label" for="dropdownCheck">
-                Ricordami
-              </label>
-            </div>
-          </div>-->
-        <!-- Fine terza riga  -->
         <button type="submit" class="btn btn-primary">Accedi</button>
         <div class="mt-1">
             <a class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href="../Signup/singup.html">Primo accesso? Iscriviti ora!</a>

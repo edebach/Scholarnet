@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <?php
-  session_start();
-  $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+session_start();
+$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
                 user=postgres password=biar")
-    or die('Could not connect: ' . pg_last_error());
-  $q1 = "SELECT SUM(conteggio) AS somma
+  or die('Could not connect: ' . pg_last_error());
+$q1 = "SELECT SUM(conteggio) AS somma
         FROM (
           SELECT count(*) AS conteggio
           FROM partecipa
@@ -14,9 +14,9 @@
           FROM insegna
           WHERE docente=$1
         ) AS conteggi; ";
-  $ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
-  $num_corsi = pg_fetch_result($ris, 0, 'somma');
-  $q2 = "SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
+$ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
+$num_corsi = pg_fetch_result($ris, 0, 'somma');
+$q2 = "SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
           FROM corso c
           LEFT JOIN insegna i ON c.codice = i.corso
           LEFT JOIN partecipa p ON c.codice = p.corso
@@ -25,10 +25,10 @@
           ORDER BY num_iscritti DESC
           LIMIT 1;
           ";
-  $max_corso = "";
-  $ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
-  if (pg_num_rows($ris) > 0)
-    $max_corso = pg_fetch_result($ris, 0, 'corso');
+$max_corso = "";
+$ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
+if (pg_num_rows($ris) > 0)
+  $max_corso = pg_fetch_result($ris, 0, 'corso');
 ?>
 
 <html lang="en">
@@ -37,18 +37,7 @@
   <title></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    .gradient-custom {
-      /* fallback for old browsers */
-      background: #f6d365;
 
-      /* Chrome 10-25, Safari 5.1-6 */
-      background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-
-      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
-    }
-  </style>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
   <!-- Librerie di modal -->
@@ -60,114 +49,12 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-  <!-- Carica Fontawesome (immagini degli omini accanto ai form) -->
+  <!-- Carica Fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./Profilo/profilo.css">
 
-  <style>
-    .btn-close {
-      position: absolute;
-      top: .2cm;
-      right: .2cm;
-    }
-  </style>
 
-  <script type="text/javascript" language="javascript">
-    function confrontaPassword() {
-      var nuovaPassword = document.getElementById("nuova-password").value;
-      var confermaPassword = document.getElementById("conferma-password").value;
-      if (nuovaPassword !== confermaPassword) {
-        alert("Le password non corrispondono. Riprovare.");
-        return false;
-      }
-      return true;
-    }
-  </script>
-
-  <script>
-    $(document).ready(function () {
-      var passwordModal = new bootstrap.Modal(document.getElementById('password-modal'));
-      $('#edit-password-btn').click(function () {
-        passwordModal.show();
-      });
-    });
-    $(document).ready(function () {
-      // Gestisci il clic sul pulsante "Modifica profilo"
-      $('#edit-profile-btn').on('click', function () {
-        $('.editable').addClass('d-none');
-        $('.form-control.profilo').removeClass('d-none');
-        $('#edit-profile-btn').addClass('d-none');
-        $('#save-profile-btn').removeClass('d-none');
-        $('#cancel-profile-btn').removeClass('d-none');
-      });
-      $('#cancel-profile-btn').on('click', function () {
-        // Ripristina i valori precedenti di email e telefono
-        // $("#email-input").val($("#email").text());
-        $("#phone-input").val($("#phone").text());
-        // Nascondi il pulsante "Salva modifiche" e mostra il pulsante "Modifica profilo"
-        $('.editable').removeClass('d-none');
-        $('.form-control.profilo').addClass('d-none');
-        $("#save-profile-btn").addClass("d-none");
-        $("#edit-profile-btn").removeClass("d-none");
-        // Nascondi il pulsante "Annulla modifiche"
-        $("#cancel-profile-btn").addClass("d-none");
-      });
-
-      // Gestisci il clic sul pulsante "Salva modifiche"
-      $('#save-profile-btn').on('click', function () {
-        if (confirm("vuoi salvare le modifiche?")) {
-          $('.editable').removeClass('d-none');
-          $('.form-control.profilo').addClass('d-none');
-          $('#edit-profile-btn').removeClass('d-none');
-          $('#save-profile-btn').addClass('d-none');
-          $('#cancel-profile-btn').addClass('d-none');
-
-          // Aggiorna le informazioni nel database tramite una chiamata AJAX
-          $.ajax({
-            url: './Modifica/update_profile.php',
-            type: 'POST',
-            data: { // passa i dati aggiornati tramite POST
-              // email: $('#email-input').val(),
-              telefono: $('#phone-input').val()
-            },
-            dataType: "json",
-            success: function (response) {
-              // gestisci la risposta del server
-              location.reload();
-              console.log(response);
-            },
-            error: function (xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
-        }
-      });
-
-    });
-  </script>
-  <script type="text/javascript" language="javascript">
-    function validaInputTel() {
-      var input = document.getElementById("phone-input");
-      var errorMsg = document.getElementById("error-msg");
-
-      if (input.value) {
-        input.setCustomValidity(""); // resetta eventuali errori precedenti
-
-        if (!input.checkValidity()) {
-          input.setCustomValidity("Formato richiesto: (+XXX) XXXXXXX");
-          errorMsg.innerHTML = "Formato richiesto: (+XXX) XXXXXXX";
-          input.style.color = "red";
-        } else {
-          input.setCustomValidity("");
-          input.style.color = "";
-          errorMsg.innerHTML = "";
-        }
-      } else {
-        input.setCustomValidity("");
-        input.style.color = "";
-        errorMsg.innerHTML = "";
-      }
-    }
-  </script>
+  <script src="./Profilo/profilo.js" language="javascript"></script>
 
 </head>
 
@@ -186,7 +73,7 @@
                 <!-- immagine profilo in base a professione e sesso -->
                 <?php include "./Profilo/fotoprofilo.php" ?>
                 <?php include "./Profilo/nome_studprof.php" ?>
-                
+
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
@@ -294,4 +181,5 @@
     </div>
   </section>
 </body>
+
 </html>

@@ -238,3 +238,89 @@ $(document).ready(function () {
     dots[slideIndex - 1].className += " active";
   }
 });
+  // Script elimina_classe
+    $(document).ready(function () {
+      $(".btn-elimina-annuncio").click(function () {
+        if (confirm("Sei sicuro di voler eliminare il post?")) {
+          var url = $(this).data("action");
+          var titolo = $(this).data("titolo");
+          var testo = $(this).data("testo");
+          var corso = $(this).data("corso");
+          var allegati = $(this).data("allegati");
+          console.log(allegati);
+
+
+          $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+              elimina_annuncio: true,
+              testo: testo, corso: corso, titolo: titolo, allegati: allegati
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.success) {
+                alert("Annuncio eliminato correttamente.");
+                location.reload(); // Ricarica la pagina
+              } else {
+                console.log(data.message);
+                alert("Errore durante l\'eliminazione dell\' annuncio.");
+              }
+            },
+            error: function (jqXHR, status, error) {
+              console.log(status + ": " + error);
+              alert("Errore durante l\'eliminazione dell\' annuncio.");
+            }
+          });
+        }
+      });
+    });
+
+    // Script inserisci commento
+     $(document).ready(function () {
+      $(".input-group input[type='text']").on("input", function() { // Aggiunge un listener all'evento "input" dell'input text
+            var input = $(this);
+            var btn = input.siblings("button");
+            if (input.val().trim() === "") { // Controlla se l'input è vuoto o contiene solo spazi
+                btn.prop("disabled", true); // Disabilita il bottone se l'input è vuoto
+                btn.removeClass("btn-attivo");
+            } else {
+                btn.prop("disabled", false); // Abilita il bottone se l'input non è vuoto
+                btn.addClass("btn-attivo");
+            }
+        });
+      
+      $(".btn-inserisci-commento").click(function () {
+       
+        var id_post = $(this).data("id"); 
+        var url = $(this).data("action");
+        var descrizione = $("#descrizione-commento"+id_post).val();
+        var titolo = $(this).data("titolo");
+        var pubblicazione = $(this).data("pubblicazione");
+        var email = $(this).data("email");
+
+        $.ajax({
+          url: url,
+          type: 'post',
+          data: {
+            inserisci_commento: true,
+            pubblicazione: pubblicazione, email: email, titolo: titolo, descrizione: descrizione
+          },
+          dataType: 'json',
+          success: function (data) {
+            if (data.success) {
+              location.reload(); // Ricarica la pagina
+            } else {
+              console.log(data.message);
+              alert("Errore durante l\'inserimento del commento.");
+            }
+          },
+          error: function (jqXHR, status, error) {
+            console.log(status + ": " + error);
+            alert("Errore durante l\'inserimento del commento.");
+          }
+        });
+      });
+    });
+    
+    
