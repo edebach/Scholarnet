@@ -20,13 +20,11 @@ $_SESSION['flag'] = $_POST['flag'];
     <!-- Carica gli stili di Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Stili per il calendario, link: https://codepen.io/SaadRegal/pen/ezVBJL-->
-    <!-- TODO: Stessi problemi presenti in Signup1 -->
+
     <link href="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.css" rel="stylesheet" type="text/css" />
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
-    <!-- Per gli stili nel file "Style.cc"-->
-    <link rel="stylesheet" href="style.css">
-    <script src="./localStorage.js"></script>
+
 
     <!--Verifica password-->
     <script>

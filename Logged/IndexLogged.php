@@ -63,6 +63,70 @@ session_start();
 
   <link rel="stylesheet" href="../src/rating.css">
   <link rel="stylesheet" href="../src/rating1.css">
+  
+  <!--Script annulla iscrizione-->
+  <script>
+    $(document).ready(function () {
+      $(".btn-annulla-iscrizione").click(function () {
+        if (confirm("Sei sicuro di voler annullare l'iscrizione alla classe?")) {
+          var url = $(this).data("action");
+          var link = $(this).data("href");
+          $.ajax({
+            url: url,
+            type: 'post',
+            data: { link: link },
+            dataType: 'json',
+            success: function (data) {
+              if (data.success) {
+                alert("Iscrizione annullata correttamente.");
+                location.reload(); // Ricarica la pagina
+              } else {
+                alert("Errore durante l'annullamento dell'iscrizione.");
+              }
+            },
+            error: function (jqXHR, status, error) {
+              console.log(status + ": " + error);
+              alert("Errore durante l'annullamento dell'iscrizione.");
+            }
+          });
+
+        }
+      });
+    });
+  </script>
+
+  <!--Script elimina_classe-->
+  <script>
+    $(document).ready(function () {
+      $(".btn-elimina-classe").click(function () {
+        if (confirm("Sei sicuro di voler eliminare la classe?")) {
+          var url = $(this).data("action");
+          var link = $(this).data("href");
+          var codice_corso = $(this).data("classe");
+
+          $.ajax({
+            url: url,
+            type: 'post',
+            data: { elimina_classe: true, link: link, codice_corso: codice_corso },
+            dataType: 'json',
+            success: function (data) {
+              if (data.success) {
+                alert("Classe eliminata correttamente.");
+                location.reload(); // Ricarica la pagina
+              } else {
+                console.log(data.message);
+                alert("Errore durante l'eliminazione della classe.");
+              }
+            },
+            error: function (jqXHR, status, error) {
+              console.log(status + ": " + error);
+              alert("Errore durante l'eliminazione della classe.");
+            }
+          });
+        }
+      });
+    });
+  </script>
 
 
   <!--ZONA DINAMICA1: Implementazione oggetto AJAX per click stelle-->
@@ -328,11 +392,11 @@ session_start();
   </section>
 
   <!-- Finestra di Iscriviti corso -->
-  <div class="modal fade" id="iscriviti-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="iscriviti-popup" tabindex="-1" role="dialog" aria-labelledby="ModalIscriviti">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">Iscriviti al corso</h5>
+          <h5 class="modal-title" id="ModalIscriviti">Iscriviti al corso</h5>
         </div>
         <div class="modal-body">
           <div class="container">
@@ -356,11 +420,11 @@ session_start();
   </div>
 
   <!-- Finestra di Crea corso -->
-  <div class="modal fade" id="crea-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="crea-popup" tabindex="-1" role="dialog" aria-labelledby="ModalCreaCorso">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="myModalLabel">Crea corso</h5>
+          <h5 class="modal-title" id="ModalCreaCorso">Crea corso</h5>
         </div>
         <div class="modal-body">
 
@@ -434,7 +498,7 @@ session_start();
           </fieldset>
           <button class="btn btn-outline-info ml-3" id="allrec" value="0"><label for="allrec"
               title="visualizza tutte le recensioni"> tutte le recensioni </label> </button>
-        </div>
+        </div>            
 
 
         <div class="col-sm-12 ">
@@ -449,7 +513,7 @@ session_start();
             <style>
               body { margin: 0; }
             </style>
-            
+
             <!-- Bootstrap CSS -->
             <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
             <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css'>
@@ -488,7 +552,7 @@ session_start();
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
-                                                                        <p class='mb-1'><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong><span class='small'> - " . $row['data'] . "</span></p>
+                                                                        <p class='mb-1'><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong><span class='small'> - " . date('d/m/Y H:i:s', strtotime($row['data'])). "</span></p>
                                                                     </div>
                                                                     <p class='small mb-0'>" . $row['descrizione'] . "</p>
                                                                 </div>
@@ -522,11 +586,11 @@ session_start();
       </div>
 
       <!--Finestra inserisci recensione-->
-      <div class="modal fade" id="recensione-popup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal fade" id="recensione-popup" tabindex="-1" role="dialog" aria-labelledby="ModalRecensione">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="myModalLabel">Inserisci recensione</h5>
+              <h5 class="modal-title" id="ModalRecensione">Inserisci recensione</h5>
             </div>
             <div class="modal-body">
               <div class="container">

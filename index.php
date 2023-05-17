@@ -1,4 +1,5 @@
 <?php
+session_start();
 session_destroy();
 ?>
 
@@ -454,24 +455,6 @@ session_destroy();
               </div>
             </div>
 
-            <!--Sesta domanda-->
-            <div class="card">
-              <div class="card-header" id="headingSix">
-                <h3 class="mb-0">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="false" aria-controls="collapseSix">
-                    Posso comunicare con gli studenti attraverso l'applicazione?
-                  </button>
-                </h3>
-              </div>
-              <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-                <div class="card-body">
-                  Si, potrai comunicare con i tuoi studenti sia nello stream della homepage della classe, e
-                  anche tramite la chat del corso.
-                </div>
-              </div>
-            </div>
-
             <!--Settima domanda-->
             <div class="card">
               <div class="card-header" id="headingSeven">
@@ -582,7 +565,7 @@ session_destroy();
                                                             <div class='flex-grow-1 flex-shrink-1'>
                                                                 <div>
                                                                     <div class='d-flex justify-content-between align-items-center'>
-                                                                        <p class='mb-1'><strong>".$row['nome']." ".$row['cognome']."</strong><span class='small'> - ".$row['data']."</span></p>
+                                                                        <p class='mb-1'><strong>".$row['nome']." ".$row['cognome']."</strong><span class='small'> - ". date('d/m/Y H:i:s', strtotime($row['data']))."</span></p>
                                                                     </div>
                                                                     <p class='small mb-0'>".$row['descrizione']."</p>
                                                                 </div>

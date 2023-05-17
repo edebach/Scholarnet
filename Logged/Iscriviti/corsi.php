@@ -1,85 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
-  <!--Script annulla iscrizione-->
-  <script>
-    $(document).ready(function () {
-      $(".btn-annulla-iscrizione").click(function () {
-        if (confirm("Sei sicuro di voler annullare l'iscrizione alla classe?")) {
-          var url = $(this).data("action");
-          var link = $(this).data("href");
-          $.ajax({
-            url: url,
-            type: 'post',
-            data: { link: link },
-            dataType: 'json',
-            success: function (data) {
-              if (data.success) {
-                alert("Iscrizione annullata correttamente.");
-                location.reload(); // Ricarica la pagina
-              } else {
-                alert("Errore durante l'annullamento dell'iscrizione.");
-              }
-            },
-            error: function (jqXHR, status, error) {
-              console.log(status + ": " + error);
-              alert("Errore durante l'annullamento dell'iscrizione.");
-            }
-          });
-
-        }
-      });
-    });
-  </script>
-
-  <!--Script elimina_classe-->
-  <script>
-    $(document).ready(function () {
-      $(".btn-elimina-classe").click(function () {
-        if (confirm("Sei sicuro di voler eliminare la classe?")) {
-          var url = $(this).data("action");
-          var link = $(this).data("href");
-          var codice_corso = $(this).data("classe");
-
-          $.ajax({
-            url: url,
-            type: 'post',
-            data: { elimina_classe: true, link: link, codice_corso: codice_corso },
-            dataType: 'json',
-            success: function (data) {
-              if (data.success) {
-                alert("Classe eliminata correttamente.");
-                location.reload(); // Ricarica la pagina
-              } else {
-                console.log(data.message);
-                alert("Errore durante l'eliminazione della classe.");
-              }
-            },
-            error: function (jqXHR, status, error) {
-              console.log(status + ": " + error);
-              alert("Errore durante l'eliminazione della classe.");
-            }
-          });
-        }
-      });
-    });
-  </script>
-
-</head>
-
-<body>
-  <?php
+<?php
 
   //Connessione al db
-  
+
   $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-            user=postgres password=biar")
+              user=postgres password=biar")
     or die('Could not connect: ' . pg_last_error());
 
 
@@ -89,12 +13,12 @@
   // Controlliamo se si tratta di uno studente o docente: 
   // Nel caso il flag sia 0 si trattadi un docente, nel caso in cui è 1 di uno studente
   if ($flag == '0') { // Docente
-  
+
     //Genera tutte le tuple dove il docente insegna in dei corsi
     $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
     $result1a = pg_query_params($dbconn, $q1a, array($email));
     $var = 0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
-  
+
 
     if ($row1 = pg_fetch_array($result1a, null, PGSQL_ASSOC)) {
       $var = 1;
@@ -102,34 +26,34 @@
       do {
         //Parte l'interfaccia grafica: implementazione delle card corso
         echo "        
-                <div class='card' style='width: 18rem;'>
-                    <div class='position-relative'>
-                        <img src='" . $row1['link_imm'] . "' class='card-img-top'>
-                        <div class='position-absolute top-0 end-0'>
-                            <div class='dropdown'>
-                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                <i class='bi bi-three-dots-vertical'></i>
-                                </button>
-                                <ul class='dropdown-menu dropdown-menu-end'>
-                                    <li>
-                                        <div class='text-center'>
-                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
-                                                    id='btn-elimina-classe-" . $row1['link'] . "' 
-                                                    data-classe='" . substr($row1['link'], -12, -4) . "'
-                                                    data-action='./Elimina/eliminaclasse.php'  
-                                                    data-href='" . $row1['link'] . "'>Elimina classe
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='card-body'>
-                        <h5 class='card-title'><a href='./Logged/" . $row1['link'] . "'>" . $row1['nome'] . "</a></h5>
-                        <p class='card-text'>" . $row1['materia'] . "</p>
-                    </div>
-                </div>";
+                  <div class='card' style='width: 18rem;'>
+                      <div class='position-relative'>
+                          <img src='" . $row1['link_imm'] . "' class='card-img-top'>
+                          <div class='position-absolute top-0 end-0'>
+                              <div class='dropdown'>
+                                  <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                  <i class='bi bi-three-dots-vertical'></i>
+                                  </button>
+                                  <ul class='dropdown-menu dropdown-menu-end'>
+                                      <li>
+                                          <div class='text-center'>
+                                              <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                                      id='btn-elimina-classe-" . $row1['link'] . "' 
+                                                      data-classe='" . substr($row1['link'], -12, -4) . "'
+                                                      data-action='./Elimina/eliminaclasse.php'  
+                                                      data-href='" . $row1['link'] . "'>Elimina classe
+                                              </button>
+                                          </div>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class='card-body'>
+                          <h5 class='card-title'><a href='./Logged/" . $row1['link'] . "'>" . $row1['nome'] . "</a></h5>
+                          <p class='card-text'>" . $row1['materia'] . "</p>
+                      </div>
+                  </div>";
 
       } while ($row1 = pg_fetch_array($result1a));
 
@@ -147,34 +71,34 @@
       do {
         //Parte l'interfaccia grafica: implementazione delle card corso
         echo "        
-                <div class='card' style='width: 18rem;'>
-                    <div class='position-relative'>
-                        <img src='" . $row2['link_imm'] . "' class='card-img-top'>
-                        <div class='position-absolute top-0 end-0'>
-                            <div class='dropdown'>
-                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                <i class='bi bi-three-dots-vertical'></i>
-                                </button>
-                                <ul class='dropdown-menu dropdown-menu-end'>
-                                    <li>
-                                        <div class='text-center'>
-                                            <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
-                                                    id='btn-elimina-classe-" . $row2['link'] . "' 
-                                                    data-classe='" . substr($row2['link'], -12, -4) . "'
-                                                    data-action='./Elimina/eliminaclasse.php'  
-                                                    data-href='" . $row2['link'] . "'>Elimina classe
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='card-body'>
-                        <h5 class='card-title'><a href='./Logged/" . $row2['link'] . "'>" . $row2['nome'] . "</a></h5>
-                        <p class='card-text'>" . $row2['materia'] . "</p>
-                    </div>
-                </div>";
+                  <div class='card' style='width: 18rem;'>
+                      <div class='position-relative'>
+                          <img src='" . $row2['link_imm'] . "' class='card-img-top'>
+                          <div class='position-absolute top-0 end-0'>
+                              <div class='dropdown'>
+                                  <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                  <i class='bi bi-three-dots-vertical'></i>
+                                  </button>
+                                  <ul class='dropdown-menu dropdown-menu-end'>
+                                      <li>
+                                          <div class='text-center'>
+                                              <button class='btn btn-light d-inline-block mx-1 btn-elimina-classe' 
+                                                      id='btn-elimina-classe-" . $row2['link'] . "' 
+                                                      data-classe='" . substr($row2['link'], -12, -4) . "'
+                                                      data-action='./Elimina/eliminaclasse.php'  
+                                                      data-href='" . $row2['link'] . "'>Elimina classe
+                                              </button>
+                                          </div>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class='card-body'>
+                          <h5 class='card-title'><a href='./Logged/" . $row2['link'] . "'>" . $row2['nome'] . "</a></h5>
+                          <p class='card-text'>" . $row2['materia'] . "</p>
+                      </div>
+                  </div>";
 
       } while ($row2 = pg_fetch_array($result1b));
 
@@ -194,34 +118,34 @@
       do {
         //Parte l'interfaccia grafica: implementazione delle card corso
         echo "        
-                <div class='card' style='width: 18rem;'>
-                    <div class='position-relative'>
-                        <img src='" . $row3['link_imm'] . "' class='card-img-top'>
-                        <div class='position-absolute top-0 end-0'>
-                            <div class='dropdown'>
-                                <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                                <i class='bi bi-three-dots-vertical'></i>
-                                </button>
-                                <ul class='dropdown-menu dropdown-menu-end'>
-                                    <li>
-                                        <div class='text-center'>
-                                            <button class='btn btn-light d-inline-block mx-1 btn-annulla-iscrizione' 
-                                                    id='btn-annulla-iscrizione-" . $row3['link'] . "'
-                                                    data-action='./Elimina/annulla-iscrizione.php'
-                                                    data-href='" . $row3['link'] . "'>
-                                                    Annulla iscrizione
-                                            </button>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='card-body'>
-                        <h5 class='card-title'><a href='./Logged/" . $row3['link'] . "'>" . $row3['nome'] . "</a></h5>
-                        <p class='card-text'>" . $row3['materia'] . "</p>
-                    </div>
-                </div>";
+                  <div class='card' style='width: 18rem;'>
+                      <div class='position-relative'>
+                          <img src='" . $row3['link_imm'] . "' class='card-img-top'>
+                          <div class='position-absolute top-0 end-0'>
+                              <div class='dropdown'>
+                                  <button class='btn btn-secondary' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                                  <i class='bi bi-three-dots-vertical'></i>
+                                  </button>
+                                  <ul class='dropdown-menu dropdown-menu-end'>
+                                      <li>
+                                          <div class='text-center'>
+                                              <button class='btn btn-light d-inline-block mx-1 btn-annulla-iscrizione' 
+                                                      id='btn-annulla-iscrizione-" . $row3['link'] . "'
+                                                      data-action='./Elimina/annulla-iscrizione.php'
+                                                      data-href='" . $row3['link'] . "'>
+                                                      Annulla iscrizione
+                                              </button>
+                                          </div>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <div class='card-body'>
+                          <h5 class='card-title'><a href='./Logged/" . $row3['link'] . "'>" . $row3['nome'] . "</a></h5>
+                          <p class='card-text'>" . $row3['materia'] . "</p>
+                      </div>
+                  </div>";
 
       } while ($row3 = pg_fetch_array($result2));
       echo "</div>";
@@ -229,7 +153,4 @@
       echo "<p>Non sei iscritto a nessun corso.</p>";
     }
   }
-  ?>
-</body>
-
-</html>
+?>

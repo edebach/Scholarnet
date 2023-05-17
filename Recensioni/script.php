@@ -27,7 +27,7 @@
     while ($row = pg_fetch_array($result)) {
         $recensioni[] = array(
             'utente' => $row['nome']." ".$row['cognome'],
-            'data' => $row['data'],
+            'data' => date('d/m/Y H:i:s', strtotime($row['data'])),
             'stelle' => $row['stelle'],
             'descrizione' => $row['descrizione'],
             'nome_recensione' => $row['nome_recensione'],
