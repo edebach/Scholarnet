@@ -52,7 +52,7 @@
   <script>
     $(document).ready(function () {
       $('#allrec').trigger('click');
-      $('#star1').prop('checked', true);
+      $('#star5').prop('checked', true);
     });
 
 
