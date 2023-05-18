@@ -2,20 +2,20 @@
   $codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
   //Query
-  $q = "SELECT * FROM compito WHERE classe=$1 ORDER BY pubblicazione DESC";
+  $q = "SELECT * FROM compito c join utente u on c.email=u.email  WHERE classe=$1 ORDER BY pubblicazione DESC";
   $result = pg_query_params($dbconn, $q, array($codice_corso));
 
   // Calcola il numero totale di compiti per la classe
   $num_compiti = pg_num_rows($result);
 
   // Calcola il numero di pagine
-  $num_pagine = ceil($num_compiti / 5);
+  $num_pagine = ceil($num_compiti / 3);
 
   // Ottieni il numero di pagina corrente dalla query string
   $pagina_corrente = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
 
   // Calcola l'indice di partenza del subset di compiti da visualizzare
-  $indice_inizio = ($pagina_corrente - 1) * 5;
+  $indice_inizio = ($pagina_corrente - 1) * 3;
   $i = 0;
   // Seleziona i 5 compiti più recenti per la pagina corrente
   if (pg_num_rows($result) > 0) {
@@ -40,7 +40,7 @@
           <div class='card text-black bg-light mb-3 d-inline-block'>
             <div class='card-body'>";
         
-        if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
+        if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email']){
           echo "
             <div class='position-absolute top-0 end-0'>
               <div class='dropdown'>
@@ -62,10 +62,15 @@
                 </ul>
               </div>
             </div>";
+        }
         echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
                 <span style='font-size: 18px;'>
-                  <i class='fa-sharp fa-solid fa-scroll'></i>
-                  " . $row['titolo'] . " - " . $row['utente'] . "
+                  <i class='fa-sharp fa-solid fa-scroll'></i>";
+                  if($row['flagStudente']=="t")
+                  echo " ".$row['titolo'] . " - " . $row['utente'];
+                  else
+                  echo " ".$row['titolo'] . " - prof. " . $row['cognome'];
+                  echo "
                 </span>
                 <span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
                 Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
@@ -182,7 +187,7 @@
                           data-titolo='" . $row['titolo'] . "'
                           data-corso='" . $codice_corso . "'
                           data-allegati='" . $percorso_file . "'													  
-                            >Elimina annuncio
+                            >Elimina compito
                       </button>
                     </div>
                   </li>
@@ -192,8 +197,12 @@
         echo "
               <div style='display: flex; align-items: center;'>
                 <span class='card-text bg-light text-black' style='font-size: 18px;'>
-                  <i class='fa-solid fa-book' style='font-size: 18px;'></i>
-                  " . $row['titolo'] . " - " . $row['utente'] . "
+                  <i class='fa-solid fa-book' style='font-size: 18px;'></i>";
+                  if ($row['flagStudente'] == "t")
+                  echo " ".$row['titolo'] . " - " . $row['utente'];
+                  else
+                  echo " ".$row['titolo'] . " - prof. " . $row['cognome'];
+                  echo"
                 </span>
                 <span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
                   Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "
@@ -289,7 +298,7 @@
       }
       $count++;
 
-    } while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) and $count < 5);
+    } while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) and $count < 3);
 
     // Mostra l'elenco di numeri di pagina per la paginazione
     echo "<nav aria-label='Page navigation example'>

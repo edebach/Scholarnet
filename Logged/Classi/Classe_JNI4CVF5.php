@@ -44,7 +44,7 @@
       });
       //al click ricarica la pagina
       var reloadBtn = document.getElementById("reload-btn");
-      reloadBtn.addEventListener("click", function() {
+      reloadBtn.addEventListener("click", function () {
         location.reload();
       });
 
@@ -108,7 +108,7 @@
 
         <!-- offcanvas il mio profilo -->
         <button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#profile">
+          data-bs-target="#profile">
           <!-- Icona dell'utente -->
           <i class="fa-sharp fa-regular fa-user fa-lg"></i>
         </button>
@@ -126,20 +126,20 @@
             $result = pg_query_params($dbconn, $q, array($email));
             $row = pg_fetch_array($result);
             ?>
-        
+
             <div class="container">
               <div class="row">
                 <div class="d-flex align-items-center">
                   <div class="me-3">
                     <?php
-                      //Caricamento immagine circolare
-                      echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/".$row['immagine']."' alt='avatar' width='65' height='65' />";
+                    //Caricamento immagine circolare
+                    echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/" . $row['immagine'] . "' alt='avatar' width='65' height='65' />";
                     ?>
                   </div>
                   <div>
-                    <?php 
-                      //Campo nome e cognome, con indirizzo email associato
-                      echo "<h6><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h6>
+                    <?php
+                    //Campo nome e cognome, con indirizzo email associato
+                    echo "<h6><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h6>
                             <p class='mb-0'>" . $row['email'] . "</p>"; ?>
                   </div>
                 </div>
@@ -147,21 +147,21 @@
               <hr>
               <div class="row">
                 <?php
-                  //Campo istituto
-                  echo "<p>Istituto/Università: " . $row['istituto'] . "</p>"; 
-                
-                  //Campo data di nascita
-                  if ($row['sesso'] == "Femmina")
-                    echo "<p>Nata il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
-                  else
-                    echo "<p>Nato il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+                //Campo istituto
+                echo "<p>Istituto/Università: " . $row['istituto'] . "</p>";
 
-                  //Campo telefono se esiste
-                  if ($row['telefono'] != "")
-                    echo "<p>Numero di telefono: " . $row['telefono'] . "</p>";
+                //Campo data di nascita
+                if ($row['sesso'] == "Femmina")
+                  echo "<p>Nata il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+                else
+                  echo "<p>Nato il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
 
-                  //Campo data iscrizione
-                  echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
+                //Campo telefono se esiste
+                if ($row['telefono'] != "")
+                  echo "<p>Numero di telefono: " . $row['telefono'] . "</p>";
+
+                //Campo data iscrizione
+                echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
                 ?>
                 <!--Link al file Profilo.php-->
                 <p><a href="../Profilo.php">Vai al mio profilo</a></p>
@@ -169,7 +169,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- offcanvas le mie classi -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
           <div class="offcanvas-header">
@@ -412,7 +412,7 @@
         $nome_file = substr($row['allegati'], 4);
         $i++;
         $var = "flush-collapse-" . $i;
-        echo 
+        echo
           "<div class='accordion-item'>
 						<h2 class='accordion-header'>
 							<button class='accordion-button collapsed row align-items-center' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='false' aria-controls='" . $var . "'>
@@ -434,11 +434,10 @@
         //calcoliamo il numero di giorni rimanenti
         $giorni_restanti = floor(($data_scadenza - $data_attuale) / (60 * 60 * 24));
         $giorni_restanti += 1;
-        if($giorni_restanti<0){
+        if ($giorni_restanti < 0) {
           echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
           echo "<div class='col-4  '></div>";
-        }
-        else if($giorni_restanti==0){
+        } else if ($giorni_restanti == 0) {
           if ($ora <= $ora_attuale) {
             echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
             echo "<div class='col-4  '></div>";
@@ -446,16 +445,14 @@
             echo "<div class='col-4 text-center'  style='color: orange;'>oggi alle: " . $ora . "</div>";
             echo "<div class='col-4  '></div>";
           }
-        }
-        else if($giorni_restanti==1){
+        } else if ($giorni_restanti == 1) {
           echo "<div class='col-4 text-center' style='color: orange;'>" . $giorni_restanti . " giorno</div>";
-          echo "<div class='col-4  '></div>";          
-        }
-        else{
+          echo "<div class='col-4  '></div>";
+        } else {
           echo "<div class='col-4 text-center' style='color: green;'>" . $giorni_restanti . " giorni</div>";
           echo "<div class='col-4  '></div>";
         }
-        
+
 
         echo
           "</button>
@@ -471,7 +468,7 @@
                 </button>
               </a></p>";
         }
-                echo "
+        echo "
 							</div>
 						</div>
 					</div> ";

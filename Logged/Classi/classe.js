@@ -124,27 +124,27 @@ $iconaitalic.on("click", function () {
 
     if (selectionStart === selectionEnd) {
       // se non c'è alcun testo selezionato, inserisci i 4 asterischi e posiziona il cursore al centro
-      ialicText = "__";
+      ialicText = "____";
       textarea.value =
         textarea.value.substring(0, selectionStart) +
         ialicText +
         textarea.value.substring(selectionEnd);
-      textarea.selectionStart = selectionStart + 1;
-      textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     } else {
       const selectedText = textarea.value.substring(
         selectionStart,
         selectionEnd
       );
-      const ialicText = "_" + selectedText + "_";
+      const ialicText = "__" + selectedText + "__";
       const newText =
         textarea.value.substring(0, selectionStart) +
         ialicText +
         textarea.value.substring(selectionEnd);
       textarea.value = newText;
       // riposizioniamo il cursore dopo il testo
-      textarea.selectionStart = selectionStart + 1;
-      textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     }
     textarea.focus();
   });
@@ -155,27 +155,27 @@ $iconaitalic.on("click", function () {
 
     if (selectionStart === selectionEnd) {
       // se non c'è alcun testo selezionato, inserisci i 4 asterischi e posiziona il cursore al centro
-      underlineText = "~~";
+      underlineText = "~~~~";
       textarea.value =
         textarea.value.substring(0, selectionStart) +
         underlineText +
         textarea.value.substring(selectionEnd);
-      textarea.selectionStart = selectionStart + 1;
-      textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     } else {
       const selectedText = textarea.value.substring(
         selectionStart,
         selectionEnd
       );
-      const underlineText = "~" + selectedText + "~";
+      const underlineText = "~~" + selectedText + "~~";
       const newText =
         textarea.value.substring(0, selectionStart) +
         underlineText +
         textarea.value.substring(selectionEnd);
       textarea.value = newText;
       // riposizioniamo il cursore dopo il testo
-      textarea.selectionStart = selectionStart + 1;
-      textarea.selectionEnd = selectionEnd + 1;
+      textarea.selectionStart = selectionStart + 2;
+      textarea.selectionEnd = selectionEnd + 2;
     }
     textarea.focus();
   });
@@ -190,17 +190,17 @@ $iconaitalic.on("click", function () {
     textarea.style.display = "none";
     // icona.style.display = "none";
     const regexBold = /\*\*([^*]*)\*\*/g; // espressione regolare per cercare testo tra quattro asterischi
-    const regexUnderline = /~([^~]+)~/g;
-    const regexItalic = /_([^_]+)_/g;
-    const regexCross = /-([^>]+)-/g;
+    const regexUnderline = /~~([^~]+)~~/g;
+    const regexItalic = /__([^_]+)__/g;
+    // const regexCross = /--([^>]+)--/g;
     newText = textarea.value.replace(regexBold, "<strong>$1</strong>");
     textarea.value = newText;
     newText = textarea.value.replace(regexUnderline, "<u>$1</u>");
     textarea.value = newText;
     newText = textarea.value.replace(regexItalic, "<em>$1</em>");
     textarea.value = newText;
-    newText = textarea.value.replace(regexCross, "<del>$1</del>");
-    textarea.value = newText;
+    // newText = textarea.value.replace(regexCross, "<del>$1</del>");
+    // textarea.value = newText;
     newText = textarea.value.replace(/\n/g, "<br>");
     textarea.value = newText;
   });

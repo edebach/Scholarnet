@@ -5,7 +5,7 @@
     $email = $_POST['email'];
     $pubblicazione = $_POST['pubblicazione'];
     $titolo = $_POST['titolo'];
-    $data_commento = date("d-m-Y H:i");
+    $data_commento = date("d-m-Y H:i:s");
 
     $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
                   user=postgres password=biar")
