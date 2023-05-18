@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <?php
-session_start();
-$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
-                user=postgres password=biar")
-  or die('Could not connect: ' . pg_last_error());
-$q1 = "SELECT SUM(conteggio) AS somma
-        FROM (
-          SELECT count(*) AS conteggio
-          FROM partecipa
-          WHERE studente=$1
-          UNION ALL
-          SELECT count(*) AS conteggio
-          FROM insegna
-          WHERE docente=$1
-        ) AS conteggi; ";
-$ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
-$num_corsi = pg_fetch_result($ris, 0, 'somma');
-$q2 = "SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
-          FROM corso c
-          LEFT JOIN insegna i ON c.codice = i.corso
-          LEFT JOIN partecipa p ON c.codice = p.corso
+  session_start();
+
+  //Connessione al db
+  $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+                  user=postgres password=biar")
+    or die('Could not connect: ' . pg_last_error());
+  
+  // Calcola il numero totale di corsi a cui è iscritto l'utente loggato (studente o docente)
+  $q1 = "SELECT SUM(conteggio) AS somma
+          FROM (
+            SELECT count(*) AS conteggio
+            FROM partecipa
+            WHERE studente=$1
+            UNION ALL
+            SELECT count(*) AS conteggio
+            FROM insegna
+            WHERE docente=$1
+          ) AS conteggi; ";
+  $ris = pg_query_params($dbconn, $q1, array($_SESSION['email']));
+  $num_corsi = pg_fetch_result($ris, 0, 'somma');
+
+  // Determina il corso con più iscritti tra i corsi a cui partecipa l'utente loggato come studente o docente
+  $q2 = " SELECT COALESCE(c.nome, '') AS corso, COUNT(*) AS num_iscritti
+          FROM corso c LEFT JOIN insegna i ON c.codice = i.corso
+                       LEFT JOIN partecipa p ON c.codice = p.corso
           WHERE i.docente = $1 OR p.studente = $1
           GROUP BY c.nome
           ORDER BY num_iscritti DESC
-          LIMIT 1;
-          ";
-$max_corso = "";
-$ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
-if (pg_num_rows($ris) > 0)
-  $max_corso = pg_fetch_result($ris, 0, 'corso');
+          LIMIT 1; ";
+  $max_corso = "";
+  $ris = pg_query_params($dbconn, $q2, array($_SESSION['email']));
+  if (pg_num_rows($ris) > 0)
+    $max_corso = pg_fetch_result($ris, 0, 'corso');
 ?>
 
 <html lang="en">
@@ -53,13 +57,13 @@ if (pg_num_rows($ris) > 0)
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./Profilo/profilo.css">
 
-
+  <!-- Carica il file js -->
   <script src="./Profilo/profilo.js" language="javascript"></script>
 
 </head>
 
 <body>
-
+  
   <section class="vh-100" style="background-color: #f4f5f7;">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -67,20 +71,25 @@ if (pg_num_rows($ris) > 0)
           <div class="card mb-3" style="border-radius: .5rem;">
             <div class="row g-0">
               <button type="button" class="btn-close" aria-label="Close" onclick="window.history.back()"></button>
+              
               <div class="col-md-4 gradient-custom text-center text-white"
-                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-
+                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
                 <!-- immagine profilo in base a professione e sesso -->
                 <?php include "./Profilo/fotoprofilo.php" ?>
                 <?php include "./Profilo/nome_studprof.php" ?>
-
               </div>
+
+              
               <div class="col-md-8">
                 <div class="card-body p-4">
+
+                  <!-- Sezione 'Informazioni' -->
                   <h6>Informazioni</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
                     <div class="col-6 mb-3">
+
+                      <!-- Email -->
                       <h6>Email</h6>
                       <p class="text-muted">
                         <span class="text-muted" id="email">
@@ -88,19 +97,24 @@ if (pg_num_rows($ris) > 0)
                         </span>
                       </p>
                     </div>
+
+                    <!-- Telefono -->
                     <div class="col-6 mb-3">
                       <h6>Telefono</h6>
                       <p class="text-muted">
                         <span class="editable" id="phone">
                           <?php echo $_SESSION["telefono"]; ?>
                         </span>
+                        <!-- Verifica il formato del telefono -->
                         <input type="tel" class="form-control profilo d-none" id="phone-input"
-                          oninput="validaInputTel()" pattern="^\+?\d{1,3}\s?\d{6,}$"
-                          value="<?php echo $_SESSION["telefono"]; ?>">
+                               oninput="validaInputTel()" pattern="^\+?\d{1,3}\s?\d{6,}$"
+                               value="<?php echo $_SESSION["telefono"]; ?>">
                         <span id="error-msg" style="color: red;"></span>
                       </p>
                     </div>
                   </div>
+
+                  <!-- Sezione 'Corsi' -->
                   <h6>Corsi</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
@@ -123,16 +137,16 @@ if (pg_num_rows($ris) > 0)
                         data-target="#password-modal" data-toggle="modal">Modifica password</button>
                     </div>
                     <div>
-                      <button type="button" class="btn btn-primary btn-sm me-2" id="edit-profile-btn">Modifica
-                        profilo</button>
-                      <button type="button" class="btn btn-success btn-sm d-none" id="save-profile-btn">Salva
-                        modifiche</button>
-                      <button type="button" class="btn btn-secondary btn-sm d-none" id="cancel-profile-btn">Annulla
-                        modifiche</button>
+                      <button type="button" class="btn btn-primary btn-sm me-2" id="edit-profile-btn">
+                        Modifica profilo</button>
+                      <button type="button" class="btn btn-success btn-sm d-none" id="save-profile-btn">
+                        Salva modifiche</button>
+                      <button type="button" class="btn btn-secondary btn-sm d-none" id="cancel-profile-btn">
+                        Annulla modifiche</button>
                     </div>
 
 
-                    <!-- Modal -->
+                    <!-- Modal: modifica password -->
                     <div class="modal fade" id="password-modal" tabindex="-1" role="dialog"
                       aria-labelledby="password-modal-label" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -170,6 +184,8 @@ if (pg_num_rows($ris) > 0)
                         </div>
                       </div>
                     </div>
+
+
                   </div>
                 </div>
               </div>

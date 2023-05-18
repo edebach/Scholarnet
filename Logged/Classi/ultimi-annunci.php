@@ -39,12 +39,13 @@
         echo "
           <div class='card text-black bg-light mb-3 d-inline-block'>
             <div class='card-body'>";
+        
         if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
           echo "
             <div class='position-absolute top-0 end-0'>
               <div class='dropdown'>
                 <button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-                <i class='fa-solid fa-xmark fa-xs'></i>                                </button>
+                <i class='fa-solid fa-xmark fa-xs'></i></button>
                 <ul class='dropdown-menu dropdown-menu-end'>
                   <li>
                     <div class='text-center'>

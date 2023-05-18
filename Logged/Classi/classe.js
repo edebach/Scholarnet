@@ -238,7 +238,8 @@ $(document).ready(function () {
     dots[slideIndex - 1].className += " active";
   }
 });
-  // Script elimina_classe
+
+  // Script elimina annuncio
     $(document).ready(function () {
       $(".btn-elimina-annuncio").click(function () {
         if (confirm("Sei sicuro di voler eliminare il post?")) {
@@ -247,9 +248,7 @@ $(document).ready(function () {
           var testo = $(this).data("testo");
           var corso = $(this).data("corso");
           var allegati = $(this).data("allegati");
-          console.log(allegati);
-
-
+          
           $.ajax({
             url: url,
             type: 'post',
