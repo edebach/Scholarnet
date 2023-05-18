@@ -59,6 +59,7 @@
       });
     });
   </script>
+
   <!-- Nascondi lo slider compito se studente -->
   <script>
     $(document).ready(function () {
@@ -95,18 +96,23 @@
             <span class="visually-hidden">Toggle navigation</span>
           </button>
           <a class="navbar-brand text-center" href="#">
+            <!-- Nome del corso di riferimento -->
             <?php echo $nome ?>
           </a>
         </div>
+
+        <!-- offcanvas il mio profilo -->
         <button class="btn btn-link rounded-circle text-white" type="button" data-bs-toggle="offcanvas"
-          data-bs-target="#profile">
+                data-bs-target="#profile">
+          <!-- Icona dell'utente -->
           <i class="fa-sharp fa-regular fa-user fa-lg"></i>
         </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="profile" aria-labelledby="profile-label">
+        <div class="offcanvas offcanvas-end" id="profile" aria-labelledby="profile-label">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="profile-label">Il mio profilo</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
+
           <div class="offcanvas-body">
             <?php
             //Prendiamo dal db tutte le informazione dell'utente
@@ -115,57 +121,42 @@
             $result = pg_query_params($dbconn, $q, array($email));
             $row = pg_fetch_array($result);
             ?>
-
+        
             <div class="container">
-              <!-- Campo informazioni generali: nome e cognome, con immagine e email-->
               <div class="row">
                 <div class="d-flex align-items-center">
                   <div class="me-3">
-                    <!-- Caricamento immagine -->
                     <?php
-                    if ($row['sesso'] == "Maschio") {
-                      if ($_SESSION['flag'] == "1") {
-                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/studente.png' alt='avatar' width='65' height='65' />";
-                      } else {
-                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/professore.png' alt='avatar' width='65' height='65' />";
-                      }
-                    } else if ($row['sesso'] == "Femmina") {
-                      if ($_SESSION['flag'] == "1") {
-                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/studentessa.jpg' alt='avatar' width='65' height='65' />";
-                      } else {
-                        echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/professoressa.png' alt='avatar' width='65' height='65' />";
-                      }
-                    } else {
-                      echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/neutro.png' alt='avatar' width='65' height='65' />";
-                    }
+                      //Caricamento immagine circolare
+                      echo "<img class='rounded-circle shadow-1-strong mb-2' src='../Profilo/img/".$row['immagine']."' alt='avatar' width='65' height='65' />";
                     ?>
                   </div>
                   <div>
-                    <?php echo "<h6><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h6>
-                      <p class='mb-0'>" . $row['email'] . "</p>"; ?>
+                    <?php 
+                      //Campo nome e cognome, con indirizzo email associato
+                      echo "<h6><strong>" . $row['nome'] . " " . $row['cognome'] . "</strong></h6>
+                            <p class='mb-0'>" . $row['email'] . "</p>"; ?>
                   </div>
                 </div>
               </div>
               <hr>
               <div class="row">
-                <!--Campo istituto-->
-                <p>
-                  <?php echo "Istituto/Università: " . $row['istituto']; ?>
-                </p>
                 <?php
-                //Campo data di nascita
-                if ($row['sesso'] == "Femmina")
-                  echo "<p>Nata il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
-                else
-                  echo "<p>Nato il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+                  //Campo istituto
+                  echo "<p>Istituto/Università: " . $row['istituto'] . "</p>"; 
+                
+                  //Campo data di nascita
+                  if ($row['sesso'] == "Femmina")
+                    echo "<p>Nata il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
+                  else
+                    echo "<p>Nato il " . date('d/m/Y', strtotime($row['dataN'])) . "</p>";
 
-                //Campo telefono se esiste
-                if ($row['telefono'] != "")
-                  echo "<p>Numero di telefono: " . $row['telefono'] . "</p>";
+                  //Campo telefono se esiste
+                  if ($row['telefono'] != "")
+                    echo "<p>Numero di telefono: " . $row['telefono'] . "</p>";
 
-                //Campo data iscrizione
-                echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
-
+                  //Campo data iscrizione
+                  echo "<p>Iscritto dal " . date('d/m/Y', strtotime($row['data_iscrizione'])) . "</p>";
                 ?>
                 <!--Link al file Profilo.php-->
                 <p><a href="../Profilo.php">Vai al mio profilo</a></p>
@@ -173,7 +164,8 @@
             </div>
           </div>
         </div>
-
+        
+        <!-- offcanvas le mie classi -->
         <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebar-label">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="sidebar-label">Le mie classi</h5>
@@ -279,6 +271,7 @@
         </div>
       </div>
     </nav>
+
     <nav class="navbar nav navbar-white ">
       <div class="container-fluid">
         <ul class="nav nav-tabs mx-auto">
@@ -392,10 +385,11 @@
   </main>
   <br>
   <br>
+
   <main class="container my-4" id="compiti-section">
     <?php
-    //Query
-    $q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null ORDER BY  data_scadenza DESC";
+    //Seleziono tutti i compiti associati a una classe con quel codice codice corso
+    $q = "SELECT * FROM compito WHERE classe=$1 AND data_scadenza is not null ORDER BY data_scadenza DESC";
     $result = pg_query_params($dbconn, $q, array($codice_corso));
 
     if ($row = pg_fetch_array($result, null, PGSQL_ASSOC)) {
@@ -494,10 +488,10 @@
 
     $codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-    //Visualizza la lista dei professori che insegnano il corso
+    //Visualizza la lista dei professori che insegnano ad un determinato corso
     $q1 = "SELECT u.nome, u.cognome 
-					FROM corso c JOIN insegna i ON c.codice=i.corso JOIN utente u ON u.email=i.docente 
-					WHERE c.codice=$1";
+					 FROM corso c JOIN insegna i ON c.codice=i.corso JOIN utente u ON u.email=i.docente 
+					 WHERE c.codice=$1";
 
     $result1 = pg_query_params($dbconn, $q1, array($codice_corso));
 
@@ -519,7 +513,7 @@
     <?php
     $codice_corso = substr(basename($_SERVER["PHP_SELF"]), -12, 8);
 
-    //Visualizza la lista dei studenti che partecipano al corso
+    //Visualizza la lista dei studenti che partecipano ad un determinato corso
     $q2 = "SELECT u.nome, u.cognome 
 					FROM corso c JOIN partecipa p ON c.codice=p.corso JOIN utente u ON u.email=p.studente 
 					WHERE c.codice=$1";

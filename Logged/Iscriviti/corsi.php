@@ -1,31 +1,31 @@
 <?php
 
-  //Connessione al db
+//Connessione al db
 
-  $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
+$dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
               user=postgres password=biar")
-    or die('Could not connect: ' . pg_last_error());
+  or die('Could not connect: ' . pg_last_error());
 
 
-  $email = $_SESSION['email'];
-  $flag = $_SESSION['flag'];
+$email = $_SESSION['email'];
+$flag = $_SESSION['flag'];
 
-  // Controlliamo se si tratta di uno studente o docente: 
-  // Nel caso il flag sia 0 si trattadi un docente, nel caso in cui è 1 di uno studente
-  if ($flag == '0') { // Docente
+// Controlliamo se si tratta di uno studente o docente: 
+// Nel caso il flag sia 0 si trattadi un docente, nel caso in cui è 1 di uno studente
+if ($flag == '0') { // Docente
 
-    //Genera tutte le tuple dove il docente insegna in dei corsi
-    $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
-    $result1a = pg_query_params($dbconn, $q1a, array($email));
-    $var = 0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+  //Genera tutte le tuple dove il docente insegna in dei corsi
+  $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
+  $result1a = pg_query_params($dbconn, $q1a, array($email));
+  $var = 0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
 
 
-    if ($row1 = pg_fetch_array($result1a, null, PGSQL_ASSOC)) {
-      $var = 1;
-      echo "<div class='row'>";
-      do {
-        //Parte l'interfaccia grafica: implementazione delle card corso
-        echo "        
+  if ($row1 = pg_fetch_array($result1a, null, PGSQL_ASSOC)) {
+    $var = 1;
+    echo "<div class='row'>";
+    do {
+      //Parte l'interfaccia grafica: implementazione delle card corso
+      echo "        
                   <div class='card' style='width: 18rem;'>
                       <div class='position-relative'>
                           <img src='" . $row1['link_imm'] . "' class='card-img-top'>
@@ -55,22 +55,22 @@
                       </div>
                   </div>";
 
-      } while ($row1 = pg_fetch_array($result1a));
+    } while ($row1 = pg_fetch_array($result1a));
 
-    }
-
-
-    //Genera tutte le tuple che il docente partecipa ai corsi
-    $q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
-    $result1b = pg_query_params($dbconn, $q1b, array($email));
+  }
 
 
-    if ($row2 = pg_fetch_array($result1b, null, PGSQL_ASSOC)) {
-      $var = 1;
-      echo "<div class='row'>";
-      do {
-        //Parte l'interfaccia grafica: implementazione delle card corso
-        echo "        
+  //Genera tutte le tuple che il docente partecipa ai corsi
+  $q1b = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+  $result1b = pg_query_params($dbconn, $q1b, array($email));
+
+
+  if ($row2 = pg_fetch_array($result1b, null, PGSQL_ASSOC)) {
+    $var = 1;
+    echo "<div class='row'>";
+    do {
+      //Parte l'interfaccia grafica: implementazione delle card corso
+      echo "        
                   <div class='card' style='width: 18rem;'>
                       <div class='position-relative'>
                           <img src='" . $row2['link_imm'] . "' class='card-img-top'>
@@ -100,24 +100,24 @@
                       </div>
                   </div>";
 
-      } while ($row2 = pg_fetch_array($result1b));
+    } while ($row2 = pg_fetch_array($result1b));
 
-      echo "</div>";
-    }
+    echo "</div>";
+  }
 
-    if ($var == 0) {
-      echo "<p>Non sei iscritto a nessun corso.</p>";
-    }
-  } else { //Studente
-    //Genera tutte le tuple che rappresentano i corsi a cui partecipa lo studente
-    $q2 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
-    $result2 = pg_query_params($dbconn, $q2, array($email));
+  if ($var == 0) {
+    echo "<p>Non sei iscritto a nessun corso.</p>";
+  }
+} else { //Studente
+  //Genera tutte le tuple che rappresentano i corsi a cui partecipa lo studente
+  $q2 = "SELECT * FROM corso c JOIN partecipa p ON c.codice=p.corso WHERE p.studente=$1";
+  $result2 = pg_query_params($dbconn, $q2, array($email));
 
-    if (($row3 = pg_fetch_array($result2, null, PGSQL_ASSOC))) {
-      echo "<div class='row'>";
-      do {
-        //Parte l'interfaccia grafica: implementazione delle card corso
-        echo "        
+  if (($row3 = pg_fetch_array($result2, null, PGSQL_ASSOC))) {
+    echo "<div class='row'>";
+    do {
+      //Parte l'interfaccia grafica: implementazione delle card corso
+      echo "        
                   <div class='card' style='width: 18rem;'>
                       <div class='position-relative'>
                           <img src='" . $row3['link_imm'] . "' class='card-img-top'>
@@ -147,10 +147,10 @@
                       </div>
                   </div>";
 
-      } while ($row3 = pg_fetch_array($result2));
-      echo "</div>";
-    } else {
-      echo "<p>Non sei iscritto a nessun corso.</p>";
-    }
+    } while ($row3 = pg_fetch_array($result2));
+    echo "</div>";
+  } else {
+    echo "<p>Non sei iscritto a nessun corso.</p>";
   }
+}
 ?>
