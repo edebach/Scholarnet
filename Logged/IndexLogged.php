@@ -363,7 +363,6 @@
   <!--Sezione crea o unisciti corso-->
   <section id="home-section" class="bg-image mt-5">
 
-    <!-- Titolo da modificare -->
     <div class="container">
       <?php
       if ($_SESSION['sesso'] == "Maschio")

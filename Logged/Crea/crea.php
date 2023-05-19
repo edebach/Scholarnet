@@ -20,7 +20,7 @@
         $materia = null;
     }
 
-    //eseguo un ciclo do-while fin quando mi genera un codice che non sta nel db
+    //eseguo un ciclo do-while fin quando mi genera un codice non pesente nel db
     do {
         $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codice = substr(str_shuffle($chars), 0, 8);
@@ -29,17 +29,15 @@
 
     } while (($tuple = pg_fetch_array($result, null, PGSQL_ASSOC)));
 
-    $nome_file_originale = "../Classi/Classe.php"; // nome del file PHP originale
+    $file_originale = "../Classi/Classe.php"; // percorso del file PHP originale
     $nome_file_nuovo = "Classe_" . $codice . ".php"; // crea il nuovo nome del file con il codice del corso
 
     // imposta la cartella di destinazione dove verrà salvato il nuovo file
     $cartella_destinazione = "../Classi/";
 
     // copia il file originale nella cartella di destinazione con il nuovo nome
-    if (copy($nome_file_originale, $cartella_destinazione . $nome_file_nuovo)) {
-        // il file è stato copiato correttamente, rinomina il nuovo file
-        // rename($cartella_destinazione . $nome_file_nuovo, $cartella_destinazione . $nome_file_nuovo);
-        // echo "File generato correttamente.";
+    if (copy($file_originale, $cartella_destinazione . $nome_file_nuovo)) {
+        // il file è stato copiato correttamente
     } else {
         // si è verificato un errore durante la copia del file
         echo "<script>
