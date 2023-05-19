@@ -112,27 +112,18 @@
   $flag = $_POST['flag'];
 
 
-  // Query
-  $sql = "SELECT * FROM compito c join utente u on c.email=u.email WHERE testo ILIKE $1 OR titolo ILIKE $1 ORDER BY pubblicazione DESC";
+  // Seleziona tutti le tuple dalle tabelle "compito" e "utente" dove il valore della colonna "testo" o "titolo" contiene una stringa specifica
+  $sql = "SELECT * 
+          FROM compito c JOIN utente u ON c.email=u.email 
+          WHERE testo ILIKE $1 OR titolo ILIKE $1 
+          ORDER BY pubblicazione DESC";
   $result = pg_query_params($conn, $sql, array($searchText));
 
-  // // Calcola il numero totale di compiti per la classe
-  // $num_compiti = pg_num_rows($result);
-
-  // // Calcola il numero di pagine
-  // $num_pagine = ceil($num_compiti / 3);
-
-  // // Ottieni il numero di pagina corrente dalla query string
-  // $pagina_corrente = isset($_GET["pagina"]) ? $_GET["pagina"] : 1;
-
-  // // Calcola l'indice di partenza del subset di compiti da visualizzare
-  // $indice_inizio = ($pagina_corrente - 1) * 3;
   $i=0;
-  // Seleziona i 5 compiti più recenti per la pagina corrente
+  
   if (pg_num_rows($result) > 0) {
-    // pg_result_seek($result, $indice_inizio);
     $row = pg_fetch_array($result, null, PGSQL_ASSOC);
-    // $count = 0;
+    
     do {
       if (empty($row['allegati'])) {
         $percorso_file = null;
@@ -143,12 +134,14 @@
       $i++;
       $var = "collapse-" . $i;
       $var1 = "collapse-" . $i;
+
       //ANNUNCIO
       if (empty($row['data_scadenza'])) {
         
         echo "
 				<div class='card text-black bg-light mb-3 d-inline-block'>
 					<div class='card-body'>";
+          
         if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
           echo "
 					<div class='position-absolute top-0 end-0'>
@@ -170,16 +163,17 @@
 								</li>
 							</ul>
 						</div>
-					</div>";
-        echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
+					</div>
+          <div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
 							<span style='font-size: 18px;'>
 								<i class='fa-sharp fa-solid fa-scroll'></i>";
-        if ($row['flagStudente'] == "t")
-          echo " " . $row['titolo'] . " - " . $row['utente'];
-        else
-          echo " " . $row['titolo'] . " - prof. " . $row['cognome'];
-          echo "
-							</span>
+
+                if ($row['flagStudente'] == "t")
+                  echo " " . $row['titolo'] . " - " . $row['utente'];
+                else
+                  echo " " . $row['titolo'] . " - prof. " . $row['cognome'];
+
+          echo "</span>
 							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
               Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
 						</div>
@@ -260,18 +254,12 @@
                             </svg>
                           </button>
                         </div>  
-                        
                       </div>
-                      
-                          
-                          
-                      
-                    </div>";
-
-                    echo " </div>
-                            </div>
-                          </div>
-                        </div>";  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>";  
       }
       //COMPITO
       else {
@@ -332,8 +320,6 @@
 						<hr>
 							<p class='card-text' style='margin-left: 12px'>Data di consegna: " . date('d/m/Y', strtotime($row['data_scadenza'])) . "</p>
 					</div>
-          ";
-        echo "
             <div class='accordion ' id='div-commento-'" . $var1 . ">
               <div class='accordion-item'>
                 <h2 class='accordion-header'>
@@ -362,9 +348,9 @@
           echo "<table cellpadding='5' cellspacing='15'>";
           do {
             echo "<tr>
-                      <td><img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $row2['immagine'] . "' alt='avatar' width='35' height='35' /></td>
-                      <td><strong>" . $row2['nome'] . " " . $row2['cognome'] . " - </strong>". date('d/m/Y H:i', strtotime($row2['data_commento']))."<br>" . $row2['descrizione'] . "</td>
-                    </tr>";
+                    <td><img class='rounded-circle shadow-1-strong me-3' src='../Profilo/img/" . $row2['immagine'] . "' alt='avatar' width='35' height='35' /></td>
+                    <td><strong>" . $row2['nome'] . " " . $row2['cognome'] . " - </strong>". date('d/m/Y H:i', strtotime($row2['data_commento']))."<br>" . $row2['descrizione'] . "</td>
+                  </tr>";
           } while ($row2 = pg_fetch_array($ris1, null, PGSQL_ASSOC));
           echo "
             </table>";
@@ -390,43 +376,18 @@
                             </svg>
                           </button>
                         </div>  
-                        
-                      </div>
-                      
-                          
-                          
-                      
-                    </div>";
-
-        echo " </div>
-                            </div>
-                          </div>
-                        </div>";
-
+                      </div>  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>";
       }
-      // $count++;
-      // and $count < 3
-
     } while (($row = pg_fetch_array($result, null, PGSQL_ASSOC)) );
 
-
-    // Mostra l'elenco di numeri di pagina per la paginazione
-    // echo "<nav aria-label='Page navigation example'>
-		// 	<ul class='pagination '>";
-    // for ($pagina = 1; $pagina <= $num_pagine; $pagina++) {
-    //   if ($pagina == $pagina_corrente) {
-    //     echo "<li class='page-item active'><a class='page-link' href='#'>$pagina</a></li>";
-    //   } else {
-    //     echo "<li class='page-item'><a class='page-link' href='?pagina=$pagina'>$pagina</a></li>";
-    //   }
-    // }
-    // echo "</ul></nav>";
   } else {
     echo "<p>Al momento non ci sono annunci.</p>";
   }
-
-
-
   ?>
 </body>
 
