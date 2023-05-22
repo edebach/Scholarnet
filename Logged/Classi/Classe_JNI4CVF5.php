@@ -448,7 +448,7 @@
             echo "<div class='col-4 text-center'  style='color: red;'>Tempo scaduto</div>";
             echo "<div class='col-4  '></div>";
           } else {
-            echo "<div class='col-4 text-center'  style='color: orange;'>oggi alle: " . $ora . "</div>";
+            echo "<div class='col-4 text-center'  style='color: orange;'>Oggi alle " . $ora . "</div>";
             echo "<div class='col-4  '></div>";
           }
         } else if ($giorni_restanti == 1) {
