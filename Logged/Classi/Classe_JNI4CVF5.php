@@ -4,6 +4,12 @@
 <head>
   <?php
   session_start();
+  if (!isset($_SESSION['email'])) {
+    echo "<script> alert(' Sessione scaduta, effettua nuovamente l\' accesso');
+                  window.location.href='../../Login/login.html';
+    </script>";
+    exit();
+  }
   $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
 				user=postgres password=biar")
     or die('Could not connect: ' . pg_last_error());

@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <?php
   session_start();
+  if (!isset($_SESSION['email'])) {
+    echo "<script> alert(' Sessione scaduta, effettua nuovamente l\' accesso');
+                    window.location.href='../Login/login.html';
+      </script>";
+    exit();
+  }
 
   //Connessione al db
   $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 

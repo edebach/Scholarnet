@@ -4,6 +4,12 @@
 <head>
   <?php
   session_start();
+  if (!isset($_SESSION['email'])) {
+    echo "<script> alert(' Sessione scaduta, effettua nuovamente l\' accesso');
+                  window.location.href='../../Login/login.html';
+    </script>";
+    exit();
+  }
   $dbconn = pg_connect("host=localhost port=5432 dbname=Scholarnet 
 				user=postgres password=biar")
     or die('Could not connect: ' . pg_last_error());
@@ -223,7 +229,7 @@
                   //Genera tutte le tuple che il docente insegna ai corsi
                   $q1a = "SELECT * FROM corso c JOIN insegna i ON c.codice=i.corso WHERE i.docente=$1";
                   $result1a = pg_query_params($dbconn, $q1a, array($email));
-                  $var = 0; //variabile che mi servirà per verificare se un docente partecipa o insegna dei corsi
+                  $var = 0; //variabile che servirà per verificare se un docente partecipa o insegna dei corsi
                 
                   if ($row2 = pg_fetch_array($result1a, null, PGSQL_ASSOC)) {
 
