@@ -49,6 +49,8 @@
       height: 130px;
     }
   </style>
+  <script src="./signup.js" language="javascript"></script>
+
   <title>Signup</title>
 </head>
 
@@ -58,7 +60,7 @@
       onclick="location.href='../index.php'">
     <h2 class="text-center mb-3">Signup</h2>
     <!-- Il form è ancora statico, va settato in modo da verificare che le credenziali inserite siano nel formato giusto -->
-    <form name="signup1" action="./signup2.php" method="POST">
+    <form name="signup1" action="./signup2.php" method="POST" onSubmit="return validaForm()">
       <!-- Per le floating label ho usato Bootstrap. Per la documentazione: https://getbootstrap.com/docs/5.3/forms/floating-labels/ -->
       <!-- Prima riga: form per nome e cognome.-->
       <div class="row">
@@ -152,7 +154,7 @@
       </div>
 
       <div class="row" id="BottoneProsegui">
-        <button type="submit" class="btn btn-primary" href="./signup2.php">Prosegui</button>
+        <button type="submit" class="btn btn-primary">Prosegui</button>
       </div>
       <div class="row" id="BottoneReset">
         <button type="reset" class="btn btn-warning">Ripristina</button>
