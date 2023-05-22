@@ -11,7 +11,7 @@
   $flagStudente = $row['flag'];
 
 
-  if ($flagStudente == "1") {
+  if ($flagStudente == "t") {
     echo "<p class='text-center'>Studente</p>";
   } else {
     echo "<p class='text-center'>Professore</p>";

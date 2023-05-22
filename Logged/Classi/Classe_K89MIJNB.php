@@ -344,11 +344,11 @@
                 </label> Compito
               </div>
               <div class="mb-3" id="data-div">
-                <label for="data_scadenza" class="form-label">Data</label>
+                <label for="data_scadenza" class="form-label">Data di consegna</label>
                 <input type="date" class="form-control" id="data_scadenza" name="data_scadenza">
               </div>
               <div class="mb-3" id="ora-div">
-                <label for="orario" class="form-label">Orario</label>
+                <label for="orario" class="form-label">Orario di consegna</label>
                 <input type="time" class="form-control" id="orario" name="orario" value="">
               </div>
               <button type="submit" class="btn btn-primary mt-3">Pubblica</button>

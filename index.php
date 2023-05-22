@@ -335,16 +335,15 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Descrizione</h2>
-          <p>ScholarNet è una piattaforma di apprendimento online progettata per
-            semplificare la gestione delle attività scolastiche e migliorare la comunicazione
-            tra insegnanti e studenti.
-            È progettata per semplificare la gestione delle classi e delle attività scolastiche,
+          <p>Scholarnet è una piattaforma di apprendimento online mirata a simulare una classe virtuale.
+            È progettata per semplificare la gestione dei corsi e delle attività scolastiche,
             consentendo agli insegnanti di creare e condividere lezioni, assegnazioni e materiali didattici
-            con i loro studenti.</p>
-          <p>Gli studenti possono accedere a ScholarNet tramite il proprio account personale
+            con i loro studenti, e permettendo agli studenti di interagire con il 
+            materiale fornito dal docente e con i loro compagni di corso.</p>
+          <p>Gli studenti possono accedere a Scholarnet tramite il proprio account personale
             e visualizzare le lezioni e le attività assegnate dai loro insegnanti.
             Possono anche inviare i loro annunci e interagire con i loro compagni di classe e
-            l'insegnante tramite la piattaforma.</p>
+            l'insegnante tramite i commenti nei post.</p>
         </div>
       </div>
     </div>
@@ -393,8 +392,8 @@
                   Gli insegnanti possono utilizzare l'applicazione per creare aule virtuali,
                   caricare materiali didattici, assegnare compiti e comunicare con gli studenti.
                   Gli studenti possono utilizzare l'applicazione per accedere all'aula virtuale,
-                  vedere i materiali didattici caricati dagli insegnanti, completare i compiti assegnati e
-                  comunicare con gli insegnanti e gli altri studenti.
+                  vedere i materiali didattici caricati dagli insegnanti, svolgere i compiti assegnati e
+                  comunicare tra di loro.
                 </div>
               </div>
             </div>
@@ -411,9 +410,8 @@
               </div>
               <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                 <div class="card-body">
-                  Per creare la classe virtuale basta effettuare il <a href="./Signup/singup.html">signup</a>, se non
-                  sei ancora iscritto.
-                  Una volta iscritto da docente potrai creare il tuo corso, tramite l'apposita pagina di index.
+                  Per creare la classe virtuale devi prima aver effettuato il <a href="./Signup/singup.html">signup</a> come docente.
+                  Una volta iscritto ed eseguito il Login, potrai creare il tuo corso tramite la sezione presente nell'apposita pagina Home.
                 </div>
               </div>
             </div>
@@ -431,7 +429,7 @@
               <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                 <div class="card-body">
                   Per invitare gli studenti a partecipare alla classe virtuale, basta fornirgli il codice della
-                  classe, dove lo troverei nella homepage della classe. Ti basterà copiarlo e condivederlo ai
+                  classe, situato nello stream del corso. Ti basterà cliccarci sopra per copiarlo e condivederlo ai
                   tuoi studenti.
                 </div>
               </div>
@@ -443,7 +441,7 @@
                 <h3 class="mb-0">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                     data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                    Gli studenti possono vedere i materiali caricati da altri studenti?
+                    Cosa può fare uno studente iscritto ad un corso?
                   </button>
                 </h3>
               </div>
@@ -456,20 +454,20 @@
               </div>
             </div>
 
-            <!--Settima domanda-->
+            <!--Sesta domanda-->
             <div class="card">
               <div class="card-header" id="headingSeven">
                 <h3 class="mb-0">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                     data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                    Come posso creare e assegnare compiti agli studenti?
+                    Come può un docente creare e assegnare compiti agli studenti?
                   </button>
                 </h3>
               </div>
               <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
                 <div class="card-body">
-                  Per creare e assegnare un compito ti basterà pubblicare un compito nello stream della classe,
-                  selezionando come flag un compito.
+                  Per creare e assegnare un compito basterà pubblicare un compito nello stream della classe,
+                  marcando l'appostito pulsante per identificarlo come compito.
                 </div>
               </div>
             </div>
