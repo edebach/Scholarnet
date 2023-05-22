@@ -2,7 +2,7 @@
 <?php
   session_start();
   if(!isset($_SESSION['email'])){
-    echo "<script> alert(' Sessione scaduta, effettua nuovamente l\' accesso');
+    echo "<script> alert('Sessione scaduta, effettua nuovamente l\' accesso');
                   window.location.href='../Login/login.html';
     </script>";
     exit();
