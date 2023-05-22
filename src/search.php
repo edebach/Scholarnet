@@ -115,9 +115,9 @@
   // Seleziona tutti le tuple dalle tabelle "compito" e "utente" dove il valore della colonna "testo" o "titolo" contiene una stringa specifica
   $sql = "SELECT * 
           FROM compito c JOIN utente u ON c.email=u.email 
-          WHERE testo ILIKE $1 OR titolo ILIKE $1 
+          WHERE (testo ILIKE $1 OR titolo ILIKE $1) and classe=$2
           ORDER BY pubblicazione DESC";
-  $result = pg_query_params($conn, $sql, array($searchText));
+  $result = pg_query_params($conn, $sql, array($searchText, $codice_corso));
 
   $i=0;
   
@@ -141,78 +141,76 @@
         echo "
 				<div class='card text-black bg-light mb-3 d-inline-block'>
 					<div class='card-body'>";
-          
-        if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email'])
+
+        if (!$_SESSION['flag'] or $row['email'] == $_SESSION['email']) {
           echo "
-					<div class='position-absolute top-0 end-0'>
-						<div class='dropdown'>
-							<button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
-							<i class='fa-solid fa-xmark fa-xs'></i>                                </button>
-							<ul class='dropdown-menu dropdown-menu-end'>
-								<li>
-									<div class='text-center'>
-										<button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
-												data-action='../Elimina/elimina-annuncio.php' 
-												data-testo='" . $row['testo'] . "' 
-												data-titolo='" . $row['titolo'] . "'
-												data-corso='" . $codice_corso . "'
-                        data-allegati='" . $percorso_file . "'
-												>Elimina annuncio
-										</button>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-          <div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
-							<span style='font-size: 18px;'>
-								<i class='fa-sharp fa-solid fa-scroll'></i>";
-
-                if ($row['flagStudente'] == "t")
-                  echo " " . $row['titolo'] . " - " . $row['utente'];
-                else
-                  echo " " . $row['titolo'] . " - prof. " . $row['cognome'];
-
-          echo "</span>
-							<span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
-              Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
-						</div>
-						<hr>
-						<div class='card-body'>
-							<p class='card-text'>" . $row['testo'] . "</p>
-              ";
+            <div class='position-absolute top-0 end-0'>
+              <div class='dropdown'>
+                <button class='btn' style='opacity: 0.6;' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                <i class='fa-solid fa-xmark fa-xs'></i></button>
+                <ul class='dropdown-menu dropdown-menu-end'>
+                  <li>
+                    <div class='text-center'>
+                      <button class='btn btn-light d-inline-block mx-1 btn-elimina-annuncio' 
+                          data-action='../Elimina/elimina-annuncio.php' 
+                          data-testo='" . $row['testo'] . "' 
+                          data-titolo='" . $row['titolo'] . "'
+                          data-corso='" . $codice_corso . "'
+                          data-allegati='" . $percorso_file . "'
+                          >Elimina annuncio
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>";
+        }
+        echo "<div class='card-text bg-light text-black' style='display: flex; align-items: center;'>
+                <span style='font-size: 18px;'>
+                  <i class='fa-sharp fa-solid fa-scroll'></i>";
+        if ($row['flagStudente'] == "t")
+          echo " " . $row['titolo'] . " - " . $row['utente'];
+        else
+          echo " " . $row['titolo'] . " - prof. " . $row['cognome'];
+        echo "
+                </span>
+                <span style='margin-left: auto; margin-top: 3px; font-size: 12px;'>
+                Data di pubblicazione: " . date('d/m/Y', strtotime($row['pubblicazione'])) . "</span>
+              </div>
+              <hr>
+              <div class='card-body'>
+                <p class='card-text'>" . $row['testo'] . "</p>
+                ";
         if (!empty($row['allegati'])) {
           echo "<p class='card-text ml-3'> <a href='" . $percorso_file . "' target='_blank'>
-                <button type='button' class='btn btn-link allegato' style='text-decoration: none; padding: 5px; border-radius: 999px;'>
-                  <i class='fas fa-file'></i> " . $nome_file . "
-                </button>
-              </a></p>";
+                  <button type='button' class='btn btn-link allegato' style='text-decoration: none; padding: 5px; border-radius: 999px;'>
+                    <i class='fas fa-file'></i> " . $nome_file . "
+                  </button>
+                </a></p>";
         }
         echo "
-						</div>
-					</div>
-          ";
+              </div>
+            </div>
+            ";
 
-          
+
 
         // Commento in annunci
-          echo "
-            <div class='accordion ' id='div-commento-'".$var.">
-              <div class='accordion-item'>
-                <h2 class='accordion-header'>
-                  <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#".$var."' aria-expanded='true' aria-controls='".$var."'>
-                    Commenti &nbsp;
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sticky' viewBox='0 0 16 16'>
-                      <path d='M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z'/>
-                    </svg>
-                  </button>
-                </h2>
-                <div id='".$var."' class='accordion-collapse collapse' data-bs-parent='#div-commento-'".$var.">
-                  <div class='accordion-body accordion-container'>";
-                    $pubb = $row['pubblicazione'];
-                    $titolo = $row['titolo'];
-
-                    //Restituisce tutti i commenti per quell'annuncio
+        echo "
+              <div class='accordion ' id='div-commento-'" . $var . ">
+                <div class='accordion-item'>
+                  <h2 class='accordion-header'>
+                    <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#" . $var . "' aria-expanded='true' aria-controls='" . $var . "'>
+                      Commenti &nbsp;
+                      <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-sticky' viewBox='0 0 16 16'>
+                        <path d='M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1h-11zM2 2.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V8H9.5A1.5 1.5 0 0 0 8 9.5V14H2.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V9.5a.5.5 0 0 1 .5-.5h4.293L9 13.793z'/>
+                      </svg>
+                    </button>
+                  </h2>
+                  <div id='" . $var . "' class='accordion-collapse collapse' data-bs-parent='#div-commento-'" . $var . ">
+                    <div class='accordion-body accordion-container'>";
+        $pubb = $row['pubblicazione'];
+        $titolo = $row['titolo'];                    //Restituisce tutti i commenti per quell'annuncio
                     $q = "SELECT * 
                             FROM commento c1 JOIN compito c2 ON c1.pubblicazione=c2.pubblicazione AND c1.titolo=c2.titolo JOIN utente u ON u.email=c1.email
                             WHERE c1.pubblicazione=$1 AND c2.titolo=$2";
