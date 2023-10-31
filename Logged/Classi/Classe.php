@@ -376,10 +376,10 @@
       <aside class="col-lg-4" id="aside-compiti">
         <div class="slideshow-container">
 
-          <!-- Full-width slides/quotes -->
+          <!-- Elenco dei compiti -->
           <?php include "./compiti-assegnati.php" ?>
 
-          <!-- Next/prev buttons -->
+          <!-- Bottoni avanti e indietro -->
           <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
@@ -492,7 +492,7 @@
 
 
   </main>
-
+<!-- Sezione partecipanti al corso -->
   <main class="container my-4" id="persone-section">
     <h1 class="display-6"><strong>Professori</strong></h1>
     <hr color="red">
