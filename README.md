@@ -3,7 +3,7 @@
 # ScholarNet
 **Progetto di Linguaggi e Tecnologie per il Web (A.A. 2022/2023)**
 
-**Autori**: Marco Giangreco, Emanuele Elie Debach, Fabio Priori.
+**Autori**: Emanuele Elie Debach, Marco Giangreco, Fabio Priori.
 
 **Descrizione**: Scholarnet è una piattaforma di apprendimento mirata a simulare una classe virtuale. È progettata per semplificare la gestione dei corsi e delle attività scolastiche, consentendo agli insegnanti di creare e condividere lezioni, assegnazioni e materiali didattici con i loro studenti, e permettendo agli studenti di interagire con il materiale fornito dal docente e con i loro compagni di corso. Gli studenti possono accedere a Scholarnet tramite il proprio account personale e visualizzare le lezioni e le attività assegnate dai loro insegnanti. Possono anche inviare i loro annunci e interagire con i loro compagni di classe e l'insegnante tramite i commenti nei post.
 
